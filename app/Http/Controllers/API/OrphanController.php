@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Http\Requests\StoreCompetitionRequest;
-use App\Http\Requests\UpdateCompetitionRequest;
-use App\Models\Competition;
+use App\Http\Requests\StoreOrphanRequest;
+use App\Http\Requests\UpdateOrphanRequest;
+use App\Models\Orphan;
 
-class CompetitionController extends Controller
+class OrphanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,7 @@ class CompetitionController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -30,10 +31,10 @@ class CompetitionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCompetitionRequest  $request
+     * @param  \App\Http\Requests\StoreOrphanRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCompetitionRequest $request)
+    public function store(StoreOrphanRequest $request)
     {
         //
     }
@@ -41,10 +42,10 @@ class CompetitionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Competition  $competition
+     * @param  \App\Models\Orphan  $orphan
      * @return \Illuminate\Http\Response
      */
-    public function show(Competition $competition)
+    public function show(Orphan $orphan)
     {
         //
     }
@@ -52,10 +53,10 @@ class CompetitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Competition  $competition
+     * @param  \App\Models\Orphan  $orphan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Competition $competition)
+    public function edit(Orphan $orphan)
     {
         //
     }
@@ -63,11 +64,11 @@ class CompetitionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCompetitionRequest  $request
-     * @param  \App\Models\Competition  $competition
+     * @param  \App\Http\Requests\UpdateOrphanRequest  $request
+     * @param  \App\Models\Orphan  $orphan
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCompetitionRequest $request, Competition $competition)
+    public function update(UpdateOrphanRequest $request, Orphan $orphan)
     {
         //
     }
@@ -75,10 +76,10 @@ class CompetitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Competition  $competition
+     * @param  \App\Models\Orphan  $orphan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Competition $competition)
+    public function destroy(Orphan $orphan)
     {
         //
     }

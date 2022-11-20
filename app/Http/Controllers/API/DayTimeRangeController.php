@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Http\Requests\StoreCompetitionRequest;
-use App\Http\Requests\UpdateCompetitionRequest;
-use App\Models\Competition;
+use App\Http\Requests\Storeday_time_rangeRequest;
+use App\Http\Requests\Updateday_time_rangeRequest;
+use App\Models\day_time_range;
 
-class CompetitionController extends Controller
+class DayTimeRangeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,7 @@ class CompetitionController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -30,10 +31,10 @@ class CompetitionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCompetitionRequest  $request
+     * @param  \App\Http\Requests\Storeday_time_rangeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCompetitionRequest $request)
+    public function store(Storeday_time_rangeRequest $request)
     {
         //
     }
@@ -41,10 +42,10 @@ class CompetitionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Competition  $competition
+     * @param  \App\Models\day_time_range  $day_time_range
      * @return \Illuminate\Http\Response
      */
-    public function show(Competition $competition)
+    public function show(day_time_range $day_time_range)
     {
         //
     }
@@ -52,10 +53,10 @@ class CompetitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Competition  $competition
+     * @param  \App\Models\day_time_range  $day_time_range
      * @return \Illuminate\Http\Response
      */
-    public function edit(Competition $competition)
+    public function edit(day_time_range $day_time_range)
     {
         //
     }
@@ -63,11 +64,11 @@ class CompetitionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCompetitionRequest  $request
-     * @param  \App\Models\Competition  $competition
+     * @param  \App\Http\Requests\Updateday_time_rangeRequest  $request
+     * @param  \App\Models\day_time_range  $day_time_range
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCompetitionRequest $request, Competition $competition)
+    public function update(Updateday_time_rangeRequest $request, day_time_range $day_time_range)
     {
         //
     }
@@ -75,10 +76,10 @@ class CompetitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Competition  $competition
+     * @param  \App\Models\day_time_range  $day_time_range
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Competition $competition)
+    public function destroy(day_time_range $day_time_range)
     {
         //
     }
