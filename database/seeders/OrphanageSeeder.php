@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Orphanage;
 
 class OrphanageSeeder extends Seeder
 {
@@ -14,6 +16,9 @@ class OrphanageSeeder extends Seeder
      */
     public function run()
     {
-        //
-    }
+        foreach(User::all()->where('user_type','Pengurus Panti') as $user){
+            Orphanage::factory()->create([
+                'user_id'=>$user->id
+            ]);
+    }}
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Orphan_course_booking extends Model
+class OrphanCourseBooking extends Model
 {
     use HasFactory;
 }

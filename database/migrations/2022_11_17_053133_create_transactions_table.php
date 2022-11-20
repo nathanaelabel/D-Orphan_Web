@@ -18,8 +18,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
             $table->integer("amount");
-            $table->enum("status",["Pending","Complete","Canceled"]);
+            $table->enum("status",['pending','complete','canceled']);
             $table->string("description")->nullable();
+            $table->unsignedBigInteger("to_user_id")->nullable();
+            $table->foreign("to_user_id")->references("id")->on("users")->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use App\Models\Tutor;
+use App\Models\TutorDayTimeRange;
 class TutorDayTimeRangeSeeder extends Seeder
 {
     /**
@@ -14,6 +15,10 @@ class TutorDayTimeRangeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        foreach(Tutor::all() as $tutor){
+            TutorDayTimeRange::factory()->create([
+                'tutor_id'=>$tutor->id,
+            ]);
+        }
     }
 }

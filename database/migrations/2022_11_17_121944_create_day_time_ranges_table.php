@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreign('day_id')->references('id')->on('days');
             $table->time('start_time');
             $table->time('end_time');
+            $table->timestamps();
+
         });
     }
 

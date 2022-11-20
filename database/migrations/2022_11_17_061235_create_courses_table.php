@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign("skill_id")->references("id")->on("skills");
             $table->string("description")->nullable();
             $table->string("location");
+            $table->integer("hourly_price");
             $table->integer("is_online")->default(0);
             $table->integer("is_visit")->default(0);
             $table->integer("maximum_member")->default(1);

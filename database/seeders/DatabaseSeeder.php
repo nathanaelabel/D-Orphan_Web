@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\CourseBookingDayTimeRange;
+use App\Models\DayTimeRange;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +17,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+      UserSeeder::class,
+      TutorSeeder::class,
+      DaySeeder::class,
+      DayTimeRangeSeeder::class,
+      TutorDayTimeRangeSeeder::class,
+      OrphanageSeeder::class,
+      OrphanSeeder::class,
+      SkillSeeder::class,
+      CompetitionSeeder::class,
+      CourseSeeder::class,
+      CourseBookingSeeder::class,
+      OrphanCourseBookingSeeder::class,
+      CourseBookingDayTimeRangeSeeder::class,
+      DonationSeeder::class,
+        ]);
     }
 }

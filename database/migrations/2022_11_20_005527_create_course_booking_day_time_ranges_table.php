@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('course_bookings_day_time_ranges', function (Blueprint $table) {
+        Schema::create('course_booking_day_time_ranges', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("course_booking_id");
             $table->unsignedBigInteger("day_time_range_id");

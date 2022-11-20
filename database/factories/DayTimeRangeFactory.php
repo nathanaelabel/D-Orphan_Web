@@ -17,7 +17,7 @@ class DayTimeRangeFactory extends Factory
     public function definition()
     {
         return [
-            //
+
         ];
     }
 }

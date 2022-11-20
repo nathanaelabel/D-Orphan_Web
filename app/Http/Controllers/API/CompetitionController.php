@@ -18,7 +18,7 @@ class CompetitionController extends Controller
     {
 
         if($request->id){
-            return response()->json(Competition::find($id)->toJson());        
+            return response()->json(json_encode(Competition::find($request->id)));        
         }else{
             if($request->tutor_id && $request->category_id){
                 return 'request berdasar tutor id dan category id';
