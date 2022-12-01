@@ -19,22 +19,22 @@ class DonationFactory extends Factory
      */
     public function definition()
     {
-        $faker=Faker::create("id_ID");
-        $amount = random_int(10000,300000);
-        $orphanage= Orphanage::all()->random(1)->first();
+        $faker = Faker::create('id_ID');
+        $amount = random_int(10000, 300000);
+        $orphanage = Orphanage::all()->random(1)->first();
+
         return [
-            'orphanage_id'=>$orphanage->id,
-            'donator_name'=>$faker->randomElement(['Anonymous',$faker->name()]),
-            'amount'=>$amount,
-            'message'=>'Semoga membantu ya!',
-            'transaction_id'=>Transaction::create([
+            'orphanage_id' => $orphanage->id,
+            'donator_name' => $faker->randomElement(['Anonymous', $faker->name()]),
+            'amount' => $amount,
+            'message' => 'Semoga membantu ya!',
+            'transaction_id' => Transaction::create([
                 'user_id' => $orphanage->user->id,
                 'amount' => $amount,
                 'to_user_id' => $orphanage->user->id,
-                'status' => $faker->randomElement(['complete','canceled','pending']),
-                'description' => 'Donasi kepada ' . $orphanage->name,
-            ])
-
+                'status' => $faker->randomElement(['complete', 'canceled', 'pending']),
+                'description' => 'Donasi kepada '.$orphanage->name,
+            ]),
         ];
     }
 }
