@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Faker\Factory as Faker;
 
 class UserFactory extends Factory
 {
@@ -24,11 +25,15 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $faker = Faker::create('id_ID');
+
         return [
-            'name' => $this->faker->name(),
+            'name' => $faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'phone_number' => $faker->phoneNumber(),
+            'address' => $faker->address(),
             'remember_token' => Str::random(10),
         ];
     }
@@ -54,7 +59,7 @@ class UserFactory extends Factory
      */
     public function withPersonalTeam()
     {
-        if (! Features::hasTeamFeatures()) {
+        if (!Features::hasTeamFeatures()) {
             return $this->state([]);
         }
 
