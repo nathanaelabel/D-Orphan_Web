@@ -15,7 +15,6 @@ class CourseBookingController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -25,62 +24,67 @@ class CourseBookingController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCourseBookingRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCourseBookingRequest $request)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CourseBooking  $courseBooking
      * @return \Illuminate\Http\Response
      */
     public function show(CourseBooking $courseBooking)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CourseBooking  $courseBooking
      * @return \Illuminate\Http\Response
      */
     public function edit(CourseBooking $courseBooking)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCourseBookingRequest  $request
-     * @param  \App\Models\CourseBooking  $courseBooking
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCourseBookingRequest $request, CourseBooking $courseBooking)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CourseBooking  $courseBooking
      * @return \Illuminate\Http\Response
      */
     public function destroy(CourseBooking $courseBooking)
     {
-        //
+    }
+
+    public function changeCourseStatus($status, $courseBookingId)
+    {
+        CourseBooking::findOrFail($courseBookingId)->update([
+            'status' => $status,
+        ]);
+
+        if ($status == 'ongoing') {
+            return redirect('/mydashboard')->with('status', 'Has been accepted!');
+        } elseif ($status == 'complete') {
+            return redirect('/mydashboard')->with('status', 'Has been completed!');
+        } elseif ($status == 'canceled') {
+            return redirect('/mydashboard')->with('status', 'Has been canceled!');
+        } elseif ($status == 'complete') {
+            return redirect('/mydashboard')->with('status', 'Has been completed!');
+        }
     }
 }

@@ -9,12 +9,22 @@ class CourseBooking extends Model
 {
     use HasFactory;
 
-    public function orphanage(){
+    protected $guarded = [
+        'id',
+    ];
+
+    public function orphanage()
+    {
         return $this->belongsTo(Orphanage::class);
     }
-    public function course(){
+
+    public function course()
+    {
         return $this->belongsTo(Course::class);
     }
 
-
+    public function orphanCourseBookings()
+    {
+        return $this->hasMany(OrphanCourseBooking::class);
+    }
 }

@@ -25,12 +25,15 @@ class CourseBookingFactory extends Factory
         $total_price = random_int(200000, 1000000);
         $status = $faker->randomElement(['pending', 'ongoing', 'complete', 'canceled']);
         $faker = Faker::create('en_EN');
+        $getCourse = $faker->randomElement(Course::all()->pluck('id'));
+        $is_visit = Course::findOrFail($getCourse)->is_visit == 1 ? rand(0,1):null;
         return  [
-            'course_id' => $faker->randomElement(Course::all()->pluck('id')),
+            'course_id' => $getCourse,
             'start_date' => $faker->dateTimeThisYear(),
             'hour_count' => random_int(1, 30),
             'total_price' => $total_price,
             'status' => $status,
+            'is_visit' => $is_visit,
 
         ];
     }

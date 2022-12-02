@@ -8,7 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    public function tutor(){
+
+    protected $guarded = [
+        'id',
+    ];
+
+    public function tutor()
+    {
         return $this->belongsTo(Tutor::class);
+    }
+
+    public function skill()
+    {
+        return $this->belongsTo(Skill::class);
+    }
+
+    public function courseBookings()
+    {
+        return $this->hasMany(CourseBooking::class);
     }
 }

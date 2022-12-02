@@ -14,7 +14,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $gender = ['Male', 'Female'];
         User::factory()->count(25)->create([
             'user_type' => 'Tutor',
             'gender' => 'Male',
@@ -23,9 +22,13 @@ class UserSeeder extends Seeder
             'user_type' => 'Tutor',
             'gender' => 'Female',
         ]);
-        User::factory()->count(50)->create([
+        User::factory()->count(25)->create([
             'user_type' => 'Pengurus Panti',
-            'gender' => array_rand($gender),
+            'gender' => 'Male',
+        ]);
+        User::factory()->count(25)->create([
+            'user_type' => 'Pengurus Panti',
+            'gender' => 'Female',
         ]);
     }
 }

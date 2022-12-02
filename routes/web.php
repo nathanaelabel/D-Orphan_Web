@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CourseBookingController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +19,13 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/mydashboard', [DashboardController::class, 'index']);
+Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseStatus'])->name('progress-course-tutor');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
