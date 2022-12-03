@@ -70,17 +70,6 @@ class CourseController extends Controller
         return view('mydetailtutorcoursecollection', [
             'courseData' => Course::findOrFail($courseId),
         ]);
-
-        // if (auth()->user()->user_type == 'Tutor') {
-            // return redirect('/mydetailtutorcoursecollection')->with([
-            //     'courseData' => Course::findOrFail($courseId),
-            // ]);
-        // // } elseif (auth()->user()->user_type == 'Pengurus Panti') {
-        // return view('mytutorcoursecollection', [
-        //         'skillDatas' => Skill::all(),
-        //         'pengurus' => ['data ini dihapus aja'],
-        //     ]);
-        // }
     }
 
     /**
@@ -144,14 +133,14 @@ class CourseController extends Controller
         ]);
     }
 
-    public function getTutorCourseCollection(Course $course)
+    public function getTutorCourseCollection()
     {
         return view('mytutorcoursecollection', [
                 'courseDatas' => User::where('user_type', 'Tutor')->first()->tutor->courses,
             ]);
     }
 
-    public function getPaSkill(Course $course)
+    public function getPaSkill()
     {
         return view('myfindpaskill', [
                 'skillDatas' => Skill::all(),

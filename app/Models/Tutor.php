@@ -18,6 +18,11 @@ class Tutor extends Model
         return $this->hasMany(Course::class);
     }
 
+    public function competitions()
+    {
+        return $this->hasMany(Competition::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

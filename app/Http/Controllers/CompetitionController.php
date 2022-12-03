@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCompetitionRequest;
 use App\Http\Requests\UpdateCompetitionRequest;
 use App\Models\Competition;
+use App\Models\User;
 
 class CompetitionController extends Controller
 {
@@ -81,5 +82,11 @@ class CompetitionController extends Controller
     public function destroy(Competition $competition)
     {
         //
+    }
+    public function getTutorCompetitionPA()
+    {
+        // return view('myfindtutorcompetitionpa', [
+        //         'paDatas' => Competition::where('tutor_id', User::where('user_type', 'Tutor')->first())->pluck('type')->unique(),
+        //     ]);
     }
 }

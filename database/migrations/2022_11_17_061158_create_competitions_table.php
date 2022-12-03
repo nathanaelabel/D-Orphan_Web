@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreign('tutor_id')->references('id')->on('tutors')
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->unsignedBigInteger('orphanage_id');
+            $table->foreign("orphanage_id")->references('id')->on('orphanages')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->string("title");
             $table->string("location");
             $table->string("description");

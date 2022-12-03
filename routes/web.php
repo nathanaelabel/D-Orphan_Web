@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CourseBookingController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
@@ -25,6 +26,8 @@ Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::
 
 Route::get('/getmytutorcoursecollection', [CourseController::class, 'getTutorCourseCollection']);
 Route::resource('/mytutorcoursecollection', CourseController::class);
+
+Route::get('/getmytutorcompetionpa', [CompetitionController::class, 'getTutorCompetionPA']);
 
 Route::get('/myfindpaskill', [CourseController::class, 'getPaSkill']);
 
