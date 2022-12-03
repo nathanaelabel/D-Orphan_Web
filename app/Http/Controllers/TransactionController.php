@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTransactionRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
+use App\Models\Tutor;
+use App\Models\User;
 
 class TransactionController extends Controller
 {
@@ -34,9 +36,22 @@ class TransactionController extends Controller
      * @param  \App\Http\Requests\StoreTransactionRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTransactionRequest $request)
+    public function store(Request $request)
     {
-        //
+        $check = Transaction::insert([
+            'user_id' => Tutor::findOrFail(1)->user->id,
+            'amount' => $request->amount,
+            'description' => $request->description,
+        ]);
+
+        $status = 'Failed to request!';
+        if ($check) {
+            $status = 'Has been requested!';
+        }
+
+        return redirect('/myrequestsaldotutor')->with([
+            'status' => $status,
+        ]);
     }
 
     /**

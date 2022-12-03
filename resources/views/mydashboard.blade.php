@@ -6,6 +6,8 @@
     ########################TUTOR
     //////////////////////////////////////////showtransaction
     <div></div>
+    <div></div>
+<a href="{{ route('myrequestsaldotutor.create') }}">TARIK SALDO</a>
     @if ($transactionDatas)
         @foreach ($transactionDatas as $transactionData)
             <div></div>

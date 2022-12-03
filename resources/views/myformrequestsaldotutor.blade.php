@@ -6,6 +6,9 @@ FORM ADD COURSE
         <label>tutor_id: 1</label>
     </div>
     <div>
+        <label>saldo: {{Tutor::findOrFail(1)->}}</label>
+    </div>
+    <div>
         <label>amount:</label>
         <input type="text" required name="amount">
     </div>
