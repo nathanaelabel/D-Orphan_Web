@@ -8,7 +8,7 @@
 <div></div>
 <a href="{{ route('mytutorcoursecollection.create') }}">TAMBAH</a>
 <div></div>
-@if ($courseDatas->isNotEmpty())
+@if ($courseDatas)
     @foreach ($courseDatas as $courseData)
         <div></div>
         {{ $loop->iteration }}.

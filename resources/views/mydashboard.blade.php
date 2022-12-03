@@ -6,7 +6,7 @@
     ########################TUTOR
     //////////////////////////////////////////showtransaction
     <div></div>
-    @if ($transactionDatas->isNotEmpty())
+    @if ($transactionDatas)
         @foreach ($transactionDatas as $transactionData)
             <div></div>
             {{ $loop->iteration }}. amount: {{ $transactionData->amount }}
@@ -25,7 +25,7 @@
 
     ///////////////////////////////////////////showcoursebooking
     <div></div>
-    @if ($courseBookingDatas->isNotEmpty())
+    @if ($courseBookingDatas)
         @foreach ($courseBookingDatas as $courseBookingData)
             @if ($courseBookingData->status == 'pending')
                 PENDING
@@ -162,7 +162,7 @@
     <div></div>
     ///////////////////////////////////////////showcoursebooking
     <div></div>
-    @if ($courseBookingDatas->isNotEmpty())
+    @if ($courseBookingDatas)
         @foreach ($courseBookingDatas as $courseBookingData)
             @if ($courseBookingData->status == 'pending')
                 PENDING
