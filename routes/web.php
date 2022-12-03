@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseBookingController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,12 @@ Route::get('/', function () {
 });
 
 Route::get('/mydashboard', [DashboardController::class, 'index']);
-Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseStatus'])->name('progress-course-tutor');
+Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseStatus']);
+
+Route::get('/getmytutorcoursecollection', [CourseController::class, 'getTutorCourseCollection']);
+Route::resource('/mytutorcoursecollection', CourseController::class);
+
+Route::get('/myfindpaskill', [CourseController::class, 'getPaSkill']);
 
 Route::middleware([
     'auth:sanctum',

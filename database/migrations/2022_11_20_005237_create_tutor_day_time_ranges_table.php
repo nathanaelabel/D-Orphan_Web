@@ -17,8 +17,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("tutor_id");
             $table->unsignedBigInteger("day_time_range_id");
-            $table->foreign("tutor_id")->references("id")->on("tutors");
-            $table->foreign("day_time_range_id")->references("id")->on("day_time_ranges");
+            $table->foreign("tutor_id")->references("id")->on("tutors")
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->foreign("day_time_range_id")->references("id")->on("day_time_ranges")
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

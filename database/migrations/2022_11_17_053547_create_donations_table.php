@@ -16,12 +16,16 @@ return new class extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('orphanage_id');
-            $table->foreign("orphanage_id")->references('id')->on("orphanages");
+            $table->foreign("orphanage_id")->references('id')->on("orphanages")
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->string("donator_name")->nullable();
             $table->integer("amount")->nullable();
             $table->string("message");
             $table->unsignedBigInteger('transaction_id');
-            $table->foreign('transaction_id')->references('id')->on("transactions");
+            $table->foreign('transaction_id')->references('id')->on("transactions")
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@
             <div></div>
             description: {{ $transactionData->description }}
             <div></div>
-            created_at: {{ $transactionData->created_at }}
+            updated_at: {{ $transactionData->updated_at }}
             <div></div>
         @endforeach
     @else
@@ -54,7 +54,7 @@
                 member count/member max:
                 {{ $courseBookingData->orphanCourseBookings->count() }}/{{ $courseBookingData->course->maximum_member }}
                 <div></div>
-                created_at: {{ $courseBookingData->created_at }}
+                updated_at: {{ $courseBookingData->updated_at }}
                 <div></div>
                 <a href="mydashboard/canceled/ {{ $courseBookingData->id }}">TOLAK</a>
                 <div></div>
@@ -87,7 +87,7 @@
                 member count/member max:
                 {{ $courseBookingData->orphanCourseBookings->count() }}/{{ $courseBookingData->course->maximum_member }}
                 <div></div>
-                created_at: {{ $courseBookingData->created_at }}
+                updated_at: {{ $courseBookingData->updated_at }}
                 <div></div>
                 <a href="mydashboard/canceled/ {{ $courseBookingData->id }}">CANCEL</a>
                 <div></div>
@@ -120,7 +120,7 @@
                 member count/member max:
                 {{ $courseBookingData->orphanCourseBookings->count() }}/{{ $courseBookingData->course->maximum_member }}
                 <div></div>
-                created_at: {{ $courseBookingData->created_at }}
+                updated_at: {{ $courseBookingData->updated_at }}
                 <div></div>
             @elseif($courseBookingData->status == 'canceled')
                 CANCELED
@@ -149,7 +149,7 @@
                 member count/member max:
                 {{ $courseBookingData->orphanCourseBookings->count() }}/{{ $courseBookingData->course->maximum_member }}
                 <div></div>
-                created_at: {{ $courseBookingData->created_at }}
+                updated_at: {{ $courseBookingData->updated_at }}
                 <div></div>
             @endif
         @endforeach
@@ -193,7 +193,7 @@
                 member count/member max:
                 {{ $courseBookingData->orphanCourseBookings->count() }}/{{ $courseBookingData->course->maximum_member }}
                 <div></div>
-                created_at: {{ $courseBookingData->created_at }}
+                updated_at: {{ $courseBookingData->updated_at }}
                 <div></div>
                 <a href="mydashboard/canceled/ {{ $courseBookingData->id }}">CANCEL</a>
                 <div></div>
@@ -227,7 +227,7 @@
                 member count/member max:
                 {{ $courseBookingData->orphanCourseBookings->count() }}/{{ $courseBookingData->course->maximum_member }}
                 <div></div>
-                created_at: {{ $courseBookingData->created_at }}
+                updated_at: {{ $courseBookingData->updated_at }}
                 <div></div>
                 <a href="mydashboard/canceled/ {{ $courseBookingData->id }}">CANCEL</a>
                 <div></div>
@@ -262,7 +262,7 @@
                 member count/member max:
                 {{ $courseBookingData->orphanCourseBookings->count() }}/{{ $courseBookingData->course->maximum_member }}
                 <div></div>
-                created_at: {{ $courseBookingData->created_at }}
+                updated_at: {{ $courseBookingData->updated_at }}
                 <div></div>
             @elseif($courseBookingData->status == 'canceled')
                 CANCELED
@@ -293,7 +293,7 @@
                 member count/member max:
                 {{ $courseBookingData->orphanCourseBookings->count() }}/{{ $courseBookingData->course->maximum_member }}
                 <div></div>
-                created_at: {{ $courseBookingData->created_at }}
+                updated_at: {{ $courseBookingData->updated_at }}
                 <div></div>
             @endif
         @endforeach

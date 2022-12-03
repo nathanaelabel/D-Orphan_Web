@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCourseRequest;
-use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
+use App\Models\Skill;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -15,7 +16,6 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -25,62 +25,136 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('myformaddtutorcoursecollection', [
+            'skillDatas' => Skill::all(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCourseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCourseRequest $request)
+    public function store(Request $request)
     {
-        //
+        $check = Course::insert([
+            'tutor_id' => 1,
+            'skill_id' => $request->skill_id,
+            'description' => $request->description,
+            'location' => $request->location,
+            'hourly_price' => $request->hourly_price,
+            'tool_price' => $request->tool_price,
+            'is_online' => $request->is_online,
+            'is_visit' => $request->is_visit,
+            'maximum_member' => $request->maximum_member,
+            'tool_description' => $request->tool_description,
+        ]);
+
+        $status = 'Failed to add!';
+        if ($check) {
+            $status = 'Has been added!';
+        }
+
+        return redirect('/getmytutorcoursecollection')->with([
+            'status' => $status,
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show($courseId)
     {
-        //
+        return view('mydetailtutorcoursecollection', [
+            'courseData' => Course::findOrFail($courseId),
+        ]);
+
+        // if (auth()->user()->user_type == 'Tutor') {
+            // return redirect('/mydetailtutorcoursecollection')->with([
+            //     'courseData' => Course::findOrFail($courseId),
+            // ]);
+        // // } elseif (auth()->user()->user_type == 'Pengurus Panti') {
+        // return view('mytutorcoursecollection', [
+        //         'skillDatas' => Skill::all(),
+        //         'pengurus' => ['data ini dihapus aja'],
+        //     ]);
+        // }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit($courseId)
     {
-        //
+        return view('myformedittutorcoursecollection', [
+            'courseData' => Course::findOrFail($courseId),
+            'skillDatas' => Skill::all(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCourseRequest  $request
-     * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCourseRequest $request, Course $course)
+    public function update(Request $request, $courseId)
     {
-        //
+        $check = Course::findOrFail($courseId)->update([
+            'skill_id' => $request->skill_id,
+            'description' => $request->description,
+            'location' => $request->location,
+            'hourly_price' => $request->hourly_price,
+            'tool_price' => $request->tool_price,
+            'is_online' => $request->is_online,
+            'is_visit' => $request->is_visit,
+            'maximum_member' => $request->maximum_member,
+            'tool_description' => $request->tool_description,
+        ]);
+
+        $status = 'Failed to edit!';
+        if ($check) {
+            $status = 'Has been edited!';
+        }
+
+        return redirect(route('mytutorcoursecollection.show', $courseId))->with([
+            'status' => $status,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy($courseId)
     {
-        //
+        $check = Course::findOrFail($courseId)->delete();
+
+        $status = 'Failed to delete!';
+        if ($check) {
+            $status = 'Has been deleted!';
+        }
+
+        return redirect('/getmytutorcoursecollection')->with([
+            'status' => $status,
+        ]);
+    }
+
+    public function getTutorCourseCollection(Course $course)
+    {
+        return view('mytutorcoursecollection', [
+                'courseDatas' => User::where('user_type', 'Tutor')->first()->tutor->courses,
+            ]);
+    }
+
+    public function getPaSkill(Course $course)
+    {
+        return view('myfindpaskill', [
+                'skillDatas' => Skill::all(),
+            ]);
     }
 }

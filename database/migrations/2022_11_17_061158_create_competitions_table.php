@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('competitions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tutor_id');
-            $table->foreign('tutor_id')->references('id')->on('tutors');
+            $table->foreign('tutor_id')->references('id')->on('tutors')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->string("title");
             $table->string("location");
             $table->string("description");

@@ -16,9 +16,13 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tutor_id');
-            $table->foreign("tutor_id")->references("id")->on("tutors");
+            $table->foreign("tutor_id")->references("id")->on("tutors")
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->unsignedBigInteger('skill_id');
-            $table->foreign("skill_id")->references("id")->on("skills");
+            $table->foreign("skill_id")->references("id")->on("skills")
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->string("description")->nullable();
             $table->string("location");
             $table->integer("hourly_price");

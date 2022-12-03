@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('day_time_ranges', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("day_id");
-            $table->foreign('day_id')->references('id')->on('days');
+            $table->foreign('day_id')->references('id')->on('days')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();

@@ -16,9 +16,13 @@ return new class extends Migration
         Schema::create('orphan_course_bookings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("course_booking_id");
-            $table->foreign("course_booking_id")->references("id")->on("course_bookings");
+            $table->foreign("course_booking_id")->references("id")->on("course_bookings")
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->unsignedBigInteger("orphan_id");
-            $table->foreign("orphan_id")->references("id")->on("orphans");
+            $table->foreign("orphan_id")->references("id")->on("orphans")
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

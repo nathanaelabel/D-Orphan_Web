@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('orphans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('orphanage_id');
-            $table->foreign("orphanage_id")->references('id')->on('orphanages');
+            $table->foreign("orphanage_id")->references('id')->on('orphanages')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->string("name");
             $table->datetime("date_of_birth");
             $table->enum("gender",["Male","Female"]);
