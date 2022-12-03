@@ -71,20 +71,24 @@ class CourseBookingController extends Controller
     {
     }
 
-    public function changeCourseStatus($status, $courseBookingId)
+    public function changeCourseBookingStatus($status, $courseBookingId)
     {
-        CourseBooking::findOrFail($courseBookingId)->update([
+        $check = CourseBooking::findOrFail($courseBookingId)->update([
             'status' => $status,
         ]);
 
-        if ($status == 'ongoing') {
-            return redirect('/mydashboard')->with('status', 'Has been accepted!');
-        } elseif ($status == 'complete') {
-            return redirect('/mydashboard')->with('status', 'Has been completed!');
-        } elseif ($status == 'canceled') {
-            return redirect('/mydashboard')->with('status', 'Has been canceled!');
-        } elseif ($status == 'complete') {
-            return redirect('/mydashboard')->with('status', 'Has been completed!');
+        if ($check) {
+            if ($status == 'ongoing') {
+                return redirect('/mydashboard')->with('status', 'Has been accepted!');
+            } elseif ($status == 'complete') {
+                return redirect('/mydashboard')->with('status', 'Has been completed!');
+            } elseif ($status == 'canceled') {
+                return redirect('/mydashboard')->with('status', 'Has been canceled!');
+            } elseif ($status == 'complete') {
+                return redirect('/mydashboard')->with('status', 'Has been completed!');
+            }
+        } else {
+            return redirect('/mydashboard')->with('status', 'Failed!');
         }
     }
 }

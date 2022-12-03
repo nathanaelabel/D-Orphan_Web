@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
 use App\Models\Tutor;
-use App\Models\User;
 
 class TransactionController extends Controller
 {
@@ -17,7 +16,6 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -33,23 +31,27 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTransactionRequest  $request
+     * @param \App\Http\Requests\StoreTransactionRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $check = Transaction::insert([
-            'user_id' => Tutor::findOrFail(1)->user->id,
-            'amount' => $request->amount,
-            'description' => $request->description,
-        ]);
-
-        $status = 'Failed to request!';
-        if ($check) {
-            $status = 'Has been requested!';
+        if ($request->amount < Tutor::findOrFail(1)->user->money) {
+            $check = Transaction::insert([
+                'user_id' => Tutor::findOrFail(1)->user->id,
+                'amount' => $request->amount,
+                'description' => $request->description,
+            ]);
+            $status = 'Failed to request!';
+            if ($check) {
+                $status = 'Has been requested!';
+            }
+        } else {
+            $status = 'Failed to request!. Your money not enough';
         }
 
-        return redirect('/myrequestsaldotutor')->with([
+        return redirect('/mydashboard')->with([
             'status' => $status,
         ]);
     }
@@ -57,45 +59,49 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
     public function show(Transaction $transaction)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
     public function edit(Transaction $transaction)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTransactionRequest  $request
-     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
     public function destroy(Transaction $transaction)
     {
-        //
+    }
+
+    public function changeTransactionStatus($status, $transactionId)
+    {
+        $check = Transaction::findOrFail($transactionId)->update([
+            'status' => $status,
+        ]);
+
+        if ($check) {
+            return redirect('/mydashboard')->with('status', 'Has been canceled!');
+        } else {
+            return redirect('/mydashboard')->with('status', 'Failed to cancel!');
+        }
     }
 }

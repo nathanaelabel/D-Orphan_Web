@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('/mydashboard', [DashboardController::class, 'index']);
-Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseStatus']);
+Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseBookingStatus']);
 
 Route::get('/getmytutorcoursecollection', [CourseController::class, 'getTutorCourseCollection']);
 Route::resource('/mytutorcoursecollection', CourseController::class);
@@ -32,6 +32,7 @@ Route::get('/getmytutorcompetionpa', [CompetitionController::class, 'getTutorCom
 
 
 Route::resource('/myrequestsaldotutor', TransactionController::class);
+Route::get('/myrequestsaldotutor/{status}/{transactionId}', [TransactionController::class, 'changeTransactionStatus']);
 
 Route::get('/myfindpaskill', [CourseController::class, 'getPaSkill']);
 
