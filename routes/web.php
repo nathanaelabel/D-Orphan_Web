@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CourseBookingController;
 use App\Http\Controllers\CourseController;
@@ -28,6 +29,9 @@ Route::get('/getmytutorcoursecollection', [CourseController::class, 'getTutorCou
 Route::resource('/mytutorcoursecollection', CourseController::class);
 
 Route::get('/getmytutorcompetionpa', [CompetitionController::class, 'getTutorCompetionPA']);
+
+
+Route::resource('/myrequestsaldotutor', TransactionController::class);
 
 Route::get('/myfindpaskill', [CourseController::class, 'getPaSkill']);
 
