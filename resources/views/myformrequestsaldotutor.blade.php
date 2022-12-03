@@ -13,10 +13,6 @@ FORM ADD COURSE
         <input type="text" required name="amount">
     </div>
     <div>
-        <label>decription:</label>
-        <input type="text" required name="description">
-    </div>
-    <div>
         <button type="submit">Tambahkan</button>
     </div>
 </form>

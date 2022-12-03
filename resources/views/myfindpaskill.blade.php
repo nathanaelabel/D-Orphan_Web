@@ -2,7 +2,7 @@
  <div></div>
  ///////////////////////////////////////////showcourse
  <div></div>
- @if ($skillDatas)
+ @if ($skillDatas->isNotEmpty())
      @foreach ($skillDatas as $skillData)
          <div></div>
          {{ $loop->iteration }}.

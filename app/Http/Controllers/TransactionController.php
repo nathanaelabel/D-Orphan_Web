@@ -16,6 +16,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        return view('myadminrequestsaldotutor', [
+            'transactionDatas' => Transaction::where('description', 'Requesting')->get(),
+        ]);
     }
 
     /**
@@ -41,7 +44,6 @@ class TransactionController extends Controller
             $check = Transaction::insert([
                 'user_id' => Tutor::findOrFail(1)->user->id,
                 'amount' => $request->amount,
-                'description' => $request->description,
             ]);
             $status = 'Failed to request!';
             if ($check) {
@@ -94,14 +96,29 @@ class TransactionController extends Controller
 
     public function changeTransactionStatus($status, $transactionId)
     {
-        $check = Transaction::findOrFail($transactionId)->update([
-            'status' => $status,
-        ]);
+        $check=false;
+        if ($status == 'complete') {
+            if (Transaction::findOrFail($transactionId)->update([
+                'status' => $status,
+            ])) {
+                $check = Transaction::findOrFail($transactionId)->user->update([
+                    'money' => Transaction::findOrFail($transactionId)->user->money + Transaction::findOrFail($transactionId)->amount,
+                ]);
+            }
+        } elseif ($status == 'canceled') {
+            $check = Transaction::findOrFail($transactionId)->update([
+                'status' => $status,
+            ]);
+        }
 
         if ($check) {
-            return redirect('/mydashboard')->with('status', 'Has been canceled!');
+            if ($status == 'complete') {
+                return redirect('/myadminrequestsaldotutor')->with('status', 'Has been accepted!');
+            } elseif ($status == 'canceled') {
+                return redirect('/myadminrequestsaldotutor')->with('status', 'Has been canceled!');
+            }
         } else {
-            return redirect('/mydashboard')->with('status', 'Failed to cancel!');
+            return redirect('/myadminrequestsaldotutor')->with('status', 'Failed!');
         }
     }
 }

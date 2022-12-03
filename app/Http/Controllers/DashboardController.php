@@ -18,15 +18,15 @@ class DashboardController extends Controller
     public function index()
     {
         // if (auth()->user()->user_type == 'Tutor') {
-        return view('mydashboard')->with([
-                'transactionDatas' => User::where('user_type', 'Tutor')->first()->transactions,
-                'courseBookingDatas' => CourseBooking::whereIn('course_id', Course::where('tutor_id', User::where('user_type', 'Tutor')->first()->tutor->id)->pluck('id'))->get(),
-            ]);
-        // // } elseif (auth()->user()->user_type == 'Pengurus Panti') {
         // return view('mydashboard')->with([
-        //         'courseBookingDatas' => User::where('user_type', 'Pengurus Panti')->first()->courseBookings,
-        //         'pengurus' => ['data ini dihapus aja'],
+        //         'transactionDatas' => User::where('user_type', 'Tutor')->first()->transactions,
+        //         'courseBookingDatas' => CourseBooking::whereIn('course_id', Course::where('tutor_id', User::where('user_type', 'Tutor')->first()->tutor->id)->pluck('id'))->get(),
         //     ]);
+        // // } elseif (auth()->user()->user_type == 'Pengurus Panti') {
+        return view('mydashboard')->with([
+                'courseBookingDatas' => User::where('user_type', 'Pengurus Panti')->first()->courseBookings,
+                'pengurus' => ['data ini dihapus aja'],
+            ]);
         // }
     }
 

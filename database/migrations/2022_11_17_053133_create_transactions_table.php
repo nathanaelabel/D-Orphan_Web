@@ -21,7 +21,7 @@ return new class extends Migration
             ->onDelete('cascade');
             $table->integer("amount");
             $table->enum("status",['pending','complete','canceled'])->default('pending');
-            $table->string("description")->nullable();
+            $table->string("description")->default("Requesting");
             $table->unsignedBigInteger("to_user_id")->nullable();
             $table->foreign("to_user_id")->references("id")->on("users")
             ->onUpdate('cascade')

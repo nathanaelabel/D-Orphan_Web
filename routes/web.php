@@ -34,6 +34,8 @@ Route::get('/getmytutorcompetionpa', [CompetitionController::class, 'getTutorCom
 Route::resource('/myrequestsaldotutor', TransactionController::class);
 Route::get('/myrequestsaldotutor/{status}/{transactionId}', [TransactionController::class, 'changeTransactionStatus']);
 
+Route::get('/myadminrequestsaldotutor', [TransactionController::class, 'index']);
+
 Route::get('/myfindpaskill', [CourseController::class, 'getPaSkill']);
 
 Route::middleware([
