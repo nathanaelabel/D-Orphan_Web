@@ -1,5 +1,5 @@
 @if (session('status'))
-{{ session('status') }}
+    {{ session('status') }}
 @endif
 @if ($transactionDatas->isNotEmpty())
     @foreach ($transactionDatas as $transactionData)

@@ -96,7 +96,7 @@ class TransactionController extends Controller
 
     public function changeTransactionStatus($status, $transactionId)
     {
-        $check=false;
+        $check = false;
         if ($status == 'complete') {
             if (Transaction::findOrFail($transactionId)->update([
                 'status' => $status,
