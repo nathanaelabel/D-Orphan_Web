@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
       OrphanCourseBookingSeeder::class,
       CourseBookingDayTimeRangeSeeder::class,
       DonationSeeder::class,
+      CompetitionRecommendationSeeder::class,
         ]);
     }
 }

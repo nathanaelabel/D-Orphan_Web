@@ -14,21 +14,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(25)->create([
-            'user_type' => 'Tutor',
-            'gender' => 'Male',
-        ]);
-        User::factory()->count(25)->create([
-            'user_type' => 'Tutor',
-            'gender' => 'Female',
-        ]);
-        User::factory()->count(25)->create([
-            'user_type' => 'Pengurus Panti',
-            'gender' => 'Male',
-        ]);
-        User::factory()->count(25)->create([
-            'user_type' => 'Pengurus Panti',
-            'gender' => 'Female',
-        ]);
+        User::factory()->count(100)->create();
     }
 }

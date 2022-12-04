@@ -102,7 +102,7 @@ class TransactionController extends Controller
                 'status' => $status,
             ])) {
                 $check = Transaction::findOrFail($transactionId)->user->update([
-                    'money' => Transaction::findOrFail($transactionId)->user->money + Transaction::findOrFail($transactionId)->amount,
+                    'money' => Transaction::findOrFail($transactionId)->user->money - Transaction::findOrFail($transactionId)->amount,
                 ]);
             }
         } elseif ($status == 'canceled') {

@@ -21,7 +21,7 @@ class OrphanageFactory extends Factory
 
         return [
             'name' => $faker->company(),
-            'photo_url' => 'https://source.unsplash.com/random',
+            'photo_url' => $faker->imageUrl($width = 640, $height = 480, $category = null, $randomize = true, $word = null, $gray = FALSE),
             'description' => Faker::create('id_ID')->text(),
             'member_count' => random_int(10, 100),
         ];

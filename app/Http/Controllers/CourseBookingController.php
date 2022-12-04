@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCourseBookingRequest;
 use App\Http\Requests\UpdateCourseBookingRequest;
 use App\Models\CourseBooking;
+use App\Models\User;
 
 class CourseBookingController extends Controller
 {
@@ -79,13 +80,19 @@ class CourseBookingController extends Controller
 
         if ($check) {
             if ($status == 'ongoing') {
+                $tutor = User::findOrFail(CourseBooking::findOrFail($courseBookingId)->tutor->user->id);
+                $orphanage = User::findOrFail(CourseBooking::findOrFail($courseBookingId)->orphanage->user->id);
+                $tutor->update([
+                    'money' => $tutor->money + CourseBooking::findOrFail($courseBookingId)->hourly_price + CourseBooking::findOrFail($courseBookingId)->tool_price,
+                ]);
+                $orphanage->update([
+                    'money' => $orphanage->money - (CourseBooking::findOrFail($courseBookingId)->hourly_price + CourseBooking::findOrFail($courseBookingId)->tool_price),
+                ]);
                 return redirect('/mydashboard')->with('status', 'Has been accepted!');
             } elseif ($status == 'complete') {
                 return redirect('/mydashboard')->with('status', 'Has been completed!');
             } elseif ($status == 'canceled') {
                 return redirect('/mydashboard')->with('status', 'Has been canceled!');
-            } elseif ($status == 'complete') {
-                return redirect('/mydashboard')->with('status', 'Has been completed!');
             }
         } else {
             return redirect('/mydashboard')->with('status', 'Failed!');

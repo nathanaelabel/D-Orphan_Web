@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Orphan;
 use App\Models\Orphanage;
@@ -16,11 +15,10 @@ class OrphanSeeder extends Seeder
      */
     public function run()
     {
-        foreach(Orphanage::all() as $orphanage){
-            Orphan::factory()->count(random_int(10,30))->create([
-            'orphanage_id'=>$orphanage->id,
+        foreach (Orphanage::all() as $orphanage) {
+            Orphan::factory()->count($orphanage->member_count)->create([
+            'orphanage_id' => $orphanage->id,
             ]);
         }
-    
     }
 }

@@ -22,14 +22,14 @@ class OrphanFactory extends Factory
         $max = strtotime('18 years ago');
 
         $rand_time = mt_rand($min, $max);
-
+        $rand_gender = $faker->randomElement(['Male', 'Female']);
         $birth_date = date('Y-m-d H:i:s', $rand_time);
 
         return [
-            'name' => $faker->name(),
+            'name' => $rand_gender == 'Male' ? $faker->firstNameMale() : $faker->firstNameFemale(),
             'date_of_birth' => $birth_date,
-            'gender' => $faker->randomElement(['Male', 'Female']),
-            'note' => random_int(1, 2) == 1 ? 'Anak Disabilitas' : '',
+            'gender' => $rand_gender,
+            'note' => random_int(0, 1) == 1 ? 'Anak Disabilitas' : '',
         ];
     }
 }

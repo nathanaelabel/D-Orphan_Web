@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,18 +14,10 @@ return new class extends Migration
     {
         Schema::create('competitions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tutor_id');
-            $table->foreign('tutor_id')->references('id')->on('tutors')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-            // $table->unsignedBigInteger('orphanage_id');
-            // $table->foreign("orphanage_id")->references('id')->on('orphanages')
-            // ->onUpdate('cascade')
-            // ->onDelete('cascade');
-            $table->string("title");
-            $table->string("location");
-            $table->string("description");
-            $table->string("category");
+            $table->string('name');
+            $table->string('registration_start_date');
+            $table->string('url');
+            $table->text('description');
             $table->timestamps();
         });
     }
