@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orphan_competition_recommendations');
+        Schema::dropIfExists('orphan_crs');
     }
 };
