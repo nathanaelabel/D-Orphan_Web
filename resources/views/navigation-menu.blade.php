@@ -49,7 +49,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                                <button type="submit" class="block px-4 py-2 text-sm text-red-500" role="menuitem"
                                     tabindex="-1" id="user-menu-item-2">Keluar</button>
                             </form>
                         </div>
@@ -130,7 +130,7 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <button type="submit" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                        <button type="submit" class="block px-4 py-2 text-sm text-red-500" role="menuitem"
                             tabindex="-1" id="user-menu-item-2">Keluar</button>
                     </form>
                 </div>
