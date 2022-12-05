@@ -79,10 +79,7 @@
                                     </div>
 
                                     <div class="mt-6 mb-4">
-                                        <x-jet-button
-                                            class="bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500 normal-case text-base tracking-normal w-full justify-center">
-                                            {{ __('Daftar') }}
-                                        </x-jet-button>
+                                        <x-jet-button>{{ __('Daftar') }}</x-jet-button>
                                     </div>
 
                                     <div class="flex items-center justify-center gap-1">

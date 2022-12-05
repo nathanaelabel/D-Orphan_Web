@@ -51,6 +51,6 @@ FORM EDIT COURSE
         <input type="text" required name="tool_description" value="{{ $courseData->tool_description }}">
     </div>
     <div>
-        <button type="submit">Save Changes</button>
+        <button type="submit">Simpan Changes</button>
     </div>
 </form>

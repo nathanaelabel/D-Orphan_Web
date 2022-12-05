@@ -1,27 +1,27 @@
 <x-jet-action-section>
     <x-slot name="title">
-        {{ __('Delete Account') }}
+        {{ __('Hapus Akun') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Permanently delete your account.') }}
+        {{ __('Hapus akun Anda secara permanen.') }}
     </x-slot>
 
     <x-slot name="content">
-        <div class="max-w-xl text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+        <div class="text-sm text-gray-600">
+            {{ __('Setelah akun Anda dihapus, semua sumber daya dan datanya akan dihapus secara permanen. Sebelum menghapus akun Anda, harap unduh data atau informasi apa pun yang ingin Anda pertahankan.') }}
         </div>
 
         <div class="mt-5">
             <x-jet-danger-button wire:click="confirmUserDeletion" wire:loading.attr="disabled">
-                {{ __('Delete Account') }}
+                {{ __('Hapus Akun') }}
             </x-jet-danger-button>
         </div>
 
         <!-- Delete User Confirmation Modal -->
         <x-jet-dialog-modal wire:model="confirmingUserDeletion">
             <x-slot name="title">
-                {{ __('Delete Account') }}
+                {{ __('Hapus Akun') }}
             </x-slot>
 
             <x-slot name="content">
@@ -44,7 +44,7 @@
                 </x-jet-secondary-button>
 
                 <x-jet-danger-button class="ml-3" wire:click="deleteUser" wire:loading.attr="disabled">
-                    {{ __('Delete Account') }}
+                    {{ __('Hapus Akun') }}
                 </x-jet-danger-button>
             </x-slot>
         </x-jet-dialog-modal>
