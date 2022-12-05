@@ -37,7 +37,7 @@
     @livewire('navigation-menu')
 
     {{-- Content --}}
-    <main class="container max-w-7xl mx-auto sm:p-6 lg:p-8 space-y-8">
+    <main class="container max-w-7xl mx-auto p-6 sm:p-6 lg:p-8 space-y-8">
         <div class="font-sans text-gray-900 antialiased space-y-8">{{ $slot }}</div>
     </main>
 
