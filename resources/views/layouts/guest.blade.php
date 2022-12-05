@@ -23,9 +23,6 @@
     {{-- Laravel Framework CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- External Cascading Style Sheets --}}
-    <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css" />
-
     {{-- Google Fonts CDN --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,9 +42,7 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="mt-auto bg-gray-800 text-center text-lg leading-7 font-bold text-white p-5">
-        <p>Archotech&nbsp;&#45;&nbsp;2022</p>
-    </footer>
+    <x-footer />
 </body>
 
 </html>
