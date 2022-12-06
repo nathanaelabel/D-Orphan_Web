@@ -2,9 +2,9 @@
 
 <x-guest-layout>
     {{-- Hero --}}
-    <div class="flex flex-col space-y-4">
-        <div class="flex space-x-6">
-            <div class="flex flex-col space-y-4 w-6/12 justify-center">
+    <div class="flex flex-col space-y-10 md:space-y-4">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
+            <div class="flex flex-col space-y-0 md:space-y-4 justify-center">
                 <div class="space-y-2">
                     <p class="text-4xl font-extrabold">
                         D&#39;Orphan hadir untuk proses pembelajaran yang lebih optimal
@@ -19,7 +19,7 @@
                     </a>
                 </div>
             </div>
-            <div class="w-6/12 hidden md:block">
+            <div class="hidden md:block">
                 <img src="{{ url('img/home-hero.svg') }}" alt="Bakat Minat">
             </div>
         </div>
@@ -45,7 +45,7 @@
                     Panti Asuhan</span>
             </div>
         </div>
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             <!-- Card -->
             <x-hero-fitur-card>
                 <x-slot:icon>
@@ -117,7 +117,7 @@
             <p class="text-xl leading-8 text-gray-500">Marilah bersama-sama turut mewujudkan kelancaran SDGs</p>
         </div>
         <div class="space-y-2">
-            <div class="flex space-x-6 items-center gap-8">
+            <div class="grid place-items-center gap-x-12 gap-y-2 md:flex">
                 <div class="w-fit">
                     <img src="{{ url('img/home-sdgs4.svg') }}" alt="SDGs 4" />
                 </div>
@@ -141,7 +141,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="flex space-x-6 items-center gap-8">
+            <div class="grid place-items-center gap-x-12 gap-y-2 md:flex">
                 <div class="w-fit">
                     <img src="{{ url('img/home-sdgs8.svg') }}" alt="SDGs 8" />
                 </div>

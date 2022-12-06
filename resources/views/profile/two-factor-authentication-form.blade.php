@@ -11,12 +11,12 @@
         <h3 class="text-lg font-medium text-gray-900">
             @if ($this->enabled)
                 @if ($showingConfirmation)
-                    {{ __('Selesaikan pengaktifan autentikasi dua faktor.') }}
+                    {{ __('Selesaikan pengaktifan autentikasi dua faktor') }}
                 @else
-                    {{ __('Anda telah mengaktifkan autentikasi dua faktor.') }}
+                    {{ __('Anda telah mengaktifkan autentikasi dua faktor') }}
                 @endif
             @else
-                {{ __('Anda belum mengaktifkan autentikasi dua faktor.') }}
+                {{ __('Anda belum mengaktifkan autentikasi dua faktor') }}
             @endif
         </h3>
 

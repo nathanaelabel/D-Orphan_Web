@@ -49,7 +49,6 @@
                                                     class="peer-checked/tutor:text-blue-500">Tutor</label>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div class="mt-4">
@@ -93,7 +92,7 @@
                     </div>
                 </div>
                 <div
-                    class="bg-authentication-background bg-cover flex flex-col text-center justify-center rounded-r-2xl w-6/12 gap-8 p-8">
+                    class="bg-authentication-background bg-cover hidden md:grid md:content-evenly text-center rounded-r-2xl w-6/12 gap-4 p-8">
                     <p class="text-4xl leading-10 font-extrabold tracking-tight text-white">Asah Bakat dan Minatmu</p>
                     <img src="{{ url('img/register.svg') }}" alt="Daftar">
                 </div>

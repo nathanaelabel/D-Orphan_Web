@@ -10,10 +10,10 @@
         <!-- Page Content -->
         <main id="page-content" class="flex flex-auto flex-col max-w-full">
             <div class="flex bg-white rounded-2xl shadow">
-                <!-- Sign Up Section -->
+                <!-- Sign In Section -->
                 <div class="flex grow w-6/12">
                     <div class="flex flex-col p-8 w-full">
-                        <!-- Sign Up Content -->
+                        <!-- Sign In Content -->
                         <div class="grow flex items-center">
                             <div class="w-full max-w-lg mx-auto space-y-10">
                                 <!-- Header -->
@@ -27,7 +27,7 @@
                                 </div>
                                 <!-- END Header -->
 
-                                <!-- Sign Up Form -->
+                                <!-- Sign In Form -->
                                 <x-jet-validation-errors class="mb-4" />
 
                                 @if (session('status'))
@@ -77,15 +77,15 @@
                                 </form>
                             </div>
                         </div>
-                        <!-- END Sign Up Content -->
+                        <!-- END Sign In Content -->
                     </div>
                 </div>
                 <div
-                    class="bg-authentication-background bg-cover flex flex-col text-center justify-center rounded-r-2xl w-6/12 gap-8 p-8">
+                    class="bg-authentication-background bg-cover hidden md:grid md:content-evenly text-center rounded-r-2xl w-6/12 gap-4 p-8">
                     <p class="text-4xl leading-10 font-extrabold tracking-tight text-white">Asah Bakat dan Minatmu</p>
                     <img src="{{ url('img/login.svg') }}" alt="Masuk">
                 </div>
-                <!-- END Sign Up Section -->
+                <!-- END Sign In Section -->
             </div>
         </main>
         <!-- END Page Content -->
