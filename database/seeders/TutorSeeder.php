@@ -17,7 +17,7 @@ class TutorSeeder extends Seeder
     {
         foreach (User::all()->where('user_type', 'Tutor') as $user) {
             Tutor::factory()->create([
-            'user_id' => $user->id,
+                'user_id' => $user->id,
         ]);
         }
     }

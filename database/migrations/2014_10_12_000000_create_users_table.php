@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -17,7 +16,7 @@ return new class() extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer("money")->default(0);
+            $table->integer('money')->default(0);
             $table->string('phone_number')->nullable();
             $table->enum('gender', ['Male', 'Female']);
             $table->enum('user_type', ['Pengurus Panti', 'Tutor']);
