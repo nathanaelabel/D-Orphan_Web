@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class OrphanCr extends Model
 {
     use HasFactory;
-
     protected $guarded = [
         'id',
     ];
+    public function orphan()
+    {
+        return $this->belongsTo(Orphan::class);
+    }
 }

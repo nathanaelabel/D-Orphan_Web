@@ -1,9 +1,9 @@
  ########################PENGURUS PA
  <div></div>
- ///////////////////////////////////////////showcourse
+ ///////////////////////////////////////////showpaincompetition
  <div></div>
  @if ($skillDatas->isNotEmpty())
-     @foreach ($skillDatas as $skillData)
+     @foreach ($listPaDatas as $listPaData)
          <div></div>
          {{ $loop->iteration }}.
          skill name: {{ $skillData->name }}

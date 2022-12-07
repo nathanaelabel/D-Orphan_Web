@@ -6,7 +6,7 @@ FORM ADD COURSE
         <label>tutor_id: 1</label>
     </div>
     <div>
-        <label>jumlah saldo saat ini: {{App\Models\Tutor::findOrFail(1)->user->money}}</label>
+        <label>jumlah saldo saat ini: {{ App\Models\Tutor::findOrFail(1)->user->money }}</label>
     </div>
     <div>
         <label>amount:</label>

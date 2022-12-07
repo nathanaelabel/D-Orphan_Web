@@ -8,21 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class CourseBooking extends Model
 {
     use HasFactory;
-
     protected $guarded = [
         'id',
     ];
-
     public function orphanage()
     {
         return $this->belongsTo(Orphanage::class);
     }
-
     public function course()
     {
         return $this->belongsTo(Course::class);
     }
-
     public function orphanCourseBookings()
     {
         return $this->hasMany(OrphanCourseBooking::class);

@@ -88,6 +88,7 @@ class CourseBookingController extends Controller
                 $orphanage->update([
                     'money' => $orphanage->money - (CourseBooking::findOrFail($courseBookingId)->hourly_price + CourseBooking::findOrFail($courseBookingId)->tool_price),
                 ]);
+
                 return redirect('/mydashboard')->with('status', 'Has been accepted!');
             } elseif ($status == 'complete') {
                 return redirect('/mydashboard')->with('status', 'Has been completed!');
