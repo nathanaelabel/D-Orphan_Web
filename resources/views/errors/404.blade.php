@@ -21,7 +21,7 @@
                             Mohon periksa kembali tautan yang Anda masukkan
                         </h3>
                         <br>
-                        <a href="/">
+                        <a href="{{ route('/') }}">
                             <x-primary-button>Kembali ke beranda</x-primary-button>
                         </a>
                     </div>

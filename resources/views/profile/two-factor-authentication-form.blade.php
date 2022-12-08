@@ -31,9 +31,9 @@
                 <div class="mt-4 max-w-xl text-sm text-gray-600">
                     <p class="font-semibold">
                         @if ($showingConfirmation)
-                            {{ __('To finish enabling two factor authentication, scan the following QR code using your phone\'s authenticator application or enter the setup key and provide the generated OTP code.') }}
+                            {{ __('Untuk menyelesaikan pengaktifan autentikasi dua faktor, pindai kode QR berikut menggunakan aplikasi autentikator ponsel Anda atau masukkan kunci penyiapan dan berikan kode OTP yang dihasilkan') }}
                         @else
-                            {{ __('Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application or enter the setup key.') }}
+                            {{ __('Autentikasi dua faktor sekarang diaktifkan. Pindai kode QR berikut menggunakan aplikasi autentikator ponsel Anda atau masukkan kunci penyiapan') }}
                         @endif
                     </p>
                 </div>
@@ -50,9 +50,9 @@
 
                 @if ($showingConfirmation)
                     <div class="mt-4">
-                        <x-jet-label for="code" value="{{ __('Code') }}" />
+                        <x-jet-label for="code" value="{{ __('Kode') }}" />
 
-                        <x-jet-input id="code" type="text" name="code" class="block mt-1 w-1/2"
+                        <x-jet-input id="code" type="text" name="code" class="block mt-1 w-full"
                             inputmode="numeric" autofocus autocomplete="one-time-code" wire:model.defer="code"
                             wire:keydown.enter="confirmTwoFactorAuthentication" />
 
@@ -64,7 +64,7 @@
             @if ($showingRecoveryCodes)
                 <div class="mt-4 max-w-xl text-sm text-gray-600">
                     <p class="font-semibold">
-                        {{ __('Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.') }}
+                        {{ __('Simpan kode pemulihan ini di pengelola kata sandi yang aman. Mereka dapat digunakan untuk memulihkan akses ke akun Anda jika perangkat autentikasi dua faktor Anda hilang') }}
                     </p>
                 </div>
 
@@ -86,34 +86,34 @@
             @else
                 @if ($showingRecoveryCodes)
                     <x-jet-confirms-password wire:then="regenerateRecoveryCodes">
-                        <x-jet-secondary-button class="mr-3">
-                            {{ __('Regenerate Recovery Codes') }}
+                        <x-jet-secondary-button class="mb-3">
+                            {{ __('Regenerasi Kode Pemulihan') }}
                         </x-jet-secondary-button>
                     </x-jet-confirms-password>
                 @elseif ($showingConfirmation)
                     <x-jet-confirms-password wire:then="confirmTwoFactorAuthentication">
-                        <x-jet-button type="button" class="mr-3" wire:loading.attr="disabled">
-                            {{ __('Confirm') }}
+                        <x-jet-button type="button" class="mb-3" wire:loading.attr="disabled">
+                            {{ __('Konfirmasi') }}
                         </x-jet-button>
                     </x-jet-confirms-password>
                 @else
                     <x-jet-confirms-password wire:then="showRecoveryCodes">
-                        <x-jet-secondary-button class="mr-3">
-                            {{ __('Show Recovery Codes') }}
+                        <x-jet-secondary-button class="mb-3">
+                            {{ __('Tampilkan Kode Pemulihan') }}
                         </x-jet-secondary-button>
                     </x-jet-confirms-password>
                 @endif
 
                 @if ($showingConfirmation)
                     <x-jet-confirms-password wire:then="disableTwoFactorAuthentication">
-                        <x-jet-secondary-button wire:loading.attr="disabled">
-                            {{ __('Cancel') }}
-                        </x-jet-secondary-button>
+                        <x-jet-danger-button wire:loading.attr="disabled">
+                            {{ __('Batal') }}
+                        </x-jet-danger-button>
                     </x-jet-confirms-password>
                 @else
                     <x-jet-confirms-password wire:then="disableTwoFactorAuthentication">
                         <x-jet-danger-button wire:loading.attr="disabled">
-                            {{ __('Disable') }}
+                            {{ __('Non aktifkan') }}
                         </x-jet-danger-button>
                     </x-jet-confirms-password>
                 @endif

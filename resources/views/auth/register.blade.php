@@ -18,9 +18,9 @@
                             <div class="w-full max-w-lg mx-auto space-y-10">
                                 <!-- Header -->
                                 <div class="text-center">
-                                    <h1 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
+                                    <h3 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Halo
-                                    </h1>
+                                    </h3>
                                     <p class="text-gray-500">
                                         Silakan membuat akun
                                     </p>
@@ -37,14 +37,14 @@
                                         <x-jet-label for="role" value="{{ __('Daftar sebagai') }}" />
                                         <div class="flex gap-6 mt-1">
                                             <div class="space-x-1">
-                                                <input id="panti" class="peer/panti" type="radio" name="status"
-                                                    checked />
+                                                <input id="panti" class="peer/panti" type="radio" name="user_type"
+                                                    value="Pengurus Panti" checked />
                                                 <label for="panti" class="peer-checked/panti:text-blue-500">Panti
                                                     Asuhan</label>
                                             </div>
                                             <div class="space-x-1">
-                                                <input id="tutor" class="peer/tutor" type="radio"
-                                                    name="status" />
+                                                <input id="tutor" class="peer/tutor" type="radio" value="Tutor"
+                                                    name="user_type" />
                                                 <label for="tutor"
                                                     class="peer-checked/tutor:text-blue-500">Tutor</label>
                                             </div>
@@ -83,7 +83,7 @@
 
                                     <div class="flex items-center justify-center gap-1">
                                         <p>Sudah punya akun?</p>
-                                        <a href="{{ route('login') }}" class="font-bold">{{ __('Masuk') }}</a>
+                                        <a href="{{ route('login') }}" class="font-bold text-blue-500">{{ __('Masuk') }}</a>
                                     </div>
                                 </form>
                             </div>

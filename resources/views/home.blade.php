@@ -14,7 +14,7 @@
                     <br>
                 </div>
                 <div>
-                    <a href="/cari">
+                    <a href="{{ route('cari') }}">
                         <x-hero-button>Temukan Tutor</x-hero-button>
                     </a>
                 </div>
@@ -206,7 +206,7 @@
             <p class="text-xl leading-8 text-gray-500">Mewadahi kemudahan proses berdonasi dari para Donatur untuk
                 Panti Asuhan</p>
         </div>
-        <a href="/donasi">
+        <a href="{{ route('donasi') }}">
             <x-primary-button>
                 Donasi Sekarang
             </x-primary-button>

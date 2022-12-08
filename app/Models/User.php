@@ -26,7 +26,14 @@ class User extends Authenticatable
         'id'
     ];
 
-    
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'user_type',
+        'phone_number',
+        'address',
+    ];
 
     public function transactions()
     {

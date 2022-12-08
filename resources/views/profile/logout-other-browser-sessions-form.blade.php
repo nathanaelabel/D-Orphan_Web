@@ -66,7 +66,7 @@
             </x-jet-danger-button>
 
             <x-jet-action-message class="ml-3" on="loggedOut">
-                {{ __('Done.') }}
+                {{ __('Selesai') }}
             </x-jet-action-message>
         </div>
 
@@ -77,11 +77,11 @@
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.') }}
+                {{ __('Silakan masukkan kata sandi Anda untuk mengonfirmasi bahwa Anda ingin keluar dari sesi peramban Anda yang lain di semua perangkat Anda') }}
 
                 <div class="mt-4" x-data="{}"
                     x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
-                    <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
+                    <x-jet-input type="password" class="mt-1 block w-full" placeholder="{{ __('Kata sandi') }}"
                         x-ref="password" wire:model.defer="password" wire:keydown.enter="logoutOtherBrowserSessions" />
 
                     <x-jet-input-error for="password" class="mt-2" />
@@ -90,12 +90,12 @@
 
             <x-slot name="footer">
                 <x-jet-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
+                    {{ __('Batal') }}
                 </x-jet-secondary-button>
 
-                <x-jet-button class="ml-3" wire:click="logoutOtherBrowserSessions" wire:loading.attr="disabled">
+                <x-jet-danger-button class="ml-3" wire:click="logoutOtherBrowserSessions" wire:loading.attr="disabled">
                     {{ __('Keluar dari Sesi Peramban Lain') }}
-                </x-jet-button>
+                </x-jet-danger-button>
             </x-slot>
         </x-jet-dialog-modal>
     </x-slot>

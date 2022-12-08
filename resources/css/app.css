@@ -11,10 +11,6 @@ img,
     user-select: none;
 }
 
-a:not(.pages) {
-    color: var(--blue-500) !important;
-}
-
 html {
     scroll-behavior: smooth;
     text-rendering: optimizeLegibility;

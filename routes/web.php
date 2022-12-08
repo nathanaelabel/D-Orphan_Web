@@ -20,7 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('/');
+
+Route::get('/donasi', function () {
+    return view('dashboard');
+})->name('/donasi');
 
 Route::get('/mydashboard', [DashboardController::class, 'index']);
 Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseBookingStatus']);
@@ -29,7 +33,6 @@ Route::get('/getmytutorcoursecollection', [CourseController::class, 'getTutorCou
 Route::resource('/mytutorcoursecollection', CourseController::class);
 
 Route::get('/getmytutorcompetionpa', [CompetitionController::class, 'getTutorCompetionPA']);
-
 
 Route::resource('/myrequestsaldotutor', TransactionController::class);
 Route::get('/myrequestsaldotutor/{status}/{transactionId}', [TransactionController::class, 'changeTransactionStatus']);
@@ -45,5 +48,14 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dasbor');
+    Route::get('/cari', function () {
+        return view('dashboard');
+    })->name('cari');
+    Route::get('lomba', function () {
+        return view('dashboard');
+    })->name('lomba');
+    Route::get('/donasi', function () {
+        return view('dashboard');
+    })->name('donasi');
 });

@@ -18,9 +18,9 @@
                             <div class="w-full max-w-lg mx-auto space-y-10">
                                 <!-- Header -->
                                 <div class="text-center">
-                                    <h1 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
+                                    <h3 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Selamat datang kembali
-                                    </h1>
+                                    </h3>
                                     <p class="text-gray-500">
                                         Silakan masuk ke akun Anda
                                     </p>
@@ -60,7 +60,7 @@
                                         </label>
 
                                         @if (Route::has('password.request'))
-                                            <a href="{{ route('password.request') }}" class="font-bold">
+                                            <a href="{{ route('password.request') }}" class="font-bold text-blue-500">
                                                 {{ __('Lupa kata sandi?') }}
                                             </a>
                                         @endif
@@ -72,7 +72,7 @@
 
                                     <div class="flex items-center justify-center gap-1">
                                         <p>Belum punya akun?</p>
-                                        <a href="{{ route('register') }}" class="font-bold">{{ __('Daftar') }}</a>
+                                        <a href="{{ route('register') }}" class="font-bold text-blue-500">{{ __('Daftar') }}</a>
                                     </div>
                                 </form>
                             </div>
