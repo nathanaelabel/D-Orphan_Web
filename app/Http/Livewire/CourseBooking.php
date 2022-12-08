@@ -19,7 +19,9 @@ class CourseBooking extends Component
     public function mount()
     {
         $this->activeTab = 'pending';
-        $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->where('status', 'pending')->get();
+        if (Auth::user()->tutor->courses) {
+            $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->where('status', 'pending')->get();
+        }
     }
 
     public function setTab($tab)
