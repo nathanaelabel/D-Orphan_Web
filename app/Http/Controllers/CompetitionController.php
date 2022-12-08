@@ -45,9 +45,11 @@ class CompetitionController extends Controller
      * @param  \App\Models\Competition  $competition
      * @return \Illuminate\Http\Response
      */
-    public function show(Competition $competition)
+    public function show($competitionId)
     {
-        //
+        return view('competitionDetail', [
+            'compDatas' => Competition::findOrFail($competitionId),
+        ]);
     }
 
     /**

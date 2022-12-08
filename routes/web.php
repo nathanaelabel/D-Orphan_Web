@@ -5,6 +5,7 @@ use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CourseBookingController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrphanageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,10 @@ Route::get('/myrequestsaldotutor/{status}/{transactionId}', [TransactionControll
 Route::get('/myadminrequestsaldotutor', [TransactionController::class, 'index']);
 
 Route::get('/myfindpaskill', [CourseController::class, 'getPaSkill']);
+Route::get('/myfindpaskill/{courseId}', [CourseController::class, 'show']);
+Route::get('/padata', [OrphanageController::class, 'index']);
+Route::get('/padata/{orphanage}', [OrphanageController::class, 'show']);
+Route::get('/competition/{competitionId}', [CompetitionController::class, 'show']);
 
 Route::middleware([
     'auth:sanctum',
