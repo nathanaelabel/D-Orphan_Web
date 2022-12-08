@@ -25,26 +25,14 @@ class User extends Authenticatable
     protected $guarded = [
         'id'
     ];
-
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'user_type',
-        'phone_number',
-        'address',
-    ];
-
     public function transactions()
     {
         return $this->hasMany(Transaction::class, 'user_id');
     }
-
     public function tutor()
     {
         return $this->hasOne(Tutor::class);
     }
-
     public function orphanage()
     {
         return $this->hasOne(Orphanage::class);

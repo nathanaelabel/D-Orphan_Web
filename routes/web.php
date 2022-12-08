@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CompetitionController;
+use App\Http\Controllers\CompetitionRecommendationController;
 use App\Http\Controllers\CourseBookingController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrphanCrController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,9 +32,11 @@ Route::get('/mydashboard', [DashboardController::class, 'index']);
 Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseBookingStatus']);
 
 Route::get('/getmytutorcoursecollection', [CourseController::class, 'getTutorCourseCollection']);
-Route::resource('/mytutorcoursecollection', CourseController::class);
+Route::resource('/mytutorcoursecaollection', CourseController::class);
 
-Route::get('/getmytutorcompetionpa', [CompetitionController::class, 'getTutorCompetionPA']);
+Route::resource('/mytutorcompetition', CompetitionController::class);
+Route::get('/getmytutorcompetition/{competitionId}', [CompetitionRecommendationController::class, 'index']);
+Route::get('/mytutororphancrs/{competitionRecommendationId}', [OrphanCrController::class, 'show']);
 
 Route::resource('/myrequestsaldotutor', TransactionController::class);
 Route::get('/myrequestsaldotutor/{status}/{transactionId}', [TransactionController::class, 'changeTransactionStatus']);

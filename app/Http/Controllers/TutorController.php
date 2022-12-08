@@ -15,7 +15,6 @@ class TutorController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -25,62 +24,50 @@ class TutorController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTutorRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTutorRequest $request)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tutor  $tutor
      * @return \Illuminate\Http\Response
      */
     public function show(Tutor $tutor)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tutor  $tutor
      * @return \Illuminate\Http\Response
      */
     public function edit(Tutor $tutor)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTutorRequest  $request
-     * @param  \App\Models\Tutor  $tutor
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateTutorRequest $request, Tutor $tutor)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tutor  $tutor
      * @return \Illuminate\Http\Response
      */
     public function destroy(Tutor $tutor)
     {
-        //
     }
 }

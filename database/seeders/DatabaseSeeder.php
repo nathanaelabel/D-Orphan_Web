@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\CourseBookingDayTimeRange;
-use App\Models\DayTimeRange;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

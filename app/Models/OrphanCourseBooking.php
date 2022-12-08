@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class OrphanCourseBooking extends Model
 {
     use HasFactory;
-
     protected $guarded = [
         'id',
     ];

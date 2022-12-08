@@ -11,4 +11,8 @@ class Competition extends Model
     protected $guarded = [
         'id',
     ];
+    public function competitionRecommendations()
+    {
+        return $this->hasMany(CompetitionRecommendation::class);
+    }
 }
