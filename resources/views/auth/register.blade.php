@@ -18,9 +18,9 @@
                             <div class="w-full max-w-lg mx-auto space-y-10">
                                 <!-- Header -->
                                 <div class="text-center">
-                                    <h1 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
+                                    <h3 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Halo
-                                    </h1>
+                                    </h3>
                                     <p class="text-gray-500">
                                         Silakan membuat akun
                                     </p>
@@ -37,19 +37,18 @@
                                         <x-jet-label for="role" value="{{ __('Daftar sebagai') }}" />
                                         <div class="flex gap-6 mt-1">
                                             <div class="space-x-1">
-                                                <input id="panti" class="peer/panti" type="radio" name="status"
-                                                    checked />
+                                                <input id="panti" class="peer/panti" type="radio" name="user_type"
+                                                    value="Pengurus Panti" checked />
                                                 <label for="panti" class="peer-checked/panti:text-blue-500">Panti
                                                     Asuhan</label>
                                             </div>
                                             <div class="space-x-1">
-                                                <input id="tutor" class="peer/tutor" type="radio"
-                                                    name="status" />
+                                                <input id="tutor" class="peer/tutor" type="radio" value="Tutor"
+                                                    name="user_type" />
                                                 <label for="tutor"
                                                     class="peer-checked/tutor:text-blue-500">Tutor</label>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div class="mt-4">
@@ -79,15 +78,12 @@
                                     </div>
 
                                     <div class="mt-6 mb-4">
-                                        <x-jet-button
-                                            class="bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500 normal-case text-base tracking-normal w-full justify-center">
-                                            {{ __('Daftar') }}
-                                        </x-jet-button>
+                                        <x-jet-button>{{ __('Daftar') }}</x-jet-button>
                                     </div>
 
                                     <div class="flex items-center justify-center gap-1">
                                         <p>Sudah punya akun?</p>
-                                        <a href="{{ route('login') }}" class="font-bold">{{ __('Masuk') }}</a>
+                                        <a href="{{ route('login') }}" class="font-bold text-blue-500">{{ __('Masuk') }}</a>
                                     </div>
                                 </form>
                             </div>
@@ -96,7 +92,7 @@
                     </div>
                 </div>
                 <div
-                    class="bg-authentication-background bg-cover flex flex-col text-center justify-center rounded-r-2xl w-6/12 gap-8 p-8">
+                    class="bg-authentication-background bg-cover hidden md:grid md:content-evenly text-center rounded-r-2xl w-6/12 gap-4 p-8">
                     <p class="text-4xl leading-10 font-extrabold tracking-tight text-white">Asah Bakat dan Minatmu</p>
                     <img src="{{ url('img/register.svg') }}" alt="Daftar">
                 </div>

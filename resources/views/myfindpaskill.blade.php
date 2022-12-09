@@ -1,6 +1,6 @@
  ########################PENGURUS PA
  <div></div>
- ///////////////////////////////////////////showcourse
+ ///////////////////////////////////////////showskillforpa
  <div></div>
  @if ($skillDatas->isNotEmpty())
      @foreach ($skillDatas as $skillData)

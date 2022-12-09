@@ -17,7 +17,7 @@ class OrphanSeeder extends Seeder
     {
         foreach (Orphanage::all() as $orphanage) {
             Orphan::factory()->count($orphanage->member_count)->create([
-            'orphanage_id' => $orphanage->id,
+                'orphanage_id' => $orphanage->id,
             ]);
         }
     }

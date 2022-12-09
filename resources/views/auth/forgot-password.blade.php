@@ -21,9 +21,9 @@
                                 <div class="w-full max-w-lg mx-auto space-y-10">
                                     <!-- Header -->
                                     <div class="text-center">
-                                        <h1 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
+                                        <h3 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                             Setel ulang kata sandi
-                                        </h1>
+                                        </h3>
                                         <p class="text-gray-500">
                                             Tautan setel ulang kata sandi akan dikirimkan melalui surel akun Anda
                                         </p>
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div
-                        class="bg-authentication-background bg-cover flex flex-col text-center justify-center rounded-r-2xl w-6/12 gap-8 p-8">
+                        class="bg-authentication-background bg-cover hidden md:grid md:content-evenly text-center rounded-r-2xl w-6/12 gap-4 p-8">
                         <p class="text-4xl leading-10 font-extrabold tracking-tight text-white">Asah Bakat dan Minatmu
                         </p>
                         <img src="{{ url('img/forgot_password.svg') }}" alt="Lupa kata sandi">

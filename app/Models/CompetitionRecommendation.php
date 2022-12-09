@@ -8,11 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CompetitionRecommendation extends Model
 {
     use HasFactory;
-
     protected $guarded = [
         'id',
     ];
-
     public function orphanage()
     {
         return $this->belongsTo(Orphanage::class);

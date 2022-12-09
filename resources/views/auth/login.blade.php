@@ -10,24 +10,24 @@
         <!-- Page Content -->
         <main id="page-content" class="flex flex-auto flex-col max-w-full">
             <div class="flex bg-white rounded-2xl shadow">
-                <!-- Sign Up Section -->
+                <!-- Sign In Section -->
                 <div class="flex grow w-6/12">
                     <div class="flex flex-col p-8 w-full">
-                        <!-- Sign Up Content -->
+                        <!-- Sign In Content -->
                         <div class="grow flex items-center">
                             <div class="w-full max-w-lg mx-auto space-y-10">
                                 <!-- Header -->
                                 <div class="text-center">
-                                    <h1 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
+                                    <h3 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Selamat datang kembali
-                                    </h1>
+                                    </h3>
                                     <p class="text-gray-500">
                                         Silakan masuk ke akun Anda
                                     </p>
                                 </div>
                                 <!-- END Header -->
 
-                                <!-- Sign Up Form -->
+                                <!-- Sign In Form -->
                                 <x-jet-validation-errors class="mb-4" />
 
                                 @if (session('status'))
@@ -60,35 +60,32 @@
                                         </label>
 
                                         @if (Route::has('password.request'))
-                                            <a href="{{ route('password.request') }}" class="font-bold">
+                                            <a href="{{ route('password.request') }}" class="font-bold text-blue-500">
                                                 {{ __('Lupa kata sandi?') }}
                                             </a>
                                         @endif
                                     </div>
 
                                     <div class="mt-6 mb-4">
-                                        <x-jet-button
-                                            class="bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500 normal-case text-base tracking-normal w-full justify-center">
-                                            {{ __('Masuk') }}
-                                        </x-jet-button>
+                                        <x-jet-button>{{ __('Masuk') }}</x-jet-button>
                                     </div>
 
                                     <div class="flex items-center justify-center gap-1">
                                         <p>Belum punya akun?</p>
-                                        <a href="{{ route('register') }}" class="font-bold">{{ __('Daftar') }}</a>
+                                        <a href="{{ route('register') }}" class="font-bold text-blue-500">{{ __('Daftar') }}</a>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <!-- END Sign Up Content -->
+                        <!-- END Sign In Content -->
                     </div>
                 </div>
                 <div
-                    class="bg-authentication-background bg-cover flex flex-col text-center justify-center rounded-r-2xl w-6/12 gap-8 p-8">
+                    class="bg-authentication-background bg-cover hidden md:grid md:content-evenly text-center rounded-r-2xl w-6/12 gap-4 p-8">
                     <p class="text-4xl leading-10 font-extrabold tracking-tight text-white">Asah Bakat dan Minatmu</p>
                     <img src="{{ url('img/login.svg') }}" alt="Masuk">
                 </div>
-                <!-- END Sign Up Section -->
+                <!-- END Sign In Section -->
             </div>
         </main>
         <!-- END Page Content -->

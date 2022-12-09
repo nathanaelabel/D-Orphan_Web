@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CourseBooking extends Model
 {
     use HasFactory;
-
     protected $guarded = [
         'id',
     ];
@@ -23,8 +22,18 @@ class CourseBooking extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
     public function orphanCourseBookings()
     {
         return $this->hasMany(OrphanCourseBooking::class);
+    }
+
+    public function courseBookingDayTimeRanges()
+    {
+        return $this->hasMany(CourseBookingDayTimeRange::class);
     }
 }

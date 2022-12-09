@@ -16,6 +16,9 @@ class CompetitionController extends Controller
      */
     public function index()
     {
+        return view('mytutorfindcompetition', [
+            'competitionDatas' => Competition::all(),
+        ]);
     }
 
     /**
@@ -25,24 +28,20 @@ class CompetitionController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCompetitionRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCompetitionRequest $request)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Competition  $competition
      * @return \Illuminate\Http\Response
      */
     public function show($competitionId)
@@ -55,36 +54,30 @@ class CompetitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Competition  $competition
      * @return \Illuminate\Http\Response
      */
     public function edit(Competition $competition)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCompetitionRequest  $request
-     * @param  \App\Models\Competition  $competition
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCompetitionRequest $request, Competition $competition)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Competition  $competition
      * @return \Illuminate\Http\Response
      */
     public function destroy(Competition $competition)
     {
-        //
     }
+
     public function getTutorCompetitionPA()
     {
         // return view('myfindtutorcompetitionpa', [

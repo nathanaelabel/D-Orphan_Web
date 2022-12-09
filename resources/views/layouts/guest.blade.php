@@ -23,13 +23,13 @@
     {{-- Laravel Framework CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- External Cascading Style Sheets --}}
-    <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css" />
-
     {{-- Google Fonts CDN --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+
+    {{-- Alpine.js CDN --}}
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     {{-- Vite - Tailwind CSS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -40,14 +40,12 @@
     @livewire('navigation-menu')
 
     {{-- Content --}}
-    <main class="container max-w-7xl mx-auto sm:p-6 lg:p-8 space-y-8">
+    <main class="container max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
         <div class="font-sans text-gray-900 antialiased space-y-8">{{ $slot }}</div>
     </main>
 
     {{-- Footer --}}
-    <footer class="mt-auto bg-gray-800 text-center text-lg leading-7 font-bold text-white p-5">
-        <p>Archotech&nbsp;&#45;&nbsp;2022</p>
-    </footer>
+    <x-footer />
 </body>
 
 </html>
