@@ -15,6 +15,9 @@ class OrphanageController extends Controller
      */
     public function index()
     {
+        return view('listpa', [
+            'paDatas' => Orphanage::all(),
+        ]);
     }
 
     /**
@@ -40,8 +43,11 @@ class OrphanageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Orphanage $orphanage)
+    public function show($orphanageId)
     {
+        return view('orphanagedetail', [
+            'paDatas' => Orphanage::findOrFail($orphanageId),
+        ]);
     }
 
     /**

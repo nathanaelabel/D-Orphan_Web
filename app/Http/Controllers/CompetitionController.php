@@ -46,8 +46,8 @@ class CompetitionController extends Controller
      */
     public function show($competitionId)
     {
-        return view('mydetailtutorfindcompetition', [
-            'competitionData' => Competition::findOrFail($competitionId),
+        return view('competitionDetail', [
+            'compDatas' => Competition::findOrFail($competitionId),
         ]);
     }
 
