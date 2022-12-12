@@ -19,14 +19,41 @@ class CourseBooking extends Component
     public function mount()
     {
         $this->activeTab = 'pending';
-        if (Auth::user()->tutor->courses) {
-            $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->where('status', 'pending')->get();
+        if (Auth::user()->tutor) {
+            if (Auth::user()->tutor->courses) {
+                $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->where('status', 'pending')->get();
+            }
+        } else {
+            $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courses->pluck('id'))->where('status', 'pending')->get();
         }
     }
 
     public function setTab($tab)
     {
         $this->activeTab = $tab;
-        $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->where('status', $this->activeTab)->get();
+        if (Auth::user()->tutor) {
+
+            if (Auth::user()->tutor->courses) {
+                $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->where('status', $this->activeTab)->get();
+            }
+        } else {
+            $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courses->pluck('id'))->where('status', $this->activeTab)->get();
+        }
+    }
+
+    public function accept($id)
+    {
+        $courseBooking = ModelsCourseBooking::find($id);
+        $courseBooking->status = 'ongoing';
+        $courseBooking->save();
+        $this->setTab($this->activeTab);
+    }
+
+    public function decline($id)
+    {
+        $courseBooking = ModelsCourseBooking::find($id);
+        $courseBooking->status = 'cancelled';
+        $courseBooking->save();
+        $this->setTab($this->activeTab);
     }
 }

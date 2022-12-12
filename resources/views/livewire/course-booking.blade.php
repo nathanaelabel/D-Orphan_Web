@@ -46,6 +46,8 @@
                             <td class="whitespace-nowrap px-3 py-4">
                                 {{ $item->orphanage->name }}</td>
                             <td class="whitespace-nowrap px-3 py-4">
+                                <div class="flex items-center gap-2">
+                                  <span class=" w-40 text-ellipsis overflow-hidden">  {{ $item->course->name }}</span>
                                 <span
                                     class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
                                     <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor"
@@ -54,6 +56,7 @@
                                     </svg>
                                     {{ $item->course->skill->name }}
                                 </span>
+                                </div>
                             </td>
                             <td class="whitespace-nowrap px-3 py-4">
                                 {{ 'Rp' . $item->course->hourly_price }}</td>
@@ -64,9 +67,18 @@
                                 {{ $item->start_date }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 font-semibold space-x-8">
-                                <a href="#" class="text-green-500">Terima</a>
-                                <a href="#" class="text-red-500">Tolak</a>
-                            </td>
+
+                           @if($activeTab == 'pending' )
+                            <a href="#" wire:click='accept({{$item->id}})' class="text-green-500">Terima</a>
+                            <a href="#" wire:click='decline({{$item->id}})' class="text-red-500">Tolak</a>
+                           @elseif($activeTab == 'ongoing')
+                           <a href="#" wire:click='accept({{$item->id}})' class="text-green-500">Selesai</a>
+
+                           @else
+                           
+                           @endif
+                        </td>
+
                         </tr>
                     @endforeach
                 </tbody>

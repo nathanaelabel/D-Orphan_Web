@@ -22,6 +22,7 @@ class CourseFactory extends Factory
 
         return [
             'skill_id' => $faker->randomElement(Skill::all()->pluck('id')),
+            'name'=>$faker2->sentence(5),
             'description'=>'Asah dan kembangkan melalui kursus ini!',
             'location'=>$faker2->city(),
             'is_online'=>random_int(0,1),
