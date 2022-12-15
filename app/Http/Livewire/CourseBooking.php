@@ -18,26 +18,24 @@ class CourseBooking extends Component
 
     public function mount()
     {
-        $this->activeTab = 'pending';
-        if (Auth::user()->tutor) {
-            if (Auth::user()->tutor->courses) {
-                $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->where('status', 'pending')->get();
-            }
-        } else {
-            $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courses->pluck('id'))->where('status', 'pending')->get();
-        }
+        $this->setTab('pending');
     }
 
     public function setTab($tab)
     {
+        $a = '';
         $this->activeTab = $tab;
         if (Auth::user()->tutor) {
-
             if (Auth::user()->tutor->courses) {
-                $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->where('status', $this->activeTab)->get();
+                $a = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->get();
             }
         } else {
-            $this->courseBooking = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courses->pluck('id'))->where('status', $this->activeTab)->get();
+            $a = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('id'))->get();
+        }
+        if ($this->activeTab != 'canceled') {
+            $this->courseBooking = $a->where('status', $this->activeTab);
+        } else {
+            $this->courseBooking = $a->where('status', 'canceled')->merge($a->where('status', 'complete'));
         }
     }
 
@@ -52,7 +50,15 @@ class CourseBooking extends Component
     public function decline($id)
     {
         $courseBooking = ModelsCourseBooking::find($id);
-        $courseBooking->status = 'cancelled';
+        $courseBooking->status = 'canceled';
+        $courseBooking->save();
+        $this->setTab($this->activeTab);
+    }
+
+    public function complete($id)
+    {
+        $courseBooking = ModelsCourseBooking::find($id);
+        $courseBooking->status = 'complete';
         $courseBooking->save();
         $this->setTab($this->activeTab);
     }

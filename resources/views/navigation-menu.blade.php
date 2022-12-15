@@ -34,7 +34,7 @@
                 <div class="hidden sm:ml-6 sm:flex sm:items-center">
                     <!-- Profile dropdown -->
                     <span
-                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-800">{{ 'Rp' . Auth::user()->money }}</span>
+                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-800">{{ 'Rp' . number_format(Auth::user()->money, 2, ',', '.') }}</span>
                     <div class="ml-3 relative">
                         <div>
                             <button type="button"
@@ -47,12 +47,12 @@
                             </button>
                         </div>
                         <!-- Dropdown menu, show/hide based on menu state.
-                                                                                                                                            Entering: "transition ease-out duration-200"
-                                                                                                                                            From: "transform opacity-0 scale-95"
-                                                                                                                                            To: "transform opacity-100 scale-100"
-                                                                                                                                            Leaving: "transition ease-in duration-75"
-                                                                                                                                            From: "transform opacity-100 scale-100"
-                                                                                                                                            To: "transform opacity-0 scale-95" -->
+                                                                                                                                                    Entering: "transition ease-out duration-200"
+                                                                                                                                                    From: "transform opacity-0 scale-95"
+                                                                                                                                                    To: "transform opacity-100 scale-100"
+                                                                                                                                                    Leaving: "transition ease-in duration-75"
+                                                                                                                                                    From: "transform opacity-100 scale-100"
+                                                                                                                                                    To: "transform opacity-0 scale-95" -->
                         <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-blue-500 ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             x-show="open">
@@ -69,7 +69,6 @@
                     </div>
                 </div>
             @endauth
-
 
             @guest
                 <div class="hidden md:flex items-center gap-3">

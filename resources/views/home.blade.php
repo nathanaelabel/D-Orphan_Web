@@ -187,7 +187,7 @@
             </div>
             <div>
                 <p class="text-3xl text-white leading-10 font-bold">Bergabung sebagai Tutor handal</p>
-                <p class="text-xl leading-8 text-gray-200">Berbagi pengalaman dan salurkan ilmu untuk mempertajam
+                <p class="text-xl leading-8 text-gray-200">Berbagi pengalaman dan sebarkan ilmu untuk mempertajam
                     kemampuan peserta kursus Anda</p>
             </div>
             <div>
