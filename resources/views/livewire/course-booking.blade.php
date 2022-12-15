@@ -69,7 +69,8 @@
                                     </div>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4">
-                                    {{ 'Rp' . $item->course->hourly_price }}</td>
+                                    {{ 'Rp' . number_format($item->course->hourly_price, 2, ',', '.') }}
+                                </td>
                                 <td class="whitespace-nowrap px-3 py-4">
                                     {{ $item->hour_count . ' Jam' }}
                                 </td>
@@ -78,16 +79,22 @@
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 font-semibold space-x-8">
                                     @if ($activeTab == 'pending')
-                                        <a wire:click='accept({{ $item->id }})'
-                                            class="cursor-pointer text-green-500">Terima</a>
-                                        <a wire:click='decline({{ $item->id }})'
-                                            class="cursor-pointer text-red-500">Tolak</a>
+                                        @if (Auth::user()->role == 'tutor')
+                                            <a wire:click='accept({{ $item->id }})'
+                                                class="cursor-pointer text-green-500">Terima</a>
+                                            <a wire:click='decline({{ $item->id }})'
+                                                class="cursor-pointer text-red-500">Tolak</a>
+                                        @else
+                                            <a wire:click='decline({{ $item->id }})'
+                                                class="cursor-pointer text-red-500">Batal</a>
+                                        @endif
                                     @elseif($activeTab == 'ongoing')
                                         @if (Auth::user()->role == 'tutor')
-                                            )
+                                            <a wire:click='complete({{ $item->id }})'
+                                                class="cursor-pointer text-green-500">Akhiri</a>
+                                        @else
+                                            {{ '-' }}
                                         @endif
-                                        <a wire:click='complete({{ $item->id }})'
-                                            class="cursor-pointer text-green-500">Akhiri</a>
                                     @else
                                         @if ($item->status == 'complete')
                                             <span
