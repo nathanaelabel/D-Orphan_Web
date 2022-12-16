@@ -14,7 +14,7 @@
                     <br>
                 </div>
                 <div>
-                    <a href="{{ route('cari') }}">
+                    <a href="{{ route('kursus') }}">
                         <x-hero-button>Temukan Tutor</x-hero-button>
                     </a>
                 </div>
@@ -38,7 +38,7 @@
     {{-- Fitur --}}
     <div class="flex flex-col space-y-4" id="fitur">
         <div>
-            <p class="text-3xl leading-10 font-bold">Kenali D&#39;Orphan lebih lanjut</p>
+            <h3 class="text-3xl leading-10 font-bold">Kenali D&#39;Orphan lebih lanjut</h3>
             <div class="text-xl leading-8 text-gray-500">
                 <span class="font-bold">D'Orphan</span>&nbsp;<span>adalah Pengembangan Aplikasi Web
                     untuk Mengasah Bakat dan Minat Anak
@@ -47,7 +47,7 @@
         </div>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             <!-- Card -->
-            <x-hero-fitur-card>
+            <x-home-fitur-card>
                 <x-slot:icon>
                     <svg width=72 height=72 viewBox="0 0 98 97" fill="none" xmlns="http://www.w3.org/2000/svg"
                         class="inline-block">
@@ -61,8 +61,8 @@
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Publikasi Profil Panti dan Tutor</x-slot:title>
-            </x-hero-fitur-card>
-            <x-hero-fitur-card>
+            </x-home-fitur-card>
+            <x-home-fitur-card>
                 <x-slot:icon>
                     <svg width=72 height=72 viewBox="0 0 98 97" fill="none" xmlns="http://www.w3.org/2000/svg"
                         class="inline-block">
@@ -73,8 +73,8 @@
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Cari Tutor untuk Sesi Kursus</x-slot:title>
-            </x-hero-fitur-card>
-            <x-hero-fitur-card>
+            </x-home-fitur-card>
+            <x-home-fitur-card>
                 <x-slot:icon>
                     <svg width=72 height=72 viewBox="0 0 98 97" fill="none" xmlns="http://www.w3.org/2000/svg"
                         class="inline-block">
@@ -85,8 +85,8 @@
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Permintaan Sesi Kursus</x-slot:title>
-            </x-hero-fitur-card>
-            <x-hero-fitur-card>
+            </x-home-fitur-card>
+            <x-home-fitur-card>
                 <x-slot:icon>
                     <svg width=72 height=72 viewBox="0 0 98 97" fill="none" xmlns="http://www.w3.org/2000/svg"
                         class="inline-block">
@@ -105,7 +105,7 @@
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Rekomendasi Perlombaan</x-slot:title>
-            </x-hero-fitur-card>
+            </x-home-fitur-card>
             <!-- END Card -->
         </div>
     </div>
@@ -113,7 +113,7 @@
     {{-- SDGs --}}
     <div class="flex flex-col space-y-4">
         <div>
-            <p class="text-3xl leading-10 font-bold">Mendukung Sustainable Development Goals &#40;SDGs&#41;</p>
+            <h3 class="text-3xl leading-10 font-bold">Mendukung Sustainable Development Goals &#40;SDGs&#41;</h3>
             <p class="text-xl leading-8 text-gray-500">Marilah bersama-sama turut mewujudkan kelancaran SDGs</p>
         </div>
         <div class="space-y-2">
@@ -167,7 +167,7 @@
     {{-- Kategori --}}
     <div class="flex flex-col space-y-4">
         <div>
-            <p class="text-3xl leading-10 font-bold">Beragam kategori kursus tersedia</p>
+            <h3 class="text-3xl leading-10 font-bold">Beragam kategori kursus tersedia</h3>
         </div>
         <div>
             <img src="{{ url('img/home-kategori.jpg') }}" alt="Kategori" />
@@ -186,7 +186,7 @@
                 </svg>
             </div>
             <div>
-                <p class="text-3xl text-white leading-10 font-bold">Bergabung sebagai Tutor handal</p>
+                <h3 class="text-3xl text-white leading-10 font-bold">Bergabung sebagai Tutor handal</h3>
                 <p class="text-xl leading-8 text-gray-200">Berbagi pengalaman dan sebarkan ilmu untuk mempertajam
                     kemampuan peserta kursus Anda</p>
             </div>
@@ -202,7 +202,7 @@
     <div class="bg-home-donasi-background flex flex-col items-center rounded-2xl shadow gap-4 p-8">
         <img src="{{ url('img/home-donasi-illustration.svg') }}" alt="Donasi" />
         <div class="text-center">
-            <p class="text-3xl leading-10 font-bold">Donasi praktis</p>
+            <h3 class="text-3xl leading-10 font-bold">Donasi praktis</h3>
             <p class="text-xl leading-8 text-gray-500">Mewadahi kemudahan proses berdonasi dari para Donatur untuk
                 Panti Asuhan</p>
         </div>

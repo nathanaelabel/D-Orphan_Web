@@ -24,13 +24,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('/');
-
 Route::get('/donasi', function () {
     return view('dashboard');
 })->name('/donasi');
-Route::get('/cari', function () {
-    return view('cari');
-})->name('cari');
+Route::get('/kursus', function () {
+    return view('kursus');
+})->name('kursus');
 
 Route::get('/mydashboard', [DashboardController::class, 'index']);
 Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseBookingStatus']);
@@ -58,10 +57,13 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/dasbor', function () {
         return view('dashboard');
     })->name('dasbor');
-    Route::get('lomba', function () {
+    Route::get('/kursus', function () {
+        return view('course');
+    })->name('kursus');
+    Route::get('/lomba', function () {
         return view('dashboard');
     })->name('lomba');
     Route::get('/donasi', function () {

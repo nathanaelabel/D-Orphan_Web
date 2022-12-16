@@ -14,8 +14,8 @@
                         <a href="{{ route('dasbor') }}"
                             class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Dasbor</a>
                     @endauth
-                    <a href="{{ route('cari') }}"
-                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('cari') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Cari</a>
+                    <a href="{{ route('kursus') }}"
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kursus</a>
                     <a href="{{ route('lomba') }}"
                         class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Lomba</a>
                     @auth
@@ -127,8 +127,8 @@
                 <a href="{{ route('dasbor') }}"
                     class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'text-blue-500 font-semibold' : '' }}">Dasbor</a>
             @endauth
-            <a href="{{ route('cari') }}"
-                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('cari') ? 'text-blue-500 font-semibold' : '' }}">Cari</a>
+            <a href="{{ route('kursus') }}"
+                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'text-blue-500 font-semibold' : '' }}">Kursus</a>
             <a href="{{ route('lomba') }}"
                 class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'text-blue-500 font-semibold' : '' }}">Lomba</a>
             <a href="{{ route('donasi') }}"

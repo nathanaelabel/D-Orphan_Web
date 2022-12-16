@@ -7,7 +7,9 @@
             <h3>{{ 'Rp' . number_format(Auth::user()->money, 2, ',', '.') }}</h3>
         </div>
     </div>
+
     <div class="space-y-4">
+        {{-- Tabs --}}
         <div class="flex justify-center">
             <nav class="text-center bg-blue-100 rounded space-x-4 px-2 py-4" aria-label="Tabs">
                 <!-- Current: "bg-gray-100 text-gray-700", Default: "text-gray-500 hover:text-gray-700" -->
@@ -22,6 +24,7 @@
                     class="cursor-pointer px-3 py-2 font-semibold rounded {{ $activeTab == 'canceled' ? 'bg-blue-500 text-white' : 'text-blue-700' }}">Riwayat</a>
             </nav>
         </div>
+        {{-- Table --}}
         <div class="overflow-x-auto shadow rounded">
             <table class="min-w-full">
                 <thead class="bg-gray-500 text-white">
@@ -56,8 +59,6 @@
                                     {{ $item->orphanage->name }}</td>
                                 <td class="whitespace-nowrap px-3 py-4">
                                     <div class="flex items-center gap-2">
-                                        <span class=" w-40 text-ellipsis overflow-hidden">
-                                            {{ $item->course->name }}</span>
                                         <span
                                             class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
                                             <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor"
@@ -66,6 +67,8 @@
                                             </svg>
                                             {{ $item->course->skill->name }}
                                         </span>
+                                        <span class=" w-40 text-ellipsis overflow-hidden">
+                                            {{ $item->course->name }}</span>
                                     </div>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4">
@@ -79,7 +82,7 @@
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 font-semibold space-x-8">
                                     @if ($activeTab == 'pending')
-                                        @if (Auth::user()->role == 'tutor')
+                                        @if (Auth::user()->user_type == 'Tutor')
                                             <a wire:click='accept({{ $item->id }})'
                                                 class="cursor-pointer text-green-500">Terima</a>
                                             <a wire:click='decline({{ $item->id }})'
@@ -89,7 +92,7 @@
                                                 class="cursor-pointer text-red-500">Batal</a>
                                         @endif
                                     @elseif($activeTab == 'ongoing')
-                                        @if (Auth::user()->role == 'tutor')
+                                        @if (Auth::user()->user_type == 'Tutor')
                                             <a wire:click='complete({{ $item->id }})'
                                                 class="cursor-pointer text-green-500">Akhiri</a>
                                         @else
