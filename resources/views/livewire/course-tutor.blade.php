@@ -1,9 +1,9 @@
 <div class="space-y-8">
     {{-- Breadcrumb --}}
-    <x-tutor-breadcrumbs>
+    <x-tutor-breadcrumb>
         <x-slot:page1>Kursus</x-slot:page1>
         <x-slot:page2>Tutor</x-slot:page2>
-    </x-tutor-breadcrumbs>
+    </x-tutor-breadcrumb>
 
     {{-- Title --}}
     <h3 class="text-3xl leading-10 font-bold">{{ 'Mulailah kursus Catur dengan Tutor pilihan Anda' }}</h3>
@@ -38,7 +38,6 @@
                     <x-slot:lokasi>Surabaya</x-slot:lokasi>
                     <x-slot:sesi>Tersedia Sesi Daring</x-slot:sesi>
                     <x-slot:anak>20 anak/Panti</x-slot:anak>
-                    <x-slot:surel>willsmith@gmail.com</x-slot:surel>
                 </x-kursus-tutor-card>
             @endfor
             {{-- @endforeach --}}

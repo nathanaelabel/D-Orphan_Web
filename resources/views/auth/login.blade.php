@@ -71,7 +71,7 @@
                                     </div>
 
                                     <div class="flex items-center justify-center gap-1">
-                                        <p>Belum punya akun?</p>
+                                        <p>Belum punya akun&#63;</p>
                                         <a href="{{ route('register') }}" class="font-bold text-blue-500">{{ __('Daftar') }}</a>
                                     </div>
                                 </form>

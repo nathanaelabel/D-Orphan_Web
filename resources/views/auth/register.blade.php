@@ -82,7 +82,7 @@
                                     </div>
 
                                     <div class="flex items-center justify-center gap-1">
-                                        <p>Sudah punya akun?</p>
+                                        <p>Sudah punya akun&#63;</p>
                                         <a href="{{ route('login') }}" class="font-bold text-blue-500">{{ __('Masuk') }}</a>
                                     </div>
                                 </form>

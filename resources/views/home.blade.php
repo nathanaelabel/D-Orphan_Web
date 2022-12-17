@@ -161,7 +161,7 @@
 
     {{-- Tutor --}}
     <div class="bg-home-tutor bg-cover rounded-2xl shadow p-8">
-        <div class="flex flex-col justify-center gap-4">
+        <div class="flex flex-col gap-4">
             <div>
                 <svg width="64" height="64" viewBox="0 0 64 65" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -175,7 +175,7 @@
                 <p class="text-xl leading-8 text-gray-200">Berbagi pengalaman dan sebarkan ilmu untuk mempertajam
                     kemampuan peserta kursus Anda</p>
             </div>
-            <div>
+            <div class="w-fit">
                 <a href="{{ route('register') }}">
                     <x-primary-button>Berikan Kursus</x-primary-button>
                 </a>
@@ -192,9 +192,7 @@
                 Panti Asuhan</p>
         </div>
         <a href="{{ route('donasi') }}">
-            <x-primary-button>
-                Donasi Sekarang
-            </x-primary-button>
+            <x-primary-button>Donasi Sekarang</x-primary-button>
         </a>
     </div>
 </x-guest-layout>

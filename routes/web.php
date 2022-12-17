@@ -25,11 +25,8 @@ Route::get('/', function () {
     return view('home');
 })->name('/');
 Route::get('/donasi', function () {
-    return view('dashboard');
+    return view('donation');
 })->name('donasi');
-Route::get('/kursus', function () {
-    return view('kursus');
-})->name('kursus');
 
 Route::get('/mydashboard', [DashboardController::class, 'index']);
 Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseBookingStatus']);
@@ -67,6 +64,6 @@ Route::middleware([
         return view('tutor');
     })->name('tutor');
     Route::get('/lomba', function () {
-        return view('dashboard');
+        return view('competition');
     })->name('lomba');
 });

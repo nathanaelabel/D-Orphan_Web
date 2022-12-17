@@ -1,4 +1,5 @@
 @section('title', 'Dasbor')
+
 <x-app-layout>
     <div>
         @livewire('course-booking')
