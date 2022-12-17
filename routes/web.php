@@ -63,6 +63,9 @@ Route::middleware([
     Route::get('/kursus', function () {
         return view('course');
     })->name('kursus');
+    Route::get('/kursus/tutor', function () {
+        return view('tutor');
+    })->name('tutor');
     Route::get('/lomba', function () {
         return view('dashboard');
     })->name('lomba');

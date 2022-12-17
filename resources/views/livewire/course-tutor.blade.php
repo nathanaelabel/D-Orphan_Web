@@ -1,33 +1,45 @@
 <div class="space-y-8">
+    {{-- Breadcrumb --}}
+    <x-tutor-breadcrumbs>
+        <x-slot:page1>Kursus</x-slot:page1>
+        <x-slot:page2>Tutor</x-slot:page2>
+    </x-tutor-breadcrumbs>
+
     {{-- Title --}}
-    <h3 class="text-3xl leading-10 font-bold">{{ 'Jelajahi kategori yang ingin dipelajari' }}</h3>
+    <h3 class="text-3xl leading-10 font-bold">{{ 'Mulailah kursus Catur dengan Tutor pilihan Anda' }}</h3>
 
     {{-- Search Bar --}}
     <div class="flex justify-between gap-4 items-center">
         <x-search-bar>
-            <x-slot:placeholder>Cari Kursus</x-slot:placeholder>
+            <x-slot:placeholder>Cari Tutor</x-slot:placeholder>
         </x-search-bar>
         {{-- Dropdown Sort --}}
         <x-kursus-dropdown>
             <x-slot:selectedOption>Urutkan</x-slot:selectedOption>
-            <x-slot:option1>Abjad Kategori</x-slot:option1>
-            <x-slot:option2>Jumlah Tutor</x-slot:option2>
+            <x-slot:option1>Abjad Nama</x-slot:option1>
+            <x-slot:option2>Tarif Per Jam</x-slot:option2>
         </x-kursus-dropdown>
     </div>
 
-    {{-- Kategori --}}
+    {{-- Tutor --}}
     <div>
-        {{-- @if ($courseCategory->isEmpty())
-            <h3>Belum ada kategori kursus yang tersedia</h3>
+        {{-- @if ($courseTutor->isEmpty())
+            <h3>Belum ada tutor yang tersedia</h3>
         @else --}}
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @for ($i = 0; $i < 12; $i++)
-                {{-- @foreach ($courseCategory as $item) --}}
-                <x-kursus-kategori-card>
-                    <x-slot:image>https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80</x-slot:image>
-                    <x-slot:kategori>Catur</x-slot:kategori>
-                    <x-slot:jumlahTutor>25 Tutor</x-slot:jumlahTutor>
-                </x-kursus-kategori-card>
+                {{-- @foreach ($courseTutor as $item) --}}
+                <x-kursus-tutor-card>
+                    <x-slot:image>
+                        https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80
+                    </x-slot:image>
+                    <x-slot:nama>Will Smith</x-slot:nama>
+                    <x-slot:tarif>Rp50.000,00/jam</x-slot:tarif>
+                    <x-slot:lokasi>Surabaya</x-slot:lokasi>
+                    <x-slot:sesi>Tersedia Sesi Daring</x-slot:sesi>
+                    <x-slot:anak>20 anak/Panti</x-slot:anak>
+                    <x-slot:surel>willsmith@gmail.com</x-slot:surel>
+                </x-kursus-tutor-card>
             @endfor
             {{-- @endforeach --}}
         </div>
