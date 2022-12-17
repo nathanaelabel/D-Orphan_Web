@@ -6,7 +6,7 @@
     <!-- END Card Header -->
 
     <!-- Card Body -->
-    <div class="px-5 pb-5 w-full text-xl leading-8 font-semibold">
+    <div class="px-5 pb-4 w-full text-xl leading-8 font-semibold">
         <p>{{ $title }}</p>
     </div>
     <!-- END Card Body -->

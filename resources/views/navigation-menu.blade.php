@@ -54,13 +54,13 @@
                             </button>
                         </div>
                         <!-- Dropdown menu, show/hide based on menu state.
-                                                                                                                                                                                        Entering: "transition ease-out duration-200"
-                                                                                                                                                                                        From: "transform opacity-0 scale-95"
-                                                                                                                                                                                        To: "transform opacity-100 scale-100"
-                                                                                                                                                                                        Leaving: "transition ease-in duration-75"
-                                                                                                                                                                                        From: "transform opacity-100 scale-100"
-                                                                                                                                                                                        To: "transform opacity-0 scale-95" -->
-                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-blue-500 ring-opacity-5 focus:outline-none"
+                                                                                                                                                                                            Entering: "transition ease-out duration-200"
+                                                                                                                                                                                            From: "transform opacity-0 scale-95"
+                                                                                                                                                                                            To: "transform opacity-100 scale-100"
+                                                                                                                                                                                            Leaving: "transition ease-in duration-75"
+                                                                                                                                                                                            From: "transform opacity-100 scale-100"
+                                                                                                                                                                                            To: "transform opacity-0 scale-95" -->
+                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             x-show="open">
                             <!-- Active: "", Not Active: "" -->
@@ -147,7 +147,7 @@
             </div>
         </div>
         @auth
-            <div class="pt-4 pb-3 border-t border-gray-200">
+            <div class="py-3 border-t border-gray-200">
                 <div class="flex items-center px-4">
                     <div class="flex-shrink-0">
                         <img class="h-10 w-10 rounded-full"

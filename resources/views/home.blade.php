@@ -49,59 +49,44 @@
             <!-- Card -->
             <x-home-fitur-card>
                 <x-slot:icon>
-                    <svg width=72 height=72 viewBox="0 0 98 97" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        class="inline-block">
-                        <circle cx="49" cy="48.5" r="47.5" stroke="#3B82F6" stroke-width="2" />
-                        <path
-                            d="M41.0834 38.6042C41.0834 42.9764 44.6278 46.5208 49.0001 46.5208C53.3723 46.5208 56.9167 42.9764 56.9167 38.6042C56.9167 34.2319 53.3723 30.6875 49.0001 30.6875C44.6278 30.6875 41.0834 34.2319 41.0834 38.6042Z"
-                            stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M49.0001 52.4583C56.6515 52.4583 62.8542 58.6611 62.8542 66.3125H35.1459C35.1459 58.6611 41.3486 52.4583 49.0001 52.4583Z"
-                            stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <svg width=72 height=72 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="#3B82F6"
+                        class="inline-block rounded-full border-2 border-blue-500 p-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Publikasi Profil Panti dan Tutor</x-slot:title>
             </x-home-fitur-card>
             <x-home-fitur-card>
                 <x-slot:icon>
-                    <svg width=72 height=72 viewBox="0 0 98 97" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        class="inline-block">
-                        <circle cx="49" cy="48.5" r="47.5" stroke="#3B82F6" stroke-width="2" />
-                        <path
-                            d="M31.1875 66.3125L43.0625 54.4375M39.1042 44.5417C39.1042 52.1931 45.3069 58.3958 52.9583 58.3958C60.6098 58.3958 66.8125 52.1931 66.8125 44.5417C66.8125 36.8902 60.6098 30.6875 52.9583 30.6875C45.3069 30.6875 39.1042 36.8902 39.1042 44.5417Z"
-                            stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <svg width=72 height=72 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="#3B82F6"
+                        class="inline-block rounded-full border-2 border-blue-500 p-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Cari Tutor untuk Sesi Kursus</x-slot:title>
             </x-home-fitur-card>
             <x-home-fitur-card>
                 <x-slot:icon>
-                    <svg width=72 height=72 viewBox="0 0 98 97" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        class="inline-block">
-                        <circle cx="49" cy="48.5" r="47.5" stroke="#3B82F6" stroke-width="2" />
-                        <path
-                            d="M35.1458 48.5L31.1875 30.6875L66.8125 48.5L31.1875 66.3125L35.1458 48.5ZM35.1458 48.5L50.9792 48.5"
-                            stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <svg width=72 height=72 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="#3B82F6"
+                        class="inline-block rounded-full border-2 border-blue-500 p-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                     </svg>
                 </x-slot:icon>
-                <x-slot:title>Permintaan Sesi Kursus</x-slot:title>
+                <x-slot:title>Kelola Permintaan Sesi Kursus</x-slot:title>
             </x-home-fitur-card>
             <x-home-fitur-card>
                 <x-slot:icon>
-                    <svg width=72 height=72 viewBox="0 0 98 97" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        class="inline-block">
-                        <circle cx="49" cy="48.5" r="47.5" stroke="#3B82F6" stroke-width="2" />
-                        <g clip-path="url(#clip0_1336_22064)">
-                            <path
-                                d="M49.951 27.6766C49.6517 26.7554 48.3483 26.7554 48.049 27.6766L43.8918 40.4693C43.758 40.8813 43.374 41.1602 42.9408 41.1602L29.4897 41.1607C28.521 41.1608 28.1183 42.4003 28.9019 42.9697L39.7838 50.8765C40.1343 51.1312 40.2729 51.5825 40.1471 51.9945L35.9909 64.7874C35.6916 65.7087 36.746 66.4748 37.5297 65.9055L48.4122 57.9995C48.7627 57.7449 49.2373 57.7449 49.5878 57.9995L60.4703 65.9055C61.254 66.4748 62.3084 65.7087 62.0091 64.7874L57.8529 51.9945C57.7191 51.5825 57.8657 51.1312 58.2162 50.8765L69.0981 42.9697C69.8817 42.4003 69.479 41.1608 68.5103 41.1607L55.0592 41.1602C54.626 41.1602 54.242 40.8813 54.1082 40.4693L49.951 27.6766Z"
-                                stroke="#3B82F6" stroke-width="2" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_1336_22064">
-                                <rect width="47.5" height="47.5" fill="white"
-                                    transform="matrix(-1 0 0 1 72.75 24.75)" />
-                            </clipPath>
-                        </defs>
+                    <svg width=72 height=72 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="#3B82F6"
+                        class="inline-block rounded-full border-2 border-blue-500 p-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Rekomendasi Perlombaan</x-slot:title>

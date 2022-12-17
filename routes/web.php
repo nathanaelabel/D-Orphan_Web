@@ -26,7 +26,7 @@ Route::get('/', function () {
 })->name('/');
 Route::get('/donasi', function () {
     return view('dashboard');
-})->name('/donasi');
+})->name('donasi');
 Route::get('/kursus', function () {
     return view('kursus');
 })->name('kursus');
@@ -66,7 +66,4 @@ Route::middleware([
     Route::get('/lomba', function () {
         return view('dashboard');
     })->name('lomba');
-    Route::get('/donasi', function () {
-        return view('dashboard');
-    })->name('donasi');
 });
