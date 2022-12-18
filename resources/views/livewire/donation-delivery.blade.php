@@ -34,9 +34,9 @@
                                         <x-select>
                                             <x-slot:id>nama_panti_asuhan</x-slot:id>
                                             <x-slot:name>nama_panti_asuhan</x-slot:name>
-                                            <x-slot:option1>Sinar Bangsa</x-slot:option1>
-                                            <x-slot:option2>Bhakti Luhur</x-slot:option2>
-                                            <x-slot:option3>Budi Mulia</x-slot:option3>
+                                            @foreach ($orphanages as $orphanage)
+                                            <x-slot:option>{{ $orphanage->name }}</x-slot:option>
+                                            @endforeach
                                         </x-select>
                                     </div>
                                     <div class="space-y-1">
@@ -86,7 +86,7 @@
                                 </div>
 
                                 <div class="mt-6">
-                                    <x-primary-button>{{ __('Kirim') }}</x-primary-button>
+                                    <x-primary-button>{{ __('Sumbang') }}</x-primary-button>
                                 </div>
                             </form>
                         </div>

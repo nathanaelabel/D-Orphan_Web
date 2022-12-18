@@ -8,6 +8,8 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrphanageController;
 use App\Http\Controllers\OrphanCrController;
+use App\Http\Livewire\CourseTutor;
+use App\Http\Livewire\DetailCourseTutor;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,12 +62,8 @@ Route::middleware([
     Route::get('/kursus', function () {
         return view('course');
     })->name('kursus');
-    Route::get('/kursus/tutor', function () {
-        return view('tutor');
-    })->name('tutor');
-    Route::get('/kursus/tutor/detail-tutor', function () {
-        return view('detail-tutor');
-    })->name('detail-tutor');
+    Route::get('/kursus/tutor/{skill_id}', CourseTutor::class)->name('tutor');
+    Route::get('/kursus/tutor/detail-tutor/{course_id}', DetailCourseTutor::class)->name('detail-tutor');
     Route::get('/kursus/tutor/detail-tutor/detail-reservation', function () {
         return view('detail-reservation');
     })->name('detail-reservation');
