@@ -63,6 +63,9 @@ Route::middleware([
     Route::get('/kursus/tutor', function () {
         return view('tutor');
     })->name('tutor');
+    Route::get('/kursus/tutor/detail-tutor', function () {
+        return view('detail-tutor');
+    })->name('detail-tutor');
     Route::get('/lomba', function () {
         return view('competition');
     })->name('lomba');
