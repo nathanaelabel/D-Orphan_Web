@@ -1,5 +1,5 @@
 <div class="space-y-8">
-    {{-- Breadcrumb --}}
+    Breadcrumb
     <x-kursus.tutor.detail-tutor.breadcrumb>
         <x-slot:page1>Kursus</x-slot:page1>
         <x-slot:page2>Tutor</x-slot:page2>
@@ -90,7 +90,7 @@
                             <x-slot:slot>Hari</x-slot:slot>
                         </x-label>
                         <span class="text-sm text-red-700">&#42;</span>
-                        <x-kursus.tutor.detail-tutor.detail-reservasi.select>
+                        <x-select>
                             <x-slot:id>hari</x-slot:id>
                             <x-slot:name>hari</x-slot:name>
                             <x-slot:option1>Senin</x-slot:option1>
@@ -100,7 +100,7 @@
                             <x-slot:option5>Jumat</x-slot:option5>
                             <x-slot:option6>Sabtu</x-slot:option6>
                             <x-slot:option7>Minggu</x-slot:option7>
-                        </x-kursus.tutor.detail-tutor.detail-reservasi.select>
+                        </x-select>
                     </div>
                     <div class="text-sm text-red-700">
                         <span>&#42;</span>
