@@ -72,4 +72,7 @@ Route::middleware([
     Route::get('/lomba', function () {
         return view('competition');
     })->name('lomba');
+    Route::get('/detail-lomba', function () {
+        return view('detail-competition');
+    })->name('detail-lomba');
 });
