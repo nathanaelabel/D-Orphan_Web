@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <a href="{{ route('kursus') }}">
-                        <x-hero-button>Temukan Tutor</x-hero-button>
+                        <x-home.hero-button>Temukan Tutor</x-home.hero-button>
                     </a>
                 </div>
             </div>
@@ -47,7 +47,7 @@
         </div>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             <!-- Card -->
-            <x-home-fitur-card>
+            <x-home.fitur-card>
                 <x-slot:icon>
                     <svg width=72 height=72 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="#3B82F6"
@@ -57,8 +57,8 @@
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Publikasi Profil Panti dan Tutor</x-slot:title>
-            </x-home-fitur-card>
-            <x-home-fitur-card>
+            </x-home.fitur-card>
+            <x-home.fitur-card>
                 <x-slot:icon>
                     <svg width=72 height=72 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="#3B82F6"
@@ -68,8 +68,8 @@
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Cari Tutor untuk Sesi Kursus</x-slot:title>
-            </x-home-fitur-card>
-            <x-home-fitur-card>
+            </x-home.fitur-card>
+            <x-home.fitur-card>
                 <x-slot:icon>
                     <svg width=72 height=72 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="#3B82F6"
@@ -79,8 +79,8 @@
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Kelola Permintaan Sesi Kursus</x-slot:title>
-            </x-home-fitur-card>
-            <x-home-fitur-card>
+            </x-home.fitur-card>
+            <x-home.fitur-card>
                 <x-slot:icon>
                     <svg width=72 height=72 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="#3B82F6"
@@ -90,7 +90,7 @@
                     </svg>
                 </x-slot:icon>
                 <x-slot:title>Rekomendasi Perlombaan</x-slot:title>
-            </x-home-fitur-card>
+            </x-home.fitur-card>
             <!-- END Card -->
         </div>
     </div>
@@ -184,7 +184,7 @@
     </div>
 
     {{-- Donasi --}}
-    <div class="bg-home-donasi-background flex flex-col items-center rounded-2xl shadow gap-4 p-8">
+    <div class="bg-donasi-background flex flex-col items-center rounded-2xl shadow gap-4 p-8">
         <img src="{{ url('img/home-donasi-illustration.svg') }}" alt="Donasi" />
         <div class="text-center">
             <h3 class="text-3xl leading-10 font-bold">Donasi praktis</h3>

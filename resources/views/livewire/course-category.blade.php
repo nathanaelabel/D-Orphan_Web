@@ -8,11 +8,12 @@
             <x-slot:placeholder>Cari Kursus</x-slot:placeholder>
         </x-search-bar>
         {{-- Dropdown Sort --}}
-        <x-kursus-dropdown>
-            <x-slot:selectedOption>Urutkan</x-slot:selectedOption>
+        <x-kursus.dropdown>
+            <x-slot:id>sort_category</x-slot:id>
+            <x-slot:name>sort_category</x-slot:name>
             <x-slot:option1>Abjad Kategori</x-slot:option1>
             <x-slot:option2>Jumlah Tutor</x-slot:option2>
-        </x-kursus-dropdown>
+        </x-kursus.dropdown>
     </div>
 
     {{-- Kategori --}}
@@ -23,11 +24,11 @@
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @for ($i = 0; $i < 12; $i++)
                 {{-- @foreach ($courseCategory as $item) --}}
-                <x-kursus-kategori-card>
+                <x-kursus.kategori-card>
                     <x-slot:image>https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80</x-slot:image>
                     <x-slot:kategori>Catur</x-slot:kategori>
                     <x-slot:jumlahTutor>25 Tutor</x-slot:jumlahTutor>
-                </x-kursus-kategori-card>
+                </x-kursus.kategori-card>
             @endfor
             {{-- @endforeach --}}
         </div>
