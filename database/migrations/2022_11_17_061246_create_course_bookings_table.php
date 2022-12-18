@@ -24,6 +24,7 @@ return new class () extends Migration {
             $table->foreign('transaction_id')->references('id')->on('transactions')
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->string('address')->nullable();
             $table->integer('is_visit')->nullable();
             $table->foreign('orphanage_id')->references('id')->on('orphanages')
             ->onUpdate('cascade')
