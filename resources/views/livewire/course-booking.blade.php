@@ -67,7 +67,7 @@
                                             </svg>
                                             {{ $item->course->skill->name }}
                                         </span>
-                                        <span class=" w-40 text-ellipsis overflow-hidden">
+                                        <span class="w-40 text-ellipsis overflow-hidden">
                                             {{ $item->course->name }}</span>
                                     </div>
                                 </td>
