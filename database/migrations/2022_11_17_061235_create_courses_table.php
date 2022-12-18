@@ -25,7 +25,6 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->string("description")->nullable();
-            $table->string("location");
             $table->integer("hourly_price");
             $table->integer("is_online")->default(0);
             $table->integer("is_visit")->default(0);

@@ -30,6 +30,7 @@ class CourseBookingFactory extends Factory
             'course_id' => $getCourse,
             'start_date' => $faker->dateTimeThisYear(),
             'hour_count' => random_int(1, 30),
+            'address' => $faker->address,
             'status' => $status,
             'is_visit' => $is_visit,
 
