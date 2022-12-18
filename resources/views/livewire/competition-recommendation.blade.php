@@ -24,8 +24,8 @@
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @for ($i = 0; $i < 12; $i++)
                 {{-- @foreach ($competitionRecommendation as $item) --}}
-                <a href="{{ route('detail-lomba') }}">
-                    <x-lomba.card>
+                <x-lomba.card>
+                    @if (Auth::user()->user_type == 'Pengurus Panti')
                         <x-slot:image>
                             https://images.unsplash.com/photo-1584448141569-69f342da535c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=441&q=80
                         </x-slot:image>
@@ -35,8 +35,20 @@
                         <x-slot:jam>07:30 s.d. 14:30</x-slot:jam>
                         <x-slot:lokasi>Surabaya</x-slot:lokasi>
                         <x-slot:button>Selengkapnya</x-slot:button>
-                    </x-lomba.card>
-                </a>
+                    @else
+                        <x-slot:image>
+                            https://images.unsplash.com/photo-1584448141569-69f342da535c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=441&q=80
+                        </x-slot:image>
+                        <x-slot:nama>Asian Games</x-slot:nama>
+                        <x-slot:kategori>Atletik</x-slot:kategori>
+                        <x-slot:tanggal>06/08/2022</x-slot:tanggal>
+                        <x-slot:jam>07:30 s.d. 14:30</x-slot:jam>
+                        <x-slot:lokasi>Surabaya</x-slot:lokasi>
+                        <x-slot:primaryButton>Tambah Peserta</x-slot:primaryButton>
+                        <x-slot:secondaryButton>Ubah Lomba</x-slot:secondaryButton>
+                        <x-slot:tertiaryButton>Hapus Lomba</x-slot:tertiaryButton>
+                    @endif
+                </x-lomba.card>
             @endfor
             {{-- @endforeach --}}
         </div>
