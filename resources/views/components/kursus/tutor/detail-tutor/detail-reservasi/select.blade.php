@@ -3,8 +3,4 @@
     <option>{{ $option1 }}</option>
     <option>{{ $option2 }}</option>
     <option>{{ $option3 }}</option>
-    <option>{{ $option4 }}</option>
-    <option>{{ $option5 }}</option>
-    <option>{{ $option6 }}</option>
-    <option>{{ $option7 }}</option>
 </select>

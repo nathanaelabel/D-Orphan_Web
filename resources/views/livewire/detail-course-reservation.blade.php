@@ -90,17 +90,17 @@
                             <x-slot:slot>Hari</x-slot:slot>
                         </x-label>
                         <span class="text-sm text-red-700">&#42;</span>
-                        <x-select>
+                        <x-kursus.tutor.detail-tutor.detail-reservasi.select>
                             <x-slot:id>hari</x-slot:id>
                             <x-slot:name>hari</x-slot:name>
                             <x-slot:option1>Senin</x-slot:option1>
                             <x-slot:option2>Selasa</x-slot:option2>
                             <x-slot:option3>Rabu</x-slot:option3>
-                            <x-slot:option4>Kamis</x-slot:option4>
+                            {{-- <x-slot:option4>Kamis</x-slot:option4>
                             <x-slot:option5>Jumat</x-slot:option5>
                             <x-slot:option6>Sabtu</x-slot:option6>
-                            <x-slot:option7>Minggu</x-slot:option7>
-                        </x-select>
+                            <x-slot:option7>Minggu</x-slot:option7> --}}
+                        </x-kursus.tutor.detail-tutor.detail-reservasi.select>
                     </div>
                     <div class="text-sm text-red-700">
                         <span>&#42;</span>
