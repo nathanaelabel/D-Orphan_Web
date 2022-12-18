@@ -24,6 +24,12 @@ class OrphanController extends Controller
      */
     public function create()
     {
+        return view(
+            'orphan.create',
+            [
+                'orphan' => Orphan::all(),
+            ]
+        );
     }
 
     /**
@@ -33,6 +39,22 @@ class OrphanController extends Controller
      */
     public function store(StoreOrphanRequest $request)
     {
+        $check = Orphan::insert([
+            'orphanage_id' => $request->orphanage_id,
+            'name' => $request->name,
+            'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender,
+            'note' => $request->note,
+        ]);
+
+        $status = 'Failed to add!';
+        if ($check) {
+            $status = 'Has been added!';
+        }
+
+        return redirect('/getshoworphan')->with([
+            'status' => $status,
+        ]);
     }
 
     /**
@@ -51,6 +73,9 @@ class OrphanController extends Controller
      */
     public function edit(Orphan $orphan)
     {
+        return view('editorphan', [
+            'orphanData' => Orphan::findOrFail($orphan->id),
+        ]);
     }
 
     /**
@@ -60,6 +85,22 @@ class OrphanController extends Controller
      */
     public function update(UpdateOrphanRequest $request, Orphan $orphan)
     {
+        $check = Orphan::findOrFail($orphan)->update([
+            'orphanage_id' => $request->orphanage_id,
+            'name' => $request->name,
+            'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender,
+            'note' => $request->note,
+        ]);
+
+        $status = 'Failed to add!';
+        if ($check) {
+            $status = 'Has been edited!';
+        }
+
+        return redirect(route('showorphan.show', $orphan))->with([
+            'status' => $status,
+        ]);
     }
 
     /**
@@ -69,5 +110,15 @@ class OrphanController extends Controller
      */
     public function destroy(Orphan $orphan)
     {
+        $check = Orphan::findOrFail($orphan)->delete();
+
+        $status = 'Failed to delete!';
+        if ($check) {
+            $status = 'Has been deleted!';
+        }
+
+        return redirect('/getshoworphan')->with([
+            'status' => $status,
+        ]);
     }
 }
