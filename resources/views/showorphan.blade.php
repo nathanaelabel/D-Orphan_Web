@@ -3,7 +3,7 @@ Tampilan Peserta Kursus / Nama Peserta Kursus
     {{ session('status') }}
 @endif
 <div></div>
-<a href="{{ route('showorphan.create') }}">TAMBAH</a>
+<a href="{{ route('showorphan.create') }}">Tambah Peserta</a>
 <div></div>
 @if ($orphanDatas->isNotEmpty())
     @foreach ($orphanDatas as $orphanData)

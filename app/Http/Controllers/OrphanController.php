@@ -15,6 +15,9 @@ class OrphanController extends Controller
      */
     public function index()
     {
+        return view('showorphan', [
+            'orphanData' => Orphan::all(),
+        ]);
     }
 
     /**
@@ -25,9 +28,9 @@ class OrphanController extends Controller
     public function create()
     {
         return view(
-            'orphan.create',
+            'addorphan',
             [
-                'orphan' => Orphan::all(),
+                'orphanData' => Orphan::all(),
             ]
         );
     }
