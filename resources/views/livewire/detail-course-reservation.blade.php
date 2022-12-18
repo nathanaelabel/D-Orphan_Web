@@ -1,5 +1,5 @@
 <div class="space-y-8">
-    Breadcrumb
+    {{-- Breadcrumb --}}
     <x-kursus.tutor.detail-tutor.breadcrumb>
         <x-slot:page1>Kursus</x-slot:page1>
         <x-slot:page2>Tutor</x-slot:page2>

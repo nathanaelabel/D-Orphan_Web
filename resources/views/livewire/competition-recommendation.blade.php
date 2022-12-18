@@ -7,13 +7,6 @@
         <x-search-bar>
             <x-slot:placeholder>Cari Lomba</x-slot:placeholder>
         </x-search-bar>
-        {{-- Dropdown Sort --}}
-        {{-- <x-lomba.dropdown>
-            <x-slot:id>sort_category</x-slot:id>
-            <x-slot:name>sort_category</x-slot:name>
-            <x-slot:option1>Abjad Kategori</x-slot:option1>
-            <x-slot:option2>Jumlah Tutor</x-slot:option2>
-        </x-lomba.dropdown> --}}
     </div>
 
     {{-- Kategori --}}
