@@ -7,10 +7,10 @@
     </x-kursus.tutor.detail-tutor.breadcrumb>
 
     <div class="grid lg:flex gap-8">
-        {{-- Tutor --}}
         <div class="grid gap-4 w-full lg:w-6/12">
             {{-- Title --}}
             <h3 class="text-3xl leading-10 font-bold">{{ 'Profil Tutor' }}</h3>
+              {{-- Tutor --}}
             <x-kursus.tutor.detail-tutor.card>
                 <x-slot:image>
                     https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80
