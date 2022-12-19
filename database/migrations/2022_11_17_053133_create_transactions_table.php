@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign("user_id")->references("id")->on("users")
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->string('snap_token', 36)->nullable();
             $table->integer("amount");
             $table->enum("status",['pending','complete','canceled'])->default('pending');
             $table->string("description")->default("Requesting");

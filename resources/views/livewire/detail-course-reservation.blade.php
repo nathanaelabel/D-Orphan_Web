@@ -31,9 +31,11 @@
                             <x-kursus.tutor.detail-tutor.detail-reservasi.select>
                                 <x-slot:id>nama_peserta_kursus</x-slot:id>
                                 <x-slot:name>nama_peserta_kursus</x-slot:name>
-                                <x-slot:option1>Ilham Kurniawan</x-slot:option1>
-                                <x-slot:option2>Tono Andika</x-slot:option2>
-                                <x-slot:option3>Budi Santoso</x-slot:option3>
+                                <x-slot:option>
+                                    @foreach (Auth::user()->orphanage->orphans as $item)
+                                        <option>{{ $item->name }}</option>
+                                    @endforeach
+                                </x-slot:option>
                             </x-kursus.tutor.detail-tutor.detail-reservasi.select>
                         </div>
                     </div>
@@ -101,10 +103,13 @@
                             <x-kursus.tutor.detail-tutor.detail-reservasi.select>
                                 <x-slot:id>hari_mulai</x-slot:id>
                                 <x-slot:name>hari_mulai</x-slot:name>
-                                <x-slot:option1>Senin</x-slot:option1>
-                                <x-slot:option2>Selasa</x-slot:option2>
-                                <x-slot:option3>Rabu</x-slot:option3>
-                                {{-- <x-slot:option4>Kamis</x-slot:option4>
+                                <x-slot:option>
+                                    @foreach ($days as $item)
+                                        <option>{{ $item->day }}</option>
+                                    @endforeach
+                                    </x-slot:option1>
+
+                                    {{-- <x-slot:option>Kamis</x-slot:option4>
                             <x-slot:option5>Jumat</x-slot:option5>
                             <x-slot:option6>Sabtu</x-slot:option6>
                             <x-slot:option7>Minggu</x-slot:option7> --}}
@@ -149,53 +154,12 @@
                     </div>
                 </div>
 
-                <div class="flex gap-4 items-center">
-                    <div class="grid w-full gap-4">
-                        {{-- Hari --}}
-                        <div>
-                            <x-kursus.tutor.detail-tutor.detail-reservasi.select>
-                                <x-slot:id>hari_mulai</x-slot:id>
-                                <x-slot:name>hari_mulai</x-slot:name>
-                                <x-slot:option1>Senin</x-slot:option1>
-                                <x-slot:option2>Selasa</x-slot:option2>
-                                <x-slot:option3>Rabu</x-slot:option3>
-                                {{-- <x-slot:option4>Kamis</x-slot:option4>
-                            <x-slot:option5>Jumat</x-slot:option5>
-                            <x-slot:option6>Sabtu</x-slot:option6>
-                            <x-slot:option7>Minggu</x-slot:option7> --}}
-                            </x-kursus.tutor.detail-tutor.detail-reservasi.select>
-                        </div>
-                    </div>
-                    <div class="grid w-full gap-4">
-                        {{-- Jam Mulai --}}
-                        <div>
-                            <x-input>
-                                <x-slot:type>time</x-slot:type>
-                                <x-slot:name>jam_mulai</x-slot:name>
-                                <x-slot:id>jam_mulai</x-slot:id>
-                                <x-slot:placeholder>07.30</x-slot:placeholder>
-                            </x-input>
-                        </div>
-                    </div>
-                    <div class="grid w-full gap-4">
-                        {{-- Jam Berakhir --}}
-                        <div>
-                            <x-input>
-                                <x-slot:type>time</x-slot:type>
-                                <x-slot:name>jam_berakhir</x-slot:name>
-                                <x-slot:id>jam_berakhir</x-slot:id>
-                                <x-slot:placeholder>08.30</x-slot:placeholder>
-                            </x-input>
-                        </div>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6 text-red-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </div>
-                </div>
+       
             </div>
+            <p class="text-lg leading-8 font-semibold text-gray-700">
+                Daftar Peserta
+            </p>
+
             <div class="mt-6">
                 <x-primary-button>{{ __('Kirim Reservasi') }}</x-primary-button>
             </div>

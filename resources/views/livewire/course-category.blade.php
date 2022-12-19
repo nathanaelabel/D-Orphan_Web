@@ -1,4 +1,4 @@
-<div class="space-y-8">
+    <div class="space-y-8">
     {{-- Title --}}
     <h3 class="text-3xl leading-10 font-bold">{{ 'Jelajahi kategori yang ingin dipelajari' }}</h3>
 
@@ -18,7 +18,7 @@
 
     {{-- Kategori --}}
     <div>
-        @if ($courseCategories->isEmpty())
+        @if (!$courseCategories)
             <h3>Belum ada kategori kursus yang tersedia</h3>
         @else
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -26,7 +26,7 @@
                     <a href="{{ route('tutor', $item->id) }}">
                         <x-kursus.card>
                             <x-slot:image>
-                                https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80
+                              {{$item->photo_path}}
                             </x-slot:image>
                             <x-slot:kategori>{{ $item->name }}</x-slot:kategori>
                             <x-slot:jumlahTutor>{{ $item->courses->count() }} Kursus</x-slot:jumlahTutor>
@@ -39,5 +39,4 @@
     </div>
 
     {{-- Pagination --}}
-    <x-pagination></x-pagination>
 </div>

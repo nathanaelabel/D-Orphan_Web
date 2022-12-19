@@ -8,22 +8,12 @@ use Livewire\WithPagination;
 
 class CourseCategory extends Component
 {
-    public $courseCategories;
     use WithPagination;
     public function render()
     {
         return view('livewire.course-category',[
-            'courseCategories' => Skill::paginate(10)
+            'courseCategories' => Skill::all()
         ]
         );
-    }
-
-    public function mount()
-    {
-        $this->setCourseCategories();
-    }
-
-    public function setCourseCategories()
-    {
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\TransactionController as APITransactionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CompetitionRecommendationController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\OrphanageController;
 use App\Http\Controllers\OrphanCrController;
 use App\Http\Livewire\CourseTutor;
 use App\Http\Livewire\DetailCourseTutor;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +52,7 @@ Route::get('/myfindpaskill/{courseId}', [CourseController::class, 'show']);
 Route::get('/padata', [OrphanageController::class, 'index']);
 Route::get('/padata/{orphanage}', [OrphanageController::class, 'show']);
 Route::get('/competition/{competitionId}', [CompetitionController::class, 'show']);
-
+Route::get('midtrans/{id}', [TransactionController::class, 'showMidtrans'])->name('midtrans');
 //buat panti
 Route::middleware([
     'auth:sanctum',

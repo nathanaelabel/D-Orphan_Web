@@ -15,4 +15,8 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function donation(){
+        return $this->hasOne(Donation::class);
+    }
 }

@@ -2,6 +2,6 @@
 
 <x-app-layout>
     <div>
-        @livewire('course-tutor')
+        <livewire:detail-course-tutor course_id="{{$course_id}}" />
     </div>
 </x-app-layout>

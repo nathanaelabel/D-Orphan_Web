@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
@@ -20,6 +20,23 @@ class TransactionController extends Controller
             'transactionDatas' => Transaction::where('description', 'Requesting')->get(),
         ]);
     }
+
+    public function showMidtrans($id){
+        $order = Transaction::find($id);
+        $snapToken = $order->snap_token;
+        if (is_null($snapToken)) {
+            // If snap token is still NULL, generate snap token and save it to database
+
+            $midtrans = new CreateSnapTokenService($order);
+            $snapToken = $midtrans->getSnapToken();
+
+            $order->snap_token = $snapToken;
+            $order->save();
+        }
+
+        return view('midtrans', compact('order', 'snapToken'));
+    }
+    
 
     /**
      * Show the form for creating a new resource.
