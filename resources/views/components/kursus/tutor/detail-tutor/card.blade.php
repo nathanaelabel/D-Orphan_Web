@@ -14,15 +14,8 @@
                     <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor" viewBox="0 0 8 8">
                         <circle cx="4" cy="4" r="3" />
                     </svg>
-                    {{ $kategori1 }}
-                </span>
-                <span
-                    class="w-fit inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
-                    <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor" viewBox="0 0 8 8">
-                        <circle cx="4" cy="4" r="3" />
-                    </svg>
-                    {{ $kategori2 }}
-                </span>
+                    {{ $kategori }}
+                </span> --}}
             </div>
             <div>
                 <div class="flex gap-2 items-center">
@@ -67,14 +60,14 @@
                     <p class="text-lg leading-8 text-gray-500">{{ $surel }}</p>
                 </div>
                 @if (Auth::user()->user_type == 'Pengurus Panti')
-                <div class="mt-2">
-                    <a href="{{ route('detail-reservation') }}"> <button type="button"
-                        class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
-                        <p class="font-semibold text-white">{{ $button }}</p>
-                    </button>
-                </a>
-                </div>
-                @endif 
+                    <div class="mt-2">
+                        <a href="{{ route('detail-reservation') }}"> <button type="button"
+                                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
+                                <p class="font-semibold text-white">{{ $button }}</p>
+                            </button>
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
