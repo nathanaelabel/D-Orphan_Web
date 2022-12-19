@@ -1,13 +1,6 @@
 <x-guest-layout>
 
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Lvl Midtrans</h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="https://jurnalmms.web.id/">Blog</a>
-            <a class="p-2 text-dark" href="https://github.com/mulyosyahidin">GitHub</a>
-            <a class="p-2 text-dark" href="https://instagram.com/mul.yoo">Instagram</a>
-        </nav>
-    </div>
+
 
     <div class="container pb-5 pt-5">
         <div class="row">
@@ -23,8 +16,8 @@
                                 <td><b>#{{ $order->id }}</b></td>
                             </tr>
                             <tr>
-                                <td>Total Harga</td>
-                                <td><b>Rp {{ number_format($order->amount, 2, ',', '.') }}</b></td>
+                                <td>Total Sumbangan</td>
+                                <td><b>Rp {{ number_format(($order->amount+1/100*$order->amount), 2, ',', '.') }}</b></td>
                             </tr>
                             <tr>
                                 <td>Status Pembayaran</td>

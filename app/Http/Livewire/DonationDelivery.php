@@ -10,7 +10,7 @@ use Livewire\Component;
 class DonationDelivery extends Component
 {
     public $orphanages;
-    public $selectedOrphanage;
+public $selectedOrphanage;
     public $donator_name;
     public $amount;
     public $message;
