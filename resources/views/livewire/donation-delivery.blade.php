@@ -87,7 +87,7 @@
                                 </div>
 
                                 <div class="mt-6">
-                                    <x-primary-button wire:click="saveDonation">{{ __('Sumbang') }}</x-primary-button>
+                                    <x-primary-button wire:click="saveDonation">{{ __('Kirim Donasi') }}</x-primary-button>
                                 </div>
                             </div>
                         </div>
