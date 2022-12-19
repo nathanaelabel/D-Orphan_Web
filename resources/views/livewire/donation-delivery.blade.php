@@ -31,12 +31,14 @@
                                             <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
                                         </x-label>
                                         <span class="text-sm text-red-700">&#42;</span>
-                                        <x-select>
+                                        <x-select name="orphanage">
                                             <x-slot:id>nama_panti_asuhan</x-slot:id>
                                             <x-slot:name>nama_panti_asuhan</x-slot:name>
-                                            @foreach ($orphanages as $orphanage)
-                                                <x-slot:option>{{ $orphanage->name }}</x-slot:option>
-                                            @endforeach
+                                            <x-slot:option>
+                                                @foreach ($orphanages as $orphanage)
+                                                    <option value="{{ $orphanage->id }}">{{ $orphanage->name }}</option>
+                                                @endforeach
+                                            </x-slot:option>
                                         </x-select>
                                     </div>
                                     <div class="space-y-1">
