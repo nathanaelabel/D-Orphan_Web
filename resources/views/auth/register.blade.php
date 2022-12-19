@@ -77,32 +77,19 @@
                                     </div>
 
                                     <div class="mt-4">
-                                        <x-label>
-                                            <x-slot:for>phone_number</x-slot:for>
-                                            <x-slot:slot>Nomor Telepon</x-slot:slot>
-                                        </x-label>
-                                        <x-input>
-                                            <x-slot:type>number</x-slot:type>
-                                            <x-slot:name>phone_number</x-slot:name>
-                                            <x-slot:id>phone_number</x-slot:id>
-                                            <x-slot:placeholder>08xx-xxxx-xxxx</x-slot:placeholder>
-                                        </x-input>
-                                    </div>
-
-                                    <div>
                                         <x-jet-label for="role" value="{{ __('Gender') }}" />
                                         <div class="flex gap-6 mt-1">
                                             <div class="space-x-1">
                                                 <input id="male" class="peer/male" type="radio" name="gender"
-                                                    value="Male" checked />
+                                                    value="Male" />
                                                 <label for="male"
-                                                    class="peer-checked/panti:text-blue-500">Male</label>
+                                                    class="peer-checked/male:text-blue-500">Male</label>
                                             </div>
                                             <div class="space-x-1">
                                                 <input id="female" class="peer/female" type="radio" value="Female"
-                                                    name="user_type" />
+                                                    name="gender" />
                                                 <label for="female"
-                                                    class="peer-checked/tutor:text-blue-500">Female</label>
+                                                    class="peer-checked/female:text-blue-500">Female</label>
                                             </div>
                                         </div>
                                     </div>
