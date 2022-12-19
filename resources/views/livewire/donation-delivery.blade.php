@@ -23,7 +23,7 @@
                                 <!-- Donation Form -->
 
                                 <div class="mt-4 space-y-4">
-                                    <div class="space-y-1">
+                                    {{-- <div class="space-y-1">
                                         <x-label>
                                             <x-slot:for>nama_panti_asuhan</x-slot:for>
                                             <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
@@ -38,7 +38,7 @@
                                                 @endforeach
                                             </x-slot:option>
                                         </x-select>
-                                    </div>
+                                    </div> --}}
                                     <div class="space-y-1">
                                         <x-label>
                                             <x-slot:for>nama_donatur</x-slot:for>

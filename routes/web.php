@@ -29,8 +29,14 @@ Route::get('/', function () {
     return view('home');
 })->name('/');
 Route::get('/donasi', function () {
-    return view('donation');
+    return view('list-orphanage');
 })->name('donasi');
+Route::get('/kirim-donasi', function () {
+    return view('donation');
+})->name('kirim-donasi');
+Route::get('/detail-panti', function () {
+    return view('detail-orphanage');
+})->name('detail-panti');
 
 Route::get('/mydashboard', [DashboardController::class, 'index']);
 Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseBookingStatus']);

@@ -37,6 +37,4 @@
             </div>
         @endif
     </div>
-
-    {{-- Pagination --}}
 </div>
