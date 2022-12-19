@@ -64,6 +64,63 @@
                                     </div>
 
                                     <div class="mt-4">
+                                        <x-label>
+                                            <x-slot:for>phone_number</x-slot:for>
+                                            <x-slot:slot>Nomor Telepon</x-slot:slot>
+                                        </x-label>
+                                        <x-input>
+                                            <x-slot:type>number</x-slot:type>
+                                            <x-slot:name>phone_number</x-slot:name>
+                                            <x-slot:id>phone_number</x-slot:id>
+                                            <x-slot:placeholder>08xx-xxxx-xxxx</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <x-label>
+                                            <x-slot:for>phone_number</x-slot:for>
+                                            <x-slot:slot>Nomor Telepon</x-slot:slot>
+                                        </x-label>
+                                        <x-input>
+                                            <x-slot:type>number</x-slot:type>
+                                            <x-slot:name>phone_number</x-slot:name>
+                                            <x-slot:id>phone_number</x-slot:id>
+                                            <x-slot:placeholder>08xx-xxxx-xxxx</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
+
+                                    <div>
+                                        <x-jet-label for="role" value="{{ __('Gender') }}" />
+                                        <div class="flex gap-6 mt-1">
+                                            <div class="space-x-1">
+                                                <input id="male" class="peer/male" type="radio" name="gender"
+                                                    value="Male" checked />
+                                                <label for="male"
+                                                    class="peer-checked/panti:text-blue-500">Male</label>
+                                            </div>
+                                            <div class="space-x-1">
+                                                <input id="female" class="peer/female" type="radio" value="Female"
+                                                    name="user_type" />
+                                                <label for="female"
+                                                    class="peer-checked/tutor:text-blue-500">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <x-label>
+                                            <x-slot:for>address</x-slot:for>
+                                            <x-slot:slot>Alamat</x-slot:slot>
+                                        </x-label>
+                                        <x-input>
+                                            <x-slot:type>text</x-slot:type>
+                                            <x-slot:name>address</x-slot:name>
+                                            <x-slot:id>address</x-slot:id>
+                                            <x-slot:placeholder>Alamat</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
+
+                                    <div class="mt-4">
                                         <x-jet-label for="password" value="{{ __('Kata Sandi') }}" />
                                         <x-jet-input id="password" class="block mt-1 w-full" type="password"
                                             name="password" required autocomplete="new-password" />
@@ -83,7 +140,8 @@
 
                                     <div class="flex items-center justify-center gap-1">
                                         <p>Sudah punya akun&#63;</p>
-                                        <a href="{{ route('login') }}" class="font-bold text-blue-500">{{ __('Masuk') }}</a>
+                                        <a href="{{ route('login') }}"
+                                            class="font-bold text-blue-500">{{ __('Masuk') }}</a>
                                     </div>
                                 </form>
                             </div>
