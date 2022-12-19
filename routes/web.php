@@ -65,7 +65,7 @@ Route::middleware([
     })->name('kursus');
     Route::get('/kursus/tutor/{skill_id}', CourseTutor::class)->name('tutor');
     Route::get('/kursus/tutor/detail-tutor/{course_id}', DetailCourseTutor::class)->name('detail-tutor');
-    Route::get('/kursus/tutor/detail-tutor/detail-reservation', function () {
+    Route::get('/kursus/tutor/detail-tutor/{course_id}/detail-reservation', function () {
         return view('detail-reservation');
     })->name('detail-reservation');
     Route::get('/lomba', function () {

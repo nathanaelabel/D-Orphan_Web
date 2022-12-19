@@ -14,7 +14,7 @@
                     <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor" viewBox="0 0 8 8">
                         <circle cx="4" cy="4" r="3" />
                     </svg>
-                    {{ $kategori1 }}
+                    {{ $kategori }}
                 </span>
             </div>
             <div>
