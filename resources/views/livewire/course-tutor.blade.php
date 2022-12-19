@@ -28,29 +28,28 @@
             <h3>Belum ada tutor yang tersedia</h3>
         @else
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                @for ($i = 0; $i < 12; $i++)
-                    @foreach ($courseTutors as $item)
-                        <a href="{{ route('detail-tutor', $item->id) }}">
-                            <x-kursus.tutor.card>
-                                <x-slot:image>
-                                    https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80
-                                </x-slot:image>
-                                <x-slot:nama>{{ $item->tutor->user->name }}</x-slot:nama>
-                                <x-slot:tarif>Rp {{ $item->hourly_price }}/jam</x-slot:tarif>
-                                <x-slot:lokasi>Surabaya</x-slot:lokasi>
-                                <x-slot:sesi>
-                                    @if ($item->is_online == 1)
-                                        Tersedia Sesi Daring
-                                    @else
-                                        Hanya Sesi Luring
-                                    @endif
-                                </x-slot:sesi>
-                                <x-slot:anak>{{ $item->maximum_member }} anak/Panti</x-slot:anak>
-                                <x-slot:button>Selengkapnya</x-slot:button>
-                            </x-kursus.tutor.card>
-                        </a>
-                    @endforeach
-                @endfor
+                @foreach ($courseTutors as $item)
+                    <a href="{{ route('detail-tutor', $item->id) }}">
+                        <x-kursus.tutor.card>
+                            <x-slot:image>
+                                https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80
+                            </x-slot:image>
+                            <x-slot:nama>{{ $item->tutor->user->name }}</x-slot:nama>
+                            <x-slot:tarif>{{ 'Rp' . number_format($item->hourly_price, 2, ',', '.') . '/jam' }}
+                            </x-slot:tarif>
+                            <x-slot:lokasi>Surabaya</x-slot:lokasi>
+                            <x-slot:sesi>
+                                @if ($item->is_online == 1)
+                                    Tersedia Sesi Daring
+                                @else
+                                    Hanya Sesi Luring
+                                @endif
+                            </x-slot:sesi>
+                            <x-slot:anak>{{ $item->maximum_member }}&nbsp;anak/Panti</x-slot:anak>
+                            <x-slot:button>Selengkapnya</x-slot:button>
+                        </x-kursus.tutor.card>
+                    </a>
+                @endforeach
             </div>
         @endif
     </div>

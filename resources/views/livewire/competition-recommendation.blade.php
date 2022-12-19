@@ -1,6 +1,6 @@
 <div class="space-y-8">
     {{-- Title --}}
-    <h3 class="text-3xl leading-10 font-bold">{{ 'Ikuti lomba dan jadilah yang terbaik' }}</h3>
+    <h3 class="text-3xl leading-10 font-bold">{{ 'Rekomendasi Perlombaan Untuk Anak Panti' }}</h3>
 
     {{-- Search Bar --}}
     <div class="flex justify-between gap-4 items-center">
@@ -11,16 +11,14 @@
 
     {{-- Kategori --}}
     <div>
-        {{-- @if ($competitionRecommendation->isEmpty())
+         @if ($competitionRecommendation->isEmpty())
             <h3>Belum ada kategori lomba yang tersedia</h3>
-        @else --}}
+        @else 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
-            {{-- @foreach ($competitionRecommendation as $item) --}}
-            @if (Auth::user()->user_type == 'Pengurus Panti')
-                @foreach ($competitionRecommendation as $item)
-                    <x-lomba.card>
-
+            @for ($i = 0; $i < 12; $i++)
+                {{-- @foreach ($competitionRecommendation as $item) --}}
+                <x-lomba.card>
+                    @if (Auth::user()->user_type == 'Pengurus Panti')
                         <x-slot:image>
                             https://images.unsplash.com/photo-1584448141569-69f342da535c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=441&q=80
                         </x-slot:image>
@@ -47,10 +45,9 @@
                         <x-slot:primaryButton>Tambah Peserta</x-slot:primaryButton>
                         <x-slot:secondaryButton>Ubah Lomba</x-slot:secondaryButton>
                         <x-slot:tertiaryButton>Hapus Lomba</x-slot:tertiaryButton>
-                    </x-lomba.card>
-                @endforeach
-
-            @endif
+                    @endif
+                </x-lomba.card>
+            @endfor
             {{-- @endforeach --}}
         </div>
         {{-- @endif --}}

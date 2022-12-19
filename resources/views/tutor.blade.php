@@ -1,4 +1,5 @@
 @section('title', 'Tutor')
+
 <x-app-layout>
     <div>
         @livewire('course-tutor')

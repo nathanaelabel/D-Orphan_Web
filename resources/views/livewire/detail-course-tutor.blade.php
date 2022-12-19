@@ -16,9 +16,9 @@
                     https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80
                 </x-slot:image>
                 <x-slot:nama>{{ $courseTutor->tutor->user->name }}</x-slot:nama>
-                <x-slot:kategori1>{{ $courseTutor->skill->name }}</x-slot:kategori1>
-                <x-slot:kategori2>Atletik</x-slot:kategori2>
-                <x-slot:tarif>Rp{{ $courseTutor->hourly_price }}/jam</x-slot:tarif>
+                <x-slot:kategori>{{ $courseTutor->skill->name }}</x-slot:kategori>
+                <x-slot:tarif>{{ 'Rp' . number_format($courseTutor->hourly_price, 2, ',', '.') . '/jam' }}
+                </x-slot:tarif>
                 <x-slot:lokasi>Surabaya</x-slot:lokasi>
 
                 <x-slot:sesi>
