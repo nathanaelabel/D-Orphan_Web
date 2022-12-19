@@ -51,6 +51,7 @@ Route::get('/padata', [OrphanageController::class, 'index']);
 Route::get('/padata/{orphanage}', [OrphanageController::class, 'show']);
 Route::get('/competition/{competitionId}', [CompetitionController::class, 'show']);
 
+//buat panti
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
