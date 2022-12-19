@@ -72,7 +72,7 @@
                                             <x-slot:type>number</x-slot:type>
                                             <x-slot:name>phone_number</x-slot:name>
                                             <x-slot:id>phone_number</x-slot:id>
-                                            <x-slot:placeholder>08xx-xxxx-xxxx</x-slot:placeholder>
+                                            <x-slot:placeholder>08XX-XXXX-XXXX</x-slot:placeholder>
                                         </x-input>
                                     </div>
 
