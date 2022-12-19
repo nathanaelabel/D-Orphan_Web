@@ -35,7 +35,7 @@
                                             <x-slot:id>nama_panti_asuhan</x-slot:id>
                                             <x-slot:name>nama_panti_asuhan</x-slot:name>
                                             @foreach ($orphanages as $orphanage)
-                                            <x-slot:option>{{ $orphanage->name }}</x-slot:option>
+                                                <x-slot:option>{{ $orphanage->name }}</x-slot:option>
                                             @endforeach
                                         </x-select>
                                     </div>
@@ -66,7 +66,7 @@
                                                 <x-slot:type>number</x-slot:type>
                                                 <x-slot:name>nominal_donasi</x-slot:name>
                                                 <x-slot:id>nominal_donasi</x-slot:id>
-                                                <x-slot:placeholder>xxx.xxx</x-slot:placeholder>
+                                                <x-slot:placeholder>xxxxxx</x-slot:placeholder>
                                             </x-input>
                                         </div>
                                     </div>
@@ -76,6 +76,7 @@
                                             <x-slot:slot>Pesan</x-slot:slot>
                                         </x-label>
                                         <x-textarea>
+                                            <x-slot:maxlength>200</x-slot:maxlength>
                                             <x-slot:placeholder>Semoga membantu ya</x-slot:placeholder>
                                         </x-textarea>
                                     </div>

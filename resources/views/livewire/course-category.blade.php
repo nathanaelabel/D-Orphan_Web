@@ -22,20 +22,18 @@
             <h3>Belum ada kategori kursus yang tersedia</h3>
         @else
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                @for ($i = 0; $i < 12; $i++)
-                    @foreach ($courseCategories as $item)
-                        <a href="{{ route('tutor', $item->id) }}">
-                            <x-kursus.card>
-                                <x-slot:image>
-                                    https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80
-                                </x-slot:image>
-                                <x-slot:kategori>{{ $item->name }}</x-slot:kategori>
-                                <x-slot:jumlahTutor>{{ $item->courses->count() }} Kursus</x-slot:jumlahTutor>
-                                <x-slot:button>Selengkapnya</x-slot:button>
-                            </x-kursus.card>
-                        </a>
-                    @endforeach
-                @endfor
+                @foreach ($courseCategories as $item)
+                    <a href="{{ route('tutor', $item->id) }}">
+                        <x-kursus.card>
+                            <x-slot:image>
+                                https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80
+                            </x-slot:image>
+                            <x-slot:kategori>{{ $item->name }}</x-slot:kategori>
+                            <x-slot:jumlahTutor>{{ $item->courses->count() }} Kursus</x-slot:jumlahTutor>
+                            <x-slot:button>Selengkapnya</x-slot:button>
+                        </x-kursus.card>
+                    </a>
+                @endforeach
             </div>
         @endif
     </div>
