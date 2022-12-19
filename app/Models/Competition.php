@@ -15,4 +15,7 @@ class Competition extends Model
     {
         return $this->hasMany(CompetitionRecommendation::class);
     }
+    public function category(){
+        return $this->belongsTo(Skill::class);
+    }
 }
