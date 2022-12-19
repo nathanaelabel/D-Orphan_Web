@@ -17,7 +17,6 @@
                 </x-slot:image>
                 <x-slot:nama>{{ $courseTutor->tutor->user->name }}</x-slot:nama>
                 <x-slot:kategori1>{{ $courseTutor->skill->name }}</x-slot:kategori1>
-                <x-slot:kategori2>Atletik</x-slot:kategori2>
                 <x-slot:tarif>Rp{{ $courseTutor->hourly_price }}/jam</x-slot:tarif>
                 <x-slot:lokasi>Surabaya</x-slot:lokasi>
 

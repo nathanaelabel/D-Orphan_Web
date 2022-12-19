@@ -16,13 +16,6 @@
                     </svg>
                     {{ $kategori1 }}
                 </span>
-                <span
-                    class="w-fit inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
-                    <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor" viewBox="0 0 8 8">
-                        <circle cx="4" cy="4" r="3" />
-                    </svg>
-                    {{ $kategori2 }}
-                </span>
             </div>
             <div>
                 <div class="flex gap-2 items-center">
