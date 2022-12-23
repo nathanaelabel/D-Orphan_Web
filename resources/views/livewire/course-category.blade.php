@@ -3,7 +3,7 @@
 
     @if (auth()->user()->tutor)
         {{-- Title --}}
-        <h3 class="text-3xl leading-10 font-bold">{{ 'Jelajahi kategori' }}</h3>
+        <h3 class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus' }}</h3>
         {{-- Tabs --}}
         <div class="flex justify-center">
             <nav class="text-center bg-blue-100 rounded space-x-4 px-2 py-4" aria-label="Tabs">
@@ -18,7 +18,7 @@
         </div>
     @else
         {{-- Title --}}
-        <h3 class="text-3xl leading-10 font-bold">{{ 'Jelajahi kategori yang ingin dipelajari' }}</h3>
+        <h3 class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang ingin dipelajari' }}</h3>
     @endif
 
     {{-- Search Bar --}}
