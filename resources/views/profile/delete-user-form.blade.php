@@ -35,7 +35,7 @@
                                 wire:keydown.enter="deleteUser" />
 
                     <x-jet-input-error for="password" class="mt-2" />
-                </div>
+            </div>
             </x-slot>
 
             <x-slot name="footer">

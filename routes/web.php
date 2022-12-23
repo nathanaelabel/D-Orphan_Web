@@ -11,6 +11,7 @@ use App\Http\Controllers\OrphanageController;
 use App\Http\Controllers\OrphanCrController;
 use App\Http\Livewire\CourseTutor;
 use App\Http\Livewire\DetailCourseTutor;
+use App\Http\Livewire\DetailOrphanage;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,8 @@ Route::get('/kirim-donasi', function () {
 Route::get('/detail-panti', function () {
     return view('detail-orphanage');
 })->name('detail-panti');
+Route::get('/detail-panti/{orphanage_id}', DetailOrphanage::class)->name('detail-panti');
+
 
 Route::get('/mydashboard', [DashboardController::class, 'index']);
 Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseBookingStatus']);

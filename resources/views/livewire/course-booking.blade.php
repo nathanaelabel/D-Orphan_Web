@@ -55,8 +55,9 @@
                     <tbody>
                         @foreach ($courseBooking as $item)
                             <tr class="odd:bg-white even:bg-gray-100">
-                                <td class="whitespace-nowrap px-3 py-4">
-                                    {{ $item->orphanage->name }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
+                                    <a href="{{ route('detail-panti', $item->id) }}">{{ $item->orphanage->name }}</a>
+                                </td>
                                 <td class="whitespace-nowrap px-3 py-4">
                                     <div class="flex items-center gap-2">
                                         <span
@@ -83,18 +84,50 @@
                                 <td class="whitespace-nowrap px-3 py-4 font-semibold space-x-8">
                                     @if ($activeTab == 'pending')
                                         @if (Auth::user()->user_type == 'Tutor')
+                                            {{-- Terima --}}
                                             <a wire:click='accept({{ $item->id }})'
-                                                class="cursor-pointer text-green-500">Terima</a>
+                                                class="cursor-pointer text-green-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-green-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </a>
+                                            {{-- Tolak --}}
                                             <a wire:click='decline({{ $item->id }})'
-                                                class="cursor-pointer text-red-500">Tolak</a>
+                                                class="cursor-pointer text-red-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-red-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </a>
                                         @else
+                                            {{-- Batal --}}
                                             <a wire:click='decline({{ $item->id }})'
-                                                class="cursor-pointer text-red-500">Batal</a>
+                                                class="cursor-pointer text-red-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-red-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </a>
                                         @endif
                                     @elseif($activeTab == 'ongoing')
                                         @if (Auth::user()->user_type == 'Tutor')
+                                            {{-- Akhiri --}}
                                             <a wire:click='complete({{ $item->id }})'
-                                                class="cursor-pointer text-green-500">Akhiri</a>
+                                                class="cursor-pointer text-green-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-green-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            </a>
                                         @else
                                             {{ '-' }}
                                         @endif
