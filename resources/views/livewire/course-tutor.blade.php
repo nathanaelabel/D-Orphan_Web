@@ -6,7 +6,15 @@
     </x-kursus.tutor.breadcrumb>
 
     {{-- Title --}}
-    <h3 class="text-3xl leading-10 font-bold">Mulailah kursus {{ $courseCategory->name }} dengan Tutor pilihan Anda</h3>
+
+    <h3 class="text-3xl leading-10 font-bold">
+        @if (auth()->user()->orphanage)
+            Mulailah kursus {{ $courseCategory->name }} dengan Tutor pilihan Anda
+        @else
+            Kursus {{ $courseCategory->name }}
+        @endif
+    </h3>
+
 
     {{-- Search Bar --}}
     <div class="flex justify-between gap-4 items-center">
