@@ -31,6 +31,7 @@ return new class () extends Migration {
             ->onDelete('cascade');
             $table->datetime('start_date');
             $table->enum('status', ['pending', 'ongoing', 'complete', 'canceled']);
+            $table->string('location')->nullable();
             $table->timestamps();
         });
     }
