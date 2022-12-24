@@ -23,33 +23,32 @@
                                 <!-- Donation Form -->
 
                                 <div class="mt-4 space-y-4">
-                                    {{-- <div class="space-y-1">
+                                     <div class="space-y-1">
                                         <x-label>
                                             <x-slot:for>nama_panti_asuhan</x-slot:for>
                                             <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
                                         </x-label>
                                         <span class="text-sm text-red-700">&#42;</span>
-                                        <x-select wire:model="selectedOrphanage" name="orphanage">
-                                            <x-slot:id>nama_panti_asuhan</x-slot:id>
+                                        <x-input-donasi>
+                                            <x-slot:type>text</x-slot:type>
                                             <x-slot:name>nama_panti_asuhan</x-slot:name>
-                                            <x-slot:option>
-                                                @foreach ($orphanages as $orphanage)
-                                                    <option value="{{ $orphanage->user->id }}">{{ $orphanage->name }}</option>
-                                                @endforeach
-                                            </x-slot:option>
-                                        </x-select>
-                                    </div> --}}
+                                            <x-slot:id>nama_panti_asuhan</x-slot:id>
+                                            <x-slot:placeholder>{{$target->name}}</x-slot:placeholder>
+                                            <x-slot:read>readonly</x-slot:read>
+                                        </x-input-donasi>
+                                    </div>
                                     <div class="space-y-1">
                                         <x-label>
                                             <x-slot:for>nama_donatur</x-slot:for>
                                             <x-slot:slot>Nama Donatur</x-slot:slot>
                                         </x-label>
-                                        <x-input wire:model="donator_name">
+                                        <x-input-donasi wire:model="donator_name">
                                             <x-slot:type>text</x-slot:type>
                                             <x-slot:name>nama_donatur</x-slot:name>
                                             <x-slot:id>nama_donatur</x-slot:id>
-                                            <x-slot:placeholder>Surya Candra</x-slot:placeholder>
-                                        </x-input>
+                                            <x-slot:placeholder>Silakan isi nama donatur</x-slot:placeholder>
+                                            <x-slot:read></x-slot:read>
+                                        </x-input-donasi>
                                     </div>
                                     <div class="space-y-1">
                                         <x-label>
@@ -62,12 +61,13 @@
                                                 class="absolute inset-y-0 left-0 pl-3 text-gray-700 flex items-center pointer-events-none">
                                                 <p>Rp</p>
                                             </div>
-                                            <x-input wire:model="amount" class="pl-10">
+                                            <x-input-donasi wire:model="amount" class="pl-10">
                                                 <x-slot:type>number</x-slot:type>
                                                 <x-slot:name>nominal_donasi</x-slot:name>
                                                 <x-slot:id>nominal_donasi</x-slot:id>
                                                 <x-slot:placeholder>xxxxxx</x-slot:placeholder>
-                                            </x-input>
+                                                <x-slot:read></x-slot:read>
+                                            </x-input-donasi>
                                         </div>
                                     </div>
                                     <div class="space-y-1">

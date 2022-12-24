@@ -21,7 +21,7 @@
             <x-slot:kategori>{{ $courseTutor->skill->name }}</x-slot:kategori>
             <x-slot:tarif>{{ 'Rp' . number_format($courseTutor->hourly_price, 2, ',', '.') . '/jam' }}
             </x-slot:tarif>
-            <x-slot:lokasi>Surabaya</x-slot:lokasi>
+            <x-slot:lokasi>{{$courseTutor->location}}</x-slot:lokasi>
 
             <x-slot:sesi>
                 @if ($courseTutor->is_online == 1)

@@ -47,7 +47,7 @@
                     <tbody class="bg-white">
                         <tr>
                             <td colspan="6" class="px-3 py-4 text-center">
-                                {{ 'Belum ada data' }}
+                                {{ 'Belum ada data reservasi kursus' }}
                             </td>
                         </tr>
                     </tbody>
@@ -56,7 +56,7 @@
                         @foreach ($courseBooking as $item)
                             <tr class="odd:bg-white even:bg-gray-100">
                                 <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
-                                    <a href="{{ route('detail-panti', $item->id) }}">{{ $item->orphanage->name }}</a>
+                                    <a href="{{ route('detail-user', $item->orphanage->user->id) }}">{{ $item->orphanage->name }}</a>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4">
                                     <div class="flex items-center gap-2">

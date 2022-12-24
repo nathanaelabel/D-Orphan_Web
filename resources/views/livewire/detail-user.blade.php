@@ -15,17 +15,20 @@
                 <x-slot:image>
                     https://images.unsplash.com/photo-1621403215688-d4d8088ccbc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80
                 </x-slot:image>
-                <x-slot:panti>Sinar Bangsa</x-slot:panti>
-                <x-slot:lokasi>Jl. Pahlawan No. 2B</x-slot:lokasi>
-                <x-slot:surel>sinarbangsa@gmail.com</x-slot:surel>
-                <x-slot:button>Donasi Panti</x-slot:button>
+                <x-slot:panti>{{ $user->orphanage->name }}</x-slot:panti>
+                <x-slot:lokasi>{{ $user->address }}</x-slot:lokasi>
+                <x-slot:surel>{{ $user->email }}</x-slot:surel>
+                <x-slot name="orphanage_id">{{$user->orphanage->id}}</x-slot>
+                <x-slot:button>Donasi Sekarang</x-slot:button>
             </x-donasi.list-panti.detail-panti.card>
         </div>
 
         <div class="w-fit flex-col space-y-4">
             {{-- Description --}}
             <h3 class="text-3xl leading-10 font-bold">{{ 'Tentang Panti Asuhan' }}</h3>
-            <p class="text-lg leading-8 text-gray-500">Panti Sinar Bangsa telah didirikan sejak tahun 1985. Pemilik dari panti ini bernama Susanto Budiman. Beliau mendirikan panti ini karena memiliki amanah sebelumnya untuk membantu setiap anak yang kehilangan orang tua dan membutuhkan bantuan serta bimbingan.</p>
+            <p class="text-lg leading-8 text-gray-500">Panti Sinar Bangsa telah didirikan sejak tahun 1985. Pemilik dari
+                panti ini bernama Susanto Budiman. Beliau mendirikan panti ini karena memiliki amanah sebelumnya untuk
+                membantu setiap anak yang kehilangan orang tua dan membutuhkan bantuan serta bimbingan.</p>
         </div>
     </div>
 </div>

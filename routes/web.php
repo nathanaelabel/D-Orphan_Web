@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\TransactionController as APITransactionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CompetitionRecommendationController;
@@ -11,8 +10,8 @@ use App\Http\Controllers\OrphanageController;
 use App\Http\Controllers\OrphanCrController;
 use App\Http\Livewire\CourseTutor;
 use App\Http\Livewire\DetailCourseTutor;
-use App\Http\Livewire\DetailOrphanage;
-use App\Models\Transaction;
+use App\Http\Livewire\DetailUser;
+use App\Http\Livewire\DonationDelivery;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,11 +34,8 @@ Route::get('/donasi', function () {
 Route::get('/kirim-donasi', function () {
     return view('donation');
 })->name('kirim-donasi');
-Route::get('/detail-panti', function () {
-    return view('detail-orphanage');
-})->name('detail-panti');
-Route::get('/detail-panti/{orphanage_id}', DetailOrphanage::class)->name('detail-panti');
-
+Route::get('/detail-user/{user_id}', DetailUser::class)->name('detail-user');
+Route::get('/kirim-donasi/{orphanage_id}', DonationDelivery::class)->name('kirim-donasi');
 
 Route::get('/mydashboard', [DashboardController::class, 'index']);
 Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseBookingStatus']);

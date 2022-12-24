@@ -32,19 +32,18 @@
 
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
-
                                     <div>
                                         <x-jet-label for="role" value="{{ __('Daftar sebagai') }}" />
                                         <div class="flex gap-6 mt-1">
                                             <div class="space-x-1">
                                                 <input id="panti" class="peer/panti" type="radio" name="user_type"
-                                                    value="Pengurus Panti" checked />
+                                                    value="Pengurus Panti" @if(count(request()->query()) == 0) checked @endif/>
                                                 <label for="panti" class="peer-checked/panti:text-blue-500">Panti
                                                     Asuhan</label>
                                             </div>
                                             <div class="space-x-1">
                                                 <input id="tutor" class="peer/tutor" type="radio" value="Tutor"
-                                                    name="user_type" />
+                                                    @if(count(request()->query()) > 0) checked @endif name="user_type" />
                                                 <label for="tutor"
                                                     class="peer-checked/tutor:text-blue-500">Tutor</label>
                                             </div>
@@ -81,7 +80,7 @@
                                         <div class="flex gap-6 mt-1">
                                             <div class="space-x-1">
                                                 <input id="male" class="peer/male" type="radio" name="gender"
-                                                    value="Male" />
+                                                   checked value="Male" />
                                                 <label for="male"
                                                     class="peer-checked/male:text-blue-500">Male</label>
                                             </div>

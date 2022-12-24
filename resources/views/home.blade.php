@@ -18,6 +18,11 @@
                         <x-home.hero-button>Temukan Tutor</x-home.hero-button>
                     </a>
                 </div>
+                <div>
+                    <a href="{{ route('donasi') }}">
+                        <x-home.hero-button>Berikan Donasi</x-home.hero-button>
+                    </a>
+                </div>
             </div>
             <div class="hidden md:block">
                 <img src="{{ url('img/home-hero.svg') }}" alt="Bakat Minat">
@@ -176,7 +181,7 @@
                     kemampuan peserta kursus Anda</p>
             </div>
             <div class="w-fit">
-                <a href="{{ route('register') }}">
+                <a href="{{ route('register', 'Tutor') }}">
                     <x-primary-button>Berikan Kursus</x-primary-button>
                 </a>
             </div>

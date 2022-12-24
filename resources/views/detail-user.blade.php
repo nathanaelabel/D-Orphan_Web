@@ -2,6 +2,6 @@
 
 <x-app-layout>
     <div>
-        @livewire('detail-orphanage')
+        @livewire('detail-user')
     </div>
 </x-app-layout>

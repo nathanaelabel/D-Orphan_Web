@@ -10,17 +10,24 @@ use Livewire\Component;
 class DonationDelivery extends Component
 {
     public $orphanages;
-public $selectedOrphanage;
+    public $selectedOrphanage;
     public $donator_name;
     public $amount;
     public $message;
+    public $target;
+
     public function render()
     {
-        return view('livewire.donation-delivery')->with('orphanages', $this->orphanages);
+        return view('livewire.donation-delivery');
     }
 
-    public function mount()
+    public function mount($orphanage_id)
     {
+        $this->target = Orphanage::find($orphanage_id);
+        if (auth()->user()) {
+            $this->donator_name = auth()->user()->name;
+        }
+
         $this->setOrphanages();
     }
 
@@ -47,6 +54,7 @@ public $selectedOrphanage;
             'message' => $this->message,
             'transaction_id' => $a->id,
         ]);
+
         return redirect(route('midtrans', $a->id));
     }
 }

@@ -13,21 +13,23 @@
                     @auth
                         <a href="{{ route('dasbor') }}"
                             class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Dasbor</a>
-                    @endauth
-                    <a href="{{ route('kursus') }}"
-                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kursus</a>
-                    <a href="{{ route('lomba') }}"
-                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Lomba</a>
-                    @auth
+
+                        <a href="{{ route('kursus') }}"
+                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kursus</a>
+                        <a href="{{ route('lomba') }}"
+                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Lomba</a>
+
                         @if (Auth::user()->user_type == 'Tutor')
                             <a href="{{ route('donasi') }}"
                                 class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Donasi</a>
                         @endif
                     @endauth
+                    {{--
                     @guest
                         <a href="{{ route('donasi') }}"
                             class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Donasi</a>
                     @endguest
+                    --}}
                 </div>
             </div>
             @auth
@@ -54,12 +56,12 @@
                             </button>
                         </div>
                         <!-- Dropdown menu, show/hide based on menu state.
-                                                                                                                                                                                                    Entering: "transition ease-out duration-200"
-                                                                                                                                                                                                    From: "transform opacity-0 scale-95"
-                                                                                                                                                                                                    To: "transform opacity-100 scale-100"
-                                                                                                                                                                                                    Leaving: "transition ease-in duration-75"
-                                                                                                                                                                                                    From: "transform opacity-100 scale-100"
-                                                                                                                                                                                                    To: "transform opacity-0 scale-95" -->
+                                                                                                                                                                                                            Entering: "transition ease-out duration-200"
+                                                                                                                                                                                                            From: "transform opacity-0 scale-95"
+                                                                                                                                                                                                            To: "transform opacity-100 scale-100"
+                                                                                                                                                                                                            Leaving: "transition ease-in duration-75"
+                                                                                                                                                                                                            From: "transform opacity-100 scale-100"
+                                                                                                                                                                                                            To: "transform opacity-0 scale-95" -->
                         <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             x-show="open">
@@ -126,25 +128,35 @@
             @auth
                 <a href="{{ route('dasbor') }}"
                     class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'text-blue-500 font-semibold' : '' }}">Dasbor</a>
+                <a href="{{ route('kursus') }}"
+                    class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'text-blue-500 font-semibold' : '' }}">Kursus</a>
+                <a href="{{ route('lomba') }}"
+                    class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'text-blue-500 font-semibold' : '' }}">Lomba</a>
+                @if (Auth::user()->user_type == 'Tutor')
+                    <a href="{{ route('donasi') }}"
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'text-blue-500 font-semibold' : '' }}">Donasi</a>
+                @endif
             @endauth
-            <a href="{{ route('kursus') }}"
-                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'text-blue-500 font-semibold' : '' }}">Kursus</a>
-            <a href="{{ route('lomba') }}"
-                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'text-blue-500 font-semibold' : '' }}">Lomba</a>
+            @guest
+            {{--
+             
             <a href="{{ route('donasi') }}"
                 class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'text-blue-500 font-semibold' : '' }}">Donasi</a>
-            <div class="grid gap-4">
-                <a href="{{ route('login') }}">
-                    <x-secondary-button>
-                        Masuk
-                    </x-secondary-button>
-                </a>
-                <a href="{{ route('register') }}">
-                    <x-primary-button>
-                        Daftar
-                    </x-primary-button>
-                </a>
-            </div>
+            --}}
+
+                <div class="grid gap-4">
+                    <a href="{{ route('login') }}">
+                        <x-secondary-button>
+                            Masuk
+                        </x-secondary-button>
+                    </a>
+                    <a href="{{ route('register') }}">
+                        <x-primary-button>
+                            Daftar
+                        </x-primary-button>
+                    </a>
+                </div>
+            @endguest
         </div>
         @auth
             <div class="py-3 border-t border-gray-200">
