@@ -43,23 +43,13 @@
                     </svg>
                     <p class="text-lg leading-8 text-gray-500">{{ $lokasi }}</p>
                 </div>
-                <div class="mt-2">
-                    <button
-                        {{ $attributes->merge(['type' => 'submit', 'class' => 'w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 font-semibold text-white bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500']) }}>
-                        {{ $primaryButton }}
-                    </button>
-                </div>
-                <div class="mt-2">
-                    <button
-                        {{ $attributes->merge(['type' => 'button', 'class' => 'w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 font-semibold text-blue-700 bg-blue-100 hover:bg-blue-200 focus:ring focus:ring-blue-100 focus:ring-opacity-50 active:bg-blue-100 active:border-blue-100']) }}>
-                        {{ $secondaryButton }}
-                    </button>
-                </div>
-                <div class="mt-2">
-                    <button
-                        {{ $attributes->merge(['type' => 'button', 'class' => 'w-full inline-flex justify-center items-center space-x-2 px-3 leading-6 font-semibold text-red-500 hover:text-red-600 active:scale-100']) }}>
-                        {{ $tertiaryButton }}
-                    </button>
-                </div>
             </div>
+            <div class="mt-2">
+                <button
+                    {{ $attributes->merge(['type' => 'submit', 'class' => 'w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 font-semibold text-white bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500']) }}>
+                    {{ $button }}
+                </button>
+            </div>
+        </div>
+    </div>
 </a>

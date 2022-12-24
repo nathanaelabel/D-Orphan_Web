@@ -20,7 +20,6 @@ class CourseBookingFactory extends Factory
     {
         $faker = Faker::create('en_EN');
         $status = $faker->randomElement(['pending', 'ongoing', 'complete', 'canceled']);
-        $faker = Faker::create('en_EN');
         $getCourse = $faker->randomElement(Course::all()->pluck('id'));
         $is_visit = Course::findOrFail($getCourse)->is_visit == 1 ? rand(0, 1) : null;
 

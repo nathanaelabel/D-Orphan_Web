@@ -1,6 +1,10 @@
 <div class="space-y-8">
     {{-- Title --}}
-    <h3 class="text-3xl leading-10 font-bold">{{ 'Rekomendasi Perlombaan Untuk Anak Panti' }}</h3>
+    @if (Auth::user()->user_type == 'Tutor')
+        <h3 class="text-3xl leading-10 font-bold">{{ 'Berikan rekomendasi lomba ke anak-anak Panti Asuhan' }}</h3>
+    @else
+        <h3 class="text-3xl leading-10 font-bold">{{ 'Ikuti lomba dan jadilah yang terbaik' }}</h3>
+    @endif
 
     {{-- Search Bar --}}
     <div class="flex justify-between gap-4 items-center">
@@ -28,29 +32,15 @@
         @else
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($competitions as $item)
-                    @if (Auth::user()->user_type == 'Tutor')
-                        <x-lomba.tutor-card>
-                            <x-slot:image>https://source.unsplash.com/random</x-slot:image>
-                            <x-slot:nama>{{ $item->name }}</x-slot:nama>
-                            <x-slot:kategori>{{ $item->category }}</x-slot:kategori>
-                            <x-slot:tanggal>06/08/2022</x-slot:tanggal>
-                            <x-slot:jam>07:30 s.d. 14:30</x-slot:jam>
-                            <x-slot:lokasi>Surabaya</x-slot:lokasi>
-                            <x-slot:primaryButton>Tambah Peserta</x-slot:primaryButton>
-                            <x-slot:secondaryButton>Ubah Lomba</x-slot:secondaryButton>
-                            <x-slot:tertiaryButton>Hapus Lomba</x-slot:tertiaryButton>
-                        </x-lomba.tutor-card>
-                    @else
-                        <x-lomba.panti-card>
+                        <x-lomba.card>
                             <x-slot:image>https://source.unsplash.com/random</x-slot:image>
                             <x-slot:nama>{{ $item->name }}</x-slot:nama>
                             <x-slot:kategori>Atletik</x-slot:kategori>
-                            <x-slot:tanggal>06/08/2022</x-slot:tanggal>
-                            <x-slot:jam>07:30 s.d. 14:30</x-slot:jam>
+                            <x-slot:tanggal>{{ $item->registration_start_date }}</x-slot:tanggal>
+                            <x-slot:jam>{{ $item->registration_start_hour }}</x-slot:jam>
                             <x-slot:lokasi>Surabaya</x-slot:lokasi>
                             <x-slot:button>Selengkapnya</x-slot:button>
-                        </x-lomba.panti-card>
-                    @endif
+                        </x-lomba.card>
                 @endforeach
             </div>
         @endif

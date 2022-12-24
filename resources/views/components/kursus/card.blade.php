@@ -1,7 +1,7 @@
 <a href="{{ route('tutor', $category_id) }}">
     <div class="group relative bg-white rounded-2xl shadow flex flex-col overflow-hidden">
         <div class="aspect-w-3 aspect-h-4 group-hover:opacity-75 sm:aspect-none sm:h-96">
-            <img src="{{ $image }}" alt="Kategori kursus"
+            <img src="{{ $image }}" alt="Tutor"
                 class="w-full h-full object-center object-cover sm:w-full sm:h-full">
         </div>
         <div class="flex-1 p-4 space-y-2 flex flex-col">

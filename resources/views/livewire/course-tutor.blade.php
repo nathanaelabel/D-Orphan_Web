@@ -1,3 +1,5 @@
+@section('title', 'Tutor')
+
 <div class="space-y-8">
     {{-- Breadcrumb --}}
     <x-kursus.tutor.breadcrumb>
@@ -6,12 +8,11 @@
     </x-kursus.tutor.breadcrumb>
 
     {{-- Title --}}
-
     <h3 class="text-3xl leading-10 font-bold">
         @if (auth()->user()->orphanage)
             Mulailah kursus {{ $courseCategory->name }} dengan Tutor pilihan Anda
         @else
-            Kursus {{ $courseCategory->name }}
+            Tutor yang tersedia di kursus {{ $courseCategory->name }}
         @endif
     </h3>
 

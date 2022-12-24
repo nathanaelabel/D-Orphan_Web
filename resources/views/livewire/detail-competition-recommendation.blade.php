@@ -62,19 +62,156 @@
             <p>Pesta Olahraga Asia adalah ajang multi-olahraga yang diselenggarakan setiap empat tahun sekali, dengan
                 atlet-atlet dari seluruh Asia dan diselenggarakan oleh Dewan Olimpiade Asia.</p>
 
-            <div>
-                <h4 class="text-xl leading-8 font-semibold">Peserta Lomba</h4>
+            <details open class="space-y-2">
+                <summary class="text-xl leading-8 font-semibold">Peserta Lomba</summary>
 
-                <ol class="list-decimal text-gray-500 ml-8">
-                    <li>Ilham Kurniawan</li>
-                    <li>Ilham Kurniawan</li>
-                    <li>Ilham Kurniawan</li>
-                </ol>
-            </div>
+                <div class="overflow-x-auto shadow rounded">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-500 text-white">
+                            <tr>
+                                <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
+                                    No.</th>
+                                <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                                    Nama Peserta Kursus</th>
+                            </tr>
+                        </thead>
+                        {{-- @if ($competitionRecommendation->isEmpty())
+                            <tbody class="bg-white">
+                                <tr>
+                                    <td colspan="2" class="px-3 py-4">
+                                        <div
+                                            class="grid gap-2 border-2 border-gray-300 border-dashed rounded p-2 place-items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
+                                            </svg>
+                                            <p>{{ 'Belum ada rekomendasi yang diberikan' }}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @else --}}
+                        <tbody>
+                            {{-- @foreach ($competitionRecommendation as $item) --}}
+                            @php $number = 1 @endphp
+                            <tr class="odd:bg-white even:bg-gray-100">
+                                <td class="whitespace-nowrap px-3 py-4 w-fit">{{ $number }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 w-full">Ilham Kurniawan</td>
+                            </tr>
+                            @php $number++ @endphp
+                            {{-- @endforeach --}}
+                        </tbody>
+                        {{-- @endif --}}
+                    </table>
+                </div>
+            </details>
 
             <a href="#">
                 <x-primary-button>Tautan Lomba</x-primary-button>
             </a>
+
+            @if (Auth::user()->user_type == 'Tutor')
+                <hr class="border-2">
+                <form method="POST" action="{{ route('dasbor') }}" class="space-y-6">
+                    @csrf
+
+                    <div class="flex justify-between items-center">
+                        <p class="text-lg leading-8 font-semibold text-gray-700">
+                            Peserta Kursus
+                        </p>
+                        <x-primary-button class="w-fit">{{ __('Tambah Peserta') }}</x-primary-button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="space-y-1">
+                            <x-label>
+                                <x-slot:for>nama_panti_asuhan</x-slot:for>
+                                <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
+                            </x-label>
+                            <x-select>
+                                <x-slot:id>nama_panti_asuhan</x-slot:id>
+                                <x-slot:name>nama_panti_asuhan</x-slot:name>
+                                <x-slot:option>
+                                    {{-- @foreach (Auth::user()->orphanage->name as $item) --}}
+                                    <option>Sinar Bangsa</option>
+                                    {{-- @endforeach --}}
+                                </x-slot:option>
+                            </x-select>
+                        </div>
+                        <div class="space-y-1">
+                            <x-label>
+                                <x-slot:for>nama_peserta_kursus</x-slot:for>
+                                <x-slot:slot>Nama Peserta Kursus</x-slot:slot>
+                            </x-label>
+                            <x-select>
+                                <x-slot:id>nama_peserta_kursus</x-slot:id>
+                                <x-slot:name>nama_peserta_kursus</x-slot:name>
+                                <x-slot:option>
+                                    {{-- @foreach (Auth::user()->orphanage->orphans as $item) --}}
+                                    <option>Ilham Kurniawan</option>
+                                    {{-- @endforeach --}}
+                                </x-slot:option>
+                            </x-select>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto shadow rounded">
+                        <table class="min-w-full">
+                            <thead class="bg-gray-500 text-white">
+                                <tr>
+                                    <th scope="col"
+                                        class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
+                                        No.</th>
+                                    <th scope="col"
+                                        class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                                        Nama Peserta Kursus</th>
+                                    <th scope="col"
+                                        class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                                        Aksi</th>
+                                </tr>
+                            </thead>
+                            {{-- @if ($competitionRecommendation->isEmpty())
+                                <tbody class="bg-white">
+                                    <tr>
+                                        <td colspan="2" class="px-3 py-4">
+                                            <div
+                                                class="grid gap-2 border-2 border-gray-300 border-dashed rounded p-2 place-items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
+                                                </svg>
+                                                <p>{{ 'Belum ada rekomendasi yang diberikan' }}</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            @else --}}
+                            <tbody>
+                                {{-- @foreach ($competitionRecommendation as $item) --}}
+                                @php $number = 1 @endphp
+                                <tr class="odd:bg-white even:bg-gray-100">
+                                    <td class="whitespace-nowrap px-3 py-4 w-fit">{{ $number }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 w-full">Ilham Kurniawan</td>
+                                    <td class="whitespace-nowrap px-3 py-4 w-full">
+                                        <a wire:click='' class="cursor-pointer" title="Hapus">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="w-6 h-6 text-red-500">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @php $number++ @endphp
+                                {{-- @endforeach --}}
+                            </tbody>
+                            {{-- @endif --}}
+                        </table>
+                    </div>
+                </form>
+            @endif
         </div>
     </div>
 </div>

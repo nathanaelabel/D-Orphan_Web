@@ -16,6 +16,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name');
             $table->string('registration_start_date');
+            $table->string('registration_start_hour');
             $table->string('url');
             $table->text('description');
             $table->timestamps();

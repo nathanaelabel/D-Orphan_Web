@@ -21,34 +21,25 @@
                                 <!-- END Header -->
 
                                 <!-- Donation Form -->
-
                                 <div class="mt-4 space-y-4">
-                                     <div class="space-y-1">
+                                    <div class="space-y-1">
                                         <x-label>
                                             <x-slot:for>nama_panti_asuhan</x-slot:for>
-                                            <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
+                                            <x-slot:slot>Panti Asuhan yang dituju&#58;</x-slot:slot>
                                         </x-label>
-                                        <span class="text-sm text-red-700">&#42;</span>
-                                        <x-input-donasi>
-                                            <x-slot:type>text</x-slot:type>
-                                            <x-slot:name>nama_panti_asuhan</x-slot:name>
-                                            <x-slot:id>nama_panti_asuhan</x-slot:id>
-                                            <x-slot:placeholder>{{$target->name}}</x-slot:placeholder>
-                                            <x-slot:read>readonly</x-slot:read>
-                                        </x-input-donasi>
+                                        <strong>{{ $target->name }}</strong>
                                     </div>
                                     <div class="space-y-1">
                                         <x-label>
                                             <x-slot:for>nama_donatur</x-slot:for>
                                             <x-slot:slot>Nama Donatur</x-slot:slot>
                                         </x-label>
-                                        <x-input-donasi wire:model="donator_name">
-                                            <x-slot:type>text</x-slot:type>
+                                        <x-input wire:model="donator_name">
+                                            <x-slot:type>search</x-slot:type>
                                             <x-slot:name>nama_donatur</x-slot:name>
                                             <x-slot:id>nama_donatur</x-slot:id>
-                                            <x-slot:placeholder>Silakan isi nama donatur</x-slot:placeholder>
-                                            <x-slot:read></x-slot:read>
-                                        </x-input-donasi>
+                                            <x-slot:placeholder>Jane Doe</x-slot:placeholder>
+                                        </x-input>
                                     </div>
                                     <div class="space-y-1">
                                         <x-label>
@@ -61,13 +52,12 @@
                                                 class="absolute inset-y-0 left-0 pl-3 text-gray-700 flex items-center pointer-events-none">
                                                 <p>Rp</p>
                                             </div>
-                                            <x-input-donasi wire:model="amount" class="pl-10">
+                                            <x-input wire:model="amount" class="pl-10">
                                                 <x-slot:type>number</x-slot:type>
                                                 <x-slot:name>nominal_donasi</x-slot:name>
                                                 <x-slot:id>nominal_donasi</x-slot:id>
                                                 <x-slot:placeholder>xxxxxx</x-slot:placeholder>
-                                                <x-slot:read></x-slot:read>
-                                            </x-input-donasi>
+                                            </x-input>
                                         </div>
                                     </div>
                                     <div class="space-y-1">
@@ -87,7 +77,8 @@
                                 </div>
 
                                 <div class="mt-6">
-                                    <x-primary-button wire:click="saveDonation">{{ __('Kirim Donasi') }}</x-primary-button>
+                                    <x-primary-button wire:click="saveDonation">{{ __('Kirim Donasi') }}
+                                    </x-primary-button>
                                 </div>
                             </div>
                         </div>
