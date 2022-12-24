@@ -25,7 +25,7 @@ class CourseFactory extends Factory
         $is_visit = 0;
 
         if ($is_online == 1) {
-            $location = $faker->url();
+            $location = $faker->randomElement(['Zoom Meeting', 'Google Meet', 'Microsoft Teams', 'Cisco Webex', 'Adobe Connect Meetings', 'Discord', 'Lifesize', 'BlueJeans', 'GoToMeeting', 'Any Meeting', 'RingCentral Meetings', 'Zoho Meeting']);
         } else {
             $is_visit = random_int(0, 1);
             if ($is_visit == 1) {
@@ -38,7 +38,7 @@ class CourseFactory extends Factory
         return [
             'skill_id' => $faker->randomElement(Skill::all()->pluck('id')),
             'name' => $faker2->sentence(5),
-            'description' => 'Asah dan kembangkan melalui kursus ini!',
+            'description' => $faker->text(),
             'location' => $location,
             'is_online' => $is_online,
             'is_visit' => $is_visit,

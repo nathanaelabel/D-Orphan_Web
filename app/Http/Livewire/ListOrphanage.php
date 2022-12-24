@@ -12,13 +12,12 @@ class ListOrphanage extends Component
 
     public function render()
     {
-        if($this->PASearch!=null){  
+        if ($this->PASearch != null) {
 
-            $this->orphanages= Orphanage::where('name','like', '%' . $this->PASearch . '%')->get();
-            
-                            }else{
-                                $this->orphanages= Orphanage::all();
-                            }
+            $this->orphanages = Orphanage::where('name', 'like', '%' . $this->PASearch . '%')->get();
+        } else {
+            $this->orphanages = Orphanage::all();
+        }
         return view('livewire.list-orphanage');
     }
 }

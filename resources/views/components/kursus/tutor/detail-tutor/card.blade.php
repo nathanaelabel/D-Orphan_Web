@@ -59,7 +59,7 @@
                     </svg>
                     <p class="text-lg leading-8 text-gray-500">{{ $surel }}</p>
                 </div>
-                @if ($b == 1)
+                @if ($value == 1)
                     <div class="mt-2">
                         <a href="{{ route('detail-reservation', $course_id) }}">
                             <button type="button"

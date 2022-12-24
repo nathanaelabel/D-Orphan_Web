@@ -26,7 +26,7 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}"
+                    <img src="{{ $this->user->profile_photo_path }}" alt="{{ $this->user->name }}"
                         class="rounded-full h-20 w-20 object-cover">
                 </div>
 
@@ -55,7 +55,7 @@
 
         <!-- Name -->
         <div class="col-span-full">
-            <x-jet-label for="name" value="{{ __('Nama') }}" />
+            <x-jet-label for="name" value="{{ __('Nama') }} {{ Auth::user()->user_type }}" />
             <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name"
                 autocomplete="name" />
             <x-jet-input-error for="name" class="mt-2" />

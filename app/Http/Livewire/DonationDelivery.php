@@ -38,7 +38,7 @@ class DonationDelivery extends Component
 
     public function saveDonation()
     {
-        $a = Transaction::create(
+        $transaction = Transaction::create(
             [
                 'user_id' => $this->selectedOrphanage,
                 'to_user_id' => $this->selectedOrphanage,
@@ -52,9 +52,9 @@ class DonationDelivery extends Component
             'donator_name' => $this->donator_name,
             'amount' => $this->amount,
             'message' => $this->message,
-            'transaction_id' => $a->id,
+            'transaction_id' => $transaction->id,
         ]);
 
-        return redirect(route('midtrans', $a->id));
+        return redirect(route('midtrans', $transaction->id));
     }
 }

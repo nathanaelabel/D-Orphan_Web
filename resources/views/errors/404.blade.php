@@ -22,7 +22,7 @@
                         </h3>
                         <br>
                         <a href="{{ route('/') }}">
-                            <x-primary-button>Kembali ke beranda</x-primary-button>
+                            <x-primary-button class="w-fit">Kembali ke beranda</x-primary-button>
                         </a>
                     </div>
                 </div>

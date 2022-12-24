@@ -50,8 +50,8 @@
                                 class="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 id="user-menu-button" aria-expanded="false" aria-haspopup="true" @click="open=!open">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}"
-                                    alt="">
+                                <img class="h-8 w-8 rounded-full" src="{{ Auth::user()->profile_photo_path }}"
+                                    alt="{{ Auth::user()->name }}" title="{{ Auth::user()->user_type }}">
                             </button>
                         </div>
                         <!-- Dropdown menu, show/hide based on menu state.
@@ -161,7 +161,7 @@
             <div class="py-3 border-t border-gray-200">
                 <div class="flex items-center px-4">
                     <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}"
+                        <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_path }}"
                             alt="{{ Auth::user()->name }}">
                     </div>
                     <div class="ml-3">

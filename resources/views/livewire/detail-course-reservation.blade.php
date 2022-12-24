@@ -13,13 +13,13 @@
     <div class="flex p-8 bg-white rounded-2xl shadow">
         <div class="w-full space-y-8">
             <div class="space-y-4">
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center">
                     <p class="text-lg leading-8 font-semibold text-gray-700">
                         Peserta Kursus
                     </p>
                     <x-primary-button class="w-fit">{{ __('Tambah Peserta') }}</x-primary-button>
                 </div>
-                <form method="POST" action="{{ route('donasi') }}">
+                <form method="POST" action="{{ route('dasbor') }}">
                     @csrf
 
                     <div class="space-y-8">
@@ -50,11 +50,11 @@
                         <x-slot:for>tanggal_mulai_kursus</x-slot:for>
                         <x-slot:slot>Tanggal Mulai Kursus</x-slot:slot>
                     </x-label>
-                    <x-input>
+                    <x-input class="cursor-text">
                         <x-slot:type>date</x-slot:type>
                         <x-slot:name>tanggal_mulai_kursus</x-slot:name>
                         <x-slot:id>tanggal_mulai_kursus</x-slot:id>
-                        <x-slot:placeholder>01/11/2022</x-slot:placeholder>
+                        <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
                     </x-input>
                 </div>
 
@@ -64,7 +64,7 @@
                         <x-slot:slot>Total Jumlah Pertemuan</x-slot:slot>
                     </x-label>
                     <x-input>
-                        <x-slot:type>text</x-slot:type>
+                        <x-slot:type>number</x-slot:type>
                         <x-slot:name>total_jumlah_pertemuan</x-slot:name>
                         <x-slot:id>total_jumlah_pertemuan</x-slot:id>
                         <x-slot:placeholder>20</x-slot:placeholder>
@@ -80,12 +80,12 @@
                         <x-slot:type>text</x-slot:type>
                         <x-slot:name>lokasi_kursus_luring</x-slot:name>
                         <x-slot:id>lokasi_kursus_luring</x-slot:id>
-                        <x-slot:placeholder>Sinar Bangsa</x-slot:placeholder>
+                        <x-slot:placeholder>Jl. Pahlawan No. 2B</x-slot:placeholder>
                     </x-input>
                 </div>
             </div>
             <div class="space-y-4">
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center">
                     <p class="text-lg leading-8 font-semibold text-gray-700">
                         Jadwal Mingguan
                     </p>
@@ -123,7 +123,7 @@
                                 <x-slot:for>jam mulai</x-slot:for>
                                 <x-slot:slot>Jam Mulai</x-slot:slot>
                             </x-label>
-                            <x-input>
+                            <x-input class="cursor-text">
                                 <x-slot:type>time</x-slot:type>
                                 <x-slot:name>jam_mulai</x-slot:name>
                                 <x-slot:id>jam_mulai</x-slot:id>
@@ -138,7 +138,7 @@
                                 <x-slot:for>jam berakhir</x-slot:for>
                                 <x-slot:slot>Jam Berakhir</x-slot:slot>
                             </x-label>
-                            <x-input>
+                            <x-input class="cursor-text">
                                 <x-slot:type>time</x-slot:type>
                                 <x-slot:name>jam_berakhir</x-slot:name>
                                 <x-slot:id>jam_berakhir</x-slot:id>
@@ -153,12 +153,7 @@
                         </svg>
                     </div>
                 </div>
-
-       
             </div>
-            <p class="text-lg leading-8 font-semibold text-gray-700">
-                Daftar Peserta
-            </p>
 
             <div class="mt-6">
                 <x-primary-button>{{ __('Kirim Reservasi') }}</x-primary-button>

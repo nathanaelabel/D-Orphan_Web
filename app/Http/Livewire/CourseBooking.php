@@ -23,19 +23,19 @@ class CourseBooking extends Component
 
     public function setTab($tab)
     {
-        $a = '';
+        $data = '';
         $this->activeTab = $tab;
         if (Auth::user()->tutor) {
             if (Auth::user()->tutor->courses) {
-                $a = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->get();
+                $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->get();
             }
         } else {
-            $a = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('id'))->get();
+            $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('id'))->get();
         }
         if ($this->activeTab != 'canceled') {
-            $this->courseBooking = $a->where('status', $this->activeTab);
+            $this->courseBooking = $data->where('status', $this->activeTab);
         } else {
-            $this->courseBooking = $a->where('status', 'canceled')->merge($a->where('status', 'complete'));
+            $this->courseBooking = $data->where('status', 'canceled')->merge($data->where('status', 'complete'));
         }
     }
 

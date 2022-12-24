@@ -25,11 +25,8 @@ class CompetitionRecommendation extends Component
         );
     }
 
-
-
     public function mount()
     {
         //  $this->competitionRecommendation = ModelsCompetitionRecommendation::where('orphanage_id', auth()->user()->orphanage->id)->get();
     }
-
 }
