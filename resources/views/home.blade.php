@@ -2,8 +2,8 @@
 
 <x-guest-layout>
     {{-- Hero --}}
-    <div class="flex flex-col space-y-10 md:space-y-4">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
+    <div class="flex flex-col space-y-10">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
             <div class="flex flex-col space-y-0 md:space-y-4 justify-center">
                 <div class="space-y-2">
                     <p class="text-4xl font-extrabold">
@@ -13,18 +13,16 @@
                         anak-anak Panti Asuhan melalui D&#39;Orphan</p>
                     <br>
                 </div>
-                <div>
+                <div class="grid gap-4 md:grid lg:flex">
                     <a href="{{ route('kursus') }}">
-                        <x-home.hero-button>Temukan Tutor</x-home.hero-button>
+                        <x-home.hero-primary-button>Temukan Tutor</x-home.hero-primary-button>
                     </a>
-                </div>
-                <div>
                     <a href="{{ route('donasi') }}">
-                        <x-home.hero-button>Berikan Donasi</x-home.hero-button>
+                        <x-home.hero-secondary-button>Salurkan Donasi</x-home.hero-secondary-button>
                     </a>
                 </div>
             </div>
-            <div class="hidden md:block">
+            <div class="hidden lg:block">
                 <img src="{{ url('img/home-hero.svg') }}" alt="Bakat Minat">
             </div>
         </div>

@@ -10,7 +10,7 @@
     <x-slot name="form">
         <!-- Profile Photo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-            <div x-data="{ photoName: null, photoPreview: null }" class="col-span-6 sm:col-span-4">
+            <div x-data="{ photoName: null, photoPreview: null }" class="col-span-full">
                 <!-- Profile Photo File Input -->
                 <input type="file" class="hidden" wire:model="photo" x-ref="photo"
                     x-on:change="
@@ -22,7 +22,7 @@
                                     reader.readAsDataURL($refs.photo.files[0]);
                             " />
 
-                <x-jet-label for="photo" value="{{ __('Photo') }}" />
+                <x-jet-label for="photo" value="{{ __('Foto Profil') }}" />
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
@@ -37,15 +37,17 @@
                     </span>
                 </div>
 
-                <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
-                </x-jet-secondary-button>
-
-                @if ($this->user->profile_photo_path)
-                    <x-jet-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
+                <div class="grid gap-4 md:flex lg:flex">
+                    <x-jet-secondary-button class="mt-2" type="button" x-on:click.prevent="$refs.photo.click()">
+                        {{ __('Unggah Foto Baru') }}
                     </x-jet-secondary-button>
-                @endif
+
+                    @if ($this->user->profile_photo_path)
+                        <x-jet-danger-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
+                            {{ __('Hapus Foto') }}
+                        </x-jet-danger-button>
+                    @endif
+                </div>
 
                 <x-jet-input-error for="photo" class="mt-2" />
             </div>

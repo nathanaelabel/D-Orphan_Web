@@ -21,18 +21,18 @@ class CourseCategory extends Component
     {
         if (Auth::user()->tutor) {
             if ($this->activeTabCourseCategory == 'eksplor') {
-                if($this->categorySearch!=null){
-                    $this->courseCategories = Skill::where('name','like', '%' . $this->categorySearch . '%')->get();
-                }else{
+                if ($this->categorySearch != null) {
+                    $this->courseCategories = Skill::where('name', 'like', '%' . $this->categorySearch . '%')->get();
+                } else {
                     $this->courseCategories = Skill::all();
                 }
             } else {
                 $this->coursesTutor = Course::where('tutor_id', auth()->user()->tutor->id)->get();
             }
         } else {
-            if($this->categorySearch!=null){
-                $this->courseCategories = Skill::where('name','like', '%' . $this->categorySearch . '%')->get();
-            }else{
+            if ($this->categorySearch != null) {
+                $this->courseCategories = Skill::where('name', 'like', '%' . $this->categorySearch . '%')->get();
+            } else {
                 $this->courseCategories = Skill::all();
             }
         }

@@ -35,17 +35,20 @@
                                     <div>
                                         <x-jet-label for="role" value="{{ __('Daftar sebagai') }}" />
                                         <div class="flex gap-6 mt-1">
-                                            <div class="space-x-1">
-                                                <input id="panti" class="peer/panti" type="radio" name="user_type"
-                                                    value="Pengurus Panti" @if(count(request()->query()) == 0) checked @endif/>
-                                                <label for="panti" class="peer-checked/panti:text-blue-500">Panti
+                                            <div class="flex gap-2 cursor-pointer items-center">
+                                                <input id="panti" class="peer/panti checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" type="radio"
+                                                    name="user_type" value="Pengurus Panti"
+                                                    @if (count(request()->query()) == 0) checked @endif />
+                                                <label for="panti"
+                                                    class="peer-checked/panti:text-blue-500 cursor-pointer">Panti
                                                     Asuhan</label>
                                             </div>
-                                            <div class="space-x-1">
-                                                <input id="tutor" class="peer/tutor" type="radio" value="Tutor"
-                                                    @if(count(request()->query()) > 0) checked @endif name="user_type" />
+                                            <div class="flex gap-2 cursor-pointer items-center">
+                                                <input id="tutor" class="peer/tutor checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" type="radio"
+                                                    value="Tutor" @if (count(request()->query()) > 0) checked @endif
+                                                    name="user_type" />
                                                 <label for="tutor"
-                                                    class="peer-checked/tutor:text-blue-500">Tutor</label>
+                                                    class="peer-checked/tutor:text-blue-500 cursor-pointer">Tutor</label>
                                             </div>
                                         </div>
                                     </div>
@@ -53,42 +56,44 @@
                                     <div class="mt-4">
                                         <x-jet-label for="name" value="{{ __('Nama') }}" />
                                         <x-jet-input id="name" class="block mt-1 w-full" type="text"
-                                            name="name" :value="old('name')" required autofocus autocomplete="name" />
+                                            name="name" :value="old('name')" placeholder="John Doe" required autofocus
+                                            autocomplete="name" />
                                     </div>
 
                                     <div class="mt-4">
                                         <x-jet-label for="email" value="{{ __('Surel') }}" />
                                         <x-jet-input id="email" class="block mt-1 w-full" type="email"
-                                            name="email" :value="old('email')" required />
+                                            name="email" :value="old('email')" placeholder="johndoe@example.net"
+                                            required />
                                     </div>
 
-                                    <div class="mt-4">
+                                    <div class="mt-4 required">
                                         <x-label>
                                             <x-slot:for>phone_number</x-slot:for>
                                             <x-slot:slot>Nomor Telepon</x-slot:slot>
                                         </x-label>
-                                        <x-input>
-                                            <x-slot:type>number</x-slot:type>
+                                        <x-input class="mt-1">
+                                            <x-slot:type>tel</x-slot:type>
                                             <x-slot:name>phone_number</x-slot:name>
                                             <x-slot:id>phone_number</x-slot:id>
-                                            <x-slot:placeholder>08XX-XXXX-XXXX</x-slot:placeholder>
+                                            <x-slot:placeholder>081234567890</x-slot:placeholder>
                                         </x-input>
                                     </div>
 
                                     <div class="mt-4">
-                                        <x-jet-label for="role" value="{{ __('Gender') }}" />
+                                        <x-jet-label for="role" value="{{ __('Jenis Kelamin') }}" />
                                         <div class="flex gap-6 mt-1">
-                                            <div class="space-x-1">
-                                                <input id="male" class="peer/male" type="radio" name="gender"
-                                                   checked value="Male" />
+                                            <div class="flex gap-2 cursor-pointer items-center">
+                                                <input id="male" class="peer/male checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" type="radio" name="gender"
+                                                    checked value="Male" />
                                                 <label for="male"
-                                                    class="peer-checked/male:text-blue-500">Male</label>
+                                                    class="peer-checked/male:text-blue-500 cursor-pointer">Pria</label>
                                             </div>
-                                            <div class="space-x-1">
-                                                <input id="female" class="peer/female" type="radio" value="Female"
+                                            <div class="flex gap-2 cursor-pointer items-center">
+                                                <input id="female" class="peer/female checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" type="radio" value="Female"
                                                     name="gender" />
                                                 <label for="female"
-                                                    class="peer-checked/female:text-blue-500">Female</label>
+                                                    class="peer-checked/female:text-blue-500 cursor-pointer">Wanita</label>
                                             </div>
                                         </div>
                                     </div>
@@ -98,25 +103,26 @@
                                             <x-slot:for>address</x-slot:for>
                                             <x-slot:slot>Alamat</x-slot:slot>
                                         </x-label>
-                                        <x-input>
+                                        <x-input class="mt-1" required>
                                             <x-slot:type>text</x-slot:type>
                                             <x-slot:name>address</x-slot:name>
                                             <x-slot:id>address</x-slot:id>
-                                            <x-slot:placeholder>Alamat</x-slot:placeholder>
+                                            <x-slot:placeholder>Jl. Pahlawan No. 2B</x-slot:placeholder>
                                         </x-input>
                                     </div>
 
                                     <div class="mt-4">
                                         <x-jet-label for="password" value="{{ __('Kata Sandi') }}" />
                                         <x-jet-input id="password" class="block mt-1 w-full" type="password"
-                                            name="password" required autocomplete="new-password" />
+                                            name="password" placeholder="********" required
+                                            autocomplete="new-password" />
                                     </div>
 
                                     <div class="mt-4">
                                         <x-jet-label for="password_confirmation"
                                             value="{{ __('Konfirmasi Kata Sandi') }}" />
                                         <x-jet-input id="password_confirmation" class="block mt-1 w-full"
-                                            type="password" name="password_confirmation" required
+                                            type="password" name="password_confirmation" placeholder="********" required
                                             autocomplete="new-password" />
                                     </div>
 
@@ -136,7 +142,7 @@
                     </div>
                 </div>
                 <div
-                    class="bg-authentication-background bg-cover hidden md:grid md:content-evenly text-center rounded-r-2xl w-6/12 gap-4 p-8">
+                    class="bg-authentication-background bg-cover hidden lg:grid lg:content-evenly text-center rounded-r-2xl w-6/12 gap-4 p-8">
                     <p class="text-4xl leading-10 font-extrabold tracking-tight text-white">Asah Bakat dan Minatmu</p>
                     <img src="{{ url('img/register.svg') }}" alt="Daftar">
                 </div>

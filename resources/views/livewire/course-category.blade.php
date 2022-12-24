@@ -21,13 +21,13 @@
 
     {{-- Search Bar --}}
     <div class="flex justify-between gap-4 items-center">
-    <div class="w-full relative">
-        <x-search-bar>
-            <x-slot:placeholder>Cari Kursus</x-slot:placeholder>
-        </x-search-bar>
-        <input type="text" name="search" id="search"
-        class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-        placeholder="Cari Kursus" wire:model = "categorySearch" />
+        <div class="w-full relative">
+            <x-search-bar>
+                <x-slot:placeholder>Cari Kursus</x-slot:placeholder>
+            </x-search-bar>
+            <input type="text" name="search" id="search"
+                class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                placeholder="Cari Kursus" wire:model="categorySearch" />
         </div>
         {{-- Dropdown Sort --}}
         <x-kursus.dropdown>
@@ -39,32 +39,31 @@
     </div>
 
 
-@if((auth()->user()->tutor && $activeTabCourseCategory == "eksplor") || (auth()->user()->orphanage))
-    {{-- Kategori --}}
-    <div>
-        @if ($courseCategories->isEmpty())
-            <h3>Data kursus tidak tersedia</h3>
-        @else
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                @foreach ($courseCategories as $item)
-                    
+    @if ((auth()->user()->tutor && $activeTabCourseCategory == 'eksplor') || auth()->user()->orphanage)
+        {{-- Kategori --}}
+        <div>
+            @if ($courseCategories->isEmpty())
+                <h3>Data kursus tidak tersedia</h3>
+            @else
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($courseCategories as $item)
                         <x-kursus.card>
                             <x-slot:image>
                                 {{ $item->photo_path }}
                             </x-slot:image>
                             <x-slot:kategori>{{ $item->name }}</x-slot:kategori>
                             <x-slot:jumlahTutor>{{ $item->courses->count() }} Kursus</x-slot:jumlahTutor>
-                            <x-slot name="category_id">{{$item->id}}</x-slot>
+                            <x-slot name="category_id">{{ $item->id }}</x-slot>
                             <x-slot:button>Selengkapnya</x-slot:button>
                         </x-kursus.card>
-                @endforeach
-            </div>
-        @endif
-    </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
 </div>
 @endif
 
-@if (auth()->user()->tutor && $activeTabCourseCategory == "kelola")
+@if (auth()->user()->tutor && $activeTabCourseCategory == 'kelola')
     <div>
         @if (!$coursesTutor)
             <h3>Data kursus belum ada</h3>
