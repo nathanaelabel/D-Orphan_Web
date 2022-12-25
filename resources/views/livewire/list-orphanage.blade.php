@@ -1,9 +1,9 @@
 <div class="space-y-8">
 
     {{-- Title --}}
-    <h3 class="text-3xl leading-10 font-bold">Pilih Panti Asuhan yang menjadi tujuan donasi</h3>
+    <p class="text-3xl leading-10 font-bold">Pilih Panti Asuhan yang menjadi tujuan donasi</h3>
 
-    {{-- Search Bar --}}
+        {{-- Search Bar --}}
     <div class="flex justify-between gap-4 items-center">
         <div class="w-full relative">
             <x-search-bar>
@@ -36,10 +36,11 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($orphanages as $item)
                     <x-donasi.list-panti.card>
-                        <x-slot:image>{{ $item->user->profile_photo_path }}</x-slot:image>
+                        <x-slot:image>{{ $item->user->orphanage->photo_url }}</x-slot:image>
                         <x-slot:panti>{{ $item->name }}</x-slot:panti>
                         <x-slot:surel>{{ $item->user->email }}</x-slot:surel>
                         <x-slot:lokasi>{{ $item->user->address }}</x-slot:lokasi>
+                        <x-slot:anak>{{ $item->user->orphanage->member_count . ' anak Panti' }}</x-slot:anak>
                         <x-slot name="user_id">{{ $item->user->id }}</x-slot>
                         <x-slot:button>Selengkapnya</x-slot:button>
                     </x-donasi.list-panti.card>

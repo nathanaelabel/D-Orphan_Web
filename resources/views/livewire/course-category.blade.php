@@ -2,9 +2,9 @@
     @if (auth()->user()->tutor)
         {{-- Title --}}
         @if ($activeTabCourseCategory == 'eksplor')
-            <h3 class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang tersedia' }}</h3>
+            <p class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang tersedia' }}</h3>
         @else
-            <h3 class="text-3xl leading-10 font-bold">{{ 'Atur kursus yang Anda sediakan' }}</h3>
+            <p class="text-3xl leading-10 font-bold">{{ 'Atur kursus yang Anda sediakan' }}</h3>
         @endif
         {{-- Tabs --}}
         <div class="flex justify-center">
@@ -20,7 +20,7 @@
         </div>
     @else
         {{-- Title --}}
-        <h3 class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang ingin dipelajari' }}</h3>
+        <p class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang ingin dipelajari' }}</h3>
     @endif
 
     {{-- Search Bar --}}

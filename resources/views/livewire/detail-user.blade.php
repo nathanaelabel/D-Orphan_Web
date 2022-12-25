@@ -1,34 +1,61 @@
 <div class="space-y-8">
-    {{-- Breadcrumb --}}
     <x-donasi.list-panti.detail-panti.breadcrumb>
         <x-slot:page1>Panti Asuhan</x-slot:page1>
         <x-slot:page2>Detail Panti Asuhan</x-slot:page2>
     </x-donasi.list-panti.detail-panti.breadcrumb>
 
-    <div class="grid lg:flex gap-8">
-        <div class="grid gap-4 w-full lg:w-6/12">
-            {{-- Title --}}
-            <h3 class="text-3xl leading-10 font-bold">{{ 'Profil Panti Asuhan' }}</h3>
-            {{-- Panti Asuhan --}}
-            <x-donasi.list-panti.detail-panti.card>
-                {{-- <x-slot name="course_id">{{$courseTutor->id}}</x-slot> --}}
-                <x-slot:image>
-                    https://images.unsplash.com/photo-1621403215688-d4d8088ccbc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80
-                </x-slot:image>
-                <x-slot:panti>{{ $user->orphanage->name }}</x-slot:panti>
-                <x-slot:lokasi>{{ $user->address }}</x-slot:lokasi>
-                <x-slot:surel>{{ $user->email }}</x-slot:surel>
-                <x-slot name="orphanage_id">{{$user->orphanage->id}}</x-slot>
-                <x-slot:button>Donasi Sekarang</x-slot:button>
-            </x-donasi.list-panti.detail-panti.card>
+    <p class="text-3xl leading-10 font-bold">{{ 'Detail Panti Asuhan' }}</p>
+
+    <div class="grid rounded-2xl shadow bg-white lg:flex">
+        <div class="lg:w-6/12">
+            <img src="{{ $user->orphanage->photo_url }}" alt="Panti Asuhan"
+                class="w-full h-full object-cover rounded-t-2xl rounded-b-none lg:rounded-l-2xl lg:rounded-r-none">
         </div>
 
-        <div class="w-fit flex-col space-y-4">
-            {{-- Description --}}
-            <h3 class="text-3xl leading-10 font-bold">{{ 'Tentang Panti Asuhan' }}</h3>
-            <p class="text-lg leading-8 text-gray-500">Panti Sinar Bangsa telah didirikan sejak tahun 1985. Pemilik dari
-                panti ini bernama Susanto Budiman. Beliau mendirikan panti ini karena memiliki amanah sebelumnya untuk
-                membantu setiap anak yang kehilangan orang tua dan membutuhkan bantuan serta bimbingan.</p>
+        <div class="w-fit self-center">
+            <div class="grid gap-4 p-4 lg:p-8">
+                <p class="truncate w-full text-2xl leading-8 font-semibold text-gray-900 group-hover:text-blue-500">
+                    {{ $user->orphanage->name }}
+                </p>
+                <div>
+                    <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-gray-500">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        <p class="text-lg leading-8 text-gray-500">{{ $user->address }}</p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-gray-500">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                        </svg>
+                        <p class="text-lg leading-8 text-gray-500">{{ $user->orphanage->member_count . ' anak Panti' }}
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="text-gray-500">{{ $user->orphanage->description }}</p>
+                </div>
+
+                <div>
+                    <span hidden>{{ $orphanage_id = $user->orphanage->id }}</span>
+                    <a href="{{ route('kirim-donasi', $orphanage_id) }}">
+                        <x-primary-button>Donasi Sekarang</x-primary-button>
+                    </a>
+                </div>
+
+                <div>
+                    <a href="mailto:{{ $user->email }}">
+                        <x-secondary-button>Kirim Surel</x-secondary-button>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

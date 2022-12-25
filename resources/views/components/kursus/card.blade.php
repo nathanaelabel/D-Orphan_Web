@@ -5,7 +5,7 @@
                 class="w-full h-full object-center object-cover sm:w-full sm:h-full">
         </div>
         <div class="flex-1 p-4 space-y-2 flex flex-col">
-            <h3 class="truncate text-2xl leading-8 font-semibold text-gray-900 group-hover:text-blue-500">
+            <p class="truncate w-full text-2xl leading-8 font-semibold text-gray-900 group-hover:text-blue-500">
                 {{ $kategori }}
             </h3>
             <div class="flex gap-2 items-center">

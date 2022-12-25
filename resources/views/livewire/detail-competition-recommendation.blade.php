@@ -10,9 +10,9 @@
                 <x-slot:page2>Detail Lomba</x-slot:page2>
             </x-lomba.detail-lomba.breadcrumb>
 
-            <h3 class="text-3xl leading-10 font-bold">{{ 'Detail Lomba' }}</h3>
+            <p class="text-3xl leading-10 font-bold">{{ 'Detail Lomba' }}</h3>
 
-            <h4 class="text-2xl leading-8 font-semibold">Asian Games</h4>
+            <p class="text-2xl leading-8 font-semibold">Asian Games</h4>
 
             <div class="flex gap-2 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

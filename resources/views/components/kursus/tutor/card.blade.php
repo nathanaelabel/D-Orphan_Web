@@ -5,7 +5,7 @@
                 class="w-full h-full object-center object-cover sm:w-full sm:h-full">
         </div>
         <div class="flex-1 p-4 space-y-2 flex flex-col">
-            <h3 class="truncate text-2xl leading-8 font-semibold text-gray-900 group-hover:text-blue-500">
+            <p class="truncate w-full text-2xl leading-8 font-semibold text-gray-900 group-hover:text-blue-500">
                 {{ $nama }}
             </h3>
             <div>
@@ -24,7 +24,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
-                    <p class="truncate text-lg leading-8 text-gray-500">{{ $lokasi }}</p>
+                    <p class="truncate w-full text-lg leading-8 text-gray-500">{{ $lokasi }}</p>
                 </div>
                 <div class="flex gap-2 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

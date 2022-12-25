@@ -22,6 +22,7 @@ class CompetitionFactory extends Factory
 
         return [
             'name' => $faker->sentence(3),
+            'photo_url' => 'https://picsum.photos/id/' . random_int(1, 250) . '/640',
             'registration_start_date' => $faker2->dateTimeBetween($startDate = '+ 10 days', $endDate = '+ 100 days', $timezone = null)->format('Y-m-d'),
             'registration_start_hour' => $faker2->dateTimeBetween($startDate = '+ 10 days', $endDate = '+ 100 days', $timezone = null)->format('H:i'),
             'url' => $faker2->url(),

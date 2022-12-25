@@ -9,7 +9,7 @@
     <div class="grid lg:flex gap-8">
         <div class="grid gap-4 w-full lg:w-6/12">
             {{-- Title --}}
-            <h3 class="text-3xl leading-10 font-bold">{{ 'Profil Tutor' }}</h3>
+            <p class="text-3xl leading-10 font-bold">{{ 'Profil Tutor' }}</h3>
             {{-- Tutor --}}
             <x-kursus.tutor.detail-tutor.card :value=1>
                 <x-slot name="course_id">{{ $courseTutor->id }}</x-slot>
@@ -34,7 +34,7 @@
 
         <div class="w-fit flex-col space-y-4">
             {{-- Description --}}
-            <h3 class="text-3xl leading-10 font-bold">{{ 'Tentang Tutor' }}</h3>
+            <p class="text-3xl leading-10 font-bold">{{ 'Tentang Tutor' }}</h3>
             <p class="text-lg leading-8 text-gray-500">{{ $courseTutor->description }}</p>
         </div>
     </div>

@@ -1,9 +1,9 @@
 <div class="space-y-8">
     {{-- Title --}}
     @if (Auth::user()->user_type == 'Tutor')
-        <h3 class="text-3xl leading-10 font-bold">{{ 'Berikan rekomendasi lomba ke anak-anak Panti Asuhan' }}</h3>
+        <p class="text-3xl leading-10 font-bold">{{ 'Berikan rekomendasi lomba ke anak-anak Panti Asuhan' }}</h3>
     @else
-        <h3 class="text-3xl leading-10 font-bold">{{ 'Ikuti lomba dan jadilah yang terbaik' }}</h3>
+        <p class="text-3xl leading-10 font-bold">{{ 'Ikuti lomba dan jadilah yang terbaik' }}</h3>
     @endif
 
     {{-- Search Bar --}}
@@ -33,7 +33,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($competitions as $item)
                         <x-lomba.card>
-                            <x-slot:image>https://source.unsplash.com/random</x-slot:image>
+                            <x-slot:image>{{ $item->photo_url }}</x-slot:image>
                             <x-slot:nama>{{ $item->name }}</x-slot:nama>
                             <x-slot:kategori>Atletik</x-slot:kategori>
                             <x-slot:tanggal>{{ $item->registration_start_date }}</x-slot:tanggal>

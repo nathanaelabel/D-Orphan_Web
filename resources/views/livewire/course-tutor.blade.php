@@ -8,7 +8,7 @@
     </x-kursus.tutor.breadcrumb>
 
     {{-- Title --}}
-    <h3 class="text-3xl leading-10 font-bold">
+    <p class="text-3xl leading-10 font-bold">
         @if (auth()->user()->orphanage)
             Mulailah kursus {{ $courseCategory->name }} dengan Tutor pilihan Anda
         @else

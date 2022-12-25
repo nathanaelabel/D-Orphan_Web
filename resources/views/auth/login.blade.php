@@ -18,7 +18,7 @@
                             <div class="w-full max-w-lg mx-auto space-y-10">
                                 <!-- Header -->
                                 <div class="text-center">
-                                    <h3 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
+                                    <p class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Selamat datang kembali
                                     </h3>
                                     <p class="text-gray-500">

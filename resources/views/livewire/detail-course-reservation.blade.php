@@ -8,7 +8,7 @@
     </x-kursus.tutor.detail-tutor.detail-reservasi.breadcrumb>
 
     {{-- Title --}}
-    <h3 class="text-3xl leading-10 font-bold">{{ 'Detail Reservasi' }}</h3>
+    <p class="text-3xl leading-10 font-bold">{{ 'Detail Reservasi' }}</h3>
 
     <div class="flex p-8 bg-white rounded-2xl shadow">
         <div class="w-full space-y-8">
