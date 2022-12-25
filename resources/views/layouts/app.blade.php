@@ -35,7 +35,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="flex flex-col h-screen bg-gray-50 bg-body bg-repeat bg-local bg-blend-multiply">
+<body class="flex flex-col h-screen bg-gray-50 bg-body bg-blend-multiply">
     {{-- Header --}}
     @livewire('navigation-menu')
 

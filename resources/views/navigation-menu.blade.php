@@ -33,7 +33,7 @@
                 </div>
             </div>
             @auth
-                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                <div class="hidden sm:ml-6 sm:flex sm:items-center" title="Saldo {{ Auth::user()->name }}">
                     <!-- Profile dropdown -->
                     <span
                         class="inline-flex items-center px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 border-b-2 border-gray-200"><svg
@@ -47,20 +47,25 @@
                     <div class="ml-3 relative">
                         <div>
                             <button type="button"
-                                class="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                class="bg-white rounded-full flex focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:scale-100"
                                 id="user-menu-button" aria-expanded="false" aria-haspopup="true" @click="open=!open">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full" src="{{ Auth::user()->profile_photo_path }}"
-                                    alt="{{ Auth::user()->name }}" title="{{ Auth::user()->user_type }}">
+                                @if (Auth::user()->profile_photo_path != null)
+                                    <img src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
+                                        class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
+                                @else
+                                    <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"
+                                        class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
+                                @endif
                             </button>
                         </div>
                         <!-- Dropdown menu, show/hide based on menu state.
-                                                                                                                                                                                                                Entering: "transition ease-out duration-200"
-                                                                                                                                                                                                                From: "transform opacity-0 scale-95"
-                                                                                                                                                                                                                To: "transform opacity-100 scale-100"
-                                                                                                                                                                                                                Leaving: "transition ease-in duration-75"
-                                                                                                                                                                                                                From: "transform opacity-100 scale-100"
-                                                                                                                                                                                                                To: "transform opacity-0 scale-95" -->
+                                                                                                                                                                                                                                    Entering: "transition ease-out duration-200"
+                                                                                                                                                                                                                                    From: "transform opacity-0 scale-95"
+                                                                                                                                                                                                                                    To: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                    Leaving: "transition ease-in duration-75"
+                                                                                                                                                                                                                                    From: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                    To: "transform opacity-0 scale-95" -->
                         <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             x-show="open">
@@ -71,8 +76,8 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <button type="submit" class="block px-4 py-2 text-red-500 active:scale-100" role="menuitem"
-                                    tabindex="-1" id="user-menu-item-2">Keluar</button>
+                                <button type="submit" class="w-full text-start px-4 py-2 text-red-500 active:scale-100"
+                                    role="menuitem" tabindex="-1" id="user-menu-item-2">Keluar</button>
                             </form>
                         </div>
                     </div>
@@ -161,15 +166,20 @@
             <div class="py-3 border-t border-gray-200">
                 <div class="flex items-center px-4">
                     <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_path }}"
-                            alt="{{ Auth::user()->name }}">
+                        @if (Auth::user()->profile_photo_path != null)
+                            <img src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
+                                class="h-10 w-10 rounded-full" title="{{ Auth::user()->user_type }}">
+                        @else
+                            <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"
+                                class="h-10 w-10 rounded-full" title="{{ Auth::user()->user_type }}">
+                        @endif
                     </div>
                     <div class="ml-3">
                         <div class="text-base font-medium text-gray-800">{{ Auth::user()->name }}</div>
                         <div class="text-sm font-medium text-gray-500">{{ Auth::user()->email }}</div>
                     </div>
                 </div>
-                <div class="mt-3 space-y-1">
+                <div class="mt-3 space-y-1" title="Saldo {{ Auth::user()->name }}">
                     <span
                         class="inline-flex items-center mx-4 px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 border-b-2 border-gray-200"><svg
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -185,7 +195,7 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <button type="submit" class="block px-4 py-2 text-red-500" role="menuitem" tabindex="-1"
+                        <button type="submit" class="w-full text-start px-4 py-2 text-red-500 active:scale-100" role="menuitem" tabindex="-1"
                             id="user-menu-item-2">Keluar</button>
                     </form>
                 </div>
