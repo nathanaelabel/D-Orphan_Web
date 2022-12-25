@@ -1,7 +1,19 @@
 <div class="space-y-8">
     <x-donasi.list-panti.detail-panti.breadcrumb>
-        <x-slot:page1>Panti Asuhan</x-slot:page1>
-        <x-slot:page2>Detail Panti Asuhan</x-slot:page2>
+        <x-slot:page1>
+            @if (auth()->user()->user_type == 'Tutor')
+                Panti Asuhan
+            @else
+                Tutor
+            @endif
+        </x-slot:page1>
+        <x-slot:page2>
+            @if (auth()->user()->user_type == 'Tutor')
+                Detail Panti Asuhan
+            @else
+                Detail Tutor
+            @endif
+        </x-slot:page2>
     </x-donasi.list-panti.detail-panti.breadcrumb>
 
     <p class="text-3xl leading-10 font-bold">{{ 'Detail Panti Asuhan' }}</p>
@@ -9,7 +21,7 @@
     <div class="grid rounded-2xl shadow bg-white lg:flex">
         <div class="lg:w-6/12">
             <img src="{{ $user->orphanage->photo_url }}" alt="Panti Asuhan"
-                class="w-full h-full object-cover rounded-t-2xl rounded-b-none lg:rounded-l-2xl lg:rounded-r-none" onerror="this.onerror=null;this.src='/img/placeholder.svg';">
+                class="w-full h-full object-cover rounded-t-2xl rounded-b-none lg:rounded-l-2xl lg:rounded-r-none">
         </div>
 
         <div class="w-fit self-center">

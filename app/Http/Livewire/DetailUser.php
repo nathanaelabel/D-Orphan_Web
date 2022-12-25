@@ -11,11 +11,15 @@ class DetailUser extends Component
 
     public function render()
     {
-        return view('livewire.detail-user')->with('user', $this->user);
+        return view('livewire.detail-user');
     }
 
     public function mount($user_id)
     {
-        $this->user = User::find($user_id);
+        if (auth()->user()->user_type == 'Tutor') {
+            $this->user = User::find($user_id)->orphanage;
+        } else {
+            $this->user = User::find($user_id)->tutor;
+        }
     }
 }
