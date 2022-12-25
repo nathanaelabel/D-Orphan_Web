@@ -1,5 +1,5 @@
 <div class="space-y-8">
-    <x-donasi.list-panti.detail-panti.breadcrumb>
+    <x-donasi.list-user.detail-user.breadcrumb>
         <x-slot:page1>
             @if (auth()->user()->user_type == 'Tutor')
                 Panti Asuhan

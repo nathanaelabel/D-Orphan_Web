@@ -27,10 +27,14 @@ class CourseBooking extends Component
         $this->activeTab = $tab;
         if (Auth::user()->tutor) {
             if (Auth::user()->tutor->courses) {
-                $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))->get();
+                $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))
+                ->orderBy('updated_at', 'ASC')
+                ->get();
             }
         } else {
-            $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('id'))->get();
+            $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('id'))
+            ->orderBy('updated_at', 'ASC')
+            ->get();
         }
         if ($this->activeTab != 'canceled') {
             $this->courseBooking = $data->where('status', $this->activeTab);

@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrphanageController;
 use App\Http\Controllers\OrphanCrController;
 use App\Http\Livewire\CourseTutor;
+use App\Http\Livewire\DetailCourse;
 use App\Http\Livewire\DetailCourseTutor;
 use App\Http\Livewire\DetailUser;
 use App\Http\Livewire\DonationDelivery;
@@ -71,7 +72,8 @@ Route::middleware([
         return view('course');
     })->name('kursus');
     Route::get('/kursus/tutor/{skill_id}', CourseTutor::class)->name('tutor');
-    Route::get('/kursus/tutor/detail-tutor/{course_id}', DetailCourseTutor::class)->name('detail-tutor');
+    // Route::get('/kursus/tutor/detail-tutor/{course_id}', DetailTutor::class)->name('detail-tutor');
+    Route::get('/kursus/{course_id}', DetailCourse::class)->name('detail-kursus');
     Route::get('/kursus/tutor/detail-tutor/{course_id}/detail-reservation', function () {
         return view('detail-reservation');
     })->name('detail-reservation');

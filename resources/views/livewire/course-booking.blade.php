@@ -23,28 +23,36 @@
                 class="cursor-pointer px-3 py-2 font-semibold rounded {{ $activeTab == 'canceled' ? 'bg-blue-500 text-white' : 'text-blue-700' }}">Riwayat</a>
         </nav>
     </div>
+
     {{-- Table --}}
     <div class="overflow-x-auto shadow rounded">
         <table class="min-w-full">
             <thead class="bg-gray-500 text-white">
                 <tr>
-                    @if (Auth::user()->user_type == 'Tutor')
-                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                            Nama Panti Asuhan</th>
-                    @else
-                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                            Nama Tutor</th>
-                    @endif
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                        @if (Auth::user()->user_type == 'Tutor')
+                            Nama Panti Asuhan
+                        @else
+                            Nama Tutor
+                        @endif
+                    </th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Kursus</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Tarif per jam</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Durasi</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Tanggal mulai</th>
+                        Jumlah Anak</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Aksi</th>
+                        Total Harga</th>
+                    @if (!(Auth::user()->user_type == 'Pengurus Panti' && $activeTab == 'ongoing'))
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                            @if ($activeTab == 'canceled')
+                                Status
+                            @else
+                                Aksi
+                            @endif
+                        </th>
+                    @endif
                 </tr>
             </thead>
             @if ($courseBooking->isEmpty())
@@ -74,106 +82,110 @@
             @else
                 <tbody>
                     @foreach ($courseBooking as $item)
-                        <tr class="odd:bg-white even:bg-gray-100">
-                            @if (Auth::user()->user_type == 'Tutor')
-                                <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
-                                    <a
-                                        href="{{ route('detail-user', $item->orphanage->user->id) }}">{{ $item->orphanage->name }}</a>
-                                </td>
-                            @else
-                                <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
-                                    <a
-                                        href="{{ route('detail-user', $item->course->tutor->user->id) }}">{{ $item->course->tutor->user->name }}</a>
-                                </td>
-                            @endif
-                            <td class="whitespace-nowrap px-3 py-4">
-                                <div class="flex items-center gap-2">
-                                    <span
-                                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
-                                        <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor"
-                                            viewBox="0 0 8 8">
-                                            <circle cx="4" cy="4" r="3" />
-                                        </svg>
-                                        {{ $item->course->skill->name }}
-                                    </span>
-                                    <span class="w-40 text-ellipsis overflow-hidden">
-                                        {{ $item->course->name }}</span>
-                                </div>
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                {{ 'Rp' . number_format($item->course->hourly_price, 2, ',', '.') }}
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                {{ $item->hour_count . ' Jam' }}
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                {{ $item->start_date }}
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 flex gap-2">
-                                @if ($activeTab == 'pending')
-                                    @if (Auth::user()->user_type == 'Tutor')
-                                        {{-- Terima --}}
-                                        <a wire:click='accept({{ $item->id }})'
-                                            class="cursor-pointer text-green-500" title="Terima">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                        </a>
-                                        {{-- Tolak --}}
-                                        <a wire:click='decline({{ $item->id }})'
-                                            class="cursor-pointer text-red-500" title="Tolak">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                        </a>
-                                    @else
-                                        {{-- Batal --}}
-                                        <a wire:click='decline({{ $item->id }})'
-                                            class="cursor-pointer text-red-500" title="Batal">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </a>
-                                    @endif
-                                @elseif($activeTab == 'ongoing')
-                                    @if (Auth::user()->user_type == 'Tutor')
-                                        {{-- Akhiri --}}
-                                        <a wire:click='complete({{ $item->id }})'
-                                            class="cursor-pointer text-green-500" title="Akhiri">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="w-6 h-6 text-green-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M4.5 12.75l6 6 9-13.5" />
-                                            </svg>
-                                        </a>
-                                    @else
-                                        {{ '-' }}
-                                    @endif
+                        <a href="{{ route('detail-kursus', $item->id) }}">
+                            <tr class="odd:bg-white even:bg-gray-100">
+                                @if (Auth::user()->user_type == 'Tutor')
+                                    <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
+                                        <a
+                                            href="{{ route('detail-user', $item->orphanage->user->id) }}">{{ $item->orphanage->name }}</a>
+                                    </td>
                                 @else
-                                    @if ($item->status == 'complete')
-                                        <span
-                                            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-green-100 text-green-800">
-                                            Diakhiri
-                                        </span>
-                                    @else
-                                        <span
-                                            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-red-100 text-red-800">
-                                            Ditolak
-                                        </span>
-                                    @endif
+                                    <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
+                                        <a
+                                            href="{{ route('detail-user', $item->course->tutor->user->id) }}">{{ $item->course->tutor->user->name }}</a>
+                                    </td>
                                 @endif
-                            </td>
-                        </tr>
+                                <td class="whitespace-nowrap px-3 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
+                                            <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor"
+                                                viewBox="0 0 8 8">
+                                                <circle cx="4" cy="4" r="3" />
+                                            </svg>
+                                            {{ $item->course->skill->name }}
+                                        </span>
+                                        <span class="w-40 text-ellipsis overflow-hidden">
+                                            {{ $item->course->name }}</span>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4">
+                                    {{ $item->hour_count . ' Jam' }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4">
+                                    {{ count($item->orphanCourseBookings) }} Anak
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4">
+                                    {{ 'Rp' . number_format($item->transaction->amount, 2, ',', '.') }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 flex gap-2">
+                                    @if ($activeTab == 'pending')
+                                        @if (Auth::user()->user_type == 'Tutor')
+                                            {{-- Terima --}}
+                                            <a wire:click='accept({{ $item->id }})'
+                                                class="cursor-pointer text-green-500" title="Terima">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-green-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </a>
+                                            {{-- Tolak --}}
+                                            <a wire:click='decline({{ $item->id }})'
+                                                class="cursor-pointer text-red-500" title="Tolak">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-red-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </a>
+                                        @else
+                                            {{-- Batal --}}
+                                            <a wire:click='decline({{ $item->id }})'
+                                                class="cursor-pointer text-red-500" title="Batal">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-red-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </a>
+                                        @endif
+                                    @elseif($activeTab == 'ongoing')
+                                        @if (Auth::user()->user_type == 'Tutor')
+                                            {{-- Akhiri --}}
+                                            <a wire:click='complete({{ $item->id }})'
+                                                class="cursor-pointer text-green-500" title="Akhiri">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-green-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            </a>
+                                        @endif
+                                    @else
+                                        @if ($item->status == 'complete')
+                                            <span
+                                                class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-green-100 text-green-800">
+                                                Selesai
+                                            </span>
+                                        @else
+                                            <span
+                                                class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-red-100 text-red-800">
+                                                Gagal
+                                            </span>
+                                        @endif
+                                    @endif
+                                </td>
+                            </tr>
+                        </a>
                     @endforeach
                 </tbody>
             @endif
         </table>
     </div>
+</div>
 </div>
