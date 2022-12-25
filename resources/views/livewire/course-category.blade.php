@@ -23,7 +23,7 @@
         <p class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang ingin dipelajari' }}</p>
     @endif
 
-    @if ($activeTabCourseCategory == 'eksplor')
+    @if (Auth::user()->user_type == 'Pengurus Panti' || $activeTabCourseCategory == 'eksplor')
         <div class="flex justify-between gap-4 items-center">
             {{-- Search Bar --}}
             <div class="w-full relative">
@@ -42,7 +42,7 @@
                 <x-slot:option2>Jumlah Tutor</x-slot:option2>
             </x-kursus.dropdown>
         </div>
-    @else
+    @elseif ($activeTabCourseCategory == 'eksplor')
         <div class="flex justify-between gap-4 items-center">
             {{-- Search Bar --}}
             <div class="w-full relative">

@@ -87,7 +87,7 @@
                                     {{ '-' }}
                                 @endif
                             </x-slot:hadirTipe>
-                            <x-slot:anak>{{ $item->maximum_member }}&nbsp;anak/Panti</x-slot:anak>
+                            <x-slot:anak>{{ $item->maximum_member . ' anak/Panti' }}</x-slot:anak>
                             <x-slot name="course_id">{{ $item->id }}</x-slot>
                             <x-slot:button>Selengkapnya</x-slot:button>
                         </x-kursus.tutor.card>
