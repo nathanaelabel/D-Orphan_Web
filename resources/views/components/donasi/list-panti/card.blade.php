@@ -34,7 +34,7 @@
                     </svg>
                     <p class="text-lg leading-8 text-gray-500">{{ $anak }}
                     </p>
-                </div>
+                </div
             </div>
             <div class="mt-2">
                 <button type="button"
