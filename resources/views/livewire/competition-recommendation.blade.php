@@ -1,13 +1,13 @@
 <div class="space-y-8">
     {{-- Title --}}
     @if (Auth::user()->user_type == 'Tutor')
-        <p class="text-3xl leading-10 font-bold">{{ 'Berikan rekomendasi lomba ke anak-anak Panti Asuhan' }}</h3>
+        <p class="text-3xl leading-10 font-bold">{{ 'Berikan rekomendasi lomba ke anak-anak Panti Asuhan' }}</p>
     @else
-        <p class="text-3xl leading-10 font-bold">{{ 'Ikuti lomba dan jadilah yang terbaik' }}</h3>
+        <p class="text-3xl leading-10 font-bold">{{ 'Ikuti lomba dan jadilah yang terbaik' }}</p>
     @endif
 
-    {{-- Search Bar --}}
     <div class="flex justify-between gap-4 items-center">
+        {{-- Search Bar --}}
         <div class="w-full relative">
             <x-search-bar>
                 <x-slot:placeholder>Cari Lomba</x-slot:placeholder>
@@ -32,15 +32,15 @@
         @else
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($competitions as $item)
-                        <x-lomba.card>
-                            <x-slot:image>{{ $item->photo_url }}</x-slot:image>
-                            <x-slot:nama>{{ $item->name }}</x-slot:nama>
-                            <x-slot:kategori>Atletik</x-slot:kategori>
-                            <x-slot:tanggal>{{ $item->registration_start_date }}</x-slot:tanggal>
-                            <x-slot:jam>{{ $item->registration_start_hour }}</x-slot:jam>
-                            <x-slot:lokasi>Surabaya</x-slot:lokasi>
-                            <x-slot:button>Selengkapnya</x-slot:button>
-                        </x-lomba.card>
+                    <x-lomba.card>
+                        <x-slot:image>{{ $item->photo_url }}</x-slot:image>
+                        <x-slot:nama>{{ $item->name }}</x-slot:nama>
+                        <x-slot:kategori>Atletik</x-slot:kategori>
+                        <x-slot:tanggal>{{ $item->registration_start_date }}</x-slot:tanggal>
+                        <x-slot:jam>{{ $item->registration_start_hour }}</x-slot:jam>
+                        <x-slot:lokasi>Surabaya</x-slot:lokasi>
+                        <x-slot:button>Selengkapnya</x-slot:button>
+                    </x-lomba.card>
                 @endforeach
             </div>
         @endif

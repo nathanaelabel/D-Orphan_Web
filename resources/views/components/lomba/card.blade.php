@@ -1,13 +1,13 @@
 <a href="{{ route('detail-lomba') }}">
     <div class="group relative bg-white rounded-2xl shadow flex flex-col overflow-hidden">
         <div class="aspect-w-3 aspect-h-4 group-hover:opacity-75 sm:aspect-none sm:h-96">
-            <img src="{{ $image }}" alt="Tutor"
-                class="w-full h-full object-center object-fit sm:w-full sm:h-full">
+            <img src="{{ $image }}" alt="Lomba"
+                class="w-full h-full object-center object-fit sm:w-full sm:h-full" onerror="this.onerror=null;this.src='/img/placeholder.svg';">
         </div>
         <div class="flex-1 p-4 space-y-2 flex flex-col">
             <p class="truncate w-full text-2xl leading-8 font-semibold text-gray-900 group-hover:text-blue-500">
                 {{ $nama }}
-            </h3>
+            </p>
             <div>
                 <div class="flex gap-2 my-2">
                     <span

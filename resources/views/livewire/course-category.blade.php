@@ -2,9 +2,9 @@
     @if (auth()->user()->tutor)
         {{-- Title --}}
         @if ($activeTabCourseCategory == 'eksplor')
-            <p class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang tersedia' }}</h3>
+            <p class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang tersedia' }}</p>
         @else
-            <p class="text-3xl leading-10 font-bold">{{ 'Atur kursus yang Anda sediakan' }}</h3>
+            <p class="text-3xl leading-10 font-bold">{{ 'Atur kursus yang Anda sediakan' }}</p>
         @endif
         {{-- Tabs --}}
         <div class="flex justify-center">
@@ -20,27 +20,55 @@
         </div>
     @else
         {{-- Title --}}
-        <p class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang ingin dipelajari' }}</h3>
+        <p class="text-3xl leading-10 font-bold">{{ 'Jelajahi kursus yang ingin dipelajari' }}</p>
     @endif
 
-    {{-- Search Bar --}}
-    <div class="flex justify-between gap-4 items-center">
-        <div class="w-full relative">
-            <x-search-bar>
-                <x-slot:placeholder>Cari Kursus</x-slot:placeholder>
-            </x-search-bar>
-            <input type="search" name="search" id="search"
-                class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                placeholder="Cari Kursus" wire:model="categorySearch" />
+    @if ($activeTabCourseCategory == 'eksplor')
+        <div class="flex justify-between gap-4 items-center">
+            {{-- Search Bar --}}
+            <div class="w-full relative">
+                <x-search-bar>
+                    <x-slot:placeholder>Cari Kursus</x-slot:placeholder>
+                </x-search-bar>
+                <input type="search" name="search" id="search"
+                    class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    placeholder="Cari Kursus" wire:model="categorySearch" />
+            </div>
+            {{-- Dropdown Sort --}}
+            <x-kursus.dropdown>
+                <x-slot:id>sort_category</x-slot:id>
+                <x-slot:name>sort_category</x-slot:name>
+                <x-slot:option1>Abjad Kategori</x-slot:option1>
+                <x-slot:option2>Jumlah Tutor</x-slot:option2>
+            </x-kursus.dropdown>
         </div>
-        {{-- Dropdown Sort --}}
-        <x-kursus.dropdown>
-            <x-slot:id>sort_category</x-slot:id>
-            <x-slot:name>sort_category</x-slot:name>
-            <x-slot:option1>Abjad Kategori</x-slot:option1>
-            <x-slot:option2>Jumlah Tutor</x-slot:option2>
-        </x-kursus.dropdown>
-    </div>
+    @else
+        <div class="flex justify-between gap-4 items-center">
+            {{-- Search Bar --}}
+            <div class="w-full relative">
+                <x-search-bar>
+                    <x-slot:placeholder>Cari Kursus</x-slot:placeholder>
+                </x-search-bar>
+                <input type="search" name="search" id="search"
+                    class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    placeholder="Cari Kursus" wire:model="categorySearch" />
+            </div>
+            {{-- Dropdown Sort --}}
+            <x-kursus.dropdown>
+                <x-slot:id>sort_category</x-slot:id>
+                <x-slot:name>sort_category</x-slot:name>
+                <x-slot:option1>Catur</x-slot:option1>
+                <x-slot:option2>Renang</x-slot:option2>
+            </x-kursus.dropdown>
+            {{-- Tambah Kursus --}}
+            <a wire:click='' class="cursor-pointer" title="Tambah">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 text-blue-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+            </a>
+        </div>
+    @endif
 
     @if ((auth()->user()->tutor && $activeTabCourseCategory == 'eksplor') || auth()->user()->orphanage)
         {{-- Kategori --}}
@@ -138,7 +166,8 @@
                                 @endif
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 flex gap-2">
-                                <a href="{{ route('/') }}" class="cursor-pointer text-blue-500" title="Detail">
+                                <a href="{{ route('detail-kelola-kursus') }}" class="cursor-pointer text-blue-500"
+                                    title="Detail">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"

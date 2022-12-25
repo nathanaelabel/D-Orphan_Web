@@ -1,5 +1,4 @@
 <div class="space-y-8">
-    {{-- Breadcrumb --}}
     <x-kursus.tutor.detail-tutor.detail-reservasi.breadcrumb>
         <x-slot:page1>Kursus</x-slot:page1>
         <x-slot:page2>Tutor</x-slot:page2>
@@ -7,8 +6,7 @@
         <x-slot:page4>Detail Reservasi</x-slot:page4>
     </x-kursus.tutor.detail-tutor.detail-reservasi.breadcrumb>
 
-    {{-- Title --}}
-    <p class="text-3xl leading-10 font-bold">{{ 'Detail Reservasi' }}</h3>
+    <p class="text-3xl leading-10 font-bold">{{ 'Detail Reservasi' }}</p>
 
     <div class="flex p-8 bg-white rounded-2xl shadow">
         <div class="w-full space-y-8">
@@ -17,7 +15,12 @@
                     <p class="text-lg leading-8 font-semibold text-gray-700">
                         Peserta Kursus
                     </p>
-                    <x-primary-button class="w-fit">{{ __('Tambah Peserta') }}</x-primary-button>
+                    <a wire:click='' class="cursor-pointer" title="Tambah">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-blue-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                    </a>
                 </div>
                 <form method="POST" action="{{ route('dasbor') }}">
                     @csrf
@@ -89,7 +92,12 @@
                     <p class="text-lg leading-8 font-semibold text-gray-700">
                         Jadwal Mingguan
                     </p>
-                    <x-primary-button class="w-fit">{{ __('Tambah Jadwal') }}</x-primary-button>
+                    <a wire:click='' class="cursor-pointer" title="Tambah">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-blue-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                    </a>
                 </div>
 
                 <div class="flex gap-4 items-center">
@@ -147,10 +155,12 @@
                         </div>
                     </div>
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6 text-red-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        <a wire:click='' class="cursor-pointer" title="Hapus">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -75,6 +75,9 @@ Route::middleware([
     Route::get('/kursus/tutor/detail-tutor/{course_id}/detail-reservation', function () {
         return view('detail-reservation');
     })->name('detail-reservation');
+    Route::get('/kursus/detail-kursus', function () {
+        return view('detail-course-manage');
+    })->name('detail-kelola-kursus');
     Route::get('/lomba', function () {
         return view('competition');
     })->name('lomba');

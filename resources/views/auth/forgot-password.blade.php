@@ -23,7 +23,7 @@
                                     <div class="text-center">
                                         <p class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                             Setel ulang kata sandi
-                                        </h3>
+                                        </p>
                                         <p class="text-gray-500">
                                             Tautan setel ulang kata sandi akan dikirimkan melalui surel akun Anda
                                         </p>

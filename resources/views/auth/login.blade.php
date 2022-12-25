@@ -20,7 +20,7 @@
                                 <div class="text-center">
                                     <p class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Selamat datang kembali
-                                    </h3>
+                                    </p>
                                     <p class="text-gray-500">
                                         Silakan masuk ke akun Anda
                                     </p>

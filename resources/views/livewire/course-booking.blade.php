@@ -1,10 +1,10 @@
 <div class="space-y-8">
     <div class="flex justify-between text-3xl leading-10 font-bold">
         <div>
-            <p>{{ 'Halo, ' . Auth::user()->name }}</h3>
+            <p>{{ 'Halo, ' . Auth::user()->name }}</p>
         </div>
         <div>
-            <p>{{ 'Rp' . number_format(Auth::user()->money, 2, ',', '.') }}</h3>
+            <p>{{ 'Rp' . number_format(Auth::user()->money, 2, ',', '.') }}</p>
         </div>
     </div>
 

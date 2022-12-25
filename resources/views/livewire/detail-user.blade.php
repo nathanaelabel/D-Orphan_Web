@@ -9,12 +9,12 @@
     <div class="grid rounded-2xl shadow bg-white lg:flex">
         <div class="lg:w-6/12">
             <img src="{{ $user->orphanage->photo_url }}" alt="Panti Asuhan"
-                class="w-full h-full object-cover rounded-t-2xl rounded-b-none lg:rounded-l-2xl lg:rounded-r-none">
+                class="w-full h-full object-cover rounded-t-2xl rounded-b-none lg:rounded-l-2xl lg:rounded-r-none" onerror="this.onerror=null;this.src='/img/placeholder.svg';">
         </div>
 
         <div class="w-fit self-center">
             <div class="grid gap-4 p-4 lg:p-8">
-                <p class="truncate w-full text-2xl leading-8 font-semibold text-gray-900 group-hover:text-blue-500">
+                <p class="text-2xl leading-8 font-semibold text-gray-900">
                     {{ $user->orphanage->name }}
                 </p>
                 <div>

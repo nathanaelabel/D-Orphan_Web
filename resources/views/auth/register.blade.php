@@ -20,7 +20,7 @@
                                 <div class="text-center">
                                     <p class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Halo
-                                    </h3>
+                                    </p>
                                     <p class="text-gray-500">
                                         Silakan membuat akun
                                     </p>

@@ -2,12 +2,13 @@
     <div class="group relative bg-white rounded-2xl shadow flex flex-col overflow-hidden">
         <div class="aspect-w-3 aspect-h-4 group-hover:opacity-75 sm:aspect-none sm:h-96">
             <img src="{{ $image }}" alt="Panti Asuhan"
-                class="w-full h-full object-center object-cover sm:w-full sm:h-full">
+                class="w-full h-full object-center object-cover sm:w-full sm:h-full"
+                onerror="this.onerror=null;this.src='/img/placeholder.svg';">
         </div>
         <div class="flex-1 p-4 space-y-2 flex flex-col">
             <p class="truncate w-full text-2xl leading-8 font-semibold text-gray-900 group-hover:text-blue-500">
                 {{ $panti }}
-                </h3>
+                </p>
             <div>
                 <div class="flex gap-2 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

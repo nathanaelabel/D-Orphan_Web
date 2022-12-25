@@ -13,7 +13,7 @@
                                 <div class="text-center">
                                     <p class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Salurkan donasi
-                                    </h3>
+                                    </p>
                                     <p class="text-gray-500">
                                         Mari berbagi kasih dengan anak-anak Panti Asuhan
                                     </p>
@@ -52,7 +52,7 @@
                                                 class="absolute inset-y-0 left-0 pl-3 text-gray-700 flex items-center pointer-events-none">
                                                 <p>Rp</p>
                                             </div>
-                                            <x-input wire:model="amount" class="pl-10">
+                                            <x-input wire:model="amount" min="10000" class="pl-10">
                                                 <x-slot:type>number</x-slot:type>
                                                 <x-slot:name>nominal_donasi</x-slot:name>
                                                 <x-slot:id>nominal_donasi</x-slot:id>

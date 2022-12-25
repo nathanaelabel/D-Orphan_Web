@@ -14,10 +14,10 @@
         @else
             Tutor yang tersedia di kursus {{ $courseCategory->name }}
         @endif
-    </h3>
+    </p>
 
-    {{-- Search Bar --}}
     <div class="flex justify-between gap-4 items-center">
+        {{-- Search Bar --}}
         <div class="w-full relative">
             <x-search-bar>
                 <x-slot:placeholder>Cari Tutor</x-slot:placeholder>
@@ -77,10 +77,14 @@
                                 @endif
                             </x-slot:hadirIcon>
                             <x-slot:hadirTipe>
-                                @if ($item->is_online == 1)
-                                    Daring
+                                @if ($item->is_online == 0)
+                                    {{ 'Luring' }}
+                                @elseif ($item->is_online == 1)
+                                    {{ 'Daring' }}
+                                @elseif ($item->is_visit == 0)
+                                    {{ 'Luring' }}
                                 @else
-                                    Luring
+                                    {{ '-' }}
                                 @endif
                             </x-slot:hadirTipe>
                             <x-slot:anak>{{ $item->maximum_member }}&nbsp;anak/Panti</x-slot:anak>
