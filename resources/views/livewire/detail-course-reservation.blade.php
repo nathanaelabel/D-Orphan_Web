@@ -13,32 +13,7 @@
     <div class="flex p-8 bg-white rounded-2xl shadow">
         <div class="w-full space-y-8">
             <div class="space-y-4">
-                <div class="flex justify-between">
-                    <p class="text-lg leading-8 font-semibold text-gray-700">
-                        Peserta Kursus
-                    </p>
-                    <x-primary-button class="w-fit">{{ __('Tambah Peserta') }}</x-primary-button>
-                </div>
-                <form method="POST" action="{{ route('donasi') }}">
-                    @csrf
 
-                    <div class="space-y-8">
-                        <div class="space-y-1 gap-6">
-                            <x-label>
-                                <x-slot:for>nama_peserta_kursus</x-slot:for>
-                                <x-slot:slot>Nama Peserta Kursus</x-slot:slot>
-                            </x-label>
-                            <x-kursus.tutor.detail-tutor.detail-reservasi.select>
-                                <x-slot:id>nama_peserta_kursus</x-slot:id>
-                                <x-slot:name>nama_peserta_kursus</x-slot:name>
-                                <x-slot:option>
-                                    @foreach (Auth::user()->orphanage->orphans as $item)
-                                        <option>{{ $item->name }}</option>
-                                    @endforeach
-                                </x-slot:option>
-                            </x-kursus.tutor.detail-tutor.detail-reservasi.select>
-                        </div>
-                    </div>
             </div>
             <div class="space-y-4">
                 <p class="text-lg leading-8 font-semibold text-gray-700">
@@ -89,81 +64,106 @@
                     <p class="text-lg leading-8 font-semibold text-gray-700">
                         Jadwal Mingguan
                     </p>
-                    <x-primary-button class="w-fit">{{ __('Tambah Jadwal') }}</x-primary-button>
+                    <x-primary-button wire:click="addDay" class="w-fit">{{ __('Tambah Jadwal') }}</x-primary-button>
                 </div>
+                @for ($dayCount; $dayCount > 0; $dayCount--)
+                    <div class="flex gap-4 items-center">
+                        <div class="grid w-full gap-4">
+                            {{-- Hari --}}
+                            <div class="gap-1">
+                                <x-label>
+                                    <x-slot:for>hari_mulai</x-slot:for>
+                                    <x-slot:slot>Hari</x-slot:slot>
+                                </x-label>
+                                <x-kursus.tutor.detail-tutor.detail-reservasi.select>
+                                    <x-slot:id>hari_mulai</x-slot:id>
+                                    <x-slot:name>hari_mulai</x-slot:name>
+                                    <x-slot:option>
+                                        @foreach ($days as $item)
+                                            <option>{{ $item->day }}</option>
+                                        @endforeach
+                                    </x-slot:option>
 
-                <div class="flex gap-4 items-center">
-                    <div class="grid w-full gap-4">
-                        {{-- Hari --}}
-                        <div class="gap-1">
-                            <x-label>
-                                <x-slot:for>hari_mulai</x-slot:for>
-                                <x-slot:slot>Hari</x-slot:slot>
-                            </x-label>
-                            <x-kursus.tutor.detail-tutor.detail-reservasi.select>
-                                <x-slot:id>hari_mulai</x-slot:id>
-                                <x-slot:name>hari_mulai</x-slot:name>
-                                <x-slot:option>
-                                    @foreach ($days as $item)
-                                        <option>{{ $item->day }}</option>
-                                    @endforeach
-                                    </x-slot:option1>
 
-                                    {{-- <x-slot:option>Kamis</x-slot:option4>
-                            <x-slot:option5>Jumat</x-slot:option5>
-                            <x-slot:option6>Sabtu</x-slot:option6>
-                            <x-slot:option7>Minggu</x-slot:option7> --}}
-                            </x-kursus.tutor.detail-tutor.detail-reservasi.select>
+                                </x-kursus.tutor.detail-tutor.detail-reservasi.select>
+                            </div>
+                        </div>
+                        <div class="grid w-full gap-4">
+                            {{-- Jam Mulai --}}
+                            <div class="gap-1">
+                                <x-label>
+                                    <x-slot:for>jam mulai</x-slot:for>
+                                    <x-slot:slot>Jam Mulai</x-slot:slot>
+                                </x-label>
+                                <x-input>
+                                    <x-slot:type>time</x-slot:type>
+                                    <x-slot:name>jam_mulai</x-slot:name>
+                                    <x-slot:id>jam_mulai</x-slot:id>
+                                    <x-slot:placeholder>07.30</x-slot:placeholder>
+                                </x-input>
+                            </div>
+                        </div>
+                        <div class="grid w-full gap-4">
+                            {{-- Jam Berakhir --}}
+                            <div class="gap-1">
+                                <x-label>
+                                    <x-slot:for>jam berakhir</x-slot:for>
+                                    <x-slot:slot>Jam Berakhir</x-slot:slot>
+                                </x-label>
+                                <x-input>
+                                    <x-slot:type>time</x-slot:type>
+                                    <x-slot:name>jam_berakhir</x-slot:name>
+                                    <x-slot:id>jam_berakhir</x-slot:id>
+                                    <x-slot:placeholder>08.30</x-slot:placeholder>
+                                </x-input>
+                            </div>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
                         </div>
                     </div>
-                    <div class="grid w-full gap-4">
-                        {{-- Jam Mulai --}}
-                        <div class="gap-1">
-                            <x-label>
-                                <x-slot:for>jam mulai</x-slot:for>
-                                <x-slot:slot>Jam Mulai</x-slot:slot>
-                            </x-label>
-                            <x-input>
-                                <x-slot:type>time</x-slot:type>
-                                <x-slot:name>jam_mulai</x-slot:name>
-                                <x-slot:id>jam_mulai</x-slot:id>
-                                <x-slot:placeholder>07.30</x-slot:placeholder>
-                            </x-input>
-                        </div>
-                    </div>
-                    <div class="grid w-full gap-4">
-                        {{-- Jam Berakhir --}}
-                        <div class="gap-1">
-                            <x-label>
-                                <x-slot:for>jam berakhir</x-slot:for>
-                                <x-slot:slot>Jam Berakhir</x-slot:slot>
-                            </x-label>
-                            <x-input>
-                                <x-slot:type>time</x-slot:type>
-                                <x-slot:name>jam_berakhir</x-slot:name>
-                                <x-slot:id>jam_berakhir</x-slot:id>
-                                <x-slot:placeholder>08.30</x-slot:placeholder>
-                            </x-input>
-                        </div>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6 text-red-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </div>
-                </div>
+                @endfor
 
-       
             </div>
-            <p class="text-lg leading-8 font-semibold text-gray-700">
-                Daftar Peserta
-            </p>
+            <div class="flex justify-between">
+                <p class="text-lg leading-8 font-semibold text-gray-700">
+                    Peserta Kursus
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="space-y-1 gap-6">
+                    <x-label>
+                        <x-slot:for>nama_peserta_kursus</x-slot:for>
+                        <x-slot:slot>Nama Peserta Kursus</x-slot:slot>
+                    </x-label>
+                    <div class="flex gap-5 justify-between items-center">
+                        <x-kursus.tutor.detail-tutor.detail-reservasi.select wire:model="currentStudent">
+                            <x-slot:id>nama_peserta_kursus</x-slot:id>
+                            <x-slot:name>nama_peserta_kursus</x-slot:name>
+                            <x-slot:option>
+                                @foreach (Auth::user()->orphanage->orphans as $item)
+                                    <option value="{{$item->id}}">{{ $item->name }}</option>
+                                @endforeach
+                            </x-slot:option>
+
+                        </x-kursus.tutor.detail-tutor.detail-reservasi.select>
+                        <x-primary-button wire:click="addStudent({{$currentStudent}})" class=" w-max">{{ __('Tambah Peserta') }}</x-primary-button>
+
+                    </div>
+                    @foreach ($studentList as $item)
+{{                        $item->name
+}}                    @endforeach
+                </div>
+            </div>
+
 
             <div class="mt-6">
                 <x-primary-button>{{ __('Kirim Reservasi') }}</x-primary-button>
             </div>
-            </form>
         </div>
     </div>
 </div>

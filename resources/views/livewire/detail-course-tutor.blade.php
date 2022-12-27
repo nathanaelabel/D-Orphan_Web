@@ -32,7 +32,14 @@
             </x-slot:sesi>
             <x-slot:anak>{{ $courseTutor->maximum_member }} anak/Panti</x-slot:anak>
             <x-slot:surel>{{ $courseTutor->tutor->user->email }}</x-slot:surel>
+            @if(Auth::user()->user_type != 'Tutor')
             <x-slot:button>Reservasi Kursus</x-slot:button>
+            <x-slot:bclass></x-slot:button>
+
+            @else
+            <x-slot:button>Reservasi Kursus</x-slot:button>
+            <x-slot:bclass>hidden</x-slot:button>
+            @endif
             </x-kursus.tutor.detail-tutor.card>
         </div>
 
