@@ -45,10 +45,10 @@
                         <x-slot:image>{{ $item->competition->photo_url }}</x-slot:image>
                         <x-slot:nama>{{ $item->competition->name }}</x-slot:nama>
                         <x-slot:tanggal_registrasi_dimulai>
-                            {{ date_format(date_create($item->competition->registration_start_date), 'l, d F Y') }}
+                            {{ date_format(date_create($item->competition->registration_start_date), 'd/m/Y') }}
                         </x-slot:tanggal_registrasi_dimulai>
                         <x-slot:jam_registrasi_dimulai>
-                            {{ date_format(date_create($item->competition->registration_start_hour), 'H:i A') }}
+                            {{ date_format(date_create($item->competition->registration_start_hour), 'H:i') . ' WIB' }}
                         </x-slot:jam_registrasi_dimulai>
                         <x-slot:jenjang>{{ $item->competition->jenjang }}</x-slot:jenjang>
                         <x-slot:button>Selengkapnya</x-slot:button>

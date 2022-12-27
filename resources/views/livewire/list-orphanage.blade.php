@@ -39,7 +39,7 @@
                         <x-slot:image>{{ $item->user->orphanage->photo_url }}</x-slot:image>
                         <x-slot:panti>{{ $item->name }}</x-slot:panti>
                         <x-slot:member_sum>{{ $item->member_count }} Anak Panti</x-slot:member_sum>
-                        <x-slot:lokasi>{{ $item->user->address }}</x-slot:lokasi>
+                        <x-slot:alamat>{{ $item->user->address }}</x-slot:alamat>
                         <x-slot:anak>{{ $item->user->orphanage->member_count . ' anak Panti' }}</x-slot:anak>
                         <x-slot name="user_id">{{ $item->user->id }}</x-slot>
                         <x-slot:button>Selengkapnya</x-slot:button>
