@@ -21,7 +21,7 @@ class OrphanCrFactory extends Factory
         $faker = Faker::create('en_EN');
 
         return [
-            'competition_recommendation_id' => random_int(1, count(CompetitionRecommendation::all())),
+            'competition_recommendation_id' => $faker->randomElement(CompetitionRecommendation::all()->pluck('id')->toArray()),
             'description' => $faker->text(50),
         ];
     }

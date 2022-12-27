@@ -18,10 +18,10 @@ class OrphanCrSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
-        foreach (Orphan::all() as $orphan) {
-            OrphanCr::factory()->count(random_int(1, count(CompetitionRecommendation::all())))->create([
-                'orphan_id' => $orphan->id,
-            ]);
-        }
+        OrphanCr::factory()->count(50)->create(
+            [
+                'orphan_id' => $faker->randomElement(Orphan::all()->pluck('id')->toArray()),
+            ]
+        );
     }
 }

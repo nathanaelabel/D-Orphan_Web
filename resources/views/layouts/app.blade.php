@@ -28,9 +28,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
 
-    {{-- Alpine.js CDN --}}
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
     {{-- Vite - Tailwind CSS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

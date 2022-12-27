@@ -21,7 +21,7 @@ return new class extends Migration
             ->onDelete('cascade');
             $table->string("donator_name")->nullable();
             $table->integer("amount")->nullable();
-            $table->string("message");
+            $table->string("message")->nullable();
             $table->unsignedBigInteger('transaction_id');
             $table->foreign('transaction_id')->references('id')->on("transactions")
             ->onUpdate('cascade')
