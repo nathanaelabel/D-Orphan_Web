@@ -19,6 +19,7 @@ class CourseTutor extends Component
 
     public function render()
     {
+        $this->courseTutors = [];
         if ($this->tutorSearch != null) {
             if ($this->tutorDropdownSort == 'Abjad Nama') {
                 $array_userId = User::where('name', 'like', '%'.$this->tutorSearch.'%')

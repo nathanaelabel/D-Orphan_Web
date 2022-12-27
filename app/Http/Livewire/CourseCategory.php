@@ -23,6 +23,7 @@ class CourseCategory extends Component
 
     public function render()
     {
+        $this->courseCategories = [];
         if (Auth::user()->tutor) {
             if ($this->activeTabCourseCategory == 'eksplor') {
                 if ($this->categorySearch != null) {
