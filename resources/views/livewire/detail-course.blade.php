@@ -53,20 +53,20 @@
 
         <div class="flex gap-2 items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6 text-gray-500">
+                stroke="currentColor" class="w-6 h-6 text-gray-700">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
             </svg>
-            <p class="text-lg leading-8 text-gray-500">Maksimum {{ $course->maximum_member }} anak/Panti</p>
+            <p class="text-lg leading-8 text-gray-700">Maksimum {{ $course->maximum_member }} anak/Panti</p>
         </div>
 
         <div class="flex gap-2 items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6 text-gray-500">
+                stroke="currentColor" class="w-6 h-6 text-gray-700">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79M12 12h.008v.007H12V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
-            <p class="text-lg leading-8 text-gray-500">
+            <p class="text-lg leading-8 text-gray-700">
                 @if ($course->is_online == 1)
                     Sesi Daring
                 @else
@@ -78,11 +78,11 @@
         @if ($course->is_visit == 1)
             <div class="flex gap-2 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6 text-gray-500">
+                    stroke="currentColor" class="w-6 h-6 text-gray-700">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79M12 12h.008v.007H12V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                 </svg>
-                <p class="text-lg leading-8 text-gray-500">
+                <p class="text-lg leading-8 text-gray-700">
                     Kursus diadakan di lokasi Panti Asuhan
 
                 </p>
@@ -92,45 +92,45 @@
         @if ($course->is_visit == 0)
             <div class="flex gap-2 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6 text-gray-500">
+                    stroke="currentColor" class="w-6 h-6 text-gray-700">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
-                <p class="text-lg leading-8 text-gray-500">
+                <p class="text-lg leading-8 text-gray-700">
                     {{ $course->location }}</p>
             </div>
         @endif
         <div class="flex gap-2 items-center">
 
-            <p class="text-lg leading-8 text-gray-500">Deskripsi Kursus: {{ $course->description }}</p>
+            <p class="text-lg leading-8 text-gray-700">Deskripsi Kursus: {{ $course->description }}</p>
         </div>
 
         <p class="text-2xl leading-8 font-semibold">Harga</h4>
 
         <div class="flex gap-2 items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6 text-gray-500">
+                stroke="currentColor" class="w-6 h-6 text-gray-700">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p class="text-lg leading-8 text-gray-500">
+            <p class="text-lg leading-8 text-gray-700">
                 {{ 'Rp' . number_format($course->hourly_price, 2, ',', '.') }}/jam *harga sudah termasuk biaya sewa
                 peralatan</p>
         </div>
 
         <div class="flex gap-2 items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6 text-gray-500">
+                stroke="currentColor" class="w-6 h-6 text-gray-700">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p class="text-lg leading-8 text-gray-500">Total Harga sewa peralatan:
+            <p class="text-lg leading-8 text-gray-700">Total Harga sewa peralatan:
                 {{ 'Rp' . number_format($course->tool_price, 2, ',', '.') }}</p>
         </div>
 
         <div class="flex gap-2 items-center">
-            <p class="text-lg leading-8 text-gray-500">Deskripsi sewa peralatan: {{ $course->tool_description }}</p>
+            <p class="text-lg leading-8 text-gray-700">Deskripsi sewa peralatan: {{ $course->tool_description }}</p>
         </div>
 
         {{-- Schedule --}}

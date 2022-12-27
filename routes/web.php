@@ -81,8 +81,7 @@ Route::middleware([
     Route::get('/kursus/detail-kursus', function () {
         return view('detail-course-manage');
     })->name('detail-kelola-kursus');
-
-    Route::get('/rekomendasi-lomba', CompetitionRecommendation::class)->name('lomba');
-    Route::get('/rekomendasi-lomba/detail-rekomendasi-lomba/{competition_recommendation_id}', DetailCompetitionRecommendation::class)->name('detail-competition-recommendation');
+    Route::get('/lomba', CompetitionRecommendation::class)->name('lomba');
+    Route::get('/lomba/detail-lomba/{competition_recommendation_id}', DetailCompetitionRecommendation::class)->name('detail-competition-recommendation');
     Route::get('/kelola-panti', KelolaPantiAsuhan::class)->name('kelola-panti');
 });

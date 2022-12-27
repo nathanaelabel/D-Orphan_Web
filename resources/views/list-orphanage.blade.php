@@ -1,4 +1,4 @@
-@section('title', 'List Panti Asuhan')
+@section('title', 'Panti Asuhan')
 
 <x-app-layout>
     <div>

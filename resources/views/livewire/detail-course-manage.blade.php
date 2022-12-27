@@ -55,7 +55,7 @@
                             <x-slot:slot>Lokasi</x-slot:slot>
                         </x-label>
                         <x-input>
-                            <x-slot:type>number</x-slot:type>
+                            <x-slot:type>text</x-slot:type>
                             <x-slot:name>lokasi</x-slot:name>
                             <x-slot:id>lokasi</x-slot:id>
                             <x-slot:placeholder>Surabaya</x-slot:placeholder>

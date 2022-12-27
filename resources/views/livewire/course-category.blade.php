@@ -48,11 +48,11 @@
             {{-- Search Bar --}}
             <div class="w-full relative">
                 <x-search-bar>
-                    <x-slot:placeholder>Cari Kursusmu disini</x-slot:placeholder>
+                    <x-slot:placeholder>Cari Kursus</x-slot:placeholder>
                 </x-search-bar>
                 <input type="search" name="search_kelola" id="search_kelola"
                     class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                    placeholder="Cari Kursusmu disini" wire:model="categoryKelolaSearch" />
+                    placeholder="Cari Kursus" wire:model="categoryKelolaSearch" />
             </div>
             {{-- Dropdown Sort --}}
 
@@ -115,11 +115,9 @@
             <thead class="bg-gray-500 text-white">
                 <tr>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Tarif per jam</th>
+                        Tarif Per Jam</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Batas peserta kursus</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Durasi kursus</th>
+                        Batas Peserta Kursus</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Tipe Kehadiran</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
@@ -131,7 +129,7 @@
             @if (!$coursesTutor)
                 <tbody class="bg-white">
                     <tr>
-                        <td colspan="6" class="px-3 py-4">
+                        <td colspan="5" class="px-3 py-4">
                             <div
                                 class="grid gap-2 p-2 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -153,9 +151,6 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4">
                                 {{ $item->maximum_member . ' anak/Panti' }}
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                {{ $item->name }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4">
                                 @if ($item->is_online == 0)
