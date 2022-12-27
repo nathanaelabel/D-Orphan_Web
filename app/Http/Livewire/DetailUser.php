@@ -14,7 +14,6 @@ class DetailUser extends Component
     public $skillsId = [];
     public $skills = [];
     public $courseBookingDone;
-    public $orphans;
 
     public function render()
     {
@@ -26,7 +25,6 @@ class DetailUser extends Component
         if (auth()->user()) {
             if (auth()->user()->user_type == 'Tutor') {
                 $this->user = User::find($user_id)->orphanage;
-                $this->orphans = $this->user->orphans->toArray();
             } else {
                 $this->user = User::find($user_id)->tutor;
                 $getCourseTutors = Course::where('tutor_id', $this->user->id)->pluck('id');
@@ -42,7 +40,6 @@ class DetailUser extends Component
             }
         } else {
             $this->user = User::find($user_id)->orphanage;
-            $this->orphans = $this->user->orphans->toArray();
         }
     }
 }
