@@ -47,8 +47,8 @@
                         Nama Pengurus: {{ $user->user->name }}
                     </p>
                 @endif
-                <p class="text-0xl leading-6 text-gray-500">
-                    Bergabung sejak {{ date_format(date_create($user->user->created_at), 'l, d F Y') }}
+                <p class="text-xl leading-6 text-gray-500">Bergabung sejak
+                    {{ date_format(date_create($user->user->created_at), 'l, d F Y') }}
                 </p>
                 <div>
                     <div class="flex gap-2 items-center">
@@ -186,7 +186,7 @@
                                 @if (!$orphans)
                                     <tbody class="bg-white">
                                         <tr>
-                                            <td colspan="2" class="px-3 py-4">
+                                            <td colspan="8" class="px-3 py-4">
                                                 <div
                                                     class="grid gap-2 border-2 border-gray-300 border-dashed rounded p-2 place-items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -208,22 +208,22 @@
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 w-full">
-                                                        {{ $item['name'] }}
+                                                    {{ $item['name'] }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 w-full">
-                                                        {{ $item['gender'] }}
+                                                    {{ $item['gender'] }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 w-full">
-                                                        {{ date_format(date_create($item['date_of_birth']), 'l, d F Y, H:i A') }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-3 py-4 w-full">
-                                                    0
+                                                    {{ date_format(date_create($item['date_of_birth']), 'l, d F Y, H:i A') }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 w-full">
                                                     0
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 w-full">
-                                                        {{ $item['note'] }}
+                                                    0
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 w-full">
+                                                    {{ $item['note'] }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 w-full">
                                                     {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}

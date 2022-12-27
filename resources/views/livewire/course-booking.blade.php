@@ -8,9 +8,8 @@
         </div>
     </div>
 
-    <p class="text-0xl leading-0 text-gray-500">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bergabung sejak
-        {{ date_format(date_create(auth()->user()->created_at), 'l, d F Y') }}
+    <p class="text-xl leading-0 text-gray-500">
+        Bergabung sejak {{ date_format(date_create(auth()->user()->created_at), 'l, d F Y') }}
     </p>
 
     {{-- Tabs --}}

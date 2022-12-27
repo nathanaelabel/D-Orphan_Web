@@ -73,7 +73,7 @@ Route::middleware([
         return view('course');
     })->name('kursus');
     Route::get('/kursus/tutor/{skill_id}', CourseTutor::class)->name('tutor');
-     Route::get('/kursus/tutor/detail-kursus/{course_id}', DetailCourse::class)->name('detail-kursus');
+    Route::get('/kursus/tutor/detail-kursus/{course_id}', DetailCourse::class)->name('detail-kursus');
     Route::get('/course-booking/{course_booking_id}', DetailCourseBooking::class)->name('detail-course-booking');
     Route::get('/kursus/tutor/detail-tutor/{course_id}/detail-reservation', function () {
         return view('detail-reservation');

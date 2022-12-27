@@ -133,8 +133,6 @@
             <p class="text-lg leading-8 text-gray-500">Deskripsi sewa peralatan: {{ $course->tool_description }}</p>
         </div>
 
-
-
         {{-- Schedule --}}
         <details open class="space-y-2">
             <summary class="text-xl leading-8 font-semibold">Jadwal Tutor</summary>
@@ -154,7 +152,7 @@
                     @if (!$dayTimeRanges)
                         <tbody class="bg-white">
                             <tr>
-                                <td colspan="2" class="px-3 py-4">
+                                <td colspan="3" class="px-3 py-4">
                                     <div
                                         class="grid gap-2 border-2 border-gray-300 border-dashed rounded p-2 place-items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -183,8 +181,8 @@
                 </table>
             </div>
         </details>
-        {{-- Dropdown Sort --}}
 
+        {{-- Dropdown Sort --}}
         <select id="sort_tutor_schedule" name="sort_tutor_schedule" wire:model="tutorScheduleDropdownSort"
             class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
             @if (!$days)

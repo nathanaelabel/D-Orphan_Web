@@ -14,12 +14,13 @@
         </div>
 
         {{-- Dropdown Sort --}}
-
         <select id="sort_orphan" name="sort_orphan" wire:model="orphanDropdownSort"
-            class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+            class="dropdown w-fit rounded-md shadow-sm font-medium border-transparent focus:border-transparent focus:ring bg-blue-500 text-white focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
             <option value="Abjad Nama" {{ $orphanDropdownSort == 'Abjad Nama' ? 'selected' : null }}>Abjad Nama</option>
-            <option value="Total Kursus Berhasil" {{ $orphanDropdownSort == 'Total Kursus Berhasil' ? 'selected' : null }}>Jumlah Kursus</option>
-            <option value="Total Rekomendasi Lomba" {{ $orphanDropdownSort == 'Total Rekomendasi Lomba' ? 'selected' : null }}>Total Rekomendasi Lomba
+            <option value="Total Kursus Berhasil"
+                {{ $orphanDropdownSort == 'Total Kursus Berhasil' ? 'selected' : null }}>Jumlah Kursus</option>
+            <option value="Total Rekomendasi Lomba"
+                {{ $orphanDropdownSort == 'Total Rekomendasi Lomba' ? 'selected' : null }}>Total Rekomendasi
             </option>
         </select>
 
@@ -32,7 +33,7 @@
         </a>
     </div>
 
-    <p class="text-0xl leading-6 text-gray-500">
+    <p class="text-xl leading-6 text-gray-500">
         Jumlah anak: {{ count($orphans) }}
     </p>
 
@@ -53,17 +54,19 @@
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
                         Total Rekomendasi Lomba</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                        Note</th>
+                        Catatan</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                        Terakhir Dirubah</th>
+                        Terakhir Diubah</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
                         Tanggal Ditambahkan</th>
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                        Aksi</th>
                 </tr>
             </thead>
             @if (!$orphans)
                 <tbody class="bg-white">
                     <tr>
-                        <td colspan="2" class="px-3 py-4">
+                        <td colspan="10" class="px-3 py-4">
                             <div
                                 class="grid gap-2 border-2 border-gray-300 border-dashed rounded p-2 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -88,15 +91,19 @@
                                     {{ $item['name'] }}
                                 @else
                                     <input type="text" wire:model.defer="orphans.{{ $index }}.name"
-                                        class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" />
+                                        class="rounded-md shadow-sm font-medium border-transparent focus:border-transparent focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" />
                                 @endif
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 @if ($editedOrphanIndex !== $index)
-                                    {{ $item['gender'] }}
+                                    @if ($item['gender'] == 'Male')
+                                        Pria
+                                    @else
+                                        Wanita
+                                    @endif
                                 @else
                                     <input type="text" wire:model.defer="orphans.{{ $index }}.gender"
-                                        class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" />
+                                        class="rounded-md shadow-sm font-medium border-transparent focus:border-transparent focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" />
                                 @endif
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
@@ -104,21 +111,25 @@
                                     {{ date_format(date_create($item['date_of_birth']), 'l, d F Y, H:i A') }}
                                 @else
                                     <input type="text" wire:model.defer="orphans.{{ $index }}.date_of_birth"
-                                        class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" />
+                                        class="rounded-md shadow-sm font-medium border-transparent focus:border-transparent focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" />
                                 @endif
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
-                               0
+                                0
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 0
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 @if ($editedOrphanIndex !== $index)
-                                    {{ $item['note'] }}
+                                    @if ($item['note'] == null)
+                                        {{ '-' }}
+                                    @else
+                                        {{ $item['note'] }}
+                                    @endif
                                 @else
                                     <input type="text" wire:model.defer="orphans.{{ $index }}.note"
-                                        class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" />
+                                        class="rounded-md shadow-sm font-medium border-transparent focus:border-transparent focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer" />
                                 @endif
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
@@ -129,15 +140,16 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 @if ($editedOrphanIndex !== $index)
-                                    <button wire:click.prevent='editOrphan({{ $index }})'> Edit
-                                    </button>
+                                    <x-primary-button wire:click.prevent='editOrphan({{ $index }})'>Ubah
+                                    </x-primary-button>
                                 @else
-                                    <button wire:click.prevent='saveOrphan({{ $index }})'> Simpan
-                                    </button>
+                                    <x-primary-button wire:click.prevent='saveOrphan({{ $index }})'>Simpan
+                                    </x-primary-button>
                                 @endif
                             </td>
-                            <td> <button wire:click.prevent='deleteOrphan({{ $index }})'> Hapus
-                                </button>
+                            <td>
+                                <x-primary-button class="bg-red-500"
+                                    wire:click.prevent='deleteOrphan({{ $index }})'>Hapus</x-primary-button>
                             </td>
                         </tr>
                     @endforeach
