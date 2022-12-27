@@ -1,18 +1,32 @@
 <div class="space-y-8">
-    {{-- Breadcrumb --}}
     <x-kursus.tutor.detail-tutor.detail-reservasi.breadcrumb>
         <x-slot:page1>Kursus</x-slot:page1>
         <x-slot:page2>Tutor</x-slot:page2>
-        <x-slot:page3>Profil Tutor</x-slot:page3>
-        <x-slot:page4>Detail Reservasi</x-slot:page4>
+        <x-slot:page3>Detail Kursus</x-slot:page3>
+        <x-slot:page4>Reservasi Kursus</x-slot:page4>
     </x-kursus.tutor.detail-tutor.detail-reservasi.breadcrumb>
 
-    {{-- Title --}}
-    <h3 class="text-3xl leading-10 font-bold">{{ 'Detail Reservasi' }}</h3>
+    <p class="text-3xl leading-10 font-bold">{{ 'Detail Reservasi' }}</p>
 
     <div class="flex p-8 bg-white rounded-2xl shadow">
         <div class="w-full space-y-8">
             <div class="space-y-4">
+<<<<<<< HEAD
+=======
+                <div class="flex justify-between items-center">
+                    <p class="text-lg leading-8 font-semibold text-gray-700">
+                        Peserta Kursus
+                    </p>
+                    <a wire:click='' class="cursor-pointer" title="Tambah">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-blue-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                    </a>
+                </div>
+                <form method="POST" action="{{ route('dasbor') }}">
+                    @csrf
+>>>>>>> 872ac09db747d95d98e59428e7a0b393946c2ebf
 
             </div>
             <div class="space-y-4">
@@ -25,11 +39,11 @@
                         <x-slot:for>tanggal_mulai_kursus</x-slot:for>
                         <x-slot:slot>Tanggal Mulai Kursus</x-slot:slot>
                     </x-label>
-                    <x-input>
+                    <x-input class="cursor-text">
                         <x-slot:type>date</x-slot:type>
                         <x-slot:name>tanggal_mulai_kursus</x-slot:name>
                         <x-slot:id>tanggal_mulai_kursus</x-slot:id>
-                        <x-slot:placeholder>01/11/2022</x-slot:placeholder>
+                        <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
                     </x-input>
                 </div>
 
@@ -39,7 +53,7 @@
                         <x-slot:slot>Total Jumlah Pertemuan</x-slot:slot>
                     </x-label>
                     <x-input>
-                        <x-slot:type>text</x-slot:type>
+                        <x-slot:type>number</x-slot:type>
                         <x-slot:name>total_jumlah_pertemuan</x-slot:name>
                         <x-slot:id>total_jumlah_pertemuan</x-slot:id>
                         <x-slot:placeholder>20</x-slot:placeholder>
@@ -55,16 +69,25 @@
                         <x-slot:type>text</x-slot:type>
                         <x-slot:name>lokasi_kursus_luring</x-slot:name>
                         <x-slot:id>lokasi_kursus_luring</x-slot:id>
-                        <x-slot:placeholder>Sinar Bangsa</x-slot:placeholder>
+                        <x-slot:placeholder>Jl. Pahlawan No. 2B</x-slot:placeholder>
                     </x-input>
                 </div>
             </div>
             <div class="space-y-4">
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center">
                     <p class="text-lg leading-8 font-semibold text-gray-700">
                         Jadwal Mingguan
                     </p>
+<<<<<<< HEAD
                     <x-primary-button wire:click="addDay" class="w-fit">{{ __('Tambah Jadwal') }}</x-primary-button>
+=======
+                    <a wire:click='' class="cursor-pointer" title="Tambah">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-blue-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                    </a>
+>>>>>>> 872ac09db747d95d98e59428e7a0b393946c2ebf
                 </div>
                 @for ($dayCount; $dayCount > 0; $dayCount--)
                     <div class="flex gap-4 items-center">

@@ -5,22 +5,30 @@ namespace App\Http\Livewire;
 use App\Models\Donation;
 use App\Models\Orphanage;
 use App\Models\Transaction;
+use App\Models\User;
 use Livewire\Component;
 
 class DonationDelivery extends Component
 {
     public $orphanages;
-public $selectedOrphanage;
+    public $selectedOrphanage;
     public $donator_name;
     public $amount;
     public $message;
+    public $target;
+
     public function render()
     {
-        return view('livewire.donation-delivery')->with('orphanages', $this->orphanages);
+        return view('livewire.donation-delivery');
     }
 
-    public function mount()
+    public function mount($user_id)
     {
+        $this->target = User::find($user_id)->orphanage;
+        if (auth()->user()) {
+            $this->donator_name = auth()->user()->name;
+        }
+
         $this->setOrphanages();
     }
 
@@ -31,7 +39,7 @@ public $selectedOrphanage;
 
     public function saveDonation()
     {
-        $a = Transaction::create(
+        $transaction = Transaction::create(
             [
                 'user_id' => $this->selectedOrphanage,
                 'to_user_id' => $this->selectedOrphanage,
@@ -45,8 +53,9 @@ public $selectedOrphanage;
             'donator_name' => $this->donator_name,
             'amount' => $this->amount,
             'message' => $this->message,
-            'transaction_id' => $a->id,
+            'transaction_id' => $transaction->id,
         ]);
-        return redirect(route('midtrans', $a->id));
+
+        return redirect(route('midtrans', $transaction->id));
     }
 }

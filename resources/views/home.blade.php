@@ -2,8 +2,8 @@
 
 <x-guest-layout>
     {{-- Hero --}}
-    <div class="flex flex-col space-y-10 md:space-y-4">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
+    <div class="flex flex-col space-y-10">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
             <div class="flex flex-col space-y-0 md:space-y-4 justify-center">
                 <div class="space-y-2">
                     <p class="text-4xl font-extrabold">
@@ -13,13 +13,16 @@
                         anak-anak Panti Asuhan melalui D&#39;Orphan</p>
                     <br>
                 </div>
-                <div>
+                <div class="grid gap-4 md:grid lg:flex">
                     <a href="{{ route('kursus') }}">
-                        <x-home.hero-button>Temukan Tutor</x-home.hero-button>
+                        <x-home.hero-primary-button>Temukan Tutor</x-home.hero-primary-button>
+                    </a>
+                    <a href="{{ route('donasi') }}">
+                        <x-home.hero-secondary-button>Salurkan Donasi</x-home.hero-secondary-button>
                     </a>
                 </div>
             </div>
-            <div class="hidden md:block">
+            <div class="hidden lg:block">
                 <img src="{{ url('img/home-hero.svg') }}" alt="Bakat Minat">
             </div>
         </div>
@@ -38,7 +41,7 @@
     {{-- Fitur --}}
     <div class="flex flex-col space-y-4" id="fitur">
         <div>
-            <h3 class="text-3xl leading-10 font-bold">Kenali D&#39;Orphan lebih lanjut</h3>
+            <p class="text-3xl leading-10 font-bold">Kenali D&#39;Orphan lebih lanjut</p>
             <div class="text-xl leading-8 text-gray-500">
                 <span class="font-bold">D'Orphan</span>&nbsp;<span>adalah Pengembangan Aplikasi Web
                     untuk Mengasah Bakat dan Minat Anak
@@ -98,7 +101,7 @@
     {{-- SDGs --}}
     <div class="flex flex-col space-y-4">
         <div>
-            <h3 class="text-3xl leading-10 font-bold">Mendukung Sustainable Development Goals &#40;SDGs&#41;</h3>
+            <p class="text-3xl leading-10 font-bold">Mendukung Sustainable Development Goals &#40;SDGs&#41;</p>
             <p class="text-xl leading-8 text-gray-500">Marilah bersama-sama turut mewujudkan kelancaran SDGs</p>
         </div>
         <div class="space-y-2">
@@ -152,7 +155,7 @@
     {{-- Kategori --}}
     <div class="flex flex-col space-y-4">
         <div>
-            <h3 class="text-3xl leading-10 font-bold">Beragam kategori kursus tersedia</h3>
+            <p class="text-3xl leading-10 font-bold">Beragam kategori kursus tersedia</p>
         </div>
         <div>
             <img src="{{ url('img/home-kategori.jpg') }}" alt="Kategori" />
@@ -171,12 +174,12 @@
                 </svg>
             </div>
             <div>
-                <h3 class="text-3xl text-white leading-10 font-bold">Bergabung sebagai Tutor handal</h3>
+                <p class="text-3xl text-white leading-10 font-bold">Bergabung sebagai Tutor handal</p>
                 <p class="text-xl leading-8 text-gray-200">Berbagi pengalaman dan sebarkan ilmu untuk mempertajam
                     kemampuan peserta kursus Anda</p>
             </div>
             <div class="w-fit">
-                <a href="{{ route('register') }}">
+                <a href="{{ route('register', 'Tutor') }}">
                     <x-primary-button>Berikan Kursus</x-primary-button>
                 </a>
             </div>
@@ -187,7 +190,7 @@
     <div class="bg-donasi-background flex flex-col items-center rounded-2xl shadow gap-4 p-8">
         <img src="{{ url('img/home-donasi-illustration.svg') }}" alt="Donasi" />
         <div class="text-center">
-            <h3 class="text-3xl leading-10 font-bold">Donasi praktis</h3>
+            <p class="text-3xl leading-10 font-bold">Donasi praktis</p>
             <p class="text-xl leading-8 text-gray-500">Mewadahi kemudahan proses berdonasi dari para Donatur untuk
                 Panti Asuhan</p>
         </div>

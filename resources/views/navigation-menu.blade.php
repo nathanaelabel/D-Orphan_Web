@@ -13,29 +13,34 @@
                     @auth
                         <a href="{{ route('dasbor') }}"
                             class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Dasbor</a>
-                    @endauth
-                    <a href="{{ route('kursus') }}"
-                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kursus</a>
-                    <a href="{{ route('lomba') }}"
-                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Lomba</a>
-                    @auth
+                        @if (Auth::user()->user_type == 'Pengurus Panti')
+                            <a href="{{ route('kelola-panti') }}"
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kelola</a>
+                        @endif
+                        <a href="{{ route('kursus') }}"
+                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kursus</a>
+                        <a href="{{ route('lomba') }}"
+                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Lomba</a>
                         @if (Auth::user()->user_type == 'Tutor')
                             <a href="{{ route('donasi') }}"
                                 class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Donasi</a>
                         @endif
                     @endauth
+                    {{--
                     @guest
                         <a href="{{ route('donasi') }}"
                             class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Donasi</a>
                     @endguest
+                    --}}
                 </div>
             </div>
             @auth
                 <div class="hidden sm:ml-6 sm:flex sm:items-center">
                     <!-- Profile dropdown -->
                     <span
-                        class="inline-flex items-center px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 border-b-2 border-gray-200"><svg
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        class="inline-flex items-center px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 border-b-2 border-gray-200"
+                        title="Saldo {{ Auth::user()->name }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
@@ -45,21 +50,25 @@
                     <div class="ml-3 relative">
                         <div>
                             <button type="button"
-                                class="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                class="bg-white rounded-full flex focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:scale-100"
                                 id="user-menu-button" aria-expanded="false" aria-haspopup="true" @click="open=!open">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="">
+                                @if (Auth::user()->profile_photo_path != null)
+                                    <img src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
+                                        class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
+                                @else
+                                    <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"
+                                        class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
+                                @endif
                             </button>
                         </div>
                         <!-- Dropdown menu, show/hide based on menu state.
-                                                                                                                                                                                                    Entering: "transition ease-out duration-200"
-                                                                                                                                                                                                    From: "transform opacity-0 scale-95"
-                                                                                                                                                                                                    To: "transform opacity-100 scale-100"
-                                                                                                                                                                                                    Leaving: "transition ease-in duration-75"
-                                                                                                                                                                                                    From: "transform opacity-100 scale-100"
-                                                                                                                                                                                                    To: "transform opacity-0 scale-95" -->
+                                                                                                                                                                                                                                                                    Entering: "transition ease-out duration-200"
+                                                                                                                                                                                                                                                                    From: "transform opacity-0 scale-95"
+                                                                                                                                                                                                                                                                    To: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                                                    Leaving: "transition ease-in duration-75"
+                                                                                                                                                                                                                                                                    From: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                                                    To: "transform opacity-0 scale-95" -->
                         <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             x-show="open">
@@ -70,8 +79,8 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <button type="submit" class="block px-4 py-2 text-red-500 active:scale-100" role="menuitem"
-                                    tabindex="-1" id="user-menu-item-2">Keluar</button>
+                                <button type="submit" class="w-full text-start px-4 py-2 text-red-500 active:scale-100"
+                                    role="menuitem" tabindex="-1" id="user-menu-item-2">Keluar</button>
                             </form>
                         </div>
                     </div>
@@ -126,33 +135,49 @@
             @auth
                 <a href="{{ route('dasbor') }}"
                     class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'text-blue-500 font-semibold' : '' }}">Dasbor</a>
+                @if (Auth::user()->user_type == 'Pengurus Panti')
+                    <a href="{{ route('kelola-panti') }}"
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'text-blue-500 font-semibold' : '' }}">Kelola</a>
+                @endif
+                <a href="{{ route('kursus') }}"
+                    class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'text-blue-500 font-semibold' : '' }}">Kursus</a>
+                <a href="{{ route('lomba') }}"
+                    class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'text-blue-500 font-semibold' : '' }}">Lomba</a>
+                @if (Auth::user()->user_type == 'Tutor')
+                    <a href="{{ route('donasi') }}"
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'text-blue-500 font-semibold' : '' }}">Donasi</a>
+                @endif
             @endauth
-            <a href="{{ route('kursus') }}"
-                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'text-blue-500 font-semibold' : '' }}">Kursus</a>
-            <a href="{{ route('lomba') }}"
-                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'text-blue-500 font-semibold' : '' }}">Lomba</a>
-            <a href="{{ route('donasi') }}"
+            @guest
+                {{-- <a href="{{ route('donasi') }}"
                 class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'text-blue-500 font-semibold' : '' }}">Donasi</a>
-            <div class="grid gap-4">
-                <a href="{{ route('login') }}">
-                    <x-secondary-button>
-                        Masuk
-                    </x-secondary-button>
-                </a>
-                <a href="{{ route('register') }}">
-                    <x-primary-button>
-                        Daftar
-                    </x-primary-button>
-                </a>
-            </div>
+            --}}
+
+                <div class="grid gap-4">
+                    <a href="{{ route('login') }}">
+                        <x-secondary-button>
+                            Masuk
+                        </x-secondary-button>
+                    </a>
+                    <a href="{{ route('register') }}">
+                        <x-primary-button>
+                            Daftar
+                        </x-primary-button>
+                    </a>
+                </div>
+            @endguest
         </div>
         @auth
             <div class="py-3 border-t border-gray-200">
                 <div class="flex items-center px-4">
                     <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full"
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt="Foto Profil">
+                        @if (Auth::user()->profile_photo_path != null)
+                            <img src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
+                                class="h-10 w-10 rounded-full" title="{{ Auth::user()->user_type }}">
+                        @else
+                            <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"
+                                class="h-10 w-10 rounded-full" title="{{ Auth::user()->user_type }}">
+                        @endif
                     </div>
                     <div class="ml-3">
                         <div class="text-base font-medium text-gray-800">{{ Auth::user()->name }}</div>
@@ -161,8 +186,9 @@
                 </div>
                 <div class="mt-3 space-y-1">
                     <span
-                        class="inline-flex items-center mx-4 px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 border-b-2 border-gray-200"><svg
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        class="inline-flex items-center mx-4 px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 border-b-2 border-gray-200"
+                        title="Saldo {{ Auth::user()->name }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
@@ -175,8 +201,8 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <button type="submit" class="block px-4 py-2 text-red-500" role="menuitem" tabindex="-1"
-                            id="user-menu-item-2">Keluar</button>
+                        <button type="submit" class="w-full text-start px-4 py-2 text-red-500 active:scale-100"
+                            role="menuitem" tabindex="-1" id="user-menu-item-2">Keluar</button>
                     </form>
                 </div>
             </div>

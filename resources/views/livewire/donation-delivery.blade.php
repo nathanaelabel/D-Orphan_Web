@@ -11,9 +11,9 @@
                             <div class="w-full max-w-lg mx-auto space-y-10">
                                 <!-- Header -->
                                 <div class="text-center">
-                                    <h3 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
+                                    <p class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Salurkan donasi
-                                    </h3>
+                                    </p>
                                     <p class="text-gray-500">
                                         Mari berbagi kasih dengan anak-anak Panti Asuhan
                                     </p>
@@ -21,23 +21,13 @@
                                 <!-- END Header -->
 
                                 <!-- Donation Form -->
-
                                 <div class="mt-4 space-y-4">
                                     <div class="space-y-1">
                                         <x-label>
                                             <x-slot:for>nama_panti_asuhan</x-slot:for>
-                                            <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
+                                            <x-slot:slot>Panti Asuhan yang dituju&#58;</x-slot:slot>
                                         </x-label>
-                                        <span class="text-sm text-red-700">&#42;</span>
-                                        <x-select wire:model="selectedOrphanage" name="orphanage">
-                                            <x-slot:id>nama_panti_asuhan</x-slot:id>
-                                            <x-slot:name>nama_panti_asuhan</x-slot:name>
-                                            <x-slot:option>
-                                                @foreach ($orphanages as $orphanage)
-                                                    <option value="{{ $orphanage->user->id }}">{{ $orphanage->name }}</option>
-                                                @endforeach
-                                            </x-slot:option>
-                                        </x-select>
+                                        <strong>{{ $target->name }}</strong>
                                     </div>
                                     <div class="space-y-1">
                                         <x-label>
@@ -45,10 +35,10 @@
                                             <x-slot:slot>Nama Donatur</x-slot:slot>
                                         </x-label>
                                         <x-input wire:model="donator_name">
-                                            <x-slot:type>text</x-slot:type>
+                                            <x-slot:type>search</x-slot:type>
                                             <x-slot:name>nama_donatur</x-slot:name>
                                             <x-slot:id>nama_donatur</x-slot:id>
-                                            <x-slot:placeholder>Surya Candra</x-slot:placeholder>
+                                            <x-slot:placeholder>Jane Doe</x-slot:placeholder>
                                         </x-input>
                                     </div>
                                     <div class="space-y-1">
@@ -62,7 +52,7 @@
                                                 class="absolute inset-y-0 left-0 pl-3 text-gray-700 flex items-center pointer-events-none">
                                                 <p>Rp</p>
                                             </div>
-                                            <x-input wire:model="amount" class="pl-10">
+                                            <x-input wire:model="amount" min="10000" class="pl-10">
                                                 <x-slot:type>number</x-slot:type>
                                                 <x-slot:name>nominal_donasi</x-slot:name>
                                                 <x-slot:id>nominal_donasi</x-slot:id>
@@ -87,7 +77,8 @@
                                 </div>
 
                                 <div class="mt-6">
-                                    <x-primary-button wire:click="saveDonation">{{ __('Sumbang') }}</x-primary-button>
+                                    <x-primary-button wire:click="saveDonation">{{ __('Kirim Donasi') }}
+                                    </x-primary-button>
                                 </div>
                             </div>
                         </div>

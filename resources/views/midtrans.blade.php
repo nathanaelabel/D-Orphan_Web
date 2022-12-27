@@ -1,58 +1,50 @@
+@section('title', 'Konfirmasi Donasi')
+
 <x-guest-layout>
-
-
-
-    <div class="container pb-5 pt-5">
-        <div class="row">
-            <div class="col-12 col-md-8">
-                <div class="card shadow">
-                    <div class="card-header">
-                        <h5>Data Order</h5>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover table-condensed">
-                            <tr>
-                                <td>ID</td>
-                                <td><b>#{{ $order->id }}</b></td>
-                            </tr>
-                            <tr>
-                                <td>Total Sumbangan</td>
-                                <td><b>Rp {{ number_format(($order->amount+1/100*$order->amount), 2, ',', '.') }}</b></td>
-                            </tr>
-                            <tr>
-                                <td>Status Pembayaran</td>
-                                <td><b>
-                                        @if ($order->status == "pending")
-                                            Menunggu Pembayaran
-                                        @elseif ($order->status == "complete")
-                                            Sudah Dibayar
-                                        @else
-                                            Kadaluarsa
-                                        @endif
-                                    </b></td>
-                            </tr>
-                            <tr>
-                                <td>Tanggal</td>
-                                <td><b>{{ $order->created_at->format('d M Y H:i') }}</b></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="card shadow">
-                    <div class="card-header">
-                        <h5>Pembayaran</h5>
-                    </div>
-                    <div class="card-body">
-                        @if ($order->status == "pending")
-                            <button class="btn btn-primary" id="pay-button">Bayar Sekarang</button>
-                        @else
-                            Pembayaran berhasil
-                        @endif
-                    </div>
-                </div>
-            </div>
+    <div class="grid gap-6">
+        <div class="overflow-x-auto shadow rounded">
+            <table class="min-w-full">
+                <thead class="bg-gray-500 text-white">
+                    <tr>
+                        <th scope="col" colspan="2" class="sticky top-0 z-10 px-3 py-3.5 text-center font-semibold">
+                            Detail Donasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd:bg-white even:bg-gray-100">
+                        <td class="px-3 py-4 max-w-full whitespace-nowrap font-semibold">ID</td>
+                        <td class="px-3 py-4 w-full">&#35;{{ $order->id }}</td>
+                    </tr>
+                    <tr class="odd:bg-white even:bg-gray-100">
+                        <td class="px-3 py-4 max-w-full whitespace-nowrap font-semibold">Total Nominal</td>
+                        <td class="px-3 py-4 w-full">
+                            {{ 'Rp' . number_format($order->amount + (1 / 100) * $order->amount, 2, ',', '.') }}</td>
+                    </tr>
+                    <tr class="odd:bg-white even:bg-gray-100">
+                        <td class="px-3 py-4 max-w-full whitespace-nowrap font-semibold">Status Pembayaran</td>
+                        <td class="px-3 py-4 w-full">
+                            @if ($order->status == 'pending')
+                                Menunggu Pembayaran
+                            @elseif ($order->status == 'complete')
+                                Sudah Dibayar
+                            @else
+                                Kedaluwarsa
+                            @endif
+                        </td>
+                    </tr>
+                    <tr class="odd:bg-white even:bg-gray-100">
+                        <td class="px-3 py-4 max-w-full whitespace-nowrap font-semibold">Tanggal</td>
+                        <td class="px-3 py-4 w-full">{{ $order->created_at->format('d M Y H:i') }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            @if ($order->status == 'pending')
+                <x-primary-button id="pay-button">Kirim Donasi</x-primary-button>
+            @else
+                Pembayaran berhasil
+            @endif
         </div>
     </div>
 

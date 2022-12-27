@@ -38,6 +38,7 @@ class UserFactory extends Factory
             'user_type' => $faker->randomElement(['Pengurus Panti', 'Tutor']),
             'phone_number' => $faker->phoneNumber(),
             'address' => $faker->address(),
+            'profile_photo_path' => 'https://i.pravatar.cc/640?img=' . random_int(1, 70),
             'remember_token' => Str::random(10),
         ];
     }
@@ -70,7 +71,7 @@ class UserFactory extends Factory
         return $this->has(
             Team::factory()
                 ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
+                    return ['name' => $user->name . '\'s Team', 'user_id' => $user->id, 'personal_team' => true];
                 }),
             'ownedTeams'
         );

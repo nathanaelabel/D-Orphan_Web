@@ -20,7 +20,7 @@ class CompetitionRecommendationSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
         foreach (Competition::all() as $competition) {
-            CompetitionRecommendation::factory()->count(random_int(1, 5))->create([
+            CompetitionRecommendation::factory()->create([
                 'tutor_id' => $faker->randomElement(Tutor::all()->pluck('id')),
                 'orphanage_id' => $faker->randomElement(Orphanage::all()->pluck('id')),
                 'competition_id' => $competition->id,

@@ -18,9 +18,9 @@
                             <div class="w-full max-w-lg mx-auto space-y-10">
                                 <!-- Header -->
                                 <div class="text-center">
-                                    <h3 class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
+                                    <p class="text-3xl leading-9 font-extrabold inline-flex items-center mb-1">
                                         Selamat datang kembali
-                                    </h3>
+                                    </p>
                                     <p class="text-gray-500">
                                         Silakan masuk ke akun Anda
                                     </p>
@@ -42,21 +42,21 @@
                                     <div class="mt-4">
                                         <x-jet-label for="email" value="{{ __('Surel') }}" />
                                         <x-jet-input id="email" class="block mt-1 w-full" type="email"
-                                            name="email" :value="old('email')" required />
+                                            name="email" :value="old('email')" placeholder="johndoe@example.net" required />
                                     </div>
 
                                     <div class="mt-4">
                                         <x-jet-label for="password" value="{{ __('Kata Sandi') }}" />
                                         <x-jet-input id="password" class="block mt-1 w-full" type="password"
-                                            name="password" required autocomplete="new-password" />
+                                            name="password" placeholder="********" required autocomplete="new-password" />
                                     </div>
 
                                     <div class="flex justify-between mt-4">
-                                        <label for="remember_me" class="flex items-center">
+                                        <label for="remember_me" class="flex items-center cursor-pointer">
                                             <x-jet-checkbox
-                                                class="text-blue-500 focus:border-blue-300 focus:ring-blue-200"
+                                                class="peer/remember_me cursor-pointer focus:ring focus:ring-blue-500 focus:ring-opacity-50 checked:bg-blue-500"
                                                 id="remember_me" name="remember" />
-                                            <span class="ml-2 text-gray-900">{{ __('Ingat Saya') }}</span>
+                                            <span class="ml-2 text-gray-900 peer-checked/remember_me:text-blue-500 cursor-pointer">{{ __('Ingat Saya') }}</span>
                                         </label>
 
                                         @if (Route::has('password.request'))
