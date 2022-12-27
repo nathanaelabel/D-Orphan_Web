@@ -62,48 +62,12 @@
                                             autocomplete="name" />
                                     </div>
 
-                                    {{-- <div class="mt-4">
-                                        <x-jet-label for="role" value="{{ __('Jenis Kelamin') }}" />
-                                        <div class="flex gap-6 mt-1">
-                                            <div class="flex gap-2 cursor-pointer items-center">
-                                                <input id="Male"
-                                                    class="peer/Male checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
-                                                    type="radio" name="gender" value="Male"
-                                                    @if (count(request()->query()) == 0) checked @endif />
-                                                <label for="Male"
-                                                    class="peer-checked/Male:text-blue-500 cursor-pointer">Pria</label>
-                                            </div>
-                                            <div class="flex gap-2 cursor-pointer items-center">
-                                                <input id="Female"
-                                                    class="peer/Female checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
-                                                    type="radio" value="Female"
-                                                    @if (count(request()->query()) > 0) checked @endif name="gender" />
-                                                <label for="Female"
-                                                    class="peer-checked/Female:text-blue-500 cursor-pointer">Wanita</label>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
                                     <div class="mt-4">
                                         <x-jet-label for="email" value="{{ __('Surel') }}" />
                                         <x-jet-input id="email" class="block mt-1 w-full" type="email"
                                             name="email" :value="old('email')" placeholder="johndoe@example.net"
                                             required />
                                     </div>
-
-                                    {{-- <div class="mt-4">
-                                        <x-jet-label for="phone_number" value="{{ __('Nomor Telepon') }}" />
-                                        <x-jet-input id="phone_number" class="block mt-1 w-full" type="number"
-                                            name="phone_number" :value="old('phone_number')" placeholder="08XX-XXXX-XXXX"
-                                            required />
-                                    </div> --}}
-
-                                    {{-- <div class="mt-4">
-                                        <x-jet-label for="address" value="{{ __('Alamat') }}" />
-                                        <x-jet-input id="address" class="block mt-1 w-full" type="text"
-                                            name="address" :value="old('address')" placeholder="Jl. Pahlawan No.2B"
-                                            required />
-                                    </div> --}}
 
                                     <div class="mt-4">
                                         <x-jet-label for="password" value="{{ __('Kata Sandi') }}" />

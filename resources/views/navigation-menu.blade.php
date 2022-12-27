@@ -54,6 +54,8 @@
                                 id="user-menu-button" aria-expanded="false" aria-haspopup="true" @click="open=!open">
                                 <span class="sr-only">Open user menu</span>
                                 @if (Auth::user()->profile_photo_path != null)
+                                    {{-- <img src="/storage/{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
+                                        class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}"> --}}
                                     <img src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
                                         class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
                                 @else
@@ -63,12 +65,12 @@
                             </button>
                         </div>
                         <!-- Dropdown menu, show/hide based on menu state.
-                                                                                                                                                                                                                                                                    Entering: "transition ease-out duration-200"
-                                                                                                                                                                                                                                                                    From: "transform opacity-0 scale-95"
-                                                                                                                                                                                                                                                                    To: "transform opacity-100 scale-100"
-                                                                                                                                                                                                                                                                    Leaving: "transition ease-in duration-75"
-                                                                                                                                                                                                                                                                    From: "transform opacity-100 scale-100"
-                                                                                                                                                                                                                                                                    To: "transform opacity-0 scale-95" -->
+                                                                                                                                                                                                                                                                            Entering: "transition ease-out duration-200"
+                                                                                                                                                                                                                                                                            From: "transform opacity-0 scale-95"
+                                                                                                                                                                                                                                                                            To: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                                                            Leaving: "transition ease-in duration-75"
+                                                                                                                                                                                                                                                                            From: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                                                            To: "transform opacity-0 scale-95" -->
                         <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             x-show="open">
@@ -172,8 +174,10 @@
                 <div class="flex items-center px-4">
                     <div class="flex-shrink-0">
                         @if (Auth::user()->profile_photo_path != null)
+                            {{-- <img src="/storage/{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
+                                class="h-10 w-10 rounded-full" title="{{ Auth::user()->user_type }}"> --}}
                             <img src="{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
-                                class="h-10 w-10 rounded-full" title="{{ Auth::user()->user_type }}">
+                                class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
                         @else
                             <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"
                                 class="h-10 w-10 rounded-full" title="{{ Auth::user()->user_type }}">

@@ -84,7 +84,7 @@
         {{-- Kategori --}}
         <div>
             @if ($courseCategories->isEmpty())
-                <div class="grid gap-2 border-2 border-gray-300 border-dashed rounded p-2 place-items-center">
+                <div class="grid gap-2 p-2 place-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-24 h-24">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -98,7 +98,7 @@
                         <x-kursus.card>
                             <x-slot:image>{{ $item->photo_path }}</x-slot:image>
                             <x-slot:kategori>{{ $item->name }}</x-slot:kategori>
-                            <x-slot:jumlahTutor>{{ $item->courses }} Kursus</x-slot:jumlahTutor>
+                            <x-slot:jumlahTutor>{{ $item->courses->count() }} Kursus</x-slot:jumlahTutor>
                             <x-slot name="category_id">{{ $item->id }}</x-slot>
                             <x-slot:button>Selengkapnya</x-slot:button>
                         </x-kursus.card>
@@ -133,7 +133,7 @@
                     <tr>
                         <td colspan="6" class="px-3 py-4">
                             <div
-                                class="grid gap-2 border-2 border-gray-300 border-dashed rounded p-2 place-items-center">
+                                class="grid gap-2 p-2 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
                                     <path stroke-linecap="round" stroke-linejoin="round"

@@ -68,7 +68,7 @@
                     <tr>
                         <td colspan="10" class="px-3 py-4">
                             <div
-                                class="grid gap-2 border-2 border-gray-300 border-dashed rounded p-2 place-items-center">
+                                class="grid gap-2 p-2 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
