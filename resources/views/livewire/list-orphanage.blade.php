@@ -14,11 +14,11 @@
                 placeholder="Cari Panti Asuhan" wire:model="PASearch" />
         </div>
         {{-- Dropdown Sort --}}
-        {{-- <x-donasi.list-panti.dropdown>
+        {{-- <x-donasi.list-user.dropdown>
             <x-slot:id>sort_panti</x-slot:id>
             <x-slot:name>sort_panti</x-slot:name>
             <x-slot:option1>Abjad Nama</x-slot:option1>
-        </x-donasi.list-panti.dropdown> --}}
+        </x-donasi.list-user.dropdown> --}}
     </div>
 
     {{-- Panti Asuhan --}}
@@ -35,7 +35,7 @@
         @else
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($orphanages as $item)
-                    <x-donasi.list-panti.card>
+                    <x-donasi.list-user.card>
                         <x-slot:image>{{ $item->user->orphanage->photo_url }}</x-slot:image>
                         <x-slot:panti>{{ $item->name }}</x-slot:panti>
                         <x-slot:member_sum>{{ $item->member_count }} Anak Panti</x-slot:member_sum>
@@ -43,7 +43,7 @@
                         <x-slot:anak>{{ $item->user->orphanage->member_count . ' anak Panti' }}</x-slot:anak>
                         <x-slot name="user_id">{{ $item->user->id }}</x-slot>
                         <x-slot:button>Selengkapnya</x-slot:button>
-                    </x-donasi.list-panti.card>
+                    </x-donasi.list-user.card>
                 @endforeach
             </div>
         @endif

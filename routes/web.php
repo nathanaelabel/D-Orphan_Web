@@ -8,11 +8,14 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrphanageController;
 use App\Http\Controllers\OrphanCrController;
+use App\Http\Livewire\CompetitionRecommendation;
 use App\Http\Livewire\CourseTutor;
+use App\Http\Livewire\DetailCompetitionRecommendation;
 use App\Http\Livewire\DetailCourse;
-use App\Http\Livewire\DetailCourseTutor;
+use App\Http\Livewire\DetailCourseBooking;
 use App\Http\Livewire\DetailUser;
 use App\Http\Livewire\DonationDelivery;
+use App\Http\Livewire\KelolaPantiAsuhan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,11 +35,9 @@ Route::get('/', function () {
 Route::get('/donasi', function () {
     return view('list-orphanage');
 })->name('donasi');
-Route::get('/kirim-donasi', function () {
-    return view('donation');
-})->name('kirim-donasi');
+
 Route::get('/detail-user/{user_id}', DetailUser::class)->name('detail-user');
-Route::get('/kirim-donasi/{orphanage_id}', DonationDelivery::class)->name('kirim-donasi');
+Route::get('/kirim-donasi/{user_id}', DonationDelivery::class)->name('kirim-donasi');
 
 Route::get('/mydashboard', [DashboardController::class, 'index']);
 Route::get('/mydashboard/{status}/{courseBookingId}', [CourseBookingController::class, 'changeCourseBookingStatus']);
@@ -72,18 +73,16 @@ Route::middleware([
         return view('course');
     })->name('kursus');
     Route::get('/kursus/tutor/{skill_id}', CourseTutor::class)->name('tutor');
-    // Route::get('/kursus/tutor/detail-tutor/{course_id}', DetailTutor::class)->name('detail-tutor');
-    Route::get('/kursus/{course_id}', DetailCourse::class)->name('detail-kursus');
+     Route::get('/kursus/tutor/detail-kursus/{course_id}', DetailCourse::class)->name('detail-kursus');
+    Route::get('/course-booking/{course_booking_id}', DetailCourseBooking::class)->name('detail-course-booking');
     Route::get('/kursus/tutor/detail-tutor/{course_id}/detail-reservation', function () {
         return view('detail-reservation');
     })->name('detail-reservation');
     Route::get('/kursus/detail-kursus', function () {
         return view('detail-course-manage');
     })->name('detail-kelola-kursus');
-    Route::get('/lomba', function () {
-        return view('competition');
-    })->name('lomba');
-    Route::get('/detail-lomba', function () {
-        return view('detail-competition');
-    })->name('detail-lomba');
+
+    Route::get('/rekomendasi-lomba', CompetitionRecommendation::class)->name('lomba');
+    Route::get('/rekomendasi-lomba/detail-rekomendasi-lomba/{competition_recommendation_id}', DetailCompetitionRecommendation::class)->name('detail-competition-recommendation');
+    Route::get('/kelola-panti', KelolaPantiAsuhan::class)->name('kelola-panti');
 });

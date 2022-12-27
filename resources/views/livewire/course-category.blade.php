@@ -35,31 +35,41 @@
                     placeholder="Cari Kursus" wire:model="categorySearch" />
             </div>
             {{-- Dropdown Sort --}}
-            <x-kursus.dropdown>
-                <x-slot:id>sort_category</x-slot:id>
-                <x-slot:name>sort_category</x-slot:name>
-                <x-slot:option1>Abjad Kategori</x-slot:option1>
-                <x-slot:option2>Jumlah Tutor</x-slot:option2>
-            </x-kursus.dropdown>
+
+            <select id="sort_category" name="sort_category" wire:model="categoryDropdownSort"
+                class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                <option {{ $categoryDropdownSort == 'Abjad Kategori' ? 'selected' : null }}>Abjad Kategori</option>
+                <option {{ $categoryDropdownSort == 'Jumlah Kursus' ? 'selected' : null }}>Jumlah Kursus</option>
+            </select>
         </div>
-    @elseif ($activeTabCourseCategory == 'eksplor')
+    @endif
+    @if ($activeTabCourseCategory == 'kelola')
         <div class="flex justify-between gap-4 items-center">
             {{-- Search Bar --}}
             <div class="w-full relative">
                 <x-search-bar>
-                    <x-slot:placeholder>Cari Kursus</x-slot:placeholder>
+                    <x-slot:placeholder>Cari Kursusmu disini</x-slot:placeholder>
                 </x-search-bar>
-                <input type="search" name="search" id="search"
+                <input type="search" name="search_kelola" id="search_kelola"
                     class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                    placeholder="Cari Kursus" wire:model="categorySearch" />
+                    placeholder="Cari Kursusmu disini" wire:model="categoryKelolaSearch" />
             </div>
             {{-- Dropdown Sort --}}
-            <x-kursus.dropdown>
-                <x-slot:id>sort_category</x-slot:id>
-                <x-slot:name>sort_category</x-slot:name>
-                <x-slot:option1>Catur</x-slot:option1>
-                <x-slot:option2>Renang</x-slot:option2>
-            </x-kursus.dropdown>
+
+            <select id="sort_category_kelola" name="sort_category_kelola" wire:model="categoryKelolaDropdownSort"
+                class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                @if (!$skills)
+                    <option "selected">Tidak Ada Jadwal</option>
+                @else
+                    @foreach ($skills as $itemSkill)
+                        <option value="{{ $itemSkill->name }}"
+                            {{ $categoryKelolaDropdownSort == $itemSkill->name ? 'selected' : null }}>
+                            {{ $itemSkill->name }}
+                        </option>
+                    @endforeach
+                @endif
+            </select>
+
             {{-- Tambah Kursus --}}
             <a wire:click='' class="cursor-pointer" title="Tambah">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -118,7 +128,7 @@
                         Aksi</th>
                 </tr>
             </thead>
-            @if ($coursesTutor->isEmpty())
+            @if (!$coursesTutor)
                 <tbody class="bg-white">
                     <tr>
                         <td colspan="6" class="px-3 py-4">

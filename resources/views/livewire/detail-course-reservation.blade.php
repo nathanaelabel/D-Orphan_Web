@@ -2,8 +2,8 @@
     <x-kursus.tutor.detail-tutor.detail-reservasi.breadcrumb>
         <x-slot:page1>Kursus</x-slot:page1>
         <x-slot:page2>Tutor</x-slot:page2>
-        <x-slot:page3>Profil Tutor</x-slot:page3>
-        <x-slot:page4>Detail Reservasi</x-slot:page4>
+        <x-slot:page3>Detail Kursus</x-slot:page3>
+        <x-slot:page4>Reservasi Kursus</x-slot:page4>
     </x-kursus.tutor.detail-tutor.detail-reservasi.breadcrumb>
 
     <p class="text-3xl leading-10 font-bold">{{ 'Detail Reservasi' }}</p>

@@ -16,7 +16,7 @@ class TutorDayTimeRangeSeeder extends Seeder
     public function run()
     {
         foreach(Tutor::all() as $tutor){
-            TutorDayTimeRange::factory()->create([
+            TutorDayTimeRange::factory()->count(random_int(1, 20))->create([
                 'tutor_id'=>$tutor->id,
             ]);
         }

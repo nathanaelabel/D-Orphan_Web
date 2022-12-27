@@ -1,4 +1,4 @@
-@section('title', 'Detail Kursus')
+@section('title', 'Reservasi Kursus')
 
 <x-app-layout>
     <div>

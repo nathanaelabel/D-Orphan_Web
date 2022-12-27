@@ -14,9 +14,11 @@ class DetailUser extends Component
     public $skillsId = [];
     public $skills = [];
     public $courseBookingDone;
+    public $orphans;
 
     public function render()
     {
+        
         return view('livewire.detail-user');
     }
 
@@ -24,8 +26,11 @@ class DetailUser extends Component
     {
         if (auth()->user()->user_type == 'Tutor') {
             $this->user = User::find($user_id)->orphanage;
+            $this->orphans = $this->user->orphans->toArray();
         } else {
             $this->user = User::find($user_id)->tutor;
+            $getCourseTutors = Course::where('tutor_id', $this->user->id)->pluck('id');
+            $this->courseBookingDone = CourseBooking::whereIn('course_id', $getCourseTutors)->where('status', 'complete')->get();
             $getSkillsId = $this->user->courses->pluck('skill_id');
 
             for ($i = 0; $i < count($getSkillsId); ++$i) {
@@ -34,8 +39,6 @@ class DetailUser extends Component
                     array_push($this->skills, Skill::find($getSkillsId[$i])->name);
                 }
             }
-            $getCourseTutors=Course::where('tutor_id', $user_id)->pluck('id');
-            $this->courseBookingDone = CourseBooking::whereIn('course_id', $getCourseTutors)->where('status', 'complete')->get();
         }
     }
 }

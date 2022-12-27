@@ -15,4 +15,8 @@ class OrphanCr extends Model
     {
         return $this->belongsTo(Orphan::class);
     }
+    public function competitionRecommendation()
+    {
+        return $this->belongsTo(CompetitionRecommendation::class);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Donation;
 use App\Models\Orphanage;
 use App\Models\Transaction;
+use App\Models\User;
 use Livewire\Component;
 
 class DonationDelivery extends Component
@@ -21,9 +22,9 @@ class DonationDelivery extends Component
         return view('livewire.donation-delivery');
     }
 
-    public function mount($orphanage_id)
+    public function mount($user_id)
     {
-        $this->target = Orphanage::find($orphanage_id);
+        $this->target = User::find($user_id)->orphanage;
         if (auth()->user()) {
             $this->donator_name = auth()->user()->name;
         }

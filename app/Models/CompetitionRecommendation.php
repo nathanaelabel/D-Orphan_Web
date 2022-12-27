@@ -15,4 +15,16 @@ class CompetitionRecommendation extends Model
     {
         return $this->belongsTo(Orphanage::class);
     }
+    public function competition()
+    {
+        return $this->belongsTo(Competition::class);
+    }
+    public function orphanCrs()
+    {
+        return $this->hasMany(OrphanCr::class);
+    }
+    public function tutor()
+    {
+        return $this->belongsTo(Tutor::class);
+    }
 }

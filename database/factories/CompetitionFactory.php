@@ -26,6 +26,7 @@ class CompetitionFactory extends Factory
             'registration_start_date' => $faker2->dateTimeBetween($startDate = '+ 10 days', $endDate = '+ 100 days', $timezone = null)->format('Y-m-d'),
             'registration_start_hour' => $faker2->dateTimeBetween($startDate = '+ 10 days', $endDate = '+ 100 days', $timezone = null)->format('H:i'),
             'url' => $faker2->url(),
+            'jenjang' => $faker2->randomElement(['Regional', 'Nasional', 'Internasional']),
             'description' => $faker->text(200),
         ];
     }

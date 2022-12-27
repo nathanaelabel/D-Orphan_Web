@@ -23,6 +23,11 @@
                             <a href="{{ route('donasi') }}"
                                 class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Donasi</a>
                         @endif
+
+                        @if (Auth::user()->user_type == 'Pengurus Panti')
+                            <a href="{{ route('kelola-panti') }}"
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kelola Panti Asuhan</a>
+                        @endif
                     @endauth
                     {{--
                     @guest
@@ -139,6 +144,10 @@
                 @if (Auth::user()->user_type == 'Tutor')
                     <a href="{{ route('donasi') }}"
                         class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'text-blue-500 font-semibold' : '' }}">Donasi</a>
+                @endif
+                @if (Auth::user()->user_type == 'Pengurus Panti')
+                    <a href="{{ route('kelola-panti') }}"
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'text-blue-500 font-semibold' : '' }}">Kelola Panti Asuhan</a>
                 @endif
             @endauth
             @guest

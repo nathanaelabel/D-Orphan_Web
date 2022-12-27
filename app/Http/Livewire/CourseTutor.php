@@ -10,29 +10,106 @@ use Livewire\Component;
 
 class CourseTutor extends Component
 {
-    public $courseTutors;
+    public $courseTutors = [];
     public $courseCategory;
     public $tutorSearch;
-    public $tutor;
-    public $user;
+
+    public $skill_id;
+    public $tutorDropdownSort;
 
     public function render()
     {
         if ($this->tutorSearch != null) {
-            $this->user = User::where('name', 'like', '%' . $this->tutorSearch . '%')->pluck('id');
-            $this->tutor = Tutor::whereIn('user_id', $this->user)->pluck('id');
-            $this->courseTutors = Course::whereIn('tutor_id', $this->tutor)->where('skill_id', $this->skill_id)->get();
+            if ($this->tutorDropdownSort == 'Abjad Nama') {
+                $array_userId = User::where('name', 'like', '%'.$this->tutorSearch.'%')
+                                ->where('user_type', 'Tutor')
+                                ->orderBy('name', 'ASC')
+                                ->pluck('id')->toArray();
+
+                if (count($array_userId) > 0) {
+                    $ids = $array_userId;
+                    $ids_ordered = implode(',', $ids);
+
+                    $array_tutorId = Tutor::whereIn('user_id', $array_userId)
+                                    ->orderByRaw("FIELD(user_id, $ids_ordered)")
+                                    ->pluck('id')->toArray();
+
+                    if (count($array_tutorId) > 0) {
+                        $ids = $array_tutorId;
+                        $ids_ordered = implode(',', $ids);
+                        $this->courseTutors = Course::whereIn('tutor_id', $array_tutorId)
+                                                ->where('skill_id', $this->skill_id)
+                                                ->orderByRaw("FIELD(tutor_id, $ids_ordered)")
+                                                ->get();
+                    }
+                }
+            } else {
+                $array_userId = User::where('name', 'like', '%'.$this->tutorSearch.'%')
+                ->where('user_type', 'Tutor')
+                ->orderBy('name', 'ASC')
+                ->pluck('id')->toArray();
+
+                if (count($array_userId) > 0) {
+                    $ids = $array_userId;
+                    $ids_ordered = implode(',', $ids);
+
+                    $array_tutorId = Tutor::whereIn('user_id', $array_userId)
+                    ->orderByRaw("FIELD(user_id, $ids_ordered)")
+                    ->pluck('id')->toArray();
+
+                    if (count($array_tutorId) > 0) {
+                        $ids = $array_tutorId;
+                        $ids_ordered = implode(',', $ids);
+                        $this->courseTutors = Course::whereIn('tutor_id', $array_tutorId)
+                                ->where('skill_id', $this->skill_id)
+                                ->orderBy('hourly_price', 'ASC')
+                                ->get();
+                    }
+                }
+            }
+
             $this->courseCategory = Skill::find($this->skill_id);
         } else {
+            if ($this->tutorDropdownSort == 'Abjad Nama') {
+                $array_userId = User::where('user_type', 'Tutor')->orderBy('name', 'ASC')->pluck('id')->toArray();
+
+                if (count($array_userId) > 0) {
+                    $ids = $array_userId;
+                    $ids_ordered = implode(',', $ids);
+
+                    $array_tutorId = Tutor::whereIn('user_id', $array_userId)
+                                    ->orderByRaw("FIELD(user_id, $ids_ordered)")
+                                    ->pluck('id')->toArray();
+
+                    if (count($array_tutorId) > 0) {
+                        $ids = $array_tutorId;
+                        $ids_ordered = implode(',', $ids);
+                        $this->courseTutors = Course::whereIn('tutor_id', $array_tutorId)
+                                                ->where('skill_id', $this->skill_id)
+                                                ->orderByRaw("FIELD(tutor_id, $ids_ordered)")
+                                                ->get();
+                    }
+                }
+            } else {
+                $this->courseTutors = Course::where('skill_id', $this->skill_id)
+                        ->orderBy('hourly_price', 'ASC')
+                        ->get();
+            }
+
             $this->courseCategory = Skill::find($this->skill_id);
-            $this->courseTutors = Skill::find($this->skill_id)->courses;
         }
 
         return view('livewire.course-tutor');
     }
-    
+
     public function mount($skill_id)
     {
         $this->skill_id = $skill_id;
+        $this->setTutorDropwdownSort('Abjad Nama');
+    }
+
+    public function setTutorDropwdownSort($tutorDropdownSortNew)
+    {
+        $this->tutorDropdownSort = $tutorDropdownSortNew;
     }
 }

@@ -99,7 +99,7 @@
                     </div>
 
                     <div>
-                        <a href="mailto:{{ $courseTutor->tutor->user->email }}">
+                        <a href="mailto:{{ $courseTutors->tutor->user->email }}">
                             <x-secondary-button>Kirim Surel</x-secondary-button>
                         </a>
                     </div>

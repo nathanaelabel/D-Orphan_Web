@@ -11,4 +11,14 @@ class Orphan extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function orphanCourseBookings()
+    {
+        return $this->hasMany(OrphanCourseBooking::class);
+    }
+
+    public function orphanCrs()
+    {
+        return $this->hasMany(OrphanCr::class);
+    }
 }
