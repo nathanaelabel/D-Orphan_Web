@@ -26,7 +26,7 @@ class KelolaPantiAsuhan extends Component
                 $this->orphans = Orphan::where('name', 'like', '%'.$this->orphanSearch.'%')
                                     ->where('orphanage_id', auth()->user()->orphanage->id)
                                     ->orderBy('name', 'ASC')
-                                    ->get();
+                                    ->get()->toArray();
             } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
                 $courseBookingOrdered = CourseBooking::where('orphanage_id', auth()->user()->orphanage->id)
                                         ->where('status', 'complete')->pluck('id')->toArray();
@@ -45,7 +45,7 @@ class KelolaPantiAsuhan extends Component
                                             ->where('name', 'like', '%'.$this->orphanSearch.'%')
                                             ->where('orphanage_id', auth()->user()->orphanage->id)
                                             ->orderByRaw("FIELD(id, $ids_ordered)")
-                                            ->get();
+                                            ->get()->toArray();
                     }
                 }
             } else {
@@ -68,7 +68,7 @@ class KelolaPantiAsuhan extends Component
                                             ->where('name', 'like', '%'.$this->orphanSearch.'%')
                                             ->where('orphanage_id', auth()->user()->orphanage->id)
                                             ->orderByRaw("FIELD(id, $ids_ordered)")
-                                            ->get();
+                                            ->get()->toArray();
                     }
                 }
             }
@@ -76,7 +76,7 @@ class KelolaPantiAsuhan extends Component
             if ($this->orphanDropdownSort == 'Abjad Nama') {
                 $this->orphans = Orphan::orderBy('name', 'ASC')
                                     ->where('orphanage_id', auth()->user()->orphanage->id)
-                                    ->get();
+                                    ->get()->toArray();
             } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
                 $courseBookingOrdered = CourseBooking::where('status', 'complete')
                 ->where('orphanage_id', auth()->user()->orphanage->id)
@@ -97,7 +97,7 @@ class KelolaPantiAsuhan extends Component
                         $this->orphans = Orphan::whereIn('id', $orphanOrdered)
                                             ->where('orphanage_id', auth()->user()->orphanage->id)
                                             ->orderByRaw("FIELD(id, $ids_ordered)")
-                                            ->get();
+                                            ->get()->toArray();
                     }
                 }
             
@@ -121,7 +121,7 @@ class KelolaPantiAsuhan extends Component
                         $this->orphans = Orphan::whereIn('id', $orphanOrdered)
                                             ->where('orphanage_id', auth()->user()->orphanage->id)
                                             ->orderByRaw("FIELD(id, $ids_ordered)")
-                                            ->get();
+                                            ->get()->toArray();
                     }
                 }
             }

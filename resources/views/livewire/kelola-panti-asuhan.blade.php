@@ -84,7 +84,7 @@
                     @foreach ($orphans as $index => $item)
                         <tr class="odd:bg-white even:bg-gray-100">
                             <td class="whitespace-nowrap px-3 py-4 w-fit">
-                                {{ $loop->iteration }}
+                                {{ $loop->iteration }}.{{ $item['orphanage_id'] }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 @if ($editedOrphanIndex !== $index)
