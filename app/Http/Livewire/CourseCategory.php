@@ -132,7 +132,7 @@ class CourseCategory extends Component
                 }
             }
         }
-
+        dd($this->courseCategories);
         return view('livewire.course-category');
     }
 

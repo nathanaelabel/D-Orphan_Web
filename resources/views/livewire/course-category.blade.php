@@ -98,7 +98,7 @@
                         <x-kursus.card>
                             <x-slot:image>{{ $item->photo_path }}</x-slot:image>
                             <x-slot:kategori>{{ $item->name }}</x-slot:kategori>
-                            <x-slot:jumlahTutor>{{ $item->courses->count() }} Kursus</x-slot:jumlahTutor>
+                            <x-slot:jumlahTutor>{{ $item->courses }} Kursus</x-slot:jumlahTutor>
                             <x-slot name="category_id">{{ $item->id }}</x-slot>
                             <x-slot:button>Selengkapnya</x-slot:button>
                         </x-kursus.card>

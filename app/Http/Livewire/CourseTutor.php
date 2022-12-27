@@ -96,10 +96,9 @@ class CourseTutor extends Component
                         ->orderBy('hourly_price', 'ASC')
                         ->get();
             }
-
+            
             $this->courseCategory = Skill::find($this->skill_id);
         }
-
         return view('livewire.course-tutor');
     }
 

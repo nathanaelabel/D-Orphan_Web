@@ -115,10 +115,10 @@
                                 @endif
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
-                                {{$sumcourses}}
+                                {{ $item['total_kursus'] }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
-                                {{$sumrecommendation}}
+                                {{ $item['total_lomba'] }} 
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 @if ($editedOrphanIndex !== $index)
