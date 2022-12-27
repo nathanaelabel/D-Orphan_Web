@@ -24,11 +24,12 @@ class DonationDelivery extends Component
 
     public function mount($user_id)
     {
+        $this->selectedOrphanage = User::find($user_id)->id;
+
         $this->target = User::find($user_id)->orphanage;
         if (auth()->user()) {
             $this->donator_name = auth()->user()->name;
         }
-
         $this->setOrphanages();
     }
 
