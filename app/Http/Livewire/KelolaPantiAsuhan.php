@@ -15,8 +15,8 @@ class KelolaPantiAsuhan extends Component
     public $orphans;
     public $editedOrphanIndex = null;
     public $orphanDropdownSort;
-    // public $coursesDoneOrphan;
-    // public $competitionRecommendation_sum;
+    public $sumcourses;
+    public $sumrecommendation;
 
     public function render()
     {
