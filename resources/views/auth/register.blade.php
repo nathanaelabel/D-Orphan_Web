@@ -47,8 +47,8 @@
                                             <div class="flex gap-2 cursor-pointer items-center">
                                                 <input id="tutor"
                                                     class="peer/tutor checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
-                                                    type="radio" value="Tutor"
-                                                    @if (count(request()->query()) > 0) checked @endif name="user_type" />
+                                                    type="radio" name="user_type" value="Tutor"
+                                                    @if (count(request()->query()) > 0) checked @endif />
                                                 <label for="tutor"
                                                     class="peer-checked/tutor:text-blue-500 cursor-pointer">Tutor</label>
                                             </div>

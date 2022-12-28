@@ -2,17 +2,17 @@
 
 <div class="space-y-8">
     {{-- Title --}}
-    <p class="text-3xl leading-10 font-bold">Kelola Data Anak Panti</p>
+    <p class="text-3xl leading-10 font-bold">Kelola Data Anak Panti Asuhan</p>
 
     <div class="flex justify-between gap-4 items-center">
         {{-- Search Bar --}}
         <div class="w-full relative">
             <x-search-bar>
-                <x-slot:placeholder>Cari Nama Anak Panti</x-slot:placeholder>
+                <x-slot:placeholder>Cari Nama Anak Panti Asuhan</x-slot:placeholder>
             </x-search-bar>
             <input type="search" name="search" id="search"
                 class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                placeholder="Cari Nama Anak Panti" wire:model="orphanSearch" />
+                placeholder="Cari Nama Anak Panti Asuhan" wire:model="orphanSearch" />
         </div>
 
         {{-- Dropdown Sort --}}
@@ -21,17 +21,18 @@
             <option value="Abjad Nama" {{ $orphanDropdownSort == 'Abjad Nama' ? 'selected' : null }}>Abjad Nama
             </option>
             <option value="Total Kursus Berhasil"
-                {{ $orphanDropdownSort == 'Total Kursus Berhasil' ? 'selected' : null }}>Jumlah Kursus</option>
+                {{ $orphanDropdownSort == 'Total Kursus Berhasil' ? 'selected' : null }}>Total Kursus</option>
             <option value="Total Rekomendasi Lomba"
                 {{ $orphanDropdownSort == 'Total Rekomendasi Lomba' ? 'selected' : null }}>Total Rekomendasi
             </option>
         </select>
 
         {{-- Tambah Anak Panti --}}
-        <a wire:click='toggleForm' class="cursor-pointer" title="Tambah Data">
+        <a wire:click='toggleForm' class="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6 text-blue-500">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                <title>Tambah Data</title>
             </svg>
         </a>
     </div>
@@ -39,62 +40,75 @@
     {{-- Tambah Anak Panti Form --}}
     @if ($showForm)
         <form wire:submit.prevent="addData">
-            <div class="space-y-1">
-                <x-label>
-                    <x-slot:for>name</x-slot:for>
-                    <x-slot:slot>Nama</x-slot:slot>
-                </x-label>
-                <x-input wire:model="name">
-                    <x-slot:type>text</x-slot:type>
-                    <x-slot:name>lokasi</x-slot:name>
-                    <x-slot:id>lokasi</x-slot:id>
-                    <x-slot:placeholder>Will Smith</x-slot:placeholder>
-                </x-input>
+            <div class="grid gap-2 bg-white rounded-2xl shadow px-8 py-6">
+                <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">Tambah Data Anak Panti Asuhan</p>
+                <hr class="my-2">
+                <div class="space-y-1">
+                    <x-label>
+                        <x-slot:for>name</x-slot:for>
+                        <x-slot:slot>Nama</x-slot:slot>
+                    </x-label>
+                    <x-input wire:model="name">
+                        <x-slot:type>text</x-slot:type>
+                        <x-slot:name>lokasi</x-slot:name>
+                        <x-slot:id>lokasi</x-slot:id>
+                        <x-slot:placeholder>Will Smith</x-slot:placeholder>
+                    </x-input>
+                </div>
+                <div class="space-y-1">
+                    <x-label>
+                        <x-slot:for>date_of_birth</x-slot:for>
+                        <x-slot:slot>Tanggal Lahir</x-slot:slot>
+                    </x-label>
+                    <x-input wire:model="date_of_birth" class="cursor-text">
+                        <x-slot:type>date</x-slot:type>
+                        <x-slot:name>date_of_birth</x-slot:name>
+                        <x-slot:id>date_of_birth</x-slot:id>
+                        <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
+                    </x-input>
+                </div>
+                <div>
+                    <x-label>
+                        <x-slot:for>gender</x-slot:for>
+                        <x-slot:slot>Jenis Kelamin</x-slot:slot>
+                    </x-label>
+                    <div class="flex gap-6 mt-1">
+                        <div class="flex gap-2 cursor-pointer items-center">
+                            <input wire:model="gender" id="male"
+                                class="peer/male checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
+                                type="radio" name="gender" value="Male"
+                                @if (count(request()->query()) == 0) checked @endif />
+                            <label for="male" class="peer-checked/male:text-blue-500 cursor-pointer">Pria</label>
+                        </div>
+                        <div class="flex gap-2 cursor-pointer items-center">
+                            <input wire:model="gender" id="female"
+                                class="peer/female checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
+                                type="radio" name="gender" value="Female"
+                                @if (count(request()->query()) > 0) checked @endif />
+                            <label for="female"
+                                class="peer-checked/female:text-blue-500 cursor-pointer">Wanita</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <x-label>
+                        <x-slot:for>note</x-slot:for>
+                        <x-slot:slot>Catatan</x-slot:slot>
+                    </x-label>
+                    <x-textarea wire:model="note">
+                        <x-slot:maxlength>255</x-slot:maxlength>
+                        <x-slot:placeholder>Masukkan keterangan</x-slot:placeholder>
+                    </x-textarea>
+                </div>
+                <div class="my-2">
+                    <button
+                        class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
+                        <p class="font-semibold text-white">Tambah Data</p>
+                    </button>
+                </div>
             </div>
-            <div class="space-y-1">
-                <x-label>
-                    <x-slot:for>date_of_birth</x-slot:for>
-                    <x-slot:slot>Tanggal Lahir</x-slot:slot>
-                </x-label>
-                <x-input wire:model="date_of_birth" class="cursor-text">
-                    <x-slot:type>date</x-slot:type>
-                    <x-slot:name>date_of_birth</x-slot:name>
-                    <x-slot:id>date_of_birth</x-slot:id>
-                    <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
-                </x-input>
-            </div>
-            <div class="space-y-1">
-                <x-label>
-                    <x-slot:for>gender</x-slot:for>
-                    <x-slot:slot>Jenis Kelamin</x-slot:slot>
-                </x-label>
-                <x-select wire:model="gender">
-                    <x-slot:id>gender</x-slot:id>
-                    <x-slot:name>gender</x-slot:name>
-                    <x-slot:option>
-                        <option value="Male" selected>Pria</option>
-                        <option value="Female">Wanita</option>
-                    </x-slot:option>
-                </x-select>
-            </div>
-            <div class="space-y-1">
-                <x-label>
-                    <x-slot:for>note</x-slot:for>
-                    <x-slot:slot>Catatan</x-slot:slot>
-                </x-label>
-                <x-textarea wire:model="note">
-                    <x-slot:maxlength>255</x-slot:maxlength>
-                    <x-slot:placeholder>Masukkan keterangan</x-slot:placeholder>
-                </x-textarea>
-            </div>
-            <button
-                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 
-                leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500'">
-                <p class="font-semibold text-white">Tambah Data</p>
-            </button>
         </form>
     @endif
-
 
     <div class="flex gap-2 items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -186,7 +200,7 @@
                             <td class="whitespace-nowrap
                                         px-3 py-4 w-full">
                                 @if ($editedOrphanIndex !== $index)
-                                    {{ date_format(date_create($item['date_of_birth']), 'l, d/m/Y, H:i A') }}
+                                    {{ date_format(date_create($item['date_of_birth']), 'l, d/m/Y, H:i') }}
                                 @else
                                     <x-input wire:model.defer="orphans.{{ $index }}.date_of_birth">
                                         <x-slot:type>date</x-slot:type>
