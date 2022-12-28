@@ -16,6 +16,7 @@ use App\Http\Livewire\DetailCourseBooking;
 use App\Http\Livewire\DetailUser;
 use App\Http\Livewire\DonationDelivery;
 use App\Http\Livewire\KelolaPantiAsuhan;
+use App\Http\Livewire\OrphanageOrphan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,4 +85,5 @@ Route::middleware([
     Route::get('/lomba', CompetitionRecommendation::class)->name('lomba');
     Route::get('/lomba/detail-lomba/{competition_recommendation_id}', DetailCompetitionRecommendation::class)->name('detail-competition-recommendation');
     Route::get('/kelola-panti', KelolaPantiAsuhan::class)->name('kelola-panti');
+    Route::get('/tambah-anak-panti', OrphanageOrphan::class)->name('tambah-anak-panti');
 });
