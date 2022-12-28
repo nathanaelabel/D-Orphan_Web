@@ -28,11 +28,11 @@
         </div>
 
         {{-- Dropdown Sort --}}
-            <select id="sort_tutor" name="sort_tutor" wire:model="tutorDropdownSort"
-                class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-                <option {{  $tutorDropdownSort == "Abjad Nama" ? "selected" : null }}>Abjad Nama</option>
-                <option {{  $tutorDropdownSort == "Tarif Per Jam" ? "selected" : null }}>Tarif Per Jam</option>
-            </select>
+        <select id="sort_tutor" name="sort_tutor" wire:model="tutorDropdownSort"
+            class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+            <option {{ $tutorDropdownSort == 'Abjad Nama' ? 'selected' : null }}>Abjad Nama</option>
+            <option {{ $tutorDropdownSort == 'Tarif Per Jam' ? 'selected' : null }}>Tarif Per Jam</option>
+        </select>
     </div>
 
     {{-- Tutor --}}
@@ -50,7 +50,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($courseTutors as $item)
                     <x-kursus.tutor.card>
-                    
+
                         <x-slot:image>{{ $item['tutor']['user']['profile_photo_path'] }}</x-slot:image>
                         <x-slot:nama>{{ $item['tutor']['user']['name'] }}</x-slot:nama>
                         <x-slot:tarif>{{ 'Rp' . number_format($item['hourly_price'], 2, ',', '.') . '/jam' }}

@@ -101,7 +101,7 @@
     {{-- SDGs --}}
     <div class="flex flex-col space-y-4">
         <div>
-            <p class="text-3xl leading-10 font-bold">Mendukung Sustainable Development Goals &#40;SDGs&#41;</p>
+            <p class="text-3xl leading-10 font-bold">Mendukung SDGs &#40;Sustainable Development Goals&#41;</p>
             <p class="text-xl leading-8 text-gray-500">Marilah bersama-sama turut mewujudkan kelancaran SDGs</p>
         </div>
         <div class="space-y-2">
@@ -110,8 +110,8 @@
                     <img src="{{ url('img/home-sdgs4.svg') }}" alt="SDGs 4" />
                 </div>
                 <div class="w-fit">
-                    <p class="text-lg leading-8 font-semibold">Gol ke&#45;4 &#40;Pendidikan Berkualitas&#41;</p>
-                    <q class="text-base">Menjamin Kualitas Pendidikan yang Inklusif dan Merata serta Meningkatkan
+                    <p class="text-lg leading-8 font-semibold">Gol ke&#45;4&#58; Pendidikan Berkualitas</p>
+                    <q class="text-gray-700">Menjamin Kualitas Pendidikan yang Inklusif dan Merata serta Meningkatkan
                         Kesempatan
                         Belajar Sepanjang Hayat untuk Semua</q>
                     <ul class="list-disc text-gray-500 ml-8">
@@ -134,9 +134,9 @@
                     <img src="{{ url('img/home-sdgs8.svg') }}" alt="SDGs 8" />
                 </div>
                 <div class="w-fit">
-                    <p class="text-lg leading-8 font-semibold">Gol ke&#45;8 &#40;Pekerjaan Layak dan Pertumbuhan
-                        Ekonomi&#41;</p>
-                    <q class="text-base">Meningkatkan Pertumbuhan Ekonomi yang Inklusif dan Berkelanjutan, Kesempatan
+                    <p class="text-lg leading-8 font-semibold">Gol ke&#45;8&#58; Pekerjaan Layak dan Pertumbuhan
+                        Ekonomi</p>
+                    <q class="text-gray-700">Meningkatkan Pertumbuhan Ekonomi yang Inklusif dan Berkelanjutan, Kesempatan
                         Kerja yang Produktif dan Menyeluruh, serta Pekerjaan yang Layak untuk Semua</q>
                     <ul class="list-disc text-gray-500 ml-8">
                         <li>Target ke&#45;8.3&#58; Menggalakkan kebijakan pembangunan yang mendukung kegiatan produktif,

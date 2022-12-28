@@ -23,49 +23,49 @@ class KelolaPantiAsuhan extends Component
         $this->orphans = [];
         $orphanOrdered_course = [];
         $orphanOrdered_Cr = [];
-        
+
         // Membuat daftar total kursus panti
         $courseBookingOrdered = CourseBooking::where('status', 'complete')
-                                            ->where('orphanage_id', auth()->user()->orphanage->id)
-                                            ->pluck('id')
-                                            ->toArray();
+            ->where('orphanage_id', auth()->user()->orphanage->id)
+            ->pluck('id')
+            ->toArray();
         if (count($courseBookingOrdered) > 0) {
             $orphanIdList = Orphan::where('orphanage_id', auth()->user()->orphanage->id)->pluck('id')->toArray();
             $orphanOrdered_course = OrphanCourseBooking::whereIn('course_booking_id', $courseBookingOrdered)
-                                    ->whereIn('orphan_id', $orphanIdList)
-                                    ->groupBy('orphan_id')
-                                    ->selectRaw('count(*) as total, orphan_id')
-                                    ->get();
+                ->whereIn('orphan_id', $orphanIdList)
+                ->groupBy('orphan_id')
+                ->selectRaw('count(*) as total, orphan_id')
+                ->get();
             $this->sumcourses = $orphanOrdered_course->pluck('total')->toArray();
             $orphanOrdered_course = $orphanOrdered_course->pluck('orphan_id')->toArray();
 
             $is0course = Orphan::where('orphanage_id', auth()->user()->orphanage->id)
-                                ->whereNotIn('id', $orphanOrdered_course)
-                                ->selectRaw('id, name, 0 as total')
-                                ->get();
+                ->whereNotIn('id', $orphanOrdered_course)
+                ->selectRaw('id, name, 0 as total')
+                ->get();
             $this->sumcourses = array_merge($is0course->pluck('total')->toArray(), $this->sumcourses);
             $orphanOrdered_course = array_merge($is0course->pluck('id')->toArray(), $orphanOrdered_course);
         }
 
         // Membuat daftar total lomba panti
         $competitionRecommendationOrdered = CompetitionRecommendation::where('orphanage_id', auth()->user()->orphanage->id)
-                                                        ->where('orphanage_id', auth()->user()->orphanage->id)
-                                                        ->pluck('id')
-                                                        ->toArray();
+            ->where('orphanage_id', auth()->user()->orphanage->id)
+            ->pluck('id')
+            ->toArray();
         if (count($competitionRecommendationOrdered) > 0) {
             $orphanIdList = Orphan::where('orphanage_id', auth()->user()->orphanage->id)->pluck('id')->toArray();
             $orphanOrdered_Cr = OrphanCr::whereIn('competition_recommendation_id', $competitionRecommendationOrdered)
-                                ->whereIn('orphan_id', $orphanIdList)
-                                ->groupBy('orphan_id')
-                                ->selectRaw('count(*) as total, orphan_id')
-                                ->get();
+                ->whereIn('orphan_id', $orphanIdList)
+                ->groupBy('orphan_id')
+                ->selectRaw('count(*) as total, orphan_id')
+                ->get();
             $this->sumrecommendation = $orphanOrdered_Cr->pluck('total')->toArray();
             $orphanOrdered_Cr = $orphanOrdered_Cr->pluck('orphan_id')->toArray();
 
             $is0Cr = Orphan::where('orphanage_id', auth()->user()->orphanage->id)
-                                ->whereNotIn('id', $orphanOrdered_Cr)
-                                ->selectRaw('id, name, 0 as total')
-                                ->get();
+                ->whereNotIn('id', $orphanOrdered_Cr)
+                ->selectRaw('id, name, 0 as total')
+                ->get();
             $this->sumrecommendation = array_merge($is0Cr->pluck('total')->toArray(), $this->sumrecommendation);
             $orphanOrdered_Cr = array_merge($is0Cr->pluck('id')->toArray(), $orphanOrdered_Cr);
         }
@@ -78,35 +78,35 @@ class KelolaPantiAsuhan extends Component
             $this->sumrecommendation = implode(',', $this->sumrecommendation);
 
             $this->orphans = Orphan::whereIn('id', $orphanOrdered_course)
-                                    ->where('orphanage_id', auth()->user()->orphanage->id)
-                                    ->selectRaw("*, ELT(FIELD(id, $ids_ordered_course), $this->sumcourses) as total_kursus
+                ->where('orphanage_id', auth()->user()->orphanage->id)
+                ->selectRaw("*, ELT(FIELD(id, $ids_ordered_course), $this->sumcourses) as total_kursus
                                                 , ELT(FIELD(id, $ids_ordered_Cr), $this->sumrecommendation) as total_lomba");
         }
 
         if ($this->orphanSearch != null) {
             if ($this->orphanDropdownSort == 'Abjad Nama') {
-                $this->orphans = $this->orphans->where('name', 'like', '%'.$this->orphanSearch.'%')
-                                                ->orderBy('name', 'ASC')
-                                                ->get()->toArray();
+                $this->orphans = $this->orphans->where('name', 'like', '%' . $this->orphanSearch . '%')
+                    ->orderBy('name', 'ASC')
+                    ->get()->toArray();
             } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
-                $this->orphans = $this->orphans->where('name', 'like', '%'.$this->orphanSearch.'%')
-                                                ->orderBy('total_kursus', 'ASC')
-                                                ->get()->toArray();
+                $this->orphans = $this->orphans->where('name', 'like', '%' . $this->orphanSearch . '%')
+                    ->orderBy('total_kursus', 'ASC')
+                    ->get()->toArray();
             } else {
-                $this->orphans = $this->orphans->where('name', 'like', '%'.$this->orphanSearch.'%')
-                                                ->orderBy('total_lomba', 'ASC')
-                                                ->get()->toArray();
+                $this->orphans = $this->orphans->where('name', 'like', '%' . $this->orphanSearch . '%')
+                    ->orderBy('total_lomba', 'ASC')
+                    ->get()->toArray();
             }
         } else {
             if ($this->orphanDropdownSort == 'Abjad Nama') {
                 $this->orphans = $this->orphans->orderBy('name', 'ASC')
-                                                ->get()->toArray();
+                    ->get()->toArray();
             } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
                 $this->orphans = $this->orphans->orderBy('total_kursus', 'ASC')
-                                                ->get()->toArray();
+                    ->get()->toArray();
             } else {
                 $this->orphans = $this->orphans->orderBy('total_lomba', 'ASC')
-                                                ->get()->toArray();
+                    ->get()->toArray();
             }
         }
 

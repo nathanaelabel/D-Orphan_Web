@@ -20,7 +20,9 @@ class CourseBooking extends Component
     public function mount()
     {
         if (Auth::user()->orphanage) {
-            $this->hasOrphanage == true;
+            $this->hasOrphanage = true;
+        } else {
+            $this->hasOrphanage = false;
         }
         $this->setTab('pending');
     }

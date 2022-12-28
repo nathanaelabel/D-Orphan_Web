@@ -11,8 +11,6 @@
     <div class="flex p-8 bg-white rounded-2xl shadow">
         <div class="w-full space-y-8">
             <div class="space-y-4">
-<<<<<<< HEAD
-=======
                 <div class="flex justify-between items-center">
                     <p class="text-lg leading-8 font-semibold text-gray-700">
                         Peserta Kursus
@@ -26,7 +24,6 @@
                 </div>
                 <form method="POST" action="{{ route('dasbor') }}">
                     @csrf
->>>>>>> 872ac09db747d95d98e59428e7a0b393946c2ebf
 
             </div>
             <div class="space-y-4">
@@ -78,16 +75,14 @@
                     <p class="text-lg leading-8 font-semibold text-gray-700">
                         Jadwal Mingguan
                     </p>
-<<<<<<< HEAD
+
                     <x-primary-button wire:click="addDay" class="w-fit">{{ __('Tambah Jadwal') }}</x-primary-button>
-=======
                     <a wire:click='' class="cursor-pointer" title="Tambah">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6 text-blue-500">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                     </a>
->>>>>>> 872ac09db747d95d98e59428e7a0b393946c2ebf
                 </div>
                 @for ($dayCount; $dayCount > 0; $dayCount--)
                     <div class="flex gap-4 items-center">
@@ -106,7 +101,6 @@
                                             <option>{{ $item->day }}</option>
                                         @endforeach
                                     </x-slot:option>
-
 
                                 </x-kursus.tutor.detail-tutor.detail-reservasi.select>
                             </div>
@@ -169,20 +163,20 @@
                             <x-slot:name>nama_peserta_kursus</x-slot:name>
                             <x-slot:option>
                                 @foreach (Auth::user()->orphanage->orphans as $item)
-                                    <option value="{{$item->id}}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </x-slot:option>
 
                         </x-kursus.tutor.detail-tutor.detail-reservasi.select>
-                        <x-primary-button wire:click="addStudent({{$currentStudent}})" class=" w-max">{{ __('Tambah Peserta') }}</x-primary-button>
+                        <x-primary-button wire:click="addStudent({{ $currentStudent }})" class=" w-max">
+                            {{ __('Tambah Peserta') }}</x-primary-button>
 
                     </div>
                     @foreach ($studentList as $item)
-{{                        $item->name
-}}                    @endforeach
+                        {{ $item->name }}
+                    @endforeach
                 </div>
             </div>
-
 
             <div class="mt-6">
                 <x-primary-button>{{ __('Kirim Reservasi') }}</x-primary-button>

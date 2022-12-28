@@ -44,7 +44,7 @@
                 <thead class="bg-gray-500 text-white">
                     <tr>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                            Hari, Tanggal</th>
+                            Tanggal</th>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             @if (Auth::user()->user_type == 'Tutor')
                                 Nama Panti Asuhan
@@ -101,11 +101,11 @@
                             <tr class="odd:bg-white even:bg-gray-100">
                                 @if ($activeTab == 'pending')
                                     <td class="whitespace-nowrap px-3 py-4">
-                                        {{ date_format(date_create($item->created_at), 'l, d F Y') }}
+                                        {{ date_format(date_create($item->created_at), 'd/m/Y') }}
                                     </td>
                                 @else
                                     <td class="whitespace-nowrap px-3 py-4">
-                                        {{ date_format(date_create($item->updated_at), 'l, d F Y') }}
+                                        {{ date_format(date_create($item->updated_at), 'd/m/Y') }}
                                     </td>
                                 @endif
                                 @if (Auth::user()->user_type == 'Tutor')
@@ -147,33 +147,36 @@
                                         @if (Auth::user()->user_type == 'Tutor')
                                             {{-- Terima --}}
                                             <a wire:click='accept({{ $item->id }})'
-                                                class="cursor-pointer text-green-500" title="Terima">
+                                                class="cursor-pointer text-green-500">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                     class="w-6 h-6 text-green-500">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    <title>Terima</title>
                                                 </svg>
                                             </a>
                                             {{-- Tolak --}}
                                             <a wire:click='decline({{ $item->id }})'
-                                                class="cursor-pointer text-red-500" title="Tolak">
+                                                class="cursor-pointer text-red-500">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                     class="w-6 h-6 text-red-500">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    <title>Tolak</title>
                                                 </svg>
                                             </a>
                                         @else
                                             {{-- Batal --}}
                                             <a wire:click='decline({{ $item->id }})'
-                                                class="cursor-pointer text-red-500" title="Batal">
+                                                class="cursor-pointer text-red-500">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                     class="w-6 h-6 text-red-500">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M6 18L18 6M6 6l12 12" />
+                                                    <title>Batal</title>
                                                 </svg>
                                             </a>
                                         @endif
@@ -181,12 +184,13 @@
                                         @if (Auth::user()->user_type == 'Tutor')
                                             {{-- Akhiri --}}
                                             <a wire:click='complete({{ $item->id }})'
-                                                class="cursor-pointer text-green-500" title="Akhiri">
+                                                class="cursor-pointer text-green-500">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                     class="w-6 h-6 text-green-500">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M4.5 12.75l6 6 9-13.5" />
+                                                    <title>Akhiri</title>
                                                 </svg>
                                             </a>
                                         @endif
