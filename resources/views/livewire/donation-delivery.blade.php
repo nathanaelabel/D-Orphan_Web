@@ -1,3 +1,5 @@
+@section('title', 'Salurkan Donasi')
+
 <div>
     <div id="page-container" class="flex flex-col mx-auto w-full">
         <!-- Page Content -->
