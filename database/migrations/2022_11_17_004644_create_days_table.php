@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('days', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->enum("day",["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]);
+            $table->enum("day", ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]);
         });
     }
 

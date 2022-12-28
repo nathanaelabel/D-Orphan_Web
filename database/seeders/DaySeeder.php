@@ -15,10 +15,10 @@ class DaySeeder extends Seeder
      */
     public function run()
     {
-        $day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-        foreach($day as $day){
+        $day = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+        foreach ($day as $day) {
             Day::create([
-                "day"=>$day,
+                "day" => $day,
             ]);
         }
     }

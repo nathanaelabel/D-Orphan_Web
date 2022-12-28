@@ -1,7 +1,9 @@
+@section('title', 'Detail Lomba')
+
 <div class="space-y-8">
     <x-lomba.detail-lomba.breadcrumb>
         <x-slot:page1>Lomba</x-slot:page1>
-        <x-slot:page2>w Lomba</x-slot:page2>
+        <x-slot:page2>Detail Lomba</x-slot:page2>
     </x-lomba.detail-lomba.breadcrumb>
 
     <p class="text-3xl leading-10 font-bold">{{ 'Detail Lomba' }}</p>
