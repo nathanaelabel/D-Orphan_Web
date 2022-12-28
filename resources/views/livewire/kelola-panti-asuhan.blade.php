@@ -72,7 +72,7 @@
                     <x-slot:id>gender</x-slot:id>
                     <x-slot:name>gender</x-slot:name>
                     <x-slot:option>
-                        <option value="Male">Pria</option>
+                        <option value="Male" selected>Pria</option>
                         <option value="Female">Wanita</option>
                     </x-slot:option>
                 </x-select>

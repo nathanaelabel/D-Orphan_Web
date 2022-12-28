@@ -20,7 +20,7 @@ class KelolaPantiAsuhan extends Component
 
     public $name;
     public $date_of_birth;
-    public $gender;
+    public $gender = 'Male';
     public $note;
     public $showForm = false;
 
