@@ -18,6 +18,17 @@ class KelolaPantiAsuhan extends Component
     public $sumcourses;
     public $sumrecommendation;
 
+    public $name;
+    public $date_of_birth;
+    public $gender;
+    public $note;
+    public $showForm = false;
+
+    public function toggleForm()
+    {
+        $this->showForm = !$this->showForm;
+    }
+
     public function render()
     {
         $this->orphans = [];
@@ -149,6 +160,30 @@ class KelolaPantiAsuhan extends Component
 
     public function addData()
     {
-        //nunggu form
+        $this->showForm = true;
+
+        $this->validate([
+            'name' => 'required',
+            'date_of_birth' => 'required',
+            'gender' => 'required',
+        ], [
+            'name.required' => 'Nama harus diisi.',
+            'date_of_birth.required' => 'Tanggal lahir harus diisi.',
+            'gender.required' => 'Jenis kelamin harus diisi.',
+        ]);
+
+        $orphan = Orphan::create([
+            'orphanage_id' => auth()->user()->orphanage->id,
+            'name' => $this->name,
+            'date_of_birth' => $this->date_of_birth,
+            'gender' => $this->gender,
+            'note' => $this->note,
+        ]);
+
+        // reset form fields
+        $this->reset();
+
+        // show success message
+        session()->flash('message', 'Anak panti berhasil ditambahkan.');
     }
 }

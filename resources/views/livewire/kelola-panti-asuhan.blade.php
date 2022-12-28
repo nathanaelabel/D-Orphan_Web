@@ -27,13 +27,40 @@
         </select>
 
         {{-- Tambah Anak Panti --}}
-        <a wire:click='' class="cursor-pointer" title="Tambah Data">
+        <a wire:click='toggleForm' class="cursor-pointer" title="Tambah Data">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6 text-blue-500">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
         </a>
     </div>
+
+    {{-- Tambah Anak Panti Form --}}
+    @if ($showForm)
+        <form wire:submit.prevent="addData">
+            <div class="form-group">
+                <label for="name">Nama</label>
+                <input type="text" class="form-control" wire:model="name">
+            </div>
+            <div class="form-group">
+                <label for="date_of_birth">Tanggal Lahir</label>
+                <input type="date" class="form-control" wire:model="date_of_birth">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-control" wire:model="gender">
+                    <option value="">Jenis Kelamin</option>
+                    <option value="Male">Pria</option>
+                    <option value="Female">Wanita</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="note">Catatan</label>
+                <textarea class="form-control" rows="3" wire:model="note"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Tambah Data</button>
+        </form>
+    @endif
 
     <div class="flex gap-2 items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
