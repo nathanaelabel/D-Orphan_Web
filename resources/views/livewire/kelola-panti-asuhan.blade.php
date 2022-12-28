@@ -18,7 +18,8 @@
         {{-- Dropdown Sort --}}
         <select id="sort_orphan" name="sort_orphan" wire:model="orphanDropdownSort"
             class="dropdown w-fit rounded-md shadow-sm font-medium border-transparent focus:border-transparent focus:ring bg-blue-500 text-white focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-            <option value="Abjad Nama" {{ $orphanDropdownSort == 'Abjad Nama' ? 'selected' : null }}>Abjad Nama</option>
+            <option value="Abjad Nama" {{ $orphanDropdownSort == 'Abjad Nama' ? 'selected' : null }}>Abjad Nama
+            </option>
             <option value="Total Kursus Berhasil"
                 {{ $orphanDropdownSort == 'Total Kursus Berhasil' ? 'selected' : null }}>Jumlah Kursus</option>
             <option value="Total Rekomendasi Lomba"
@@ -38,29 +39,62 @@
     {{-- Tambah Anak Panti Form --}}
     @if ($showForm)
         <form wire:submit.prevent="addData">
-            <div class="form-group">
-                <label for="name">Nama</label>
-                <input type="text" class="form-control" wire:model="name">
+            <div class="space-y-1">
+                <x-label>
+                    <x-slot:for>name</x-slot:for>
+                    <x-slot:slot>Nama</x-slot:slot>
+                </x-label>
+                <x-input wire:model="name">
+                    <x-slot:type>text</x-slot:type>
+                    <x-slot:name>lokasi</x-slot:name>
+                    <x-slot:id>lokasi</x-slot:id>
+                    <x-slot:placeholder>Will Smith</x-slot:placeholder>
+                </x-input>
             </div>
-            <div class="form-group">
-                <label for="date_of_birth">Tanggal Lahir</label>
-                <input type="date" class="form-control" wire:model="date_of_birth">
+            <div class="space-y-1">
+                <x-label>
+                    <x-slot:for>date_of_birth</x-slot:for>
+                    <x-slot:slot>Tanggal Lahir</x-slot:slot>
+                </x-label>
+                <x-input wire:model="date_of_birth" class="cursor-text">
+                    <x-slot:type>date</x-slot:type>
+                    <x-slot:name>date_of_birth</x-slot:name>
+                    <x-slot:id>date_of_birth</x-slot:id>
+                    <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
+                </x-input>
             </div>
-            <div class="form-group">
-                <label for="gender">Gender</label>
-                <select class="form-control" wire:model="gender">
-                    <option value="">Jenis Kelamin</option>
-                    <option value="Male">Pria</option>
-                    <option value="Female">Wanita</option>
-                </select>
+            <div class="space-y-1">
+                <x-label>
+                    <x-slot:for>gender</x-slot:for>
+                    <x-slot:slot>Jenis Kelamin</x-slot:slot>
+                </x-label>
+                <x-select wire:model="gender">
+                    <x-slot:id>gender</x-slot:id>
+                    <x-slot:name>gender</x-slot:name>
+                    <x-slot:option>
+                        <option value="Male">Pria</option>
+                        <option value="Female">Wanita</option>
+                    </x-slot:option>
+                </x-select>
             </div>
-            <div class="form-group">
-                <label for="note">Catatan</label>
-                <textarea class="form-control" rows="3" wire:model="note"></textarea>
+            <div class="space-y-1">
+                <x-label>
+                    <x-slot:for>note</x-slot:for>
+                    <x-slot:slot>Catatan</x-slot:slot>
+                </x-label>
+                <x-textarea wire:model="note">
+                    <x-slot:maxlength>255</x-slot:maxlength>
+                    <x-slot:placeholder>Masukkan keterangan</x-slot:placeholder>
+                </x-textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Tambah Data</button>
+            <button
+                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 
+                leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500'">
+                <p class="font-semibold text-white">Tambah Data</p>
+            </button>
         </form>
     @endif
+
 
     <div class="flex gap-2 items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

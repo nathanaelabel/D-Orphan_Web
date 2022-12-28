@@ -31,6 +31,11 @@ class KelolaPantiAsuhan extends Component
 
     public function render()
     {
+        // Sortir secara default berdasarkan Abjad Nama
+        if (!isset($this->orphanDropdownSort)) {
+            $this->orphanDropdownSort = 'Abjad Nama';
+        }
+
         $this->orphans = [];
         $orphanOrdered_course = [];
         $orphanOrdered_Cr = [];
