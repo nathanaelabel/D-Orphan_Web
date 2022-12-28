@@ -4,14 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class Modalpopup extends Component
+class UpdateKelolaAnakPantiAsuhanModal extends Component
 {
     public function render()
     {
-        return view('livewire.modalpopup');
+        return view('livewire.update-kelola-panti-asuhan-modal');
     }
 
-    // hide modal when init
     public function mount()
     {
         $this->modal = false;
@@ -27,7 +26,8 @@ class Modalpopup extends Component
         $this->modal = false;
     }
 
-    public function actionModal(){
+    public function actionModal()
+    {
         $this->modal = false;
         // do something
     }

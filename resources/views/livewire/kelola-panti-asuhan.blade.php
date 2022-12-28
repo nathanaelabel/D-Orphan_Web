@@ -3,7 +3,7 @@
 <div class="space-y-8">
     {{-- Title --}}
     <p class="text-3xl leading-10 font-bold">Kelola Data Anak Panti Asuhan</p>
-
+    
     <div class="flex justify-between gap-4 items-center">
         {{-- Search Bar --}}
         <div class="w-full relative">
