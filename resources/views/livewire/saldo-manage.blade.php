@@ -39,10 +39,15 @@
                 @foreach ($status as $itemStatus)
                     <option value="{{ $itemStatus['status'] }}"
                         {{ $tutorTransactionDropdownSort == $itemStatus['status'] ? 'selected' : null }}>
-                        {{ $itemStatus['status'] }}
+                        @if ($itemStatus['status'] == 'pending')
+                            Pesanan
+                        @elseif($itemStatus['status'] == 'complete')
+                            Sukses
+                        @else
+                            Gagal
+                        @endif
                     </option>
                 @endforeach
-
             </select>
         @endif
 
@@ -58,7 +63,7 @@
             </option>
         </select>
 
-        {{-- Tambah Kursus --}}
+        {{-- Tambah Permintaan --}}
         <a wire:click.prevent='toggleForm' class="cursor-pointer" title="Tambah">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6 text-blue-500">
@@ -79,10 +84,8 @@
                         Deskripsi</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Dari Panti</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                        Terakhir Diubah</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                        Tanggal Ditambahkan</th>
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                        Waktu Transaksi</th>
                     @if ($tutorTypeTransactionDropdownSort == 'Penarikan Saldo')
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Aksi</th>
@@ -92,7 +95,7 @@
             @empty($tutorTransactions)
                 <tbody class="bg-white">
                     <tr>
-                        <td colspan="7" class="px-3 py-4">
+                        <td colspan="6" class="px-3 py-4">
                             <div class="grid gap-2 p-2 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
@@ -108,13 +111,28 @@
                 <tbody>
                     @foreach ($tutorTransactions as $index => $item)
                         <tr class="odd:bg-white even:bg-gray-100">
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
-                                {{ $item['status'] }}
+                            <td class="whitespace-nowrap px-3 py-4">
+                                @if ($item['status'] == 'pending')
+                                    <span
+                                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800">
+                                        Pesanan
+                                    </span>
+                                @elseif($item['status'] == 'complete')
+                                    <span
+                                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-green-100 text-green-800">
+                                        Sukses
+                                    </span>
+                                @else
+                                    <span
+                                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-red-100 text-red-800">
+                                        Gagal
+                                    </span>
+                                @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 {{ 'Rp' . number_format($item['amount'], 2, ',', '.') }}
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedTutorTransactionIndex !== $index)
                                     {{ $item['description'] }}
                                 @else
@@ -126,21 +144,18 @@
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if (is_null($item['to_user_id']))
                                     -
                                 @else
                                     {{ $item['from_panti'] }}
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
-                                {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
-                            </td>
                             @if ($tutorTypeTransactionDropdownSort == 'Penarikan Saldo')
-                                <td class="whitespace-nowrap px-3 py-4 w-full flex gap-2">
+                                <td class="whitespace-nowrap px-3 py-4 flex gap-2">
                                     @if (!is_null($editedTutorTransactionIndex))
                                         @if ($editedTutorTransactionIndex == $index)
                                             {{-- Simpan --}}
@@ -175,7 +190,6 @@
             @endempty
         </table>
     </div>
-
 
     @if ($showForm)
         <div class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
