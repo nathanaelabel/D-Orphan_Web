@@ -11,12 +11,17 @@ use Livewire\Component;
 
 class DetailCourse extends Component
 {
-    public $course, $course_id;
+    public $course;
+    public $days;
+    public $dayTimeRanges;
+    public $course_id, $isFromCourseBooking;
     public $courseBookingDone;
     public $tutorScheduleDropdownSort;
 
     public function render()
     {
+        $this->days = [];
+        $this->dayTimeRanges = [];
         $this->course = Course::find($this->course_id);
 
         $getCourseTutors = Course::where('tutor_id', Course::find($this->course_id)->tutor->id)->pluck('id');
@@ -29,19 +34,22 @@ class DetailCourse extends Component
         $this->dayTimeRanges = DayTimeRange::whereIn('id', $getIdTutorDayTimeRanges)
             ->where('day_id', Day::where('day', $this->tutorScheduleDropdownSort)->first()->id)->get();
 
-        return view('livewire.detail-course');
+        $days = $this->days;
+        $dayTimeRanges = $this->dayTimeRanges;
+
+       
+
+        return view('livewire.detail-course', compact('days', 'dayTimeRanges'));
     }
 
-    public function mount($course_id)
+    public function mount()
     {
-        $this->course_id = $course_id;
-
         $getIdTutorDayTimeRanges = TutorDayTimeRange::where('tutor_id', Course::find($this->course_id)->tutor->id)->pluck('day_time_range_id')->toArray();
         $getIdDayTimeRanges = DayTimeRange::whereIn('id', $getIdTutorDayTimeRanges)->pluck('day_id');
         $this->days = Day::wherein('id', $getIdDayTimeRanges)->get();
         $this->setTutorScheduleDropwdownSort($this->days->first()->day);
     }
-    
+
     public function setTutorScheduleDropwdownSort($tutorScheduleDropdownSortNew)
     {
         $this->tutorScheduleDropdownSort = $tutorScheduleDropdownSortNew;

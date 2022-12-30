@@ -9,6 +9,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrphanageController;
 use App\Http\Controllers\OrphanCrController;
 use App\Http\Livewire\CompetitionRecommendation;
+use App\Http\Livewire\CourseBooking;
+use App\Http\Livewire\CourseManage;
 use App\Http\Livewire\CourseTutor;
 use App\Http\Livewire\DetailCompetitionRecommendation;
 use App\Http\Livewire\DetailCourse;
@@ -17,6 +19,7 @@ use App\Http\Livewire\DetailUser;
 use App\Http\Livewire\DonationDelivery;
 use App\Http\Livewire\KelolaPantiAsuhan;
 use App\Http\Livewire\OrphanageOrphan;
+use App\Http\Livewire\SaldoManage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,22 +70,20 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dasbor', function () {
-        return view('dashboard');
-    })->name('dasbor');
+    Route::get('/dasbor/{nameTab?}', CourseBooking::class)->name('dasbor');
     Route::get('/kursus', function () {
         return view('course');
     })->name('kursus');
     Route::get('/kursus/tutor/{skill_id}', CourseTutor::class)->name('tutor');
-    Route::get('/kursus/tutor/detail-kursus/{course_id}', DetailCourse::class)->name('detail-kursus');
+    Route::get('/kursus/tutor/detail-kursus/{course_id}/{isFromCourseBooking?}', DetailCourse::class)->name('detail-kursus');
     Route::get('/course-booking/{course_booking_id}', DetailCourseBooking::class)->name('detail-course-booking');
-    Route::get('/kursus/tutor/detail-tutor/{course_id}/detail-reservation', function () {
-        return view('detail-reservation');
-    })->name('detail-reservation');
-    Route::get('/kursus/detail-kursus', function () {
-        return view('detail-course-manage');
-    })->name('detail-kelola-kursus');
+    Route::get('/kelola-kursus', CourseManage::class)->name('kelola-kursus');
+    Route::get('/kelola-saldo', SaldoManage::class)->name('kelola-saldo');
     Route::get('/lomba', CompetitionRecommendation::class)->name('lomba');
     Route::get('/lomba/detail-lomba/{competition_recommendation_id}', DetailCompetitionRecommendation::class)->name('detail-competition-recommendation');
     Route::get('/kelola-panti', KelolaPantiAsuhan::class)->name('kelola-panti');
+
+    Route::get('/kursus/tutor/detail-tutor/{course_id}/detail-reservation', function () {
+        return view('detail-reservation');
+    })->name('detail-reservation');
 });

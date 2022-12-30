@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class DetailCourseBooking extends Component
 {
-    public $courseBooking;
+    public $courseBooking, $course_booking_id;
 
     public function render()
     {
@@ -16,6 +16,27 @@ class DetailCourseBooking extends Component
 
     public function mount($course_booking_id)
     {
-        $this->courseBooking = CourseBooking::find($course_booking_id);
+        $this->courseBooking = CourseBooking::find($this->course_booking_id);
+    }
+
+    public function decline($nameTab)
+    {
+        $this->courseBooking->status = 'canceled';
+        $this->courseBooking->save();
+        return redirect()->route('dasbor', ['nameTab'=>$nameTab]);
+    }
+
+    public function accept($nameTab)
+    {
+        $this->courseBooking->status = 'ongoing';
+        $this->courseBooking->save();
+        return redirect()->route('dasbor', ['nameTab'=>$nameTab]);
+    }
+    
+    public function complete($nameTab)
+    {
+        $this->courseBooking->status = 'complete';
+        $this->courseBooking->save();
+        return redirect()->route('dasbor', ['nameTab'=>$nameTab]);
     }
 }

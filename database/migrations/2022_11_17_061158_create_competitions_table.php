@@ -19,8 +19,9 @@ return new class () extends Migration {
             $table->string('registration_start_date');
             $table->string('registration_start_hour');
             $table->string('url');
-            $table->enum('jenjang', ['Regional', 'Nasional', 'Internasional']);
+            $table->enum('level', ['Regional', 'Nasional', 'Internasional']);
             $table->text('description');
+            $table->text('organizer');
             $table->timestamps();
         });
     }

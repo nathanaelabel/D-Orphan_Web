@@ -13,16 +13,15 @@ class KelolaPantiAsuhan extends Component
 {
     public $orphanSearch;
     public $orphans;
-    public $editedOrphanIndex = null;
+    public $editedOrphanIndex;
     public $orphanDropdownSort;
     public $sumcourses;
     public $sumrecommendation;
-
     public $name;
     public $date_of_birth;
     public $gender = 'Male';
     public $note;
-    public $showForm = false;
+    public $showForm;
 
     public function toggleForm()
     {
@@ -101,16 +100,16 @@ class KelolaPantiAsuhan extends Component
 
         if ($this->orphanSearch != null) {
             if ($this->orphanDropdownSort == 'Abjad Nama') {
-                $this->orphans = $this->orphans->where('name', 'like', '%' . $this->orphanSearch . '%')
+                $this->orphans = $this->orphans->where('name', 'like', '%'.$this->orphanSearch.'%')
                     ->orderBy('name', 'ASC')
                     ->get()->toArray();
             } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
-                $this->orphans = $this->orphans->where('name', 'like', '%' . $this->orphanSearch . '%')
-                    ->orderBy('total_kursus', 'ASC')
+                $this->orphans = $this->orphans->where('name', 'like', '%'.$this->orphanSearch.'%')
+                    ->orderBy('total_kursus', 'DESC')
                     ->get()->toArray();
             } else {
-                $this->orphans = $this->orphans->where('name', 'like', '%' . $this->orphanSearch . '%')
-                    ->orderBy('total_lomba', 'ASC')
+                $this->orphans = $this->orphans->where('name', 'like', '%'.$this->orphanSearch.'%')
+                    ->orderBy('total_lomba', 'DESC')
                     ->get()->toArray();
             }
         } else {
@@ -118,10 +117,10 @@ class KelolaPantiAsuhan extends Component
                 $this->orphans = $this->orphans->orderBy('name', 'ASC')
                     ->get()->toArray();
             } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
-                $this->orphans = $this->orphans->orderBy('total_kursus', 'ASC')
+                $this->orphans = $this->orphans->orderBy('total_kursus', 'DESC')
                     ->get()->toArray();
             } else {
-                $this->orphans = $this->orphans->orderBy('total_lomba', 'ASC')
+                $this->orphans = $this->orphans->orderBy('total_lomba', 'DESC')
                     ->get()->toArray();
             }
         }
@@ -131,6 +130,8 @@ class KelolaPantiAsuhan extends Component
 
     public function mount()
     {
+        $this->editedOrphanIndex = null;
+        $this->showForm = false;
         $this->setOrphanDropwdownSort('Abjad Nama');
     }
 
@@ -165,8 +166,6 @@ class KelolaPantiAsuhan extends Component
 
     public function addData()
     {
-        $this->showForm = true;
-
         $this->validate([
             'name' => 'required',
             'date_of_birth' => 'required',
@@ -177,14 +176,14 @@ class KelolaPantiAsuhan extends Component
             'gender.required' => 'Jenis kelamin harus diisi.',
         ]);
 
-        $orphan = Orphan::create([
+        Orphan::create([
             'orphanage_id' => auth()->user()->orphanage->id,
             'name' => $this->name,
             'date_of_birth' => $this->date_of_birth,
             'gender' => $this->gender,
             'note' => $this->note,
         ]);
-
+        $this->showForm = false;
         // reset form fields
         $this->reset();
 

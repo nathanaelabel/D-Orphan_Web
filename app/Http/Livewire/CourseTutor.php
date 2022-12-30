@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class CourseTutor extends Component
 {
-    public $courseTutors = [];
+    public $courseTutors;
     public $courseCategory;
     public $tutorSearch;
 
@@ -99,7 +99,8 @@ class CourseTutor extends Component
             
             $this->courseCategory = Skill::find($this->skill_id);
         }
-        return view('livewire.course-tutor');
+        $courseTutors = $this->courseTutors;
+        return view('livewire.course-tutor', compact('courseTutors'));
     }
 
     public function mount($skill_id)

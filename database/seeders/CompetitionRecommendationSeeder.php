@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Competition;
 use App\Models\CompetitionRecommendation;
-use App\Models\Orphanage;
-use App\Models\Tutor;
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class CompetitionRecommendationSeeder extends Seeder
 {
@@ -19,12 +16,14 @@ class CompetitionRecommendationSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
-        foreach (Competition::all() as $competition) {
-            CompetitionRecommendation::factory()->create([
-                'tutor_id' => $faker->randomElement(Tutor::all()->pluck('id')),
-                'orphanage_id' => $faker->randomElement(Orphanage::all()->pluck('id')),
-                'competition_id' => $competition->id,
-            ]);
+        $create_competition_recommendation = CompetitionRecommendation::factory()->count(20)->create();
+        foreach($create_competition_recommendation as $item){
+            for ($i = 0; $i < random_int(1, 20);$i++){
+                $item->orphanCrs()->create([
+                    'orphan_id' => $faker->randomElement($item->orphanage->orphans->pluck('id')->toArray()),
+                    'description' => $faker->text(50),
+                ]);
+            }
         }
     }
 }

@@ -79,6 +79,7 @@
 
                 <p class="text-gray-500"> {{ $course->tutor->description }}</p>
 
+                if($isFromCourseBooking)
                 @if (auth()->user()->user_type == 'Pengurus Panti')
                     <div class="mt-2">
                         <a href="{{ route('detail-reservation', $course_id) }}">
@@ -89,6 +90,7 @@
                         </a>
                     </div>
                 @endif
+                @endif
             </div>
         </div>
     </div>
@@ -96,9 +98,8 @@
     {{-- Kursus --}}
     <div class="rounded-2xl shadow bg-white lg:flex">
         <div class="grid gap-4 p-4 lg:p-8">
-            <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">
-                Kursus {{ $course->skill->name }} oleh {{ $course->tutor->user->name }}
-            </p>
+            <p class="text-2xl leading-8 font-semibold text-gray-900 text-center"> {{ $course->name }} </p>
+            <p class="text-gray-500">Kursus {{ $course->skill->name }} oleh {{ $course->tutor->user->name }}</p>
             <hr class="my-4">
             <div class="grid gap-1">
                 <div class="flex gap-2 items-center">
@@ -141,8 +142,8 @@
 
                 @if ($course->is_visit == 0)
                     <div class="flex gap-2 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6 text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -188,7 +189,7 @@
             {{-- Dropdown Sort --}}
             <select id="sort_tutor_schedule" name="sort_tutor_schedule" wire:model="tutorScheduleDropdownSort"
                 class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-                @if (!$days)
+                @empty($days)
                     <option "selected">Tidak Ada Jadwal</option>
                 @else
                     @foreach ($days as $item)
@@ -196,7 +197,7 @@
                             {{ $item->day }}
                         </option>
                     @endforeach
-                @endif
+                @endempty
             </select>
         </div>
 
@@ -212,7 +213,7 @@
                             Jam Akhir</th>
                     </tr>
                 </thead>
-                @if (!$dayTimeRanges)
+                @empty($dayTimeRanges)
                     <tbody class="bg-white">
                         <tr>
                             <td colspan="3" class="px-3 py-4">
@@ -239,7 +240,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                @endif
+                @endempty
             </table>
         </div>
     </div>

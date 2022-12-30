@@ -11,4 +11,9 @@ class OrphanCourseBooking extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function orphan()
+    {
+        return $this->belongsTo(Orphan::class);
+    }
 }

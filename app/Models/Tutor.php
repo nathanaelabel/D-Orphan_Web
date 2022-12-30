@@ -15,9 +15,9 @@ class Tutor extends Model
     {
         return $this->hasMany(Course::class);
     }
-    public function competitions()
+    public function competitionRecommendations()
     {
-        return $this->hasMany(Competition::class);
+        return $this->hasMany(CompetitionRecommendation::class);
     }
     public function user()
     {

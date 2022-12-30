@@ -23,7 +23,7 @@ class OrphanageFactory extends Factory
             'name' => $faker->company(),
             'photo_url' => 'https://picsum.photos/id/' . random_int(251, 500) . '/640',
             'description' => Faker::create('id_ID')->text(),
-            'member_count' => random_int(10, 100),
+            'member_count' => random_int(10, 50),
         ];
     }
 }

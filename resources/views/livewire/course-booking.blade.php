@@ -57,7 +57,7 @@
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Durasi</th>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                            Jumlah Anak</th>
+                            Jumlah Peserta</th>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Total Harga</th>
                         @if (!(Auth::user()->user_type == 'Pengurus Panti' && $activeTab == 'ongoing'))
@@ -99,26 +99,25 @@
                     <tbody>
                         @foreach ($courseBooking as $item)
                             <tr class="odd:bg-white even:bg-gray-100">
-                                @if ($activeTab == 'pending')
-                                    <td class="whitespace-nowrap px-3 py-4">
+
+                                <td class="whitespace-nowrap px-3 py-4">
+                                    @if ($activeTab == 'pending')
                                         {{ date_format(date_create($item->created_at), 'd/m/Y') }}
-                                    </td>
-                                @else
-                                    <td class="whitespace-nowrap px-3 py-4">
+                                    @else
                                         {{ date_format(date_create($item->updated_at), 'd/m/Y') }}
-                                    </td>
-                                @endif
-                                @if (Auth::user()->user_type == 'Tutor')
-                                    <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
+                                    @endif
+                                </td>
+
+                                <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
+                                    @if (Auth::user()->user_type == 'Tutor')
                                         <a
                                             href="{{ route('detail-user', $item->orphanage->user->id) }}">{{ $item->orphanage->name }}</a>
-                                    </td>
-                                @else
-                                    <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
+                                    @else
                                         <a
                                             href="{{ route('detail-user', $item->course->tutor->user->id) }}">{{ $item->course->tutor->user->name }}</a>
-                                    </td>
-                                @endif
+                                    @endif
+                                </td>
+
                                 <td class="whitespace-nowrap px-3 py-4">
                                     <div class="flex items-center gap-2">
                                         <span

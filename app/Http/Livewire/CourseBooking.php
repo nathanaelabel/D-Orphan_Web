@@ -11,6 +11,7 @@ class CourseBooking extends Component
     public $courseBooking;
     public $hasOrphanage;
     public $activeTab;
+    public $nameTab;
 
     public function render()
     {
@@ -24,7 +25,11 @@ class CourseBooking extends Component
         } else {
             $this->hasOrphanage = false;
         }
-        $this->setTab('pending');
+        if (is_null($this->nameTab)) {
+            $this->setTab('pending');
+        } else {
+            $this->setTab($this->nameTab);
+        }
     }
 
     public function setTab($tab)
@@ -39,7 +44,8 @@ class CourseBooking extends Component
             }
         } else {
             if ($this->hasOrphanage == true) {
-                $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('id'))
+                $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('course_id'))
+                ->where('orphanage_id', auth()->user()->orphanage->id)
                     ->orderBy('updated_at', 'ASC')
                     ->get();
             } else {

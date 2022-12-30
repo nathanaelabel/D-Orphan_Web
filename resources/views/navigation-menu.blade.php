@@ -17,6 +17,14 @@
                             <a href="{{ route('kelola-panti') }}"
                                 class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kelola</a>
                         @endif
+                        @if (Auth::user()->user_type == 'Tutor')
+                            <a href="{{ route('kelola-kursus') }}"
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kelola</a>
+                        @endif
+                        @if (Auth::user()->user_type == 'Tutor')
+                            <a href="{{ route('kelola-saldo') }}"
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Saldo</a>
+                        @endif
                         <a href="{{ route('kursus') }}"
                             class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kursus</a>
                         <a href="{{ route('lomba') }}"
@@ -140,6 +148,14 @@
                 @if (Auth::user()->user_type == 'Pengurus Panti')
                     <a href="{{ route('kelola-panti') }}"
                         class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'text-blue-500 font-semibold' : '' }}">Kelola</a>
+                @endif
+                @if (Auth::user()->user_type == 'Tutor')
+                    <a href="{{ route('kelola-kursus') }}"
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'text-blue-500 font-semibold' : '' }}">Kelola</a>
+                @endif
+                @if (Auth::user()->user_type == 'Tutor')
+                    <a href="{{ route('kelola-saldo') }}"
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'text-blue-500 font-semibold' : '' }}">Saldo</a>
                 @endif
                 <a href="{{ route('kursus') }}"
                     class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'text-blue-500 font-semibold' : '' }}">Kursus</a>
