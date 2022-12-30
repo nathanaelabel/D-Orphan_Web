@@ -33,8 +33,8 @@
                 class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                 placeholder="Cari Kategori Kursus" wire:model="categorySearch" />
         </div>
+        
         {{-- Dropdown Sort --}}
-
         <select id="sort_category" name="sort_category" wire:model="categoryDropdownSort"
             class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
             <option {{ $categoryDropdownSort == 'Abjad Kategori' ? 'selected' : null }}>Abjad Kategori</option>

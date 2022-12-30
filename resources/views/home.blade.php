@@ -136,7 +136,8 @@
                 <div class="w-fit">
                     <p class="text-lg leading-8 font-semibold">Gol ke&#45;8&#58; Pekerjaan Layak dan Pertumbuhan
                         Ekonomi</p>
-                    <q class="text-gray-700">Meningkatkan Pertumbuhan Ekonomi yang Inklusif dan Berkelanjutan, Kesempatan
+                    <q class="text-gray-700">Meningkatkan Pertumbuhan Ekonomi yang Inklusif dan Berkelanjutan,
+                        Kesempatan
                         Kerja yang Produktif dan Menyeluruh, serta Pekerjaan yang Layak untuk Semua</q>
                     <ul class="list-disc text-gray-500 ml-8">
                         <li>Target ke&#45;8.3&#58; Menggalakkan kebijakan pembangunan yang mendukung kegiatan produktif,
@@ -157,8 +158,10 @@
         <div>
             <p class="text-3xl leading-10 font-bold">Beragam kategori kursus tersedia</p>
         </div>
-        <div>
-            <img src="{{ url('img/home-kategori.jpg') }}" alt="Kategori" />
+        <div class="flex gap-4 snap-x snap-mandatory overflow-x-scroll x-scroll">
+            <div class="snap-start shrink-0">
+                <img src="{{ url('img/home-kategori.svg') }}" alt="Kategori" />
+            </div>
         </div>
     </div>
 
