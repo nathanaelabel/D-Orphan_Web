@@ -14,7 +14,6 @@
             <img src="{{ $courseTutor->tutor->user->profile_photo_path }}" alt="Tutor"
                 class="w-full h-full object-cover rounded-t-2xl rounded-b-none lg:rounded-l-2xl lg:rounded-r-none"
                 onerror="this.onerror=null;this.src='/img/placeholder.svg';">
-    {{-- sini --}}
 
         <div class="w-fit self-center" :value=1>
             <span hidden>{{ $course_id = $courseTutor->id }}</span>
@@ -108,7 +107,8 @@
         </div>
     </div>
 </div>
-///////////////////////COURSE-MANAGE
+
+{{-- COURSE-MANAGE --}}
 
     {{-- FORM LAMA
     @if ($showForm)

@@ -79,29 +79,40 @@
 
                 <p class="text-gray-500"> {{ $course->tutor->description }}</p>
 
-                if($isFromCourseBooking)
-                @if (auth()->user()->user_type == 'Pengurus Panti')
-                    <div class="mt-2">
-                        <a href="{{ route('detail-reservation', $course_id) }}">
-                            <button type="button"
-                                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
-                                <p class="font-semibold text-white">Reservasi Kursus</p>
-                            </button>
-                        </a>
-                    </div>
-                @endif
+                @if ($isFromCourseBooking)
+                    @if (auth()->user()->user_type == 'Pengurus Panti')
+                        <div class="mt-2">
+                            <a href="{{ route('detail-reservation', $course_id) }}">
+                                <button type="button"
+                                    class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
+                                    <p class="font-semibold text-white">Reservasi Kursus</p>
+                                </button>
+                            </a>
+                        </div>
+                    @endif
                 @endif
             </div>
         </div>
     </div>
+    
+    {{-- Title --}}
+    <p class="text-3xl leading-10 font-bold">Detail Kursus {{ $course->skill->name }} oleh {{ $course->tutor->user->name }}</p>
 
     {{-- Kursus --}}
     <div class="rounded-2xl shadow bg-white lg:flex">
         <div class="grid gap-4 p-4 lg:p-8">
-            <p class="text-2xl leading-8 font-semibold text-gray-900 text-center"> {{ $course->name }} </p>
-            <p class="text-gray-500">Kursus {{ $course->skill->name }} oleh {{ $course->tutor->user->name }}</p>
+            <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">{{ $course->name }}</p>
             <hr class="my-4">
             <div class="grid gap-1">
+                <div class="mb-2">
+                    <span
+                        class="w-fit inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
+                        <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor" viewBox="0 0 8 8">
+                            <circle cx="4" cy="4" r="3" />
+                        </svg>
+                        {{ $course->skill->name }}
+                    </span>
+                </div>
                 <div class="flex gap-2 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 text-gray-700">
@@ -162,20 +173,27 @@
                         <title>Tarif per jam</title>
                     </svg>
                     <p class="text-lg leading-8 text-gray-700">
-                        {{ 'Rp' . number_format($course->hourly_price, 2, ',', '.') }}/jam &#40;tarif sudah termasuk
-                        biaya sewa peralatan senilai {{ 'Rp' . number_format($course->tool_price, 2, ',', '.') }}&#41;
+                        {{ 'Rp' . number_format($course->hourly_price, 2, ',', '.') }}/jam
+                        @if ($course->tool_price == 0)
+                        @else
+                            &#40;tarif sudah termasuk biaya sewa peralatan senilai
+                            {{ 'Rp' . number_format($course->tool_price, 2, ',', '.') }}&#41;
+                        @endif
                     </p>
                 </div>
 
-                <div class="flex gap-2 items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6 text-gray-700">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-                        <title>Deskripsi sewa peralatan</title>
-                    </svg>
-                    <p class="text-lg leading-8 text-gray-700">{{ $course->tool_description }}</p>
-                </div>
+                @if ($course->tool_price == 0)
+                @else
+                    <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                            <title>Deskripsi sewa peralatan</title>
+                        </svg>
+                        <p class="text-lg leading-8 text-gray-700">{{ $course->tool_description }}</p>
+                    </div>
+                @endif
             </div>
 
             <p class="text-gray-500"> {{ $course->description }}</p>
