@@ -15,7 +15,7 @@
     </p>
 
     <div class="grid rounded-2xl shadow bg-white lg:flex">
-        <div class="lg:w-6/12">
+        <div class="lg:w-4/12">
             @if (auth()->user()->user_type == 'Tutor')
                 <img src="{{ $courseBooking->orphanage->photo_url }}" alt="Panti Asuhan"
                     class="w-full h-full object-cover rounded-t-2xl rounded-b-none lg:rounded-l-2xl lg:rounded-r-none">
@@ -167,7 +167,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                             </svg>
-                            <title>Tanggal</title>
+                            <title>Tanggal dipesan</title>
                         </svg>
                         <p class="text-lg leading-8 text-gray-700">{{ $courseBooking->created_at }}</p>
                     </div>
@@ -180,87 +180,93 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                                 </svg>
-                                <title>Tanggal</title>
+                                <title>Tanggal diperbarui</title>
                             </svg>
-                            <p class="text-2xl leading-8 text-gray-700">{{ $courseBooking->updated_at }}</p>
+                            <p class="text-lg leading-8 text-gray-700">{{ $courseBooking->updated_at }}</p>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<details open class="space-y-2">
-    <summary class="text-xl leading-8 font-semibold">Peserta Kursus</summary>
+    <details open class="space-y-2">
+        <summary class="text-xl leading-8 font-semibold">Peserta Kursus</summary>
 
-    <div class="overflow-x-auto shadow rounded">
-        <table class="min-w-full">
-            <thead class="bg-gray-500 text-white">
-                <tr>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
-                        No.</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Nama Anak</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Jenis Kelamin</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Catatan</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($courseBooking->orphanCourseBookings as $item)
-                    <tr class="odd:bg-white even:bg-gray-100">
-                        <td class="whitespace-nowrap px-3 py-4 w-fit">{{ $loop->iteration }}</td>
-                        <td class="whitespace-nowrap px-3 py-4">{{ $item->orphan->name }}
-                        </td>
-                        <td class="whitespace-nowrap px-3 py-4">
-                            @if ($item->orphan->gender == 'Male')
-                                {{ 'Pria' }}
-                            @else
-                                {{ 'Wanita' }}
-                            @endif
-                        </td>
-                        <td class="whitespace-nowrap px-3 py-4">
-                            @if ($item->orphan->note == null)
-                                {{ '-' }}
-                            @else
-                                {{ $item->orphan->note }}
-                            @endif
-                        </td>
+        <div class="overflow-x-auto shadow rounded">
+            <table class="min-w-full">
+                <thead class="bg-gray-500 text-white">
+                    <tr>
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
+                            No.</th>
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                            Nama Anak</th>
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                            Jenis Kelamin</th>
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                            Catatan</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</details>
+                </thead>
 
-@if ($courseBooking->status == 'pending')
-    @if (auth()->user()->user_type == 'Pengurus Panti')
-        <button wire:click='decline("pending")'>Batalkan Reservasi Kursus</button>
-    @else
-        <div class="flex gap-4">
+                <tbody>
+                    @foreach ($courseBooking->orphanCourseBookings as $item)
+                        <tr class="odd:bg-white even:bg-gray-100">
+                            <td class="whitespace-nowrap px-3 py-4 w-fit">{{ $loop->iteration }}</td>
+                            <td class="whitespace-nowrap px-3 py-4">{{ $item->orphan->name }}
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4">
+                                @if ($item->orphan->gender == 'Male')
+                                    {{ 'Pria' }}
+                                @else
+                                    {{ 'Wanita' }}
+                                @endif
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4">
+                                @if ($item->orphan->note == null)
+                                    {{ '-' }}
+                                @else
+                                    {{ $item->orphan->note }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </details>
+
+    @if ($courseBooking->status == 'pending')
+        @if (auth()->user()->user_type == 'Pengurus Panti')
             <button wire:click='decline("pending")'
                 class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
-                <p class="font-semibold text-red-700">Tolak Reservasi Kursus</p>
+                <p class="font-semibold text-red-700">Batalkan Reservasi Kursus</p>
             </button>
-            <button wire:click='accept("pending")'
-                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-500 focus:ring-opacity-50 active:bg-green-500 active:border-green-500"
-                wire:click='decline("pending")'>
-                <p class="font-semibold text-white">Terima Reservasi Kursus</p>
-            </button>
-        </div>
+        @else
+            <div class="flex gap-4">
+                <button wire:click='decline("pending")'
+                    class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                    <p class="font-semibold text-red-700">Tolak Reservasi Kursus</p>
+                </button>
+                <button wire:click='accept("pending")'
+                    class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-500 focus:ring-opacity-50 active:bg-green-500 active:border-green-500"
+                    wire:click='decline("pending")'>
+                    <p class="font-semibold text-white">Terima Reservasi Kursus</p>
+                </button>
+            </div>
+        @endif
+    @elseif($courseBooking->status == 'ongoing')
+        @if (auth()->user()->user_type == 'Tutor')
+            <div class="flex gap-4">
+                {{-- <button wire:click='decline("ongoing")'
+                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                <p class="font-semibold text-red-700">Batalkan Reservasi Kursus</p>
+            </button> --}}
+                <button wire:click='complete("ongoing")'
+                    class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-500 focus:ring-opacity-50 active:bg-green-500 active:border-green-500"
+                    wire:click='decline("pending")'>
+                    <p class="font-semibold text-white">Reservasi Kursus telah selesai</p>
+                </button>
+            </div>
+        @endif
     @endif
-@elseif($courseBooking->status == 'ongoing')
-    @if (auth()->user()->user_type == 'Tutor')
-        <button wire:click='decline("ongoing")'>Batalkan Reservasi Kursus</button>
-
-        <a wire:click='complete("ongoing")' <button type="button"
-            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
-            <p class="font-semibold text-white">Reservasi Kursus telah selesai</p>
-            </button>
-        </a>
-    @endif
-@endif
 </div>

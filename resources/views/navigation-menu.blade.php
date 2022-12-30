@@ -39,7 +39,7 @@
                 <div class="hidden sm:ml-6 sm:flex sm:items-center">
                     <!-- Profile dropdown -->
                     <span
-                        class="inline-flex items-center px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-yellow-600 text-white border-b-2 border-yellow-700"
+                        class="inline-flex items-center px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-yellow-600 bg-opacity-90 text-white border-b-2 border-yellow-700 border-opacity-90"
                         title="Saldo {{ Auth::user()->name }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -74,7 +74,7 @@
                                 <span>{{ Auth::user()->name }}</span>
                                 <span>&#128075;</span>
                             </p>
-                            <hr>
+                            <hr class="my-1">
                             <a href="{{ route('profile.show') }}"
                                 class="block px-4 py-2 text-gray-500 hover:text-blue-500 active:text-blue-500 active:scale-100 {{ request()->routeIs('profile.show') ? 'text-blue-500 font-semibold' : '' }}"
                                 role="menuitem" tabindex="-1" id="user-menu-item-0">Profil</a>
@@ -190,7 +190,7 @@
                 </div>
                 <div class="mt-3 space-y-1">
                     <span
-                        class="inline-flex items-center mx-4 px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-yellow-600 text-white border-b-2 border-yellow-700"
+                        class="inline-flex items-center mx-4 px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-yellow-600 bg-opacity-90 text-white border-b-2 border-yellow-700 border-opacity-90"
                         title="Saldo {{ Auth::user()->name }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
