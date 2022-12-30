@@ -5,48 +5,41 @@
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('/') }}" class="flex items-center py-4 mr-4">
                         <img src="{{ url('img/logo.svg') }}" alt="D&#39;Orphan" class="h-8 w-8 mr-3">
-                        <span class="text-base leading-6 font-bold text-blue-500">D&#39;Orphan</span>
+                        <span class="text-base leading-6 font-extrabold text-blue-500">D&#39;Orphan</span>
                     </a>
                 </div>
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <!-- Current: "border-blue-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
                     @auth
                         <a href="{{ route('dasbor') }}"
-                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Dasbor</a>
+                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Dasbor</a>
                         @if (Auth::user()->user_type == 'Pengurus Panti')
                             <a href="{{ route('kelola-panti') }}"
-                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kelola</a>
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Kelola</a>
                         @endif
                         @if (Auth::user()->user_type == 'Tutor')
                             <a href="{{ route('kelola-kursus') }}"
-                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kelola</a>
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-kursus') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Kelola</a>
                         @endif
                         @if (Auth::user()->user_type == 'Tutor')
                             <a href="{{ route('kelola-saldo') }}"
-                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Saldo</a>
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-saldo') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Saldo</a>
                         @endif
                         <a href="{{ route('kursus') }}"
-                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Kursus</a>
+                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Kursus</a>
                         <a href="{{ route('lomba') }}"
-                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Lomba</a>
+                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('lomba') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Lomba</a>
                         @if (Auth::user()->user_type == 'Tutor')
                             <a href="{{ route('donasi') }}"
-                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Donasi</a>
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Donasi</a>
                         @endif
                     @endauth
-                    {{--
-                    @guest
-                        <a href="{{ route('donasi') }}"
-                            class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'border-blue-500 text-blue-500 font-semibold border-b-2' : '' }}">Donasi</a>
-                    @endguest
-                    --}}
                 </div>
             </div>
             @auth
                 <div class="hidden sm:ml-6 sm:flex sm:items-center">
                     <!-- Profile dropdown -->
                     <span
-                        class="inline-flex items-center px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 border-b-2 border-gray-200"
+                        class="inline-flex items-center px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-yellow-600 text-white border-b-2 border-yellow-700"
                         title="Saldo {{ Auth::user()->name }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -72,17 +65,16 @@
                                 @endif
                             </button>
                         </div>
-                        <!-- Dropdown menu, show/hide based on menu state.
-                                                                                                                                                                                                                                                                            Entering: "transition ease-out duration-200"
-                                                                                                                                                                                                                                                                            From: "transform opacity-0 scale-95"
-                                                                                                                                                                                                                                                                            To: "transform opacity-100 scale-100"
-                                                                                                                                                                                                                                                                            Leaving: "transition ease-in duration-75"
-                                                                                                                                                                                                                                                                            From: "transform opacity-100 scale-100"
-                                                                                                                                                                                                                                                                            To: "transform opacity-0 scale-95" -->
                         <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             x-show="open">
                             <!-- Active: "", Not Active: "" -->
+                            <p class="px-4 py-2">
+                                <span>Halo,</span>
+                                <span>{{ Auth::user()->name }}</span>
+                                <span>&#128075;</span>
+                            </p>
+                            <hr>
                             <a href="{{ route('profile.show') }}"
                                 class="block px-4 py-2 text-gray-500 hover:text-blue-500 active:text-blue-500 active:scale-100 {{ request()->routeIs('profile.show') ? 'text-blue-500 font-semibold' : '' }}"
                                 role="menuitem" tabindex="-1" id="user-menu-item-0">Profil</a>
@@ -117,17 +109,13 @@
                     class="inline-flex items-center justify-center p-2 rounded bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-white"
                     aria-controls="mobile-menu" aria-expanded="false" @click="open=!open">
                     <span class="sr-only">Open main menu</span>
-                    <!-- Icon when menu is closed.
-                                                                                                                                            Heroicon name: outline/menu
-                                                                                                                                            Menu open: "hidden", Menu closed: "block" -->
+                    <!-- Icon when menu is closed. Menu open: "hidden", Menu closed: "block" -->
                     <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                    <!-- Icon when menu is open.
-                                                                                                                                Heroicon name: outline/x
-                                                                                                                                Menu open: "block", Menu closed: "hidden" -->
+                    <!-- Icon when menu is open. Menu open: "block", Menu closed: "hidden" -->
                     <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -141,7 +129,6 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="sm:hidden" id="mobile-menu" x-show="open">
         <div class="grid gap-4 p-3">
-            <!-- Current: "bg-blue-50 border-blue-500 text-blue-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
             @auth
                 <a href="{{ route('dasbor') }}"
                     class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'text-blue-500 font-semibold' : '' }}">Dasbor</a>
@@ -151,11 +138,11 @@
                 @endif
                 @if (Auth::user()->user_type == 'Tutor')
                     <a href="{{ route('kelola-kursus') }}"
-                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'text-blue-500 font-semibold' : '' }}">Kelola</a>
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-kursus') ? 'text-blue-500 font-semibold' : '' }}">Kelola</a>
                 @endif
                 @if (Auth::user()->user_type == 'Tutor')
                     <a href="{{ route('kelola-saldo') }}"
-                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-panti') ? 'text-blue-500 font-semibold' : '' }}">Saldo</a>
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-saldo') ? 'text-blue-500 font-semibold' : '' }}">Saldo</a>
                 @endif
                 <a href="{{ route('kursus') }}"
                     class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kursus') ? 'text-blue-500 font-semibold' : '' }}">Kursus</a>
@@ -167,9 +154,6 @@
                 @endif
             @endauth
             @guest
-                {{-- <a href="{{ route('donasi') }}"
-                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('donasi') ? 'text-blue-500 font-semibold' : '' }}">Donasi</a>
-            --}}
 
                 <div class="grid gap-4">
                     <a href="{{ route('login') }}">
@@ -206,7 +190,7 @@
                 </div>
                 <div class="mt-3 space-y-1">
                     <span
-                        class="inline-flex items-center mx-4 px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 border-b-2 border-gray-200"
+                        class="inline-flex items-center mx-4 px-3 py-0.5 gap-2 rounded-full text-sm font-semibold bg-yellow-600 text-white border-b-2 border-yellow-700"
                         title="Saldo {{ Auth::user()->name }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">

@@ -1,10 +1,20 @@
+@section('title', 'Dasbor')
+
 <div class="space-y-8">
-    <div class="flex justify-between text-3xl leading-10 font-bold">
+    <div class="flex items-center justify-between">
         <div>
-            <p>{{ 'Halo, ' . Auth::user()->name }}</p>
+            <p class="text-3xl leading-10 font-bold">{{ 'Pantau Dasbor Anda' }}</p>
         </div>
         <div>
-            <p>{{ 'Rp' . number_format(Auth::user()->money, 2, ',', '.') }}</p>
+            <span class="hidden lg:flex gap-2 items-center pl-1 pr-2 py-1 rounded-lg border-2 border-black font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                    <title>Masuk sebagai</title>
+                </svg>
+                {{ Auth::user()->user_type }}
+            </span>
         </div>
     </div>
 
@@ -27,14 +37,14 @@
             <nav class="text-center bg-blue-100 rounded space-x-4 px-2 py-4" aria-label="Tabs">
                 <!-- Current: "bg-gray-100 text-gray-700", Default: "text-gray-500 hover:text-gray-700" -->
                 <a wire:click='setTab("pending")'
-                    class="cursor-pointer px-3 py-2 font-semibold rounded {{ $activeTab == 'pending' ? 'bg-blue-500 text-white' : 'text-blue-700' }}"
+                    class="cursor-pointer px-3 py-2 font-medium rounded {{ $activeTab == 'pending' ? 'bg-blue-500 text-white' : 'text-blue-700' }}"
                     aria-current="page">Pesanan</a>
 
                 <a wire:click='setTab("ongoing")'
-                    class="cursor-pointer px-3 py-2 font-semibold rounded {{ $activeTab == 'ongoing' ? 'bg-blue-500 text-white' : 'text-blue-700' }}">Berlangsung</a>
+                    class="cursor-pointer px-3 py-2 font-medium rounded {{ $activeTab == 'ongoing' ? 'bg-blue-500 text-white' : 'text-blue-700' }}">Berlangsung</a>
 
                 <a wire:click='setTab("canceled")'
-                    class="cursor-pointer px-3 py-2 font-semibold rounded {{ $activeTab == 'canceled' ? 'bg-blue-500 text-white' : 'text-blue-700' }}">Riwayat</a>
+                    class="cursor-pointer px-3 py-2 font-medium rounded {{ $activeTab == 'canceled' ? 'bg-blue-500 text-white' : 'text-blue-700' }}">Riwayat</a>
             </nav>
         </div>
 

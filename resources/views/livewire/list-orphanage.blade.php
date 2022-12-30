@@ -1,7 +1,23 @@
 <div class="space-y-8">
-
-    {{-- Title --}}
-    <p class="text-3xl leading-10 font-bold">Pilih Panti Asuhan yang menjadi tujuan donasi</p>
+    <div class="flex items-center justify-between">
+        <div>
+            <p class="text-3xl leading-10 font-bold">{{ 'Pilih Panti Asuhan yang ingin dituju' }}</p>
+        </div>
+        @if (count($orphanages) == 0)
+        @else
+            <div>
+                <span class="hidden lg:flex gap-2 items-center px-2 py-1 rounded-lg border-2 border-black font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        <title>Jumlah Panti Asuhan</title>
+                    </svg>
+                    {{ count($orphanages) . ' Panti Asuhan' }}
+                </span>
+            </div>
+        @endif
+    </div>
 
     <div class="flex justify-between gap-4 items-center">
         {{-- Search Bar --}}

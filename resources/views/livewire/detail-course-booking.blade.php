@@ -1,3 +1,5 @@
+@section('title', 'Detail Reservasi Kursus')
+
 <div class="space-y-8">
     <x-list-user.detail-user.breadcrumb>
         <x-slot:page1>
@@ -21,7 +23,7 @@
             @endif
         </x-slot:image>
         @if (auth()->user()->user_type == 'Pengurus Panti')
-            <x-slot:tutor>nama kursus</x-slot:tutor>
+            <x-slot:tutor>{{ $courseBooking }}</x-slot:tutor>
         @else
             <x-slot:panti>nama kursus</x-slot:panti>
         @endif
@@ -47,17 +49,13 @@
         @endif
 
         <x-slot:description>
-            ini dibuang aja
+            {{-- {{ $courseBooking->course->description }} --}}
         </x-slot:description>
     </x-list-user.detail-user.card>
 
     @if ($courseBooking->status == 'pending')
         @if (auth()->user()->user_type == 'Pengurus Panti')
-            <a wire:click='decline("pending")' <button type="button"
-                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
-                <p class="font-semibold text-white">Batalkan Reservasi Kursus</p>
-                </button>
-            </a>
+            <x-primary-button wire:click='decline("pending")'>Batalkan Reservasi Kursus</x-primary-button>
         @else
             <a wire:click='decline("pending")' <button type="button"
                 class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
@@ -72,11 +70,8 @@
         @endif
     @elseif($courseBooking->status == 'ongoing')
         @if (auth()->user()->user_type == 'Tutor')
-            <a wire:click='decline("ongoing")' <button type="button"
-                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
-                <p class="font-semibold text-white">Batalkan Reservasi Kursus</p>
-                </button>
-            </a>
+            <x-primary-button wire:click='decline("ongoing")'>Batalkan Reservasi Kursus</x-primary-button>
+
             <a wire:click='complete("ongoing")' <button type="button"
                 class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
                 <p class="font-semibold text-white">Reservasi Kursus telah selesai</p>

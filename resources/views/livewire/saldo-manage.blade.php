@@ -1,14 +1,25 @@
-<div class="space-y-8">
-    <p class="text-3xl leading-10 font-bold">{{ 'Penarikan Saldo' }}</p>
+@section('title', 'Saldo')
 
-    <p class="text-lg leading-8 text-gray-700">
-        @empty($tutorTransactions)
-            0
+<div class="space-y-8">
+    <div class="flex items-center justify-between">
+        <div>
+            <p class="text-3xl leading-10 font-bold">{{ 'Kirimkan permintaan tarik saldo' }}</p>
+        </div>
+        @if (count($tutorTransactions) == 0)
         @else
-            {{ count($tutorTransactions) }}
-        @endempty
-        Transaksi
-    </p>
+            <div>
+                <span class="hidden lg:flex gap-2 items-center px-2 py-1 rounded-lg border-2 border-black font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                        <title>Jumlah riwayat transaksi</title>
+                    </svg>
+                    {{ count($tutorTransactions) . ' riwayat transaksi' }}
+                </span>
+            </div>
+        @endif
+    </div>
 
     <div class="flex justify-between gap-4 items-center">
         {{-- Search Bar --}}
@@ -61,7 +72,7 @@
             <thead class="bg-gray-500 text-white">
                 <tr>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        status</th>
+                        Status</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Nominal</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
@@ -81,7 +92,7 @@
             @empty($tutorTransactions)
                 <tbody class="bg-white">
                     <tr>
-                        <td colspan="5" class="px-3 py-4">
+                        <td colspan="7" class="px-3 py-4">
                             <div class="grid gap-2 p-2 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
@@ -167,7 +178,8 @@
 
 
     @if ($showForm)
-        <div class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+            aria-modal="true">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
