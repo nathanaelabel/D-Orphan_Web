@@ -326,7 +326,7 @@
             <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
                 aria-modal="true">
                 <div
-                    class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
                     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
                     </div>
 
@@ -340,7 +340,7 @@
                                     Ubah
                                 @elseif($keterangan == 'hapus')
                                     Hapus
-                                @endif Data
+                                @endif data
                             </p>
                             <hr class="my-4">
                             <p class="text-gray-500">Konfirmasi bahwa data @yield('title') yang Anda pilih akan

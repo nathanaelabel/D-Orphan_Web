@@ -119,7 +119,7 @@
                                     </span>
                                 @elseif($item['status'] == 'complete')
                                     <span
-                                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-green-100 text-green-800">
+                                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
                                         Sukses
                                     </span>
                                 @else
@@ -173,9 +173,9 @@
                                     @if (is_null($editedTutorTransactionIndex))
                                         {{-- Ubah --}}
                                         <a wire:click.prevent='editTutorTransaction({{ $index }})'
-                                            class="cursor-pointer text-green-500">
+                                            class="cursor-pointer text-blue-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-500">
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                                 <title>Ubah</title>
@@ -192,38 +192,30 @@
     </div>
 
     @if ($showForm)
-        <div class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
-            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div
                     class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Tambah Anak
-                            Panti Asuhan</p>
+                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Tambah permintaan
+                            tarik saldo</p>
                         <hr class="my-4">
-                        {{-- Tambah Anak Panti Form --}}
+                        <p class="text-gray-500">Konfirmasi bahwa permintaan tarik saldo akan dikirim</p>
                     </div>
-
-                    <a wire:click.prevent='addData' class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            <title>
-                                Tambahkan</title>
-                        </svg>
-                    </a>
-
-                    <a wire:click.prevent='toggleForm' class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            <title>
-                                Batal</title>
-                        </svg>
-                    </a>
+                    <div class="grid gap-4 lg:flex">
+                        <button wire:click.prevent='toggleForm'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                            <p class="font-semibold text-red-700">Batal</p>
+                        </button>
+                        <button wire:click.prevent='addData'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
+                            <p class="font-semibold text-white">Tambah</p>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
