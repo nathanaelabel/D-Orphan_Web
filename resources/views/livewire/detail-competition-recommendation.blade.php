@@ -212,17 +212,17 @@
                     <tr>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
                             No.</th>
-                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Nama Anak Panti</th>
-                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Asal Panti</th>
-                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Deskripsi</th>
-                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Tanggal Ditambahkan</th>
-                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Terakhir Diubah</th>
-                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Aksi</th>
                     </tr>
                 </thead>
@@ -248,13 +248,13 @@
                                 <td class="whitespace-nowrap px-3 py-4 w-fit">
                                     {{ $loop->iteration }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 w-full">
+                                <td class="whitespace-nowrap px-3 py-4">
                                     {{ App\Models\Orphan::find($item['orphan_id'])->name }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 w-full">
+                                <td class="whitespace-nowrap px-3 py-4">
                                     {{ App\Models\Orphanage::find(App\Models\Orphan::find($item['orphan_id'])->orphanage_id)->name }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 w-full">
+                                <td class="whitespace-nowrap px-3 py-4">
                                     @if ($editedOrphanCrIndex !== $index)
                                         {{ $item['description'] }}
                                     @else
@@ -266,13 +266,13 @@
                                         </x-input>
                                     @endif
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 w-full">
+                                <td class="whitespace-nowrap px-3 py-4">
                                     {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 w-full">
+                                <td class="whitespace-nowrap px-3 py-4">
                                     {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 w-full flex gap-2">
+                                <td class="whitespace-nowrap px-3 py-4 flex gap-2">
                                     @if (!is_null($editedOrphanCrIndex))
                                         @if ($editedOrphanCrIndex == $index)
                                             {{-- Simpan --}}
