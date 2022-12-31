@@ -23,10 +23,17 @@
     {{-- Laravel CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- External CSS --}}
+    <link rel="stylesheet" href="{{ url('/build/assets/app.9dfac224.css') }}" type="text/css" />
+
+    {{-- External JavaScript --}}
+    <script src="{{ url('/build/assets/app.0775d5fb.js') }}" type="text/javascript"></script>
+
     {{-- Google Fonts CDN --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     {{-- Alpine.js CDN --}}
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -46,7 +53,7 @@
 
     {{-- Footer --}}
     <x-footer />
-    
+
     @livewireScripts
 </body>
 

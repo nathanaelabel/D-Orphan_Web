@@ -160,7 +160,7 @@
         </div>
         <div class="flex gap-4 snap-x snap-mandatory overflow-x-scroll x-scroll">
             <div class="snap-start shrink-0">
-                <img src="{{ url('img/home-kategori.svg') }}" alt="Kategori" />
+                <img src="{{ url('img/home-kategori.jpg') }}" alt="Kategori" />
             </div>
         </div>
     </div>

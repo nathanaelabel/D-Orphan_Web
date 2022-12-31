@@ -74,8 +74,7 @@
                     {{ auth()->user()->orphanage ? $competitionRecommendation->competition->description : $competitionRecommendation->description }}
                 </p>
 
-                <a href="{{ auth()->user()->orphanage ? $competitionRecommendation->competition->url : $competitionRecommendation->url }}"
-                    target="_blank" rel="noopener noreferrer">
+                <a href="{{ auth()->user()->orphanage ? $competitionRecommendation->competition->url : $competitionRecommendation->url }}" target="_blank" rel="noopener noreferrer">
                     <x-primary-button>Tautan Lomba</x-primary-button>
                 </a>
             </div>
@@ -128,6 +127,8 @@
         <div class="space-y-4">
             <div class="flex justify-between items-center">
                 <div>
+                @empty($orphanCrs)
+                @else
                     <span
                         class="hidden lg:flex gap-2 items-center pl-1 pr-2 py-1 rounded-lg border-2 border-black font-medium">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -136,11 +137,8 @@
                                 d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
                             <title>Rekomendasi lomba yang diberikan</title>
                         </svg>
-                    @empty($orphanCrs)
-                    @else
-                        {{ count($orphanCrs) }}
+                        {{ count($orphanCrs) }} rekomendasi telah diberikan
                     @endempty
-                    rekomendasi telah diberikan
                 </span>
             </div>
             <a wire:click='addData' class="cursor-pointer" title="Tambah">
@@ -151,12 +149,12 @@
             </a>
         </div>
 
-        <div class="bg-white rounded-2xl shadow p-8 grid gap-6">
+        <div class="bg-white rounded-2xl shadow p-4 lg:p-8 grid gap-6">
             <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">Berikan Rekomendasi Perlombaan
                 untuk Anak Panti</p>
             <hr>
 
-            <div class="space-x-4">
+            <div class="grid gap-1 lg:flex lg:space-x-4 lg:items-center">
                 <x-label>
                     <x-slot:for>nama_panti_asuhan</x-slot:for>
                     <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
@@ -175,7 +173,7 @@
             </div>
 
             @if ($orphans)
-                <div class="space-x-4">
+                <div class="grid gap-1 lg:flex lg:space-x-4 lg:items-center">
                     <x-label>
                         <x-slot:for>nama_peserta_kursus</x-slot:for>
                         <x-slot:slot>Nama Peserta Lomba</x-slot:slot>
@@ -325,7 +323,7 @@
         </div>
 
         @if ($showFormConfirmation)
-            <div class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+            <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
                 aria-modal="true">
                 <div
                     class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
