@@ -52,7 +52,7 @@
                             </svg>
                             <p class="text-lg leading-8">
                                 @if (auth()->user()->user_type == 'Pengurus Panti')
-                                    {{ $courseBooking->course->tutor->user->name }}>
+                                    {{ $courseBooking->course->tutor->user->name }}
                                 @else
                                     {{ $courseBooking->orphanage->name }}
                                 @endif

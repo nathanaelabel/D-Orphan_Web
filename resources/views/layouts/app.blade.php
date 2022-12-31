@@ -20,7 +20,7 @@
     {{-- Favicon --}}
     <link rel="icon" href="{{ url('img/logo.svg?v=2') }}" type="image/svg" />
 
-    {{-- Laravel Framework CSRF Token --}}
+    {{-- Laravel CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Google Fonts CDN --}}

@@ -1,3 +1,5 @@
+@section('title', '404 Not Found')
+
 <x-guest-layout>
     <!-- Page Container -->
     <div id="page-container" class="flex flex-col mx-auto w-full min-h-screen">
@@ -33,4 +35,3 @@
     </div>
     <!-- END Page Container -->
 </x-guest-layout>
-@ex

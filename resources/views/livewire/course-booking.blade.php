@@ -232,6 +232,5 @@
                 @endif
             </table>
         </div>
-</div>
-@endif
+    @endif
 </div>
