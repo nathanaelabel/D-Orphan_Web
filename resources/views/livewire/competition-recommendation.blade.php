@@ -66,9 +66,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($competitionRecommendations as $item)
                     <x-lomba.card>
-
-                        {{-- Kalau tutor dari tabel competition dan panti dari tabel competition recommendation --}}
-
+                        {{-- Tutor: tabel competition, Panti: tabel competition recommendation --}}
                         <x-slot name="competition_recommendation_id">{{ $item->id }}</x-slot>
                         <x-slot:image>
                             @if (@auth()->user()->orphanage)
@@ -105,6 +103,13 @@
                                 {{ $item->level }}
                             @endif
                         </x-slot:jenjang>
+                        <x-slot:penyelenggara>
+                            @if (@auth()->user()->orphanage)
+                                {{ $item->competition->organizer }}
+                            @else
+                                {{ $item->organizer }}
+                            @endif
+                        </x-slot:penyelenggara>
                         <x-slot:button>Selengkapnya</x-slot:button>
                     </x-lomba.card>
                 @endforeach

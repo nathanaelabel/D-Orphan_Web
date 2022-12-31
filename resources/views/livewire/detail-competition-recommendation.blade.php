@@ -61,11 +61,10 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6 text-gray-700">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                                d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                             <title>Penyelenggara</title>
                         </svg>
-                        <p class="text-lg leading-8 text-gray-700"> Penyelenggara:
+                        <p class="text-lg leading-8 text-gray-700">
                             {{ auth()->user()->orphanage ? $competitionRecommendation->competition->organizer : $competitionRecommendation->organizer }}
                         </p>
                     </div>
@@ -82,6 +81,8 @@
             </div>
         </div>
     </div>
+
+    <hr>
 
     @if (auth()->user()->orphanage)
         <details open class="space-y-2">
@@ -124,82 +125,88 @@
             </div>
         </details>
     @else
-        <div class="flex gap-2 items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6 text-gray-700">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                <title>Jumlah Kursus</title>
-            </svg>
-
-            <p class="text-lg leading-8 text-gray-700">
-            @empty($orphanCrs)
-                0
-            @else
-                {{ count($orphanCrs) }}
-            @endempty
-            Rekomendai Diberikan
-        </p>
-    </div>
-
-
-    <div class="flex justify-between items-center">
-        <p class="text-lg leading-8 font-semibold text-gray-700">
-            Berikan Rekomendasi Perlombaan Untuk Anak Panti
-        </p>
-        <a wire:click='addData' class="cursor-pointer" title="Tambah">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6 text-blue-500">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-        </a>
-    </div>
-    <div class="space-y-4">
-        <div class="space-y-1">
-            <x-label>
-                <x-slot:for>nama_panti_asuhan</x-slot:for>
-                <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
-            </x-label>
-
-            {{-- Dropdown Sort --}}
-            <select id="sort_orphanage" name="sort_orphanage" wire:model="orphanageDropdownSort"
-                class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-                @foreach ($orphanages as $item)
-                    <option value="{{ $item->id }}"
-                        {{ $orphanageDropdownSort == $item->id ? 'selected' : null }}>
-                        {{ $item->name }}
-                    </option>
-                @endforeach
-            </select>
-
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <span
+                        class="hidden lg:flex gap-2 items-center pl-1 pr-2 py-1 rounded-lg border-2 border-black font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+                            <title>Rekomendasi lomba yang diberikan</title>
+                        </svg>
+                    @empty($orphanCrs)
+                    @else
+                        {{ count($orphanCrs) }}
+                    @endempty
+                    rekomendasi telah diberikan
+                </span>
+            </div>
+            <a wire:click='addData' class="cursor-pointer" title="Tambah">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 text-blue-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+            </a>
         </div>
 
-        @if ($orphans)
-            <div class="space-y-1">
+        <div class="bg-white rounded-2xl shadow p-8 grid gap-6">
+            <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">Berikan Rekomendasi Perlombaan
+                untuk Anak Panti</p>
+            <hr>
+
+            <div class="space-x-4">
                 <x-label>
-                    <x-slot:for>nama_peserta_kursus</x-slot:for>
-                    <x-slot:slot>Nama Peserta Lomba</x-slot:slot>
+                    <x-slot:for>nama_panti_asuhan</x-slot:for>
+                    <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
                 </x-label>
 
                 {{-- Dropdown Sort --}}
-                <select id="sort_orphan" name="sort_orphan" wire:model="orphanDropdownSort"
+                <select id="sort_orphanage" name="sort_orphanage" wire:model="orphanageDropdownSort"
                     class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-                    @foreach ($orphans as $item)
+                    @foreach ($orphanages as $item)
                         <option value="{{ $item->id }}"
-                            {{ $orphanDropdownSort == $item->id ? 'selected' : null }}>
+                            {{ $orphanageDropdownSort == $item->id ? 'selected' : null }}>
                             {{ $item->name }}
                         </option>
                     @endforeach
                 </select>
             </div>
-        @endif
 
-        <x-input wire:model="orphanDescription">
-            <x-slot:type>text</x-slot:type>
-            <x-slot:name>orphan_description</x-slot:name>
-            <x-slot:id>orphan_description</x-slot:id>
-            <x-slot:placeholder></x-slot:placeholder>
-        </x-input>
+            @if ($orphans)
+                <div class="space-x-4">
+                    <x-label>
+                        <x-slot:for>nama_peserta_kursus</x-slot:for>
+                        <x-slot:slot>Nama Peserta Lomba</x-slot:slot>
+                    </x-label>
+
+                    {{-- Dropdown Sort --}}
+                    <select id="sort_orphan" name="sort_orphan" wire:model="orphanDropdownSort"
+                        class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                        @foreach ($orphans as $item)
+                            <option value="{{ $item->id }}"
+                                {{ $orphanDropdownSort == $item->id ? 'selected' : null }}>
+                                {{ $item->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+
+            <div class="space-y-1">
+                <x-label>
+                    <x-slot:for>orphan_description</x-slot:for>
+                    <x-slot:slot>Deskripsi Peserta Lomba</x-slot:slot>
+                </x-label>
+                <x-textarea wire:model="orphanDescription">
+                    <x-slot:maxlength>255</x-slot:maxlength>
+                    <x-slot:name>orphan_description</x-slot:name>
+                    <x-slot:id>orphan_description</x-slot:id>
+                    <x-slot:placeholder>Masukkan Deskripsi</x-slot:placeholder>
+                </x-textarea>
+            </div>
+        </div>
 
         <div class="overflow-x-auto shadow rounded">
             <table class="min-w-full">
@@ -214,9 +221,9 @@
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
                             Deskripsi</th>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                            Terakhir Diubah</th>
-                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
                             Tanggal Ditambahkan</th>
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                            Terakhir Diubah</th>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
                             Aksi</th>
                     </tr>
@@ -224,7 +231,7 @@
                 @if (!$orphanCrs)
                     <tbody class="bg-white">
                         <tr>
-                            <td colspan="4" class="px-3 py-4">
+                            <td colspan="7" class="px-3 py-4">
                                 <div class="grid gap-2 p-2 place-items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
@@ -238,7 +245,6 @@
                     </tbody>
                 @else
                     <tbody>
-
                         @foreach ($orphanCrs as $index => $item)
                             <tr class="odd:bg-white even:bg-gray-100">
                                 <td class="whitespace-nowrap px-3 py-4 w-fit">
@@ -263,10 +269,10 @@
                                     @endif
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 w-full">
-                                    {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
+                                    {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 w-full">
-                                    {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
+                                    {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 w-full flex gap-2">
                                     @if (!is_null($editedOrphanCrIndex))
@@ -331,40 +337,43 @@
                     <div
                         class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                         <div>
-                            <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Ubah Data
+                            <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">
+                                @if ($keterangan == 'ubah')
+                                    Ubah
+                                @elseif($keterangan == 'hapus')
+                                    Hapus
+                                @endif Data
                             </p>
                             <hr class="my-4">
-                            <p class="text-gray-500">Konfirmasi bahwa data yang Anda pilih akan diubah</p>
+                            <p class="text-gray-500">Konfirmasi bahwa data @yield('title') yang Anda pilih akan
+                                @if ($keterangan == 'ubah')
+                                    diubah
+                                @elseif($keterangan == 'hapus')
+                                    dihapus
+                                @endif
+                            </p>
                         </div>
                         <div class="grid gap-4 lg:flex">
-                            <a wire:click.prevent='closeModalConfirmation' class="cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 4.5v15m7.5-7.5h-15" />
-                                    <title>Close</title>
-                                </svg>
-                            </a>
-                            <a wire:click.prevent=@if ($keterangan == 'ubah') 'saveOrphanCr' @elseif($keterangan == 'hapus') 'deleteOrphanCr' @endif
-                                class="cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 4.5v15m7.5-7.5h-15" />
-                                    <title>
-                                        @if ($keterangan == 'ubah')
-                                            Ubah
-                                        @elseif($keterangan == 'hapus')
-                                            Hapus
-                                        @endif
-                                    </title>
-                                </svg>Ubah
-                            </a>
+                            <button wire:click.prevent='closeModalConfirmation'
+                                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                                <p class="font-semibold text-red-700">Batal</p>
+                            </button>
+                            @if ($keterangan == 'ubah')
+                                <button wire:click.prevent='saveOrphanCr'
+                                    class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-500 focus:ring-opacity-50 active:bg-green-500 active:border-green-500">
+                                    <p class="font-semibold text-white">Ubah</p>
+                                </button>
+                            @elseif($keterangan == 'hapus')
+                                <button wire:click.prevent='deleteOrphanCr'
+                                    class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-500 hover:bg-red-600 focus:ring focus:ring-red-500 focus:ring-opacity-50 active:bg-red-500 active:border-red-500">
+                                    <p class="font-semibold text-white">Hapus</p>
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         @endif
-
 @endif
+</div>
 </div>

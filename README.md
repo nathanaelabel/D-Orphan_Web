@@ -1,3 +1,30 @@
+# D'Orphan - Web
+> IMT01307501-A Digital Entrepreneurship Product Development
+
+## :man_technologist::woman_technologist: Tentang Pengembang
+**Tim Archotech:**
+- 0706012010013 - Nur Azizah
+- 0706012010025 - Oey Darryl Valencio Wijaya
+- 0706012010029 - Nathanael Abel Arianto
+- 0706012010033 - David Christian
+- 0706012010039 - Probo Krishnacahya
+- 0706012010055 - Haning Galih Rani Kumbara
+
+## :globe_with_meridians: Tentang Aplikasi
+**D'Orphan - Web** adalah Pengembangan Aplikasi Web untuk Mengasah Bakat dan Minat Anak Panti Asuhan.
+
+*) Informasi lebih lanjut telah tercantum di [Notion](https://archotech.notion.site/Overview-8f04606012224c75936fc2c3890148a1).
+
+| Keterangan | Detail |
+|---------- | ------------- |
+| Program Studi | Informatika |
+| Fakultas | Teknologi Informasi |
+| Perguruan Tinggi | Universitas Ciputra Surabaya |
+| Semester | 5 |
+| Waktu Pembuatan | November 2022 - Januari 2023 |
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
