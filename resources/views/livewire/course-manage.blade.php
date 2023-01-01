@@ -358,6 +358,9 @@
                         <form wire:submit.prevent="addData">
                             <div class="grid gap-2 bg-white rounded-2xl shadow px-8 py-6">
                                 <div class="space-y-1">
+
+                                    {{-- Note untuk bagian option ini pakai x-label error kurang tau kenapa, Abel dan Zizah bingung. Jadi pakai select biasa dulu. --}}
+
                                     {{-- <x-label>
                                         <x-slot:for>skill_id</x-slot:for>
                                         <x-slot:slot>Kategori Kursus</x-slot:slot>
@@ -370,22 +373,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                {{-- <div>
-                                    <select id="sort_category_kelola" name="sort_category_kelola"
-                                        wire:model="skillIdModel"
-                                        class="dropdown
-                                    w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent
-                                    focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500
-                                    focus:ring-opacity-50 cursor-pointer">
-
-                                        @foreach ($allSkills as $itemAllSkill)
-                                            <option value="{{ $itemAllSkill->id }}"
-                                                {{ $tutorSkills[$index]['id'] == $itemAllSkill->id ? 'selected' : null }}>
-                                                {{ $itemAllSkill->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div> --}}
                                 <div class="space-y-1">
                                     <x-label>
                                         <x-slot:for>name</x-slot:for>
