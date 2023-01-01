@@ -14,6 +14,8 @@
         Detail Reservasi Kursus
     </p>
 
+    Status: {{$courseBooking->status}}
+
     <div class="grid rounded-2xl shadow bg-white lg:flex">
         <div class="lg:w-4/12">
             @if (auth()->user()->user_type == 'Tutor')
@@ -190,6 +192,56 @@
         </div>
     </div>
 
+    {{-- Jadwal Kursus --}}
+    <div class="space-y-4">
+        <div class="flex items-center justify-between">
+            {{-- Schedule --}}
+            <p class="text-xl leading-8 font-semibold">Jadwal Kursus</p>
+            {{-- Dropdown Sort --}}
+            <select id="sort_tutor_schedule" name="sort_tutor_schedule"
+                wire:model="courseBookingScheduleDropdownSort"
+                class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                @empty($days)
+                    <option "selected">Tidak Ada Jadwal</option>
+                @else
+                    @foreach ($days as $item)
+                        <option {{ $courseBookingScheduleDropdownSort == $item->day ? 'selected' : null }}>
+                            {{ $item->day }}
+                        </option>
+                    @endforeach
+                @endempty
+            </select>
+        </div>
+
+        <div class="overflow-x-auto shadow rounded">
+            <table class="min-w-full">
+                <thead class="bg-gray-500 text-white">
+                    <tr>
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
+                            No.</th>
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                            Jam Mulai</th>
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                            Jam Akhir</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($dayTimeRanges as $item)
+                        <tr class="odd:bg-white even:bg-gray-100">
+                            <td class="whitespace-nowrap px-3 py-4 w-fit">{{ $loop->iteration }}</td>
+                            <td class="whitespace-nowrap px-3 py-4">{{ $item->start_time }}
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4">{{ $item->end_time }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {{-- Peserta Kursus --}}
     <details open class="space-y-2">
         <summary class="text-xl leading-8 font-semibold">Peserta Kursus</summary>
 

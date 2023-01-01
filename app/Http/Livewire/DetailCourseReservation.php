@@ -11,6 +11,12 @@ use Livewire\Component;
 class DetailCourseReservation extends Component
 {
     public $currentStudent;
+    public $studentList;
+    public $course;
+    public $studentNotRegistered;
+    public $days;
+    public $dayCount;
+
     public function render()
     {
         return view('livewire.detail-course-reservation');
@@ -24,12 +30,11 @@ class DetailCourseReservation extends Component
         $this->studentNotRegistered = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList);
         $this->days = Day::all();
         $this->dayCount = 0;
-        
     }
 
     public function addDay()
     {
-        $this->dayCount++;
+        ++$this->dayCount;
     }
 
     public function addStudent($id)

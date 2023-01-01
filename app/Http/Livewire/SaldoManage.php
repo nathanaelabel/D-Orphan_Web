@@ -16,6 +16,8 @@ class SaldoManage extends Component
     public $showForm;
     public $showFormConfirmation;
     public $activeTab;
+    public $tutorTransaction;
+    public $keterangan;
 
     public function render()
     {

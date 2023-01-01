@@ -21,4 +21,9 @@ class Orphan extends Model
     {
         return $this->hasMany(OrphanCr::class);
     }
+
+    public function orphanage()
+    {
+        return $this->belongsTo(Orphanage::class);
+    }
 }
