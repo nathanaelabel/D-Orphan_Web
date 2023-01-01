@@ -43,7 +43,7 @@ class CourseBooking extends Component
                     ->get();
             }
         } else {
-            if ($this->hasOrphanage == true) {
+            if ($this->hasOrphanage) {
                 $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('course_id'))
                 ->where('orphanage_id', auth()->user()->orphanage->id)
                     ->orderBy('updated_at', 'ASC')

@@ -21,6 +21,25 @@
         @endif
     </div>
 
+    {{-- Tabs --}}
+    <div class="flex justify-center">
+        <nav class="text-center bg-blue-100 rounded space-x-4 px-2 py-4" aria-label="Tabs">
+            <!-- Current: "bg-gray-100 text-gray-700", Default: "text-gray-500 hover:text-gray-700" -->
+            <a wire:click='setTab("Penarikan Saldo")'
+                class="cursor-pointer px-3 py-2 font-medium rounded {{ $activeTab == 'Penarikan Saldo' ? 'bg-blue-500 text-white' : 'text-blue-700' }}">Penarikan
+                Saldo</a>
+
+            <a wire:click='setTab("Pembayaran Kursus")'
+                class="cursor-pointer px-3 py-2 font-medium rounded {{ $activeTab == 'Pembayaran Kursus' ? 'bg-blue-500 text-white' : 'text-blue-700' }}">Pembayaran
+                Kursus</a>
+        </nav>
+    </div>
+
+    @if ($activeTab == 'Penarikan Saldo')
+        Nomor Rekening Tujuan: {{ auth()->user()->tutor->bank_account }}
+    @endif
+
+    {{-- Content --}}
     <div class="flex justify-between gap-4 items-center">
         {{-- Search Bar --}}
         <div class="w-full relative">
@@ -40,7 +59,7 @@
                     <option value="{{ $itemStatus['status'] }}"
                         {{ $tutorTransactionDropdownSort == $itemStatus['status'] ? 'selected' : null }}>
                         @if ($itemStatus['status'] == 'pending')
-                            Pesanan
+                            Diproses
                         @elseif($itemStatus['status'] == 'complete')
                             Sukses
                         @else
@@ -51,17 +70,6 @@
             </select>
         @endif
 
-        {{-- Dropdown Sort --}}
-        <select id="sort_tutor_type_transaction" name="sort_tutor_type_transaction"
-            wire:model="tutorTypeTransactionDropdownSort"
-            class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-            <option value="Penarikan Saldo">
-                Penarikan Saldo
-            </option>
-            <option value="Pembayaran Kursus">
-                Pembayaran Kursus
-            </option>
-        </select>
 
         {{-- Tambah Permintaan --}}
         <a wire:click.prevent='toggleForm' class="cursor-pointer" title="Tambah">
@@ -82,11 +90,13 @@
                         Nominal</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Deskripsi</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Dari Panti</th>
+                    @if ($activeTab == 'Pembayaran Kursus')
+                        <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                            Dari Panti</th>
+                    @endif
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Waktu Transaksi</th>
-                    @if ($tutorTypeTransactionDropdownSort == 'Penarikan Saldo')
+                    @if ($activeTab == 'Penarikan Saldo' && $tutorTransactionDropdownSort != 'canceled')
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Aksi</th>
                     @endif
@@ -115,7 +125,7 @@
                                 @if ($item['status'] == 'pending')
                                     <span
                                         class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800">
-                                        Pesanan
+                                        Diproses
                                     </span>
                                 @elseif($item['status'] == 'complete')
                                     <span
@@ -144,22 +154,20 @@
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                @if (is_null($item['to_user_id']))
-                                    -
-                                @else
+                            @if ($activeTab == 'Pembayaran Kursus')
+                                <td class="whitespace-nowrap px-3 py-4">
                                     {{ $item['from_panti'] }}
-                                @endif
-                            </td>
+                                </td>
+                            @endif
                             <td class="whitespace-nowrap px-3 py-4">
                                 {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
                             </td>
-                            @if ($tutorTypeTransactionDropdownSort == 'Penarikan Saldo')
+                            @if ($activeTab == 'Penarikan Saldo' && $tutorTransactionDropdownSort != 'canceled')
                                 <td class="whitespace-nowrap px-3 py-4 flex gap-2">
                                     @if (!is_null($editedTutorTransactionIndex))
                                         @if ($editedTutorTransactionIndex == $index)
                                             {{-- Simpan --}}
-                                            <a wire:click.prevent='openModalConfirmation({{ $index }})'
+                                            <a wire:click.prevent='openModalConfirmation({{ $index }}, "ubah")'
                                                 class="cursor-pointer text-blue-500">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
@@ -182,6 +190,18 @@
                                             </svg>
                                         </a>
                                     @endif
+                                    @if (is_null($editedTutorTransactionIndex))
+                                        {{-- Cancel --}}
+                                        <a wire:click.prevent='openModalConfirmation({{ $index }}, "canceled")'
+                                            class="cursor-pointer text-red-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                <title>Batalkan</title>
+                                            </svg>
+                                        </a>
+                                    @endif
                                 </td>
                             @endif
                         </tr>
@@ -190,6 +210,51 @@
             @endempty
         </table>
     </div>
+
+    @if ($showFormConfirmation)
+        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
+            aria-modal="true">
+            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div
+                    class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    <div>
+                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Ubah Data</p>
+                        <hr class="my-4">
+                        <p class="text-gray-500">Konfirmasi bahwa data yang Anda pilih akan diubah</p>
+                    </div>
+                    <div class="grid gap-4 lg:flex">
+                        <a wire:click.prevent='closeModalConfirmation' class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                <title>Close</title>
+                            </svg>
+                        </a>
+                        <a wire:click.prevent=@if ($keterangan == 'ubah') 'saveTutorTransaction' @elseif($keterangan == 'canceled') 'cancelTutorTransaction' @endif
+                            class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                <title>
+                                    @if ($keterangan == 'ubah')
+                                        Ubah
+                                    @elseif($keterangan == 'canceled')
+                                        Batalkan Permintaan
+                                    @endif
+                                </title>
+                            </svg>Ubah
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
+
 
     @if ($showForm)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"

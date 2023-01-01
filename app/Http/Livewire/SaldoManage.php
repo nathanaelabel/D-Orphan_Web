@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Orphanage;
-use App\Models\Skill;
 use App\Models\Transaction;
 use Livewire\Component;
 
@@ -12,40 +11,24 @@ class SaldoManage extends Component
     public $tutorTransactionSearch;
     public $editedTutorTransactionIndex;
     public $tutorTransactionDropdownSort;
-    public $tutorTypeTransactionDropdownSort;
     public $tutorTransactions;
     public $status;
     public $showForm;
     public $showFormConfirmation;
+    public $activeTab;
 
     public function render()
     {
         $this->tutorTransactions = [];
-        $this->status = [];
 
-        if ($this->tutorTypeTransactionDropdownSort == 'Penarikan Saldo') {
-            $this->status = Transaction::where('user_id', auth()->user()->id)
-            ->groupby('status')
-            ->selectRaw('status')
-            ->get()->toArray();
-        } else {
-            $this->status = Transaction::where('to_user_id', auth()->user()->id)
-            ->groupby('status')
-            ->selectRaw('status')
-            ->get()->toArray();
-        }
-
-        if (!$this->tutorTransactionDropdownSort && count($this->status)) {
-            $this->setTutorTransactionDropdownSort($this->status[0]['status']);
-        }
         $this->tutorTransactions = Transaction::where('status', $this->tutorTransactionDropdownSort);
 
         $this->tutorTransactions->where(function ($search) {
             return $search->where('user_id', auth()->user()->id)
                         ->orwhere('to_user_id', auth()->user()->id);
         });
-
-        $listIdUserPanti = $this->tutorTransactions->where('user_id', '<>', auth()->user()->id)
+        $temp_transaction = clone $this->tutorTransactions;
+        $listIdUserPanti = $temp_transaction->where('user_id', '<>', auth()->user()->id)
             ->pluck('user_id')->toArray();
 
         if (count($listIdUserPanti) > 0) {
@@ -57,7 +40,7 @@ class SaldoManage extends Component
 
             $this->tutorTransactions = $this->tutorTransactions->selectRaw("*, ELT(FIELD(user_id, $ids_ordered), $name_ordered) as from_panti");
 
-            if ($this->tutorTypeTransactionDropdownSort == 'Penarikan Saldo') {
+            if ($this->activeTab == 'Penarikan Saldo') {
                 $this->tutorTransactions = $this->tutorTransactions->where('user_id', auth()->user()->id);
             } else {
                 $this->tutorTransactions = $this->tutorTransactions->where('to_user_id', auth()->user()->id);
@@ -89,14 +72,17 @@ class SaldoManage extends Component
         $this->editedTutorTransactionIndex = null;
         $this->showForm = false;
         $this->showFormConfirmation = false;
-        if (!$this->tutorTypeTransactionDropdownSort) {
-            $this->setTutorTypeTransactionDropdownSort('Penarikan Saldo');
+        if (is_null($this->activeTab)) {
+            $this->setTab('Penarikan Saldo');
+        } else {
+            $this->setTab($this->activeTab);
         }
     }
 
-    public function openModalConfirmation($tutorTransactionIndex)
+    public function openModalConfirmation($tutorTransactionIndex, $keterangan)
     {
-        $this->tutorTransactions = $this->tutorTransactions[$tutorTransactionIndex] ?? null;
+        $this->tutorTransaction = $this->tutorTransactions[$tutorTransactionIndex] ?? null;
+        $this->keterangan = $keterangan;
         $this->showFormConfirmation = true;
     }
 
@@ -110,18 +96,27 @@ class SaldoManage extends Component
         if (!is_null($this->tutorTransaction)) {
             Transaction::find($this->tutorTransaction['id'])->update($this->tutorTransaction);
         }
+
         $this->showFormConfirmation = false;
         $this->editedTutorTransactionIndex = null;
+        $this->setStatus();
     }
 
-    public function toggleForm()
+    public function cancelTutorTransaction()
     {
-        $this->showForm = !$this->showForm;
+        if (!is_null($this->tutorTransaction)) {
+            Transaction::find($this->tutorTransaction['id'])->update([
+                'status' => 'canceled',
+            ]);
+        }
+
+        $this->showFormConfirmation = false;
+        $this->editedTutorTransactionIndex = null;
+        $this->setStatus();
     }
 
     public function addData()
     {
-        //nti diisi
         // $this->validate([
         //     'name' => 'required',
         //     'date_of_birth' => 'required',
@@ -132,22 +127,28 @@ class SaldoManage extends Component
         //     'gender.required' => 'Jenis kelamin harus diisi.',
         // ]);
 
-        // $skill = Skill::find($this->skill);
-
-        // ///nti diisi
-        // $skill->courses()->create([
-        // 'orphanage_id' => auth()->user()->orphanage->id,
-        // 'name' => $this->name,
-        // 'date_of_birth' => $this->date_of_birth,
-        // 'gender' => $this->gender,
-        // 'note' => $this->note,
+        // Orphan::create([
+        //     'orphanage_id' => auth()->user()->orphanage->id,
+        //     'name' => $this->name,
+        //     'date_of_birth' => $this->date_of_birth,
+        //     'gender' => $this->gender,
+        //     'note' => $this->note,
         // ]);
         $this->showForm = false;
         // reset form fields
-        // $this->reset();
+        $getActiveTab = $this->activeTab;
 
-        // show success message
-        session()->flash('message', 'Kursus berhasil ditambahkan.');
+        $this->reset();
+
+        $this->setTab($getActiveTab);
+
+        // // show success message
+        // session()->flash('message', 'Anak panti berhasil ditambahkan.');
+    }
+
+    public function toggleForm()
+    {
+        $this->showForm = !$this->showForm;
     }
 
     public function editTutorTransaction($tutorTransactionIndex)
@@ -160,8 +161,28 @@ class SaldoManage extends Component
         $this->tutorTransactionDropdownSort = $tutorTransactionDropdownSortNew;
     }
 
-    public function setTutorTypeTransactionDropdownSort($tutorTypeTransactionDropdownSortNew)
+    public function setTab($tab)
     {
-        $this->tutorTypeTransactionDropdownSort = $tutorTypeTransactionDropdownSortNew;
+        $this->activeTab = $tab;
+
+        $this->setStatus();
+    }
+
+    public function setStatus()
+    {
+        $this->status = [];
+        if ($this->activeTab == 'Penarikan Saldo') {
+            $this->status = Transaction::where('user_id', auth()->user()->id)
+                ->groupby('status')
+                ->selectRaw('status')
+                ->get()->toArray();
+        } else {
+            $this->status = Transaction::where('to_user_id', auth()->user()->id)
+            ->groupby('status')
+            ->selectRaw('status')
+            ->get()->toArray();
+        }
+
+        $this->setTutorTransactionDropdownSort($this->status[0]['status']);
     }
 }
