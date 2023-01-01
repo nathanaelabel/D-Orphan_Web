@@ -277,8 +277,8 @@
                                     </x-label>
                                     <x-input wire:model="name">
                                         <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>lokasi</x-slot:name>
-                                        <x-slot:id>lokasi</x-slot:id>
+                                        <x-slot:name>name</x-slot:name>
+                                        <x-slot:id>name</x-slot:id>
                                         <x-slot:placeholder>Will Smith</x-slot:placeholder>
                                     </x-input>
                                 </div>

@@ -29,7 +29,7 @@ return new class () extends Migration {
             $table->integer('is_visit')->default(0);
             $table->integer('maximum_member')->default(1);
             $table->integer('tool_price')->default(0);
-            $table->string('tool_description');
+            $table->string('tool_description')->nullable();
             $table->string('location')->nullable();
             $table->timestamps();
         });

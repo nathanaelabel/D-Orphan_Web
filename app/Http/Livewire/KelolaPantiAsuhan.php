@@ -21,6 +21,7 @@ class KelolaPantiAsuhan extends Component
     public $date_of_birth;
     public $gender = 'Male';
     public $note;
+    public $keterangan;
     public $showForm;
     public $orphan;
     public $showFormConfirmation;

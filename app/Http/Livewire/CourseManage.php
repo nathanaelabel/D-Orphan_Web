@@ -14,19 +14,30 @@ class CourseManage extends Component
     public $editedCourseTutorIndex;
     public $showForm;
     public $showFormConfirmation;
+    public $name;
     public $description;
     public $hourly_price;
     public $skillIdModel;
     public $is_online = 0;
     public $is_visit = 1;
     public $maximum_member;
+    public $tool_price;
+    public $tool_description;
+    public $location;
     public $getSkill;
+    public $skill_id;
+    public $skill;
+    public $skills;
+    public $allSkills;
+    public $tutorSkills;
+    public $courseTutor;
+    public $keterangan;
 
     public function render()
     {
         $this->coursesTutors = [];
         $this->skills = Skill::whereIn('id', Course::where('tutor_id', auth()->user()->tutor->id)->pluck('skill_id'))
-        ->orderBy('name', 'ASC')->get();
+            ->orderBy('name', 'ASC')->get();
         $this->allSkills = Skill::orderBy('name', 'ASC')->get();
 
         if ($this->getSkill != null && count(Course::where('skill_id', $this->getSkill)->where('tutor_id', auth()->user()->tutor->id)->get()) == 0) {
@@ -44,15 +55,15 @@ class CourseManage extends Component
                 ->where('skill_id', $getCategoryKelolaSearch->id);
 
             $this->coursesTutors->where(function ($search) {
-                return $search->where('hourly_price', 'like', '%'.$this->categoryKelolaSearch.'%')
-                    ->orwhere('is_online', 'like', '%'.$this->categoryKelolaSearch.'%')
-                    ->orwhere('is_visit', 'like', '%'.$this->categoryKelolaSearch.'%')
-                    ->orwhere('description', 'like', '%'.$this->categoryKelolaSearch.'%')
-                    ->orwhere('maximum_member', 'like', '%'.$this->categoryKelolaSearch.'%')
-                    ->orwhere('tool_price', 'like', '%'.$this->categoryKelolaSearch.'%')
-                    ->orwhere('tool_description', 'like', '%'.$this->categoryKelolaSearch.'%')
-                    ->orwhere('location', 'like', '%'.$this->categoryKelolaSearch.'%')
-                    ->orwhere('name', 'like', '%'.$this->categoryKelolaSearch.'%');
+                return $search->where('hourly_price', 'like', '%' . $this->categoryKelolaSearch . '%')
+                    ->orwhere('is_online', 'like', '%' . $this->categoryKelolaSearch . '%')
+                    ->orwhere('is_visit', 'like', '%' . $this->categoryKelolaSearch . '%')
+                    ->orwhere('description', 'like', '%' . $this->categoryKelolaSearch . '%')
+                    ->orwhere('maximum_member', 'like', '%' . $this->categoryKelolaSearch . '%')
+                    ->orwhere('tool_price', 'like', '%' . $this->categoryKelolaSearch . '%')
+                    ->orwhere('tool_description', 'like', '%' . $this->categoryKelolaSearch . '%')
+                    ->orwhere('location', 'like', '%' . $this->categoryKelolaSearch . '%')
+                    ->orwhere('name', 'like', '%' . $this->categoryKelolaSearch . '%');
             });
 
             $this->coursesTutors = $this->coursesTutors->get()->toArray();
@@ -103,7 +114,8 @@ class CourseManage extends Component
         if (!is_null($this->courseTutor)) {
             Course::find($this->courseTutor['id'])->update($this->courseTutor);
             Course::find($this->courseTutor['id'])->update([
-                'skill_id' => $this->skillIdModel, ]);
+                'skill_id' => $this->skillIdModel,
+            ]);
         }
 
         $this->showFormConfirmation = false;
@@ -123,29 +135,34 @@ class CourseManage extends Component
     public function addData()
     {
         $this->validate([
-            'skill_id' => 'required',
+            'name' => 'required',
             'description' => 'required',
             'hourly_price' => 'required',
             'is_online' => 'required',
             'is_visit' => 'required',
             'maximum_member' => 'required',
+            'location' => 'required',
         ], [
-            'skill_id.required' => 'Silahkan pilih kategori kursus',
+            'name.required' => 'Silahkan isi nama kursus',
             'description.required' => 'Silahkan isi deskripsi',
             'hourly_price.required' => 'Silahkan isi harga per jam',
             'maximum_member.required' => 'Silahkan isi jumlah batas peserta',
+            'location.required' => 'Silahkan isi lokasi',
         ]);
 
-        $skill = Skill::find($this->skill);
+        $skill = Skill::find($this->skill_id);
 
         $skill->courses()->create([
             'tutor_id' => auth()->user()->tutor->id,
-            'skill_id' => $this->skill,
+            'name' => $this->name,
             'description' => $this->description,
             'hourly_price' => $this->hourly_price,
             'is_online' => $this->is_online,
             'is_visit' => $this->is_visit,
             'maximum_member' => $this->maximum_member,
+            'location' => $this->location,
+            'tool_price' => $this->tool_price,
+            'tool_description' => $this->tool_description,
         ]);
         $this->showForm = false;
         // reset form fields

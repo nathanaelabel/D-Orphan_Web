@@ -354,7 +354,143 @@
                         <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Tambah Anak
                             Panti Asuhan</p>
                         <hr class="my-4">
-                        {{-- Tambah Anak Panti Form --}}
+                        {{-- Tambah Kursus Form --}}
+                        <form wire:submit.prevent="addData">
+                            <div class="grid gap-2 bg-white rounded-2xl shadow px-8 py-6">
+                                <div class="space-y-1">
+                                    {{-- <x-label>
+                                        <x-slot:for>skill_id</x-slot:for>
+                                        <x-slot:slot>Kategori Kursus</x-slot:slot>
+                                    </x-label> --}}
+                                    <select wire:model="skill_id">
+                                        @foreach ($skills as $skill)
+                                            <option value="{{ $skill->id }}">
+                                                {{ $skill->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{-- <div>
+                                    <select id="sort_category_kelola" name="sort_category_kelola"
+                                        wire:model="skillIdModel"
+                                        class="dropdown
+                                    w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent
+                                    focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500
+                                    focus:ring-opacity-50 cursor-pointer">
+
+                                        @foreach ($allSkills as $itemAllSkill)
+                                            <option value="{{ $itemAllSkill->id }}"
+                                                {{ $tutorSkills[$index]['id'] == $itemAllSkill->id ? 'selected' : null }}>
+                                                {{ $itemAllSkill->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div> --}}
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>name</x-slot:for>
+                                        <x-slot:slot>Nama Kursus</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model="name">
+                                        <x-slot:type>text</x-slot:type>
+                                        <x-slot:name>name</x-slot:name>
+                                        <x-slot:id>name</x-slot:id>
+                                        <x-slot:placeholder>Nama Kursus</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>hourly_price</x-slot:for>
+                                        <x-slot:slot>Tarif Per Jam</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model="hourly_price">
+                                        <x-slot:type>number</x-slot:type>
+                                        <x-slot:name>hourly_price</x-slot:name>
+                                        <x-slot:id>hourly_price</x-slot:id>
+                                        <x-slot:placeholder>Tarif Per Jam</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>maximum_member</x-slot:for>
+                                        <x-slot:slot>Batas Jumlah Peserta</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model="maximum_member">
+                                        <x-slot:type>number</x-slot:type>
+                                        <x-slot:name>maximum_member</x-slot:name>
+                                        <x-slot:id>maximum_member</x-slot:id>
+                                        <x-slot:placeholder>Batas Jumlah Peserta</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>is_online</x-slot:for>
+                                        <x-slot:slot>Daring Didatangi</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model.defer="is_online">
+                                        <x-slot:type>text</x-slot:type>
+                                        <x-slot:name>is_online</x-slot:name>
+                                        <x-slot:id>is_online</x-slot:id>
+                                        <x-slot:placeholder>0 Tidak, 1 Ya</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>is_visit</x-slot:for>
+                                        <x-slot:slot>Luring Didatangi</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model.defer="is_visit">
+                                        <x-slot:type>text</x-slot:type>
+                                        <x-slot:name>is_visit</x-slot:name>
+                                        <x-slot:id>is_visit</x-slot:id>
+                                        <x-slot:placeholder>0 Tidak, 1 Ya</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>location</x-slot:for>
+                                        <x-slot:slot>Lokasi</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model="location">
+                                        <x-slot:type>text</x-slot:type>
+                                        <x-slot:name>location</x-slot:name>
+                                        <x-slot:id>location</x-slot:id>
+                                        <x-slot:placeholder>Lokasi</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>tool_price</x-slot:for>
+                                        <x-slot:slot>Harga Sewa Alat</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model="tool_price">
+                                        <x-slot:type>number</x-slot:type>
+                                        <x-slot:name>tool_price</x-slot:name>
+                                        <x-slot:id>tool_price</x-slot:id>
+                                        <x-slot:placeholder>Harga Sewa Alat</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>tool_description</x-slot:for>
+                                        <x-slot:slot>Deskripsi Sewa Alat</x-slot:slot>
+                                    </x-label>
+                                    <x-textarea wire:model="tool_description">
+                                        <x-slot:maxlength>255</x-slot:maxlength>
+                                        <x-slot:placeholder>Masukkan deskripsi sewa alat</x-slot:placeholder>
+                                    </x-textarea>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>description</x-slot:for>
+                                        <x-slot:slot>Deskripsi</x-slot:slot>
+                                    </x-label>
+                                    <x-textarea wire:model="description">
+                                        <x-slot:maxlength>255</x-slot:maxlength>
+                                        <x-slot:placeholder>Masukkan deskripsi dari kursus</x-slot:placeholder>
+                                    </x-textarea>
+                                </div>
+                        </form>
                     </div>
 
                     <a wire:click.prevent='addData' class="cursor-pointer">
