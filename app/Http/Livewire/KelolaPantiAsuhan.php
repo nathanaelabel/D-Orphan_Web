@@ -200,10 +200,10 @@ class KelolaPantiAsuhan extends Component
             'gender' => $this->gender,
             'note' => $this->note,
         ]);
-        $this->showForm = false;
+       
         // reset form fields
         $this->reset();
-
+        $this->showForm = false;
         // show success message
         session()->flash('message', 'Anak panti berhasil ditambahkan.');
     }

@@ -28,7 +28,8 @@ class DetailUser extends Component
                 $this->user = User::find($user_id)->tutor;
                 $getCourseTutors = Course::where('tutor_id', $this->user->id)->pluck('id');
                 $this->courseBookingDone = CourseBooking::whereIn('course_id', $getCourseTutors)->where('status', 'complete')->get();
-                $this->skills = Skill::whereIn('id', $this->user->courses->pluck('skill_id'))->get();
+                $this->skills = Skill::whereIn('id', $this->user->courses->pluck('skill_id'))
+                ->orderBy('name', 'ASC')->get();
             }
         } else {
             $this->user = User::find($user_id)->orphanage;

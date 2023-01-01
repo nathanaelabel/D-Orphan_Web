@@ -14,7 +14,7 @@
         Detail Reservasi Kursus
     </p>
 
-    Status: {{$courseBooking->status}}
+    Status: {{ $courseBooking->status }}
 
     <div class="grid rounded-2xl shadow bg-white lg:flex">
         <div class="lg:w-4/12">
@@ -28,7 +28,6 @@
         </div>
 
         <div class="w-fit self-center">
-            <span hidden>{{ $user_id = $courseBooking->orphanage->user_id }}</span>
             <div class="grid gap-4 p-4 lg:p-8">
                 <a href="{{ route('detail-kursus', [$courseBooking->course->id, true]) }}"
                     class="text-2xl leading-8 font-semibold text-blue-500 hover:text-blue-600">
@@ -43,23 +42,28 @@
                     @endif
                 </a>
                 <div class="grid gap-1">
-                    <a href="{{ route('detail-user', $user_id) }}"
-                        class="text-lg leading-8 text-blue-500 hover:text-blue-600">
-                        <div class="flex gap-2 items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <title>Nama</title>
-                            </svg>
-                            <p class="text-lg leading-8">
-                                @if (auth()->user()->user_type == 'Pengurus Panti')
-                                    {{ $courseBooking->course->tutor->user->name }}
-                                @else
-                                    {{ $courseBooking->orphanage->name }}
-                                @endif
-                            </p>
-                        </div>
+                    @if (auth()->user()->user_type == 'Pengurus Panti')
+                        <a href="{{ route('detail-user', $courseBooking->course->tutor->user->id) }}"
+                            class="text-lg leading-8 text-blue-500 hover:text-blue-600">
+                        @else
+                            <a href="{{ route('detail-user', $courseBooking->orphanage->user->id) }}"
+                                class="text-lg leading-8 text-blue-500 hover:text-blue-600">
+                    @endif
+                    <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <title>Nama</title>
+                        </svg>
+                        <p class="text-lg leading-8">
+                            @if (auth()->user()->user_type == 'Pengurus Panti')
+                                {{ $courseBooking->course->tutor->user->name }}
+                            @else
+                                {{ $courseBooking->orphanage->name }}
+                            @endif
+                        </p>
+                    </div>
                     </a>
                     <div class="flex gap-2 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
