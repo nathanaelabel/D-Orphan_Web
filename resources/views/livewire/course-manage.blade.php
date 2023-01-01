@@ -366,7 +366,7 @@
                                         <x-slot:slot>Kategori Kursus</x-slot:slot>
                                     </x-label> --}}
                                     <select wire:model="skill_id">
-                                        @foreach ($skills as $skill)
+                                        @foreach ($allSkills as $skill)
                                             <option value="{{ $skill->id }}">
                                                 {{ $skill->name }}
                                             </option>
