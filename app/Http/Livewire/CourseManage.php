@@ -55,15 +55,15 @@ class CourseManage extends Component
                 ->where('skill_id', $getCategoryKelolaSearch->id);
 
             $this->coursesTutors->where(function ($search) {
-                return $search->where('hourly_price', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('is_online', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('is_visit', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('description', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('maximum_member', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('tool_price', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('tool_description', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('location', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('name', 'like', '%' . $this->categoryKelolaSearch . '%');
+                return $search->where('hourly_price', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('is_online', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('is_visit', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('description', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('maximum_member', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('tool_price', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('tool_description', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('location', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('name', 'like', '%'.$this->categoryKelolaSearch.'%');
             });
 
             $this->coursesTutors = $this->coursesTutors->get()->toArray();
@@ -124,6 +124,7 @@ class CourseManage extends Component
 
     public function deleteCourseTutor()
     {
+        $this->getSkill = Skill::find($this->courseTutor['skill_id'])->id;
         if (!is_null($this->courseTutor)) {
             Course::find($this->courseTutor['id'])->delete();
         }
