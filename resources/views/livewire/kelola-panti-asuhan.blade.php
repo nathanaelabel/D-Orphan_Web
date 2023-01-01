@@ -166,7 +166,7 @@
                                 @if (!is_null($editedOrphanIndex))
                                     @if ($editedOrphanIndex == $index)
                                         {{-- Simpan --}}
-                                        <a wire:click.prevent='saveOrphan({{ $index }})'
+                                        <a wire:click.prevent='openModalConfirmation({{ $index }}, "ubah")'
                                             class="cursor-pointer text-blue-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor"
@@ -192,7 +192,7 @@
                                 @endif
                                 @if (is_null($editedOrphanIndex))
                                     {{-- Hapus --}}
-                                    <a wire:click.prevent='deleteOrphan({{ $index }})'
+                                    <a wire:click.prevent='openModalConfirmation({{ $index }}, "hapus")'
                                         class="cursor-pointer text-red-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
@@ -210,96 +210,149 @@
         </table>
     </div>
 
+    @if ($showFormConfirmation)
+        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
+            aria-modal="true">
+            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
-    {{-- Show Modal Add Data --}}
-    <div>
-
-        @if ($showForm)
-            <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
-                aria-modal="true">
-                <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
-                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-
-                    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                    <div
-                        class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
-                        <div>
-                            <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Tambah Anak
-                                Panti Asuhan</p>
-                            <hr class="my-4">
-                            {{-- Tambah Anak Panti Form --}}
-                            <form wire:submit.prevent="addData">
-                                <div class="grid gap-2 bg-white rounded-2xl shadow px-8 py-6">
-                                    <div class="space-y-1">
-                                        <x-label>
-                                            <x-slot:for>name</x-slot:for>
-                                            <x-slot:slot>Nama</x-slot:slot>
-                                        </x-label>
-                                        <x-input wire:model="name">
-                                            <x-slot:type>text</x-slot:type>
-                                            <x-slot:name>lokasi</x-slot:name>
-                                            <x-slot:id>lokasi</x-slot:id>
-                                            <x-slot:placeholder>Will Smith</x-slot:placeholder>
-                                        </x-input>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <x-label>
-                                            <x-slot:for>date_of_birth</x-slot:for>
-                                            <x-slot:slot>Tanggal Lahir</x-slot:slot>
-                                        </x-label>
-                                        <x-input wire:model="date_of_birth" class="cursor-text">
-                                            <x-slot:type>date</x-slot:type>
-                                            <x-slot:name>date_of_birth</x-slot:name>
-                                            <x-slot:id>date_of_birth</x-slot:id>
-                                            <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
-                                        </x-input>
-                                    </div>
-                                    <div>
-                                        <x-label>
-                                            <x-slot:for>gender</x-slot:for>
-                                            <x-slot:slot>Jenis Kelamin</x-slot:slot>
-                                        </x-label>
-                                        <div class="flex gap-6 mt-1">
-                                            <div class="flex gap-2 cursor-pointer items-center">
-                                                <input wire:model="gender" id="male"
-                                                    class="peer/male checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
-                                                    type="radio" name="gender" value="Male"
-                                                    @if (count(request()->query()) == 0) checked @endif />
-                                                <label for="male"
-                                                    class="peer-checked/male:text-blue-500 cursor-pointer">Pria</label>
-                                            </div>
-                                            <div class="flex gap-2 cursor-pointer items-center">
-                                                <input wire:model="gender" id="female"
-                                                    class="peer/female checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
-                                                    type="radio" name="gender" value="Female"
-                                                    @if (count(request()->query()) > 0) checked @endif />
-                                                <label for="female"
-                                                    class="peer-checked/female:text-blue-500 cursor-pointer">Wanita</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <x-label>
-                                            <x-slot:for>note</x-slot:for>
-                                            <x-slot:slot>Catatan</x-slot:slot>
-                                        </x-label>
-                                        <x-textarea wire:model="note">
-                                            <x-slot:maxlength>255</x-slot:maxlength>
-                                            <x-slot:placeholder>Masukkan keterangan dari anak Panti jika ada
-                                            </x-slot:placeholder>
-                                        </x-textarea>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="grid gap-4 lg:flex">
-                            <x-danger-button wire:click="toggleForm">Batal
-                            </x-danger-button>
-                            <x-primary-button wire:click="addData">Tambahkan</x-primary-button>
-                        </div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div
+                    class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    <div>
+                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Ubah Data</p>
+                        <hr class="my-4">
+                        <p class="text-gray-500">Konfirmasi bahwa data yang Anda pilih akan diubah</p>
+                    </div>
+                    <div class="grid gap-4 lg:flex">
+                        <a wire:click.prevent='closeModalConfirmation' class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                <title>Close</title>
+                            </svg>
+                        </a>
+                        <a wire:click.prevent=@if ($keterangan == 'ubah') 'saveOrphan' @elseif($keterangan == 'hapus') 'deleteOrphan' @endif
+                            class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                <title>
+                                    @if ($keterangan == 'ubah')
+                                        Ubah
+                                    @elseif($keterangan == 'hapus')
+                                        Hapus
+                                    @endif
+                                </title>
+                            </svg>Ubah
+                        </a>
                     </div>
                 </div>
             </div>
-        @endif
-    </div>
+        </div>
+    @endif
+
+
+    {{-- Show Modal Add Data --}}
+    @if ($showForm)
+        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
+            aria-modal="true">
+            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div
+                    class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    <div>
+                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Tambah Anak
+                            Panti Asuhan</p>
+                        <hr class="my-4">
+                        {{-- Tambah Anak Panti Form --}}
+                        <form wire:submit.prevent="addData">
+                            <div class="grid gap-2 bg-white rounded-2xl shadow px-8 py-6">
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>name</x-slot:for>
+                                        <x-slot:slot>Nama</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model="name">
+                                        <x-slot:type>text</x-slot:type>
+                                        <x-slot:name>lokasi</x-slot:name>
+                                        <x-slot:id>lokasi</x-slot:id>
+                                        <x-slot:placeholder>Will Smith</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>date_of_birth</x-slot:for>
+                                        <x-slot:slot>Tanggal Lahir</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model="date_of_birth" class="cursor-text">
+                                        <x-slot:type>date</x-slot:type>
+                                        <x-slot:name>date_of_birth</x-slot:name>
+                                        <x-slot:id>date_of_birth</x-slot:id>
+                                        <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div>
+                                    <x-label>
+                                        <x-slot:for>gender</x-slot:for>
+                                        <x-slot:slot>Jenis Kelamin</x-slot:slot>
+                                    </x-label>
+                                    <div class="flex gap-6 mt-1">
+                                        <div class="flex gap-2 cursor-pointer items-center">
+                                            <input wire:model="gender" id="male"
+                                                class="peer/male checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
+                                                type="radio" name="gender" value="Male"
+                                                @if (count(request()->query()) == 0) checked @endif />
+                                            <label for="male"
+                                                class="peer-checked/male:text-blue-500 cursor-pointer">Pria</label>
+                                        </div>
+                                        <div class="flex gap-2 cursor-pointer items-center">
+                                            <input wire:model="gender" id="female"
+                                                class="peer/female checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
+                                                type="radio" name="gender" value="Female"
+                                                @if (count(request()->query()) > 0) checked @endif />
+                                            <label for="female"
+                                                class="peer-checked/female:text-blue-500 cursor-pointer">Wanita</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>note</x-slot:for>
+                                        <x-slot:slot>Catatan</x-slot:slot>
+                                    </x-label>
+                                    <x-textarea wire:model="note">
+                                        <x-slot:maxlength>255</x-slot:maxlength>
+                                        <x-slot:placeholder>Masukkan keterangan dari anak Panti jika ada
+                                        </x-slot:placeholder>
+                                    </x-textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    {{-- Bisa mendeteksi livewire click --}}
+                    <a wire:click.prevent='addData' class="cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            <title>
+                                Tambahkan</title>
+                        </svg>
+                    </a>
+
+                    <a wire:click.prevent='toggleForm' class="cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            <title>
+                                Batal</title>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>

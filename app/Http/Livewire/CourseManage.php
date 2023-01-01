@@ -16,18 +16,27 @@ class CourseManage extends Component
     public $showFormConfirmation;
     public $description;
     public $hourly_price;
+    public $skillIdModel;
     public $is_online = 0;
     public $is_visit = 1;
     public $maximum_member;
+    public $getSkill;
 
     public function render()
     {
         $this->coursesTutors = [];
         $this->skills = Skill::whereIn('id', Course::where('tutor_id', auth()->user()->tutor->id)->pluck('skill_id'))
-            ->get();
+        ->orderBy('name', 'ASC')->get();
+        $this->allSkills = Skill::orderBy('name', 'ASC')->get();
+
+        if ($this->getSkill != null && count(Course::where('skill_id', $this->getSkill)->where('tutor_id', auth()->user()->tutor->id)->get()) == 0) {
+            $this->setCategoryKelolaDropdownSort($this->skills->first()->name);
+            $this->getSkill = null;
+        }
         if (!$this->categoryKelolaDropdownSort) {
             $this->setCategoryKelolaDropdownSort($this->skills->first()->name);
         }
+
         $getCategoryKelolaSearch = Skill::where('name', $this->categoryKelolaDropdownSort)->first();
 
         if ($this->categoryKelolaSearch != null) {
@@ -35,15 +44,15 @@ class CourseManage extends Component
                 ->where('skill_id', $getCategoryKelolaSearch->id);
 
             $this->coursesTutors->where(function ($search) {
-                return $search->where('hourly_price', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('is_online', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('is_visit', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('description', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('maximum_member', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('tool_price', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('tool_description', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('location', 'like', '%' . $this->categoryKelolaSearch . '%')
-                    ->orwhere('name', 'like', '%' . $this->categoryKelolaSearch . '%');
+                return $search->where('hourly_price', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('is_online', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('is_visit', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('description', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('maximum_member', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('tool_price', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('tool_description', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('location', 'like', '%'.$this->categoryKelolaSearch.'%')
+                    ->orwhere('name', 'like', '%'.$this->categoryKelolaSearch.'%');
             });
 
             $this->coursesTutors = $this->coursesTutors->get()->toArray();
@@ -53,7 +62,7 @@ class CourseManage extends Component
         }
         $this->tutorSkills = [];
         for ($i = 0; $i < count($this->coursesTutors); ++$i) {
-            array_push($this->tutorSkills, '' . Skill::where('id', $this->coursesTutors[$i]['skill_id'])->first()->name);
+            array_push($this->tutorSkills, Skill::where('id', $this->coursesTutors[$i]['skill_id'])->first());
         }
 
         return view('livewire.course-manage');
@@ -90,9 +99,13 @@ class CourseManage extends Component
 
     public function saveCourseTutor()
     {
+        $this->getSkill = Skill::find($this->courseTutor['skill_id'])->id;
         if (!is_null($this->courseTutor)) {
             Course::find($this->courseTutor['id'])->update($this->courseTutor);
+            Course::find($this->courseTutor['id'])->update([
+                'skill_id' => $this->skillIdModel, ]);
         }
+
         $this->showFormConfirmation = false;
         $this->editedCourseTutorIndex = null;
     }

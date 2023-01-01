@@ -81,7 +81,7 @@
 
                     <p class="text-gray-500"> {{ $course->tutor->description }}</p>
 
-                    @if ($isFromCourseBooking)
+                    @if (!$isFromCourseBooking)
                         @if (auth()->user()->user_type == 'Pengurus Panti')
                             <div class="mt-2">
                                 <a href="{{ route('detail-reservation', $course_id) }}">

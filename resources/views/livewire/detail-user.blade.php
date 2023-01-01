@@ -125,7 +125,7 @@
                                             viewBox="0 0 8 8">
                                             <circle cx="4" cy="4" r="3" />
                                         </svg>
-                                        {{ $item }}
+                                        {{ $item->name }}
                                     </span>
                                 @endforeach
                             </div>
@@ -159,7 +159,7 @@
                                     <title>Bergabung sejak</title>
                                 </svg>
                                 <p class="text-lg leading-8 text-gray-700">
-                                    {{ date_format(date_create($course->tutor->user->created_at), 'd/m/Y') }}
+                                    {{ date_format(date_create($user->user->created_at), 'd/m/Y') }}
                                 </p>
                             </div>
                     </div>

@@ -29,12 +29,14 @@
                 class="shadow w-full pl-10 rounded-md border-transparent focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                 placeholder="Cari Panti Asuhan" wire:model="PASearch" />
         </div>
+
         {{-- Dropdown Sort --}}
-        {{-- <x-donasi.list-user.dropdown>
-            <x-slot:id>sort_panti</x-slot:id>
-            <x-slot:name>sort_panti</x-slot:name>
-            <x-slot:option1>Abjad Nama</x-slot:option1>
-        </x-donasi.list-user.dropdown> --}}
+        <select id="sort_orphanage" name="sort_orphanage" wire:model="orphanageDropdownSort"
+            class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+            <option {{ $orphanageDropdownSort == 'Abjad Nama' ? 'selected' : null }}>Abjad Nama</option>
+            <option {{ $orphanageDropdownSort == 'Jumlah Anak Panti' ? 'selected' : null }}>Jumlah Anak Panti</option>
+        </select>
+
     </div>
 
     {{-- Panti Asuhan --}}

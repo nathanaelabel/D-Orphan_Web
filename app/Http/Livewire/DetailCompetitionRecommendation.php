@@ -16,6 +16,7 @@ class DetailCompetitionRecommendation extends Component
     public $competition_recommendation_id;
     public $orphanageDropdownSort;
     public $orphans;
+    public $orphanages;
     public $orphanDropdownSort;
     public $orphanCrs;
     public $editedOrphanCrIndex;
@@ -27,35 +28,43 @@ class DetailCompetitionRecommendation extends Component
         $competitionRecommendations = [];
         if (auth()->user()->orphanage) {
             $this->orphanCrs = [];
+
             $this->competitionRecommendation = CompetitionRecommendation::find($this->competition_recommendation_id);
-            $this->orphanCrs = OrphanCr::whereIn('orphan_id', Orphan::where('orphanage_id', auth()->user()->orphanage->id)->pluck('id'))
-                ->where('competition_recommendation_id', $this->competition_recommendation_id)->get();
-            $orphanCrs = $this->orphanCrs;
+            $this->orphanCrs = OrphanCr::whereIn('orphan_id', Orphan::where('id', $this->orphanDropdownSort)->where('orphanage_id', auth()->user()->orphanage->id)->pluck('id'))
+                ->where('competition_recommendation_id', $this->competition_recommendation_id)
+                ->orderBy('created_at', 'ASC')->get();
+
+            $this->orphans = Orphan::whereIn('id', OrphanCr::whereIn('orphan_id', Orphan::where('orphanage_id', auth()->user()->orphanage->id)->pluck('id'))
+                 ->where('competition_recommendation_id', $this->competition_recommendation_id)->pluck('orphan_id'))
+                 ->orderBy('name', 'ASC')->get();
         } else {
-            $this->orphanages = [];
-            $this->orphans = [];
-
             $this->competitionRecommendation = Competition::find($this->competition_recommendation_id);
-            $getCourses = auth()->user()->tutor->courses->pluck('id')->toArray();
-            $getOrphanageId = CourseBooking::whereIn('course_id', $getCourses)->whereIn('status', ['ongoing', 'complete'])->pluck('orphanage_id')->toArray();
-            $this->orphanages = Orphanage::whereIn('id', $getOrphanageId)->orderBy('name', 'ASC')->get();
 
-            if ($this->orphanageDropdownSort) {
-                $getOrphanId = OrphanCourseBooking::whereIn('course_booking_id', CourseBooking::whereIn('course_id', $getCourses)->whereIn('status', ['ongoing', 'complete'])->pluck('id')->toArray())
-                ->pluck('orphan_id')->toArray();
-                $this->orphans = Orphan::whereIn('id', $getOrphanId)->
-                where('orphanage_id', $this->orphanageDropdownSort)
-                ->orderBy('name', 'ASC')->get();
-                if (!$this->orphanDropdownSort) {
-                    $this->setOrphanDropdownSort($this->orphans->first()->id);
+            if ($this->hasDoneCourseBooking) {
+                $this->orphanages = [];
+                $this->orphans = [];
+
+                $getCourses = auth()->user()->tutor->courses->pluck('id')->toArray();
+                $getOrphanageId = CourseBooking::whereIn('course_id', $getCourses)->whereIn('status', ['ongoing', 'complete'])->pluck('orphanage_id')->toArray();
+                $this->orphanages = Orphanage::whereIn('id', $getOrphanageId)->orderBy('name', 'ASC')->get();
+
+                if ($this->orphanageDropdownSort) {
+                    $getOrphanId = OrphanCourseBooking::whereIn('course_booking_id', CourseBooking::whereIn('course_id', $getCourses)->whereIn('status', ['ongoing', 'complete'])->pluck('id')->toArray())
+                    ->pluck('orphan_id')->toArray();
+                    $this->orphans = Orphan::whereIn('id', $getOrphanId)->
+                    where('orphanage_id', $this->orphanageDropdownSort)
+                    ->orderBy('name', 'ASC')->get();
+                    if (!$this->orphanDropdownSort) {
+                        $this->setOrphanDropdownSort($this->orphans->first()->id);
+                    }
                 }
+
+                $this->competitionRecommendations = CompetitionRecommendation::where('competition_id', $this->competition_recommendation_id)
+                ->where('tutor_id', auth()->user()->tutor->id)->pluck('id')->toArray();
+
+                $this->orphanCrs = OrphanCr::whereIn('competition_recommendation_id', $this->competitionRecommendations)
+                ->orderBy('updated_at', 'DESC')->get()->toArray();
             }
-
-            $this->competitionRecommendations = CompetitionRecommendation::where('competition_id', $this->competition_recommendation_id)
-            ->where('tutor_id', auth()->user()->tutor->id)->pluck('id')->toArray();
-
-            $this->orphanCrs = OrphanCr::whereIn('competition_recommendation_id', $this->competitionRecommendations)
-            ->orderBy('updated_at', 'DESC')->get()->toArray();
         }
 
         return view('livewire.detail-competition-recommendation');
@@ -64,14 +73,28 @@ class DetailCompetitionRecommendation extends Component
     public function mount($competition_recommendation_id)
     {
         $this->competition_recommendation_id = $competition_recommendation_id;
-        $this->editedCrIndex = null;
-        $this->showFormConfirmation = false;
 
-        $this->competitionRecommendation = Competition::find($this->competition_recommendation_id);
-        $getCourses = auth()->user()->tutor->courses->pluck('id')->toArray();
-        $getOrphanageId = CourseBooking::whereIn('course_id', $getCourses)->whereIn('status', ['ongoing', 'complete'])->pluck('orphanage_id')->toArray();
-        $this->orphanages = Orphanage::whereIn('id', $getOrphanageId)->orderBy('name', 'ASC')->get();
-        $this->setOrphanageDropdownSort($this->orphanages->first()->id);
+        if (auth()->user()->tutor) {
+            $this->editedCrIndex = null;
+            $this->showFormConfirmation = false;
+
+            $this->competitionRecommendation = Competition::find($this->competition_recommendation_id);
+            $getCourses = auth()->user()->tutor->courses->pluck('id')->toArray();
+            $getOrphanageId = CourseBooking::whereIn('course_id', $getCourses)->whereIn('status', ['ongoing', 'complete'])->pluck('orphanage_id')->toArray();
+            $this->hasDoneCourseBooking = false;
+
+            if (count($getOrphanageId) > 0) {
+                $this->hasDoneCourseBooking = true;
+                $this->orphanages = Orphanage::whereIn('id', $getOrphanageId)->orderBy('name', 'ASC')->get();
+                $this->setOrphanageDropdownSort($this->orphanages->first()->id);
+            }
+        } else {
+            $this->orphans = Orphan::whereIn('id', OrphanCr::whereIn('orphan_id', Orphan::where('orphanage_id', auth()->user()->orphanage->id)->pluck('id'))
+            ->where('competition_recommendation_id', $this->competition_recommendation_id)->pluck('orphan_id'))
+            ->orderBy('name', 'ASC')->get();
+
+            $this->setOrphanDropdownSort($this->orphans->first()->id);
+        }
     }
 
     public function setOrphanageDropdownSort($orphanageDropdownSortNew)

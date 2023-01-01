@@ -11,7 +11,6 @@ use Livewire\Component;
 class DetailUser extends Component
 {
     public $user;
-    public $skillsId = [];
     public $skills = [];
     public $courseBookingDone;
 
@@ -29,14 +28,7 @@ class DetailUser extends Component
                 $this->user = User::find($user_id)->tutor;
                 $getCourseTutors = Course::where('tutor_id', $this->user->id)->pluck('id');
                 $this->courseBookingDone = CourseBooking::whereIn('course_id', $getCourseTutors)->where('status', 'complete')->get();
-                $getSkillsId = $this->user->courses->pluck('skill_id');
-
-                for ($i = 0; $i < count($getSkillsId); ++$i) {
-                    if (array_search($getSkillsId[$i], $this->skillsId) == null) {
-                        array_push($this->skillsId, $getSkillsId[$i]);
-                        array_push($this->skills, Skill::find($getSkillsId[$i])->name);
-                    }
-                }
+                $this->skills = Skill::whereIn('id', $this->user->courses->pluck('skill_id'))->get();
             }
         } else {
             $this->user = User::find($user_id)->orphanage;
