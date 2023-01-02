@@ -23,6 +23,8 @@ class SaldoManage extends Component
     {
         $this->tutorTransactions = [];
 
+        $this->setStatus();
+
         $this->tutorTransactions = Transaction::where('status', $this->tutorTransactionDropdownSort);
 
         $this->tutorTransactions->where(function ($search) {
@@ -65,6 +67,14 @@ class SaldoManage extends Component
         } else {
             $this->tutorTransactions = [];
         }
+        
+        $this->getStatus = [];
+
+        foreach ($this->tutorTransactions as $status) {
+            if (array_search($status['status'], $this->getStatus) == null) {
+                array_push($this->getStatus, $status);
+            }
+        }
 
         return view('livewire.saldo-manage');
     }
@@ -101,7 +111,7 @@ class SaldoManage extends Component
 
         $this->showFormConfirmation = false;
         $this->editedTutorTransactionIndex = null;
-        $this->setStatus();
+        // $this->setStatus();
     }
 
     public function cancelTutorTransaction()
@@ -114,7 +124,7 @@ class SaldoManage extends Component
 
         $this->showFormConfirmation = false;
         $this->editedTutorTransactionIndex = null;
-        $this->setStatus();
+        // $this->setStatus();
     }
 
     public function addData()
@@ -172,7 +182,6 @@ class SaldoManage extends Component
 
     public function setStatus()
     {
-        $this->status = [];
         if ($this->activeTab == 'Penarikan Saldo') {
             $this->status = Transaction::where('user_id', auth()->user()->id)
                 ->groupby('status')
@@ -184,7 +193,8 @@ class SaldoManage extends Component
             ->selectRaw('status')
             ->get()->toArray();
         }
-
-        $this->setTutorTransactionDropdownSort($this->status[0]['status']);
+        if (count($this->status) > 0) {
+            $this->setTutorTransactionDropdownSort($this->status[0]['status']);
+        }
     }
 }

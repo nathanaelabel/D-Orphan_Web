@@ -52,10 +52,11 @@
         </div>
 
         {{-- Dropdown Sort --}}
-        @if ($status)
+        {{$tutorTransactionDropdownSort}}
+        @if (count($getStatus)>0)
             <select id="sort_tutor_transaction" name="sort_tutor_transaction" wire:model="tutorTransactionDropdownSort"
                 class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-                @foreach ($status as $itemStatus)
+                @foreach ($getStatus as $itemStatus)
                     <option value="{{ $itemStatus['status'] }}"
                         {{ $tutorTransactionDropdownSort == $itemStatus['status'] ? 'selected' : null }}>
                         @if ($itemStatus['status'] == 'pending')
