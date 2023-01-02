@@ -244,14 +244,14 @@
     @if ($showFormConfirmation)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
-            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+            <div class="flex items-center justify-center min-h-screen p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div
-                    class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Ubah Data</p>
+                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Ubah Data</p>
                         <hr class="my-4">
                         <p class="text-gray-500">Konfirmasi bahwa data yang Anda pilih akan diubah</p>
                     </div>
@@ -288,14 +288,14 @@
     @if ($showForm)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
-            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+            <div class="flex items-center justify-center min-h-screen p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div
-                    class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Tambah Perlombaan
+                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Tambah Perlombaan
                         </p>
                         <hr class="my-4">
                         {{-- Tambah Perlombaan Form --}}

@@ -200,7 +200,11 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 @if ($editedCourseTutorIndex !== $index)
-                                    {{ $item['location'] }}
+                                    @if ($item['location'] == null)
+                                        {{ '-' }}
+                                    @else
+                                        {{ $item['location'] }}
+                                    @endif
                                 @else
                                     <x-input wire:model.defer="coursesTutors.{{ $index }}.location">
                                         <x-slot:type>text</x-slot:type>
@@ -302,14 +306,14 @@
     @if ($showFormConfirmation)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
-            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+            <div class="flex items-center justify-center min-h-screen p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div
-                    class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Ubah Data</p>
+                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Ubah Data</p>
                         <hr class="my-4">
                         <p class="text-gray-500">Konfirmasi bahwa data yang Anda pilih akan diubah</p>
                     </div>
@@ -342,161 +346,184 @@
     @endif
 
     @if ($showForm)
-        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
+        <div class="fixed z-50 inset-0 overflow-y-scroll" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
-            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+            <div class="flex items-center justify-center min-h-screen p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div
-                    class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Tambah Anak
-                            Panti Asuhan</p>
+                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Tambah Kursus</p>
                         <hr class="my-4">
                         {{-- Tambah Kursus Form --}}
                         <form wire:submit.prevent="addData">
-                            <div class="grid gap-2 bg-white rounded-2xl shadow px-8 py-6">
-                                <div class="space-y-1">
-
-                                    {{-- Note untuk bagian option ini pakai x-label error kurang tau kenapa, Abel dan Zizah bingung. Jadi pakai select biasa dulu. --}}
-
-                                    {{-- <x-label>
-                                        <x-slot:for>skill_id</x-slot:for>
-                                        <x-slot:slot>Kategori Kursus</x-slot:slot>
-                                    </x-label> --}}
-                                    <select wire:model="skill_id">
-                                        @foreach ($allSkills as $skill)
-                                            <option value="{{ $skill->id }}">
-                                                {{ $skill->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                            <div class="grid gap-2">
+                                <div class="grid gap-2 lg:flex">
+                                    <div class="space-y-1">
+                                        <x-label>
+                                            <x-slot:for>skill</x-slot:for>
+                                            <x-slot:slot>Kategori Kursus</x-slot:slot>
+                                        </x-label>
+                                        <select wire:model="skill_id"
+                                            class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
+                                            @foreach ($allSkills as $skill)
+                                                <option value="{{ $skill->id }}">
+                                                    {{ $skill->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>name</x-slot:for>
+                                            <x-slot:slot>Nama Kursus</x-slot:slot>
+                                        </x-label>
+                                        <x-input wire:model="name" required>
+                                            <x-slot:type>text</x-slot:type>
+                                            <x-slot:name>name</x-slot:name>
+                                            <x-slot:id>name</x-slot:id>
+                                            <x-slot:placeholder>Nama Kursus</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
                                 </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>name</x-slot:for>
-                                        <x-slot:slot>Nama Kursus</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model="name">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>name</x-slot:name>
-                                        <x-slot:id>name</x-slot:id>
-                                        <x-slot:placeholder>Nama Kursus</x-slot:placeholder>
-                                    </x-input>
+                                <div class="grid gap-2 lg:flex">
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>hourly_price</x-slot:for>
+                                            <x-slot:slot>Tarif Per Jam</x-slot:slot>
+                                        </x-label>
+                                        <x-input wire:model="hourly_price" min="10000" required>
+                                            <x-slot:type>number</x-slot:type>
+                                            <x-slot:name>hourly_price</x-slot:name>
+                                            <x-slot:id>hourly_price</x-slot:id>
+                                            <x-slot:placeholder>Tarif Per Jam</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>maximum_member</x-slot:for>
+                                            <x-slot:slot>Batas Jumlah Peserta</x-slot:slot>
+                                        </x-label>
+                                        <x-input wire:model="maximum_member" min="3" required>
+                                            <x-slot:type>number</x-slot:type>
+                                            <x-slot:name>maximum_member</x-slot:name>
+                                            <x-slot:id>maximum_member</x-slot:id>
+                                            <x-slot:placeholder>Batas Jumlah Peserta</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>tool_price</x-slot:for>
+                                            <x-slot:slot>Harga Sewa Alat</x-slot:slot>
+                                        </x-label>
+                                        <x-input wire:model="tool_price" min="0">
+                                            <x-slot:type>number</x-slot:type>
+                                            <x-slot:name>tool_price</x-slot:name>
+                                            <x-slot:id>tool_price</x-slot:id>
+                                            <x-slot:placeholder>Harga Sewa Alat</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
                                 </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>hourly_price</x-slot:for>
-                                        <x-slot:slot>Tarif Per Jam</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model="hourly_price">
-                                        <x-slot:type>number</x-slot:type>
-                                        <x-slot:name>hourly_price</x-slot:name>
-                                        <x-slot:id>hourly_price</x-slot:id>
-                                        <x-slot:placeholder>Tarif Per Jam</x-slot:placeholder>
-                                    </x-input>
+                                <div class="grid gap-2 lg:flex">
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>is_online</x-slot:for>
+                                            <x-slot:slot>Daring Didatangi</x-slot:slot>
+                                        </x-label>
+                                        <div class="flex gap-6 mt-1">
+                                            <div class="flex gap-2 cursor-pointer items-center w-full lg:w-fit">
+                                                <input wire:model.defer="is_online" id="is_online-tidak"
+                                                    class="peer/is_online-tidak checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
+                                                    type="radio" name="is_online" value="0"
+                                                    @if (count(request()->query()) == 0) checked @endif />
+                                                <label for="is_online-tidak"
+                                                    class="peer-checked/is_online-tidak:text-blue-500 cursor-pointer">Tidak</label>
+                                            </div>
+                                            <div class="flex gap-2 cursor-pointer items-center w-full lg:w-fit">
+                                                <input wire:model.defer="is_online" id="is_online-ya"
+                                                    class="peer/is_online-ya checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
+                                                    type="radio" name="is_online" value="1"
+                                                    @if (count(request()->query()) > 0) checked @endif />
+                                                <label for="is_online-ya"
+                                                    class="peer-checked/is_online-ya:text-blue-500 cursor-pointer">Ya</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>is_visit</x-slot:for>
+                                            <x-slot:slot>Luring Didatangi</x-slot:slot>
+                                        </x-label>
+                                        <div class="flex gap-6 mt-1">
+                                            <div class="flex gap-2 cursor-pointer items-center w-full lg:w-fit">
+                                                <input wire:model.defer="is_visit" id="is_visit-tidak"
+                                                    class="peer/is_visit-tidak checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
+                                                    type="radio" name="is_visit" value="0"
+                                                    @if (count(request()->query()) == 0) checked @endif />
+                                                <label for="is_visit-tidak"
+                                                    class="peer-checked/is_visit-tidak:text-blue-500 cursor-pointer">Tidak</label>
+                                            </div>
+                                            <div class="flex gap-2 cursor-pointer items-center w-full lg:w-fit">
+                                                <input wire:model.defer="is_visit" id="is_visit-ya"
+                                                    class="peer/is_visit-ya checked:bg-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
+                                                    type="radio" name="is_visit" value="1"
+                                                    @if (count(request()->query()) > 0) checked @endif />
+                                                <label for="is_visit-ya"
+                                                    class="peer-checked/is_visit-ya:text-blue-500 cursor-pointer">Ya</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>maximum_member</x-slot:for>
-                                        <x-slot:slot>Batas Jumlah Peserta</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model="maximum_member">
-                                        <x-slot:type>number</x-slot:type>
-                                        <x-slot:name>maximum_member</x-slot:name>
-                                        <x-slot:id>maximum_member</x-slot:id>
-                                        <x-slot:placeholder>Batas Jumlah Peserta</x-slot:placeholder>
-                                    </x-input>
-                                </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>is_online</x-slot:for>
-                                        <x-slot:slot>Daring Didatangi</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model.defer="is_online">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>is_online</x-slot:name>
-                                        <x-slot:id>is_online</x-slot:id>
-                                        <x-slot:placeholder>0 Tidak, 1 Ya</x-slot:placeholder>
-                                    </x-input>
-                                </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>is_visit</x-slot:for>
-                                        <x-slot:slot>Luring Didatangi</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model.defer="is_visit">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>is_visit</x-slot:name>
-                                        <x-slot:id>is_visit</x-slot:id>
-                                        <x-slot:placeholder>0 Tidak, 1 Ya</x-slot:placeholder>
-                                    </x-input>
-                                </div>
-                                <div class="space-y-1">
+                                <div class="space-y-1 w-full">
                                     <x-label>
                                         <x-slot:for>location</x-slot:for>
                                         <x-slot:slot>Lokasi</x-slot:slot>
                                     </x-label>
-                                    <x-input wire:model="location">
+                                    <x-input wire:model="location" required>
                                         <x-slot:type>text</x-slot:type>
                                         <x-slot:name>location</x-slot:name>
                                         <x-slot:id>location</x-slot:id>
                                         <x-slot:placeholder>Lokasi</x-slot:placeholder>
                                     </x-input>
                                 </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>tool_price</x-slot:for>
-                                        <x-slot:slot>Harga Sewa Alat</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model="tool_price">
-                                        <x-slot:type>number</x-slot:type>
-                                        <x-slot:name>tool_price</x-slot:name>
-                                        <x-slot:id>tool_price</x-slot:id>
-                                        <x-slot:placeholder>Harga Sewa Alat</x-slot:placeholder>
-                                    </x-input>
+                                <div>
+                                    <div class="space-y-1">
+                                        <x-label>
+                                            <x-slot:for>tool_description</x-slot:for>
+                                            <x-slot:slot>Deskripsi Sewa Alat</x-slot:slot>
+                                        </x-label>
+                                        <x-textarea wire:model="tool_description">
+                                            <x-slot:maxlength>255</x-slot:maxlength>
+                                            <x-slot:placeholder>Masukkan deskripsi sewa alat</x-slot:placeholder>
+                                        </x-textarea>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <x-label>
+                                            <x-slot:for>description</x-slot:for>
+                                            <x-slot:slot>Deskripsi Kursus</x-slot:slot>
+                                        </x-label>
+                                        <x-textarea wire:model="description" required>
+                                            <x-slot:maxlength>255</x-slot:maxlength>
+                                            <x-slot:placeholder>Masukkan deskripsi kursus</x-slot:placeholder>
+                                        </x-textarea>
+                                    </div>
                                 </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>tool_description</x-slot:for>
-                                        <x-slot:slot>Deskripsi Sewa Alat</x-slot:slot>
-                                    </x-label>
-                                    <x-textarea wire:model="tool_description">
-                                        <x-slot:maxlength>255</x-slot:maxlength>
-                                        <x-slot:placeholder>Masukkan deskripsi sewa alat</x-slot:placeholder>
-                                    </x-textarea>
-                                </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>description</x-slot:for>
-                                        <x-slot:slot>Deskripsi</x-slot:slot>
-                                    </x-label>
-                                    <x-textarea wire:model="description">
-                                        <x-slot:maxlength>255</x-slot:maxlength>
-                                        <x-slot:placeholder>Masukkan deskripsi dari kursus</x-slot:placeholder>
-                                    </x-textarea>
-                                </div>
+                            </div>
                         </form>
                     </div>
 
-                    <a wire:click.prevent='addData' class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            <title>
-                                Tambahkan</title>
-                        </svg>
-                    </a>
-
-                    <a wire:click.prevent='toggleForm' class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            <title>
-                                Batal</title>
-                        </svg>
-                    </a>
+                    <div class="grid gap-4 lg:flex">
+                        <button wire:click.prevent='toggleForm'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                            <p class="font-semibold text-red-700">Batal</p>
+                        </button>
+                        <button wire:click.prevent='addData'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
+                            <p class="font-semibold text-white">Tambah</p>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

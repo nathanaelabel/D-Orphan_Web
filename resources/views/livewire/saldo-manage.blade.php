@@ -5,20 +5,22 @@
         <div>
             <p class="text-3xl leading-10 font-bold">{{ 'Kirimkan permintaan tarik saldo' }}</p>
         </div>
-        @if (count($tutorTransactions) == 0)
-        @else
-            <div>
-                <span class="hidden lg:flex gap-2 items-center px-2 py-1 rounded-lg border-2 border-black font-medium">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                        <title>Jumlah riwayat transaksi</title>
-                    </svg>
-                    {{ count($tutorTransactions) . ' riwayat transaksi' }}
-                </span>
-            </div>
-        @endif
+        <div>
+            <span class="hidden lg:flex gap-2 items-center px-2 py-1 rounded-lg border-2 border-black font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                    <title>Nomor rekening tujuan</title>
+                </svg>
+                <span id="rekening">XXXXXXXXXX</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-5 h-5 text-blue-500 cursor-pointer" onclick="accountShowHide()">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                </svg>
+            </span>
+        </div>
     </div>
 
     {{-- Tabs --}}
@@ -34,10 +36,6 @@
                 Kursus</a>
         </nav>
     </div>
-
-    @if ($activeTab == 'Penarikan Saldo')
-        Nomor Rekening Tujuan: {{ auth()->user()->tutor->bank_account }}
-    @endif
 
     {{-- Content --}}
     <div class="flex justify-between gap-4 items-center">
@@ -130,7 +128,7 @@
                                     </span>
                                 @elseif($item['status'] == 'complete')
                                     <span
-                                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
+                                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-green-100 text-green-800">
                                         Sukses
                                     </span>
                                 @else
@@ -171,7 +169,8 @@
                                             <a wire:click.prevent='openModalConfirmation({{ $index }}, "ubah")'
                                                 class="cursor-pointer text-blue-500">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                                                    stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-blue-500">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
                                                     <title>Simpan</title>
@@ -215,14 +214,14 @@
     @if ($showFormConfirmation)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
-            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+            <div class="flex items-center justify-center min-h-screen p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div
-                    class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Ubah Data</p>
+                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Ubah Data</p>
                         <hr class="my-4">
                         <p class="text-gray-500">Konfirmasi bahwa data yang Anda pilih akan diubah</p>
                     </div>
@@ -254,20 +253,17 @@
         </div>
     @endif
 
-
-
-
     @if ($showForm)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
-            <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+            <div class="flex items-center justify-center min-h-screen p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div
-                    class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">Tambah permintaan
+                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Tambah permintaan
                             tarik saldo</p>
                         <hr class="my-4">
                         <p class="text-gray-500">Konfirmasi bahwa permintaan tarik saldo akan dikirim</p>
@@ -287,3 +283,14 @@
         </div>
     @endif
 </div>
+
+<script>
+    function accountShowHide() {
+        var x = document.getElementById("rekening");
+        if (x.innerHTML === "XXXXXXXXXX") {
+            x.innerHTML = {{ auth()->user()->tutor->bank_account }};
+        } else {
+            x.innerHTML = "XXXXXXXXXX";
+        }
+    }
+</script>

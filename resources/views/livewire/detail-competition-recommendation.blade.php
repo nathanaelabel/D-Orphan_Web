@@ -99,7 +99,7 @@
 
                 {{-- Dropdown Sort --}}
                 <select id="sort_orphan" name="sort_orphan" wire:model="orphanDropdownSort"
-                    class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                    class="w-fit rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
                 @empty($orphans)
                     <option "selected">Tidak ada rekomendasi</option>
                 @else
@@ -187,7 +187,7 @@
 
                     {{-- Dropdown Sort --}}
                     <select id="sort_orphanage" name="sort_orphanage" wire:model="orphanageDropdownSort"
-                        class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                        class="w-fit rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
                         @foreach ($orphanages as $item)
                             <option value="{{ $item->id }}"
                                 {{ $orphanageDropdownSort == $item->id ? 'selected' : null }}>
@@ -206,7 +206,7 @@
 
                         {{-- Dropdown Sort --}}
                         <select id="sort_orphan" name="sort_orphan" wire:model="orphanDropdownSort"
-                            class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                            class="w-fit rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
                             @foreach ($orphans as $item)
                                 <option value="{{ $item->id }}"
                                     {{ $orphanDropdownSort == $item->id ? 'selected' : null }}>
@@ -352,7 +352,7 @@
             @if ($showFormConfirmation)
                 <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
                     aria-modal="true">
-                    <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+                    <div class="flex items-center justify-center min-h-screen p-4">
                         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
                             aria-hidden="true">
                         </div>
@@ -360,9 +360,9 @@
                         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"
                             aria-hidden="true">&#8203;</span>
                         <div
-                            class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                            class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                             <div>
-                                <p class="text-2xl leading-8 font-semibold text-gray-900" id="modal-title">
+                                <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">
                                     @if ($keterangan == 'ubah')
                                         Ubah
                                     @elseif($keterangan == 'hapus')
