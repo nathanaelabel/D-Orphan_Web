@@ -86,31 +86,48 @@
     <hr>
 
     @if (auth()->user()->orphanage)
-        <details open class="space-y-2">
+        <details open class="space-y-4">
             <summary class="text-xl leading-8 font-semibold">
                 Rekomendasi
             </summary>
-            Total: {{ count($orphanCrs) }} Rekomendasi
-            <div>
-                Total Anak yang diberi rekomendasi: {{ count($orphans) }} Anak Panti
+            <div class="flex justify-between">
+                <div class="flex gap-4">
+                    <span
+                        class="hidden lg:flex gap-2 items-center px-2 py-1 rounded-lg border-2 border-black font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+                            <title>Jumlah rekomendasi dari Tutor</title>
+                        </svg>
+                        {{ count($orphanCrs) . ' rekomendasi' }}
+                    </span>
+                    <span
+                        class="hidden lg:flex gap-2 items-center px-2 py-1 rounded-lg border-2 border-black font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                            <title>Total peserta kursus yang diberi rekomendasi</title>
+                        </svg>
+                        {{ count($orphans) . ' Anak Panti' }}
+                    </span>
+                </div>
+                <div>
+                    <select id="sort_orphan" name="sort_orphan" wire:model="orphanDropdownSort"
+                        class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                    @empty($orphans)
+                        <option "selected">Tidak ada rekomendasi</option>
+                    @else
+                        @foreach ($orphans as $orphan)
+                            <option value="{{ $orphan->id }}"
+                                {{ $orphanDropdownSort == $orphan->id ? 'selected' : null }}>
+                                {{ $orphan->name }}
+                            </option>
+                        @endforeach
+                    @endempty
+                </select>
             </div>
-            <div>
-                Pilih Nama Anak Panti
-
-                {{-- Dropdown Sort --}}
-                <select id="sort_orphan" name="sort_orphan" wire:model="orphanDropdownSort"
-                    class="w-fit rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
-                @empty($orphans)
-                    <option "selected">Tidak ada rekomendasi</option>
-                @else
-                    @foreach ($orphans as $orphan)
-                        <option value="{{ $orphan->id }}"
-                            {{ $orphanDropdownSort == $orphan->id ? 'selected' : null }}>
-                            {{ $orphan->name }}
-                        </option>
-                    @endforeach
-                @endempty
-            </select>
         </div>
 
         <div class="overflow-x-auto shadow rounded">
@@ -120,7 +137,7 @@
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
                             No.</th>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                            Nama Anak</th>
+                            Nama Anak Panti</th>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Dari Tutor</th>
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
@@ -151,19 +168,24 @@
     @if ($hasDoneCourseBooking)
         <div class="space-y-4">
             <div class="flex justify-between items-center">
-                <div>
-                    @if (count($orphanCrs) > 0)
-                        <span
-                            class="hidden lg:flex gap-2 items-center pl-1 pr-2 py-1 rounded-lg border-2 border-black font-medium">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
-                                <title>Rekomendasi lomba yang diberikan</title>
-                            </svg>
-                            {{ count($orphanCrs) }} rekomendasi telah diberikan
-                    @endif
-                    </span>
+                <div class="flex gap-4 items-center">
+                    <p class="text-3xl leading-10 font-bold">
+                        {{ 'Berikan Rekomendasi Perlombaan untuk Anak Panti' }}
+                    </p>
+                    <div>
+                        @if (count($orphanCrs) > 0)
+                            <span
+                                class="hidden lg:flex gap-2 items-center pl-1 pr-2 py-1 rounded-lg border-2 border-black font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+                                    <title>Rekomendasi lomba yang diberikan</title>
+                                </svg>
+                                {{ count($orphanCrs) }} rekomendasi telah diberikan
+                        @endif
+                        </span>
+                    </div>
                 </div>
                 <a wire:click='addData' class="cursor-pointer" title="Tambah">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -173,19 +195,14 @@
                 </a>
             </div>
 
-            <div class="bg-white rounded-2xl shadow p-4 lg:p-8 grid gap-6">
-                <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">Berikan Rekomendasi
-                    Perlombaan
-                    untuk Anak Panti</p>
+            <div class="bg-white rounded-2xl shadow p-4 lg:p-8 grid gap-4">
+                <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">Tambah Peserta Lomba</p>
                 <hr>
-
-                <div class="grid gap-1 lg:flex lg:space-x-4 lg:items-center">
+                <div class="grid gap-1">
                     <x-label>
                         <x-slot:for>nama_panti_asuhan</x-slot:for>
                         <x-slot:slot>Nama Panti Asuhan</x-slot:slot>
                     </x-label>
-
-                    {{-- Dropdown Sort --}}
                     <select id="sort_orphanage" name="sort_orphanage" wire:model="orphanageDropdownSort"
                         class="w-fit rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
                         @foreach ($orphanages as $item)
@@ -198,13 +215,11 @@
                 </div>
 
                 @if ($orphans)
-                    <div class="grid gap-1 lg:flex lg:space-x-4 lg:items-center">
+                    <div class="grid gap-1">
                         <x-label>
                             <x-slot:for>nama_peserta_kursus</x-slot:for>
                             <x-slot:slot>Nama Peserta Lomba</x-slot:slot>
                         </x-label>
-
-                        {{-- Dropdown Sort --}}
                         <select id="sort_orphan" name="sort_orphan" wire:model="orphanDropdownSort"
                             class="w-fit rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
                             @foreach ($orphans as $item)
@@ -402,8 +417,8 @@
                 </div>
             @endif
         @else
-            KAMU TIDAK BISA MEMBERIKAN REKOMENDASI PERLOMBAAN UNTUK ANAK PANTI.
-            REKOMENDASI DIBERIKAN UNTUK KURSUS YANG SEDANG BERLANGSUNG ATAU YANG SUDAH BERHASIL DISELESAIKAN.
+            <p>Maaf, Anda belum bisa memberikan rekomendasi perlombaan kepada Anak Panti. Rekomendasi hanya dapat
+                diberikan untuk kursus yang sedang berlangsung ataupun yang telah diselesaikan.</p>
     @endif
 @endif
 </div>
