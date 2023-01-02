@@ -210,49 +210,59 @@
         </table>
     </div>
 
+    {{-- Update & Delete Data Modal --}}
     @if ($showFormConfirmation)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
             <div class="flex items-center justify-center min-h-screen p-4">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
+                </div>
 
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div
                     class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Ubah Data</p>
+                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">
+                            @if ($keterangan == 'ubah')
+                                Ubah
+                            @elseif($keterangan == 'hapus')
+                                Hapus
+                            @endif data
+                        </p>
                         <hr class="my-4">
-                        <p class="text-gray-500">Konfirmasi bahwa data yang Anda pilih akan diubah</p>
+                        <p class="text-gray-500">Konfirmasi bahwa data @yield('title') yang Anda
+                            pilih
+                            akan
+                            @if ($keterangan == 'ubah')
+                                diubah
+                            @elseif($keterangan == 'hapus')
+                                dihapus
+                            @endif
+                        </p>
                     </div>
                     <div class="grid gap-4 lg:flex">
-                        <a wire:click.prevent='closeModalConfirmation' class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                <title>Close</title>
-                            </svg>
-                        </a>
-                        <a wire:click.prevent=@if ($keterangan == 'ubah') 'saveOrphan' @elseif($keterangan == 'hapus') 'deleteOrphan' @endif
-                            class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                <title>
-                                    @if ($keterangan == 'ubah')
-                                        Ubah
-                                    @elseif($keterangan == 'hapus')
-                                        Hapus
-                                    @endif
-                                </title>
-                            </svg>Ubah
-                        </a>
+                        <button wire:click.prevent='closeModalConfirmation'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                            <p class="font-semibold text-red-700">Batal</p>
+                        </button>
+                        @if ($keterangan == 'ubah')
+                            <button wire:click.prevent='saveOrphan'
+                                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-500 focus:ring-opacity-50 active:bg-green-500 active:border-green-500">
+                                <p class="font-semibold text-white">Ubah</p>
+                            </button>
+                        @elseif($keterangan == 'hapus')
+                            <button wire:click.prevent='deleteOrphan'
+                                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-500 hover:bg-red-600 focus:ring focus:ring-red-500 focus:ring-opacity-50 active:bg-red-500 active:border-red-500">
+                                <p class="font-semibold text-white">Hapus</p>
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     @endif
 
-    {{-- Show Modal Add Data --}}
+    {{-- Create Data Modal --}}
     @if ($showForm)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">

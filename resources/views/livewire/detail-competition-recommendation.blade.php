@@ -187,10 +187,11 @@
                         </span>
                     </div>
                 </div>
-                <a wire:click='addData' class="cursor-pointer" title="Tambah">
+                <a wire:click='addData' class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        <title>Tambah</title>
                     </svg>
                 </a>
             </div>
@@ -364,6 +365,7 @@
                 </table>
             </div>
 
+            {{-- Update & Delete Data Modal --}}
             @if ($showFormConfirmation)
                 <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
                     aria-modal="true">

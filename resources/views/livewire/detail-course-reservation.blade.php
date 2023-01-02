@@ -15,10 +15,11 @@
                     <p class="text-lg leading-8 font-semibold text-gray-700">
                         Peserta Kursus
                     </p>
-                    <a wire:click='' class="cursor-pointer" title="Tambah">
+                    <a wire:click='' class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6 text-blue-500">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            <title>Tambah</title>
                         </svg>
                     </a>
                 </div>
@@ -77,11 +78,12 @@
                     </p>
 
                     <x-primary-button wire:click="addDay" class="w-fit">{{ __('Tambah Jadwal') }}</x-primary-button>
-                    <a wire:click='' class="cursor-pointer" title="Tambah">
+                    <a wire:click='' class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6 text-blue-500">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
+                        <title>Tambah</title>
                     </a>
                 </div>
                 @for ($dayCount; $dayCount > 0; $dayCount--)

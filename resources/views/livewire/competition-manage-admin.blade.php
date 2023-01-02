@@ -250,6 +250,7 @@
         </table>
     </div>
 
+    {{-- Update & Delete Data Modal --}}
     @if ($showFormConfirmation)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
@@ -301,7 +302,7 @@
         </div>
     @endif
 
-    {{-- Show Modal Add Data --}}
+    {{-- Create Data Modal --}}
     @if ($showForm)
         <div class="fixed z-50 inset-0 overflow-y-scroll" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
@@ -451,18 +452,6 @@
                     </div>
                 </div>
             </div>
-            </form>
-        </div>
-
-        <div class="grid gap-4 lg:flex">
-            <button wire:click.prevent='toggleForm'
-                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
-                <p class="font-semibold text-red-700">Batal</p>
-            </button>
-            <button wire:click.prevent='addData'
-                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
-                <p class="font-semibold text-white">Tambah</p>
-            </button>
         </div>
     @endif
 </div>
