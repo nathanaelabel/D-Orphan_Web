@@ -10,13 +10,12 @@
                 </div>
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
                     @auth
-
                         <a href="{{ route('dasbor') }}"
                             class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Dasbor</a>
 
                         @if (Auth::user()->user_type == 'Admin')
                             <a href="{{ route('kelola-competition-admin') }}"
-                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-competition-admin') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Perlombaan</a>
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-competition-admin') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Lomba</a>
                         @else
                             @if (Auth::user()->user_type == 'Pengurus Panti')
                                 <a href="{{ route('kelola-panti') }}"
@@ -143,7 +142,7 @@
                     class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'text-blue-500 font-semibold' : '' }}">Dasbor</a>
                 @if (Auth::user()->user_type == 'Admin')
                     <a href="{{ route('kelola-competition-admin') }}"
-                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-competition-admin') ? 'text-blue-500 font-semibold' : '' }}">Perlombaan</a>
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-competition-admin') ? 'text-blue-500 font-semibold' : '' }}">Lomba</a>
                 @else
                     @if (Auth::user()->user_type == 'Pengurus Panti')
                         <a href="{{ route('kelola-panti') }}"

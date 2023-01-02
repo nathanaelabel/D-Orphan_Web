@@ -252,7 +252,6 @@
         </div>
     @endif
 
-
     {{-- Show Modal Add Data --}}
     @if ($showForm)
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"

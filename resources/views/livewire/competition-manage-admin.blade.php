@@ -1,18 +1,21 @@
-@section('title', 'Kelola Perlombaan')
+@section('title', 'Lomba')
 
 <div class="space-y-8">
-    {{-- Title --}}
-    <p class="text-3xl leading-10 font-bold">Kelola Data Perlombaan</p>
-
-    <div class="flex gap-2 items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="w-6 h-6 text-gray-700">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-            <title>Jumlah Perlombaan</title>
-        </svg>
-
-        <p class="text-lg leading-8 text-gray-700">{{ count($competitions) }} Perlombaan</p>
+    <div class="flex items-center justify-between">
+        <div>
+            <p class="text-3xl leading-10 font-bold">{{ 'Kelola Data Perlombaan' }}</p>
+        </div>
+        <div>
+            <span class="hidden lg:flex gap-2 items-center pl-1 pr-2 py-1 rounded-lg border-2 border-black font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+                    <title>Jumlah perlombaan</title>
+                </svg>
+                {{ count($competitions) . ' perlombaan' }}
+            </span>
+        </div>
     </div>
 
     <div class="flex justify-between gap-4 items-center">
@@ -42,34 +45,34 @@
                 <tr>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
                         No.</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Nama</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Poster</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Tanggal Mulai Registrasi</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Jam Mulai Registrasi</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                        Link Informasi</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                        Tautan Informasi</th>
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Tingkat</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Deskripsi</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Penyelenggara</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Terakhir Diubah</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Tanggal Ditambahkan</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Aksi</th>
                 </tr>
             </thead>
             @if (!$competitions)
                 <tbody class="bg-white">
                     <tr>
-                        <td colspan="10" class="px-3 py-4">
+                        <td colspan="12" class="px-3 py-4">
                             <div class="grid gap-2 p-2 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
@@ -88,7 +91,7 @@
                             <td class="whitespace-nowrap px-3 py-4 w-fit">
                                 {{ $loop->iteration }}
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCompetitionIndex !== $index)
                                     {{ $item['name'] }}
                                 @else
@@ -96,60 +99,68 @@
                                         <x-slot:type>text</x-slot:type>
                                         <x-slot:name>name</x-slot:name>
                                         <x-slot:id>name</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
+                                        <x-slot:placeholder>Asian Games</x-slot:placeholder>
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCompetitionIndex !== $index)
-                                    {{ $item['photo_url'] }}
+                                    <img src={{ $item['photo_url'] }} alt="Poster Lomba" class="rounded-lg"
+                                        onerror="this.onerror=null;this.src='/img/placeholder.svg';">
                                 @else
                                     <x-input wire:model.defer="competitions.{{ $index }}.photo_url">
-                                        <x-slot:type>text</x-slot:type>
+                                        <x-slot:type>url</x-slot:type>
                                         <x-slot:name>photo_url</x-slot:name>
                                         <x-slot:id>photo_url</x-slot:id>
                                         <x-slot:placeholder></x-slot:placeholder>
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap
-                                        px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCompetitionIndex !== $index)
                                     {{ date_format(date_create($item['registration_start_date']), 'l, d/m/Y') }}
                                 @else
-                                    <input type="date" onfocus="this.showPicker()"
-                                        wire:model.defer="competitions.{{ $index }}.registration_start_date">
+                                    <x-input wire:model.defer="competitions.{{ $index }}.registration_start_date"
+                                        class="cursor-text">
+                                        <x-slot:type>date</x-slot:type>
+                                        <x-slot:name>registration_start_date</x-slot:name>
+                                        <x-slot:id>registration_start_date</x-slot:id>
+                                        <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
+                                    </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap
-                                        px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCompetitionIndex !== $index)
                                     {{ $item['registration_start_hour'] }}
                                 @else
-                                    <input type="date" onfocus="this.showPicker()"
-                                        wire:model.defer="competitions.{{ $index }}.registration_start_hour">
-                                @endif
-                            </td>
-                            <td class="whitespace-nowrap
-                                        px-3 py-4 w-full">
-                                @if ($editedCompetitionIndex !== $index)
-                                    {{ $item['url'] }}
-                                @else
-                                    <x-input wire:model.defer="competitions.{{ $index }}.url">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>url</x-slot:name>
-                                        <x-slot:id>url</x-slot:id>
+                                    <x-input
+                                        wire:model.defer="competitions.{{ $index }}.registration_start_hour"
+                                        class="cursor-text">
+                                        <x-slot:type>time</x-slot:type>
+                                        <x-slot:name>registration_start_hour</x-slot:name>
+                                        <x-slot:id>registration_start_hour</x-slot:id>
                                         <x-slot:placeholder></x-slot:placeholder>
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap
-                                        px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
+                                @if ($editedCompetitionIndex !== $index)
+                                    {{ $item['url'] }}
+                                @else
+                                    <x-input wire:model.defer="competitions.{{ $index }}.url">
+                                        <x-slot:type>url</x-slot:type>
+                                        <x-slot:name>url</x-slot:name>
+                                        <x-slot:id>url</x-slot:id>
+                                        <x-slot:placeholder>https://url.net/</x-slot:placeholder>
+                                    </x-input>
+                                @endif
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCompetitionIndex !== $index)
                                     {{ $item['level'] }}
                                 @else
-                                    <select name="level" id="level"
-                                        wire:model.defer="competitions.{{ $index }}.level">
+                                    <select wire:model.defer="competitions.{{ $index }}.level"
+                                        class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
                                         <option value="Regional" @if ($item['level'] == 'Regional') "selected" @endif>
                                             Regional
                                         </option>
@@ -161,8 +172,7 @@
                                     </select>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap
-                                        px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCompetitionIndex !== $index)
                                     {{ $item['description'] }}
                                 @else
@@ -170,12 +180,11 @@
                                         <x-slot:type>text</x-slot:type>
                                         <x-slot:name>description</x-slot:name>
                                         <x-slot:id>description</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
+                                        <x-slot:placeholder>Masukkan deskripsi lomba</x-slot:placeholder>
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap
-                                        px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCompetitionIndex !== $index)
                                     {{ $item['organizer'] }}
                                 @else
@@ -183,17 +192,17 @@
                                         <x-slot:type>text</x-slot:type>
                                         <x-slot:name>organizer</x-slot:name>
                                         <x-slot:id>organizer</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
+                                        <x-slot:placeholder>Olympic Council of Asia</x-slot:placeholder>
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full flex gap-2">
+                            <td class="whitespace-nowrap px-3 py-4 flex gap-2">
                                 @if (!is_null($editedCompetitionIndex))
                                     @if ($editedCompetitionIndex == $index)
                                         {{-- Simpan --}}
@@ -275,7 +284,7 @@
                                         Hapus
                                     @endif
                                 </title>
-                            </svg>Ubah
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -283,121 +292,176 @@
         </div>
     @endif
 
+    @if ($showFormConfirmation)
+        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
+            aria-modal="true">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
+                </div>
+
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div
+                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    <div>
+                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">
+                            @if ($keterangan == 'ubah')
+                                Ubah
+                            @elseif($keterangan == 'hapus')
+                                Hapus
+                            @endif data
+                        </p>
+                        <hr class="my-4">
+                        <p class="text-gray-500">Konfirmasi bahwa data @yield('title') yang Anda
+                            pilih
+                            akan
+                            @if ($keterangan == 'ubah')
+                                diubah
+                            @elseif($keterangan == 'hapus')
+                                dihapus
+                            @endif
+                        </p>
+                    </div>
+                    <div class="grid gap-4 lg:flex">
+                        <button wire:click.prevent='closeModalConfirmation'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                            <p class="font-semibold text-red-700">Batal</p>
+                        </button>
+                        @if ($keterangan == 'ubah')
+                            <button wire:click.prevent='saveCompetition'
+                                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-500 focus:ring-opacity-50 active:bg-green-500 active:border-green-500">
+                                <p class="font-semibold text-white">Ubah</p>
+                            </button>
+                        @elseif($keterangan == 'hapus')
+                            <button wire:click.prevent='deleteCompetition'
+                                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-500 hover:bg-red-600 focus:ring focus:ring-red-500 focus:ring-opacity-50 active:bg-red-500 active:border-red-500">
+                                <p class="font-semibold text-white">Hapus</p>
+                            </button>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
     {{-- Show Modal Add Data --}}
     @if ($showForm)
-        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
+        <div class="fixed z-50 inset-0 overflow-y-scroll" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
             <div class="flex items-center justify-center min-h-screen p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div
-                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
+                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Tambah Perlombaan
-                        </p>
+                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Tambah Lomba</p>
                         <hr class="my-4">
-                        {{-- Tambah Perlombaan Form --}}
+                        {{-- Tambah Lomba Form --}}
                         <form wire:submit.prevent="addData">
-                            <div class="grid gap-2 bg-white rounded-2xl shadow px-8 py-6">
+                            <div class="grid gap-2">
                                 <div class="space-y-1">
                                     <x-label>
                                         <x-slot:for>name</x-slot:for>
-                                        <x-slot:slot>Nama</x-slot:slot>
+                                        <x-slot:slot>Nama Lomba</x-slot:slot>
                                     </x-label>
                                     <x-input wire:model="name">
                                         <x-slot:type>text</x-slot:type>
                                         <x-slot:name>name</x-slot:name>
                                         <x-slot:id>name</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
+                                        <x-slot:placeholder>Asian Games</x-slot:placeholder>
+                                    </x-input>
+                                </div>
+                                <div class="grid gap-2 lg:flex">
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>organizer</x-slot:for>
+                                            <x-slot:slot>Penyelenggara</x-slot:slot>
+                                        </x-label>
+                                        <x-input wire:model="organizer">
+                                            <x-slot:type>text</x-slot:type>
+                                            <x-slot:name>organizer</x-slot:name>
+                                            <x-slot:id>organizer</x-slot:id>
+                                            <x-slot:placeholder>Olympic Council of Asia</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>level</x-slot:for>
+                                            <x-slot:slot>Tingkat</x-slot:slot>
+                                        </x-label>
+                                        <select wire:model="level"
+                                            class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
+                                            <option value="Regional"
+                                                @if ($item['level'] == 'Regional') "selected" @endif>
+                                                Regional
+                                            </option>
+                                            <option value="Nasional"
+                                                @if ($item['level'] == 'Nasional') "selected" @endif>
+                                                Nasional</option>
+                                            <option value="Internasional"
+                                                @if ($item['level'] == 'Internasional') "selected" @endif>
+                                                Internasional</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="grid gap-2 lg:flex">
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>registration_start_date</x-slot:for>
+                                            <x-slot:slot>Tanggal Registrasi Dimulai</x-slot:slot>
+                                        </x-label>
+                                        <x-input wire:model="registration_start_date" class="cursor-text">
+                                            <x-slot:type>date</x-slot:type>
+                                            <x-slot:name>registration_start_date</x-slot:name>
+                                            <x-slot:id>registration_start_date</x-slot:id>
+                                            <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
+                                    <div class="space-y-1 w-full">
+                                        <x-label>
+                                            <x-slot:for>registration_start_hour</x-slot:for>
+                                            <x-slot:slot>Jam Registrasi Dimulai</x-slot:slot>
+                                        </x-label>
+                                        <x-input wire:model="registration_start_hour">
+                                            <x-slot:type>time</x-slot:type>
+                                            <x-slot:name>registration_start_hour</x-slot:name>
+                                            <x-slot:id>registration_start_hour</x-slot:id>
+                                            <x-slot:placeholder></x-slot:placeholder>
+                                        </x-input>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>url</x-slot:for>
+                                        <x-slot:slot>Tautan Informasi Lomba</x-slot:slot>
+                                    </x-label>
+                                    <x-input wire:model="url">
+                                        <x-slot:type>url</x-slot:type>
+                                        <x-slot:name>url</x-slot:name>
+                                        <x-slot:id>url</x-slot:id>
+                                        <x-slot:placeholder>https://url.net/</x-slot:placeholder>
                                     </x-input>
                                 </div>
                                 <div class="space-y-1">
                                     <x-label>
                                         <x-slot:for>photo_url</x-slot:for>
-                                        <x-slot:slot>photo_url</x-slot:slot>
+                                        <x-slot:slot>Poster Lomba</x-slot:slot>
                                     </x-label>
                                     <x-input wire:model="photo_url">
-                                        <x-slot:type>text</x-slot:type>
+                                        <x-slot:type>url</x-slot:type>
                                         <x-slot:name>photo_url</x-slot:name>
                                         <x-slot:id>photo_url</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
-                                    </x-input>
-                                </div>
-
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>registration_start_date</x-slot:for>
-                                        <x-slot:slot>registration_start_date</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model="registration_start_date" class="cursor-text">
-                                        <x-slot:type>date</x-slot:type>
-                                        <x-slot:name>registration_start_date</x-slot:name>
-                                        <x-slot:id>registration_start_date</x-slot:id>
-                                        <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
-                                    </x-input>
-                                </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>registration_start_hour</x-slot:for>
-                                        <x-slot:slot>registration_start_hour</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model="registration_start_hour">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>registration_start_hour</x-slot:name>
-                                        <x-slot:id>registration_start_hour</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
-                                    </x-input>
-                                </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>url</x-slot:for>
-                                        <x-slot:slot>url</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model="url">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>url</x-slot:name>
-                                        <x-slot:id>url</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
-                                    </x-input>
-                                </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>level</x-slot:for>
-                                        <x-slot:slot>level</x-slot:slot>
-                                    </x-label>
-                                    <select name="level" id="level" wire:model="level">
-                                        <option value="Regional" @if ($item['level'] == 'Regional') "selected" @endif>
-                                            Regional
-                                        </option>
-                                        <option value="Nasional" @if ($item['level'] == 'Nasional') "selected" @endif>
-                                            Nasional</option>
-                                        <option value="Internasional"
-                                            @if ($item['level'] == 'Internasional') "selected" @endif>
-                                            Internasional</option>
-                                    </select>
-                                </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>organizer</x-slot:for>
-                                        <x-slot:slot>organizer</x-slot:slot>
-                                    </x-label>
-                                    <x-input wire:model="organizer">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>organizer</x-slot:name>
-                                        <x-slot:id>organizer</x-slot:id>
                                         <x-slot:placeholder></x-slot:placeholder>
                                     </x-input>
                                 </div>
                                 <div class="space-y-1">
                                     <x-label>
                                         <x-slot:for>description</x-slot:for>
-                                        <x-slot:slot>description</x-slot:slot>
+                                        <x-slot:slot>Deskripsi lomba</x-slot:slot>
                                     </x-label>
                                     <x-textarea wire:model="description">
                                         <x-slot:maxlength>255</x-slot:maxlength>
-                                        <x-slot:placeholder>Masukkan keterangan dari perlombaan jika ada
+                                        <x-slot:placeholder>Masukkan keterangan perlombaan
                                         </x-slot:placeholder>
                                     </x-textarea>
                                 </div>
@@ -405,26 +469,30 @@
                         </form>
                     </div>
 
-                    {{-- Bisa mendeteksi livewire click --}}
-                    <a wire:click.prevent='addData' class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            <title>
-                                Tambahkan</title>
-                        </svg>
-                    </a>
-
-                    <a wire:click.prevent='toggleForm' class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            <title>
-                                Batal</title>
-                        </svg>
-                    </a>
+                    <div class="grid gap-4 lg:flex">
+                        <button wire:click.prevent='toggleForm'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                            <p class="font-semibold text-red-700">Batal</p>
+                        </button>
+                        <button wire:click.prevent='addData'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
+                            <p class="font-semibold text-white">Tambah</p>
+                        </button>
+                    </div>
                 </div>
             </div>
+            </form>
+        </div>
+
+        <div class="grid gap-4 lg:flex">
+            <button wire:click.prevent='toggleForm'
+                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                <p class="font-semibold text-red-700">Batal</p>
+            </button>
+            <button wire:click.prevent='addData'
+                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
+                <p class="font-semibold text-white">Tambah</p>
+            </button>
         </div>
     @endif
 </div>
