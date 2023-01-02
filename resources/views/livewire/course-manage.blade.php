@@ -380,6 +380,7 @@
                                             <x-slot:for>name</x-slot:for>
                                             <x-slot:slot>Nama Kursus</x-slot:slot>
                                         </x-label>
+                                        <span class="text-sm text-red-700">&#42;</span>
                                         <x-input wire:model="name" required>
                                             <x-slot:type>text</x-slot:type>
                                             <x-slot:name>name</x-slot:name>
@@ -394,6 +395,7 @@
                                             <x-slot:for>hourly_price</x-slot:for>
                                             <x-slot:slot>Tarif Per Jam</x-slot:slot>
                                         </x-label>
+                                        <span class="text-sm text-red-700">&#42;</span>
                                         <x-input wire:model="hourly_price" min="10000" required>
                                             <x-slot:type>number</x-slot:type>
                                             <x-slot:name>hourly_price</x-slot:name>
@@ -406,6 +408,7 @@
                                             <x-slot:for>maximum_member</x-slot:for>
                                             <x-slot:slot>Batas Jumlah Peserta</x-slot:slot>
                                         </x-label>
+                                        <span class="text-sm text-red-700">&#42;</span>
                                         <x-input wire:model="maximum_member" min="3" required>
                                             <x-slot:type>number</x-slot:type>
                                             <x-slot:name>maximum_member</x-slot:name>
@@ -481,6 +484,7 @@
                                         <x-slot:for>location</x-slot:for>
                                         <x-slot:slot>Lokasi</x-slot:slot>
                                     </x-label>
+                                    <span class="text-sm text-red-700">&#42;</span>
                                     <x-input wire:model="location" required>
                                         <x-slot:type>text</x-slot:type>
                                         <x-slot:name>location</x-slot:name>
@@ -504,10 +508,15 @@
                                             <x-slot:for>description</x-slot:for>
                                             <x-slot:slot>Deskripsi Kursus</x-slot:slot>
                                         </x-label>
+                                        <span class="text-sm text-red-700">&#42;</span>
                                         <x-textarea wire:model="description" required>
                                             <x-slot:maxlength>255</x-slot:maxlength>
                                             <x-slot:placeholder>Masukkan deskripsi kursus</x-slot:placeholder>
                                         </x-textarea>
+                                    </div>
+                                    <div class="text-sm text-red-700">
+                                        <span>&#42;</span>
+                                        <span>Wajib diisi</span>
                                     </div>
                                 </div>
                             </div>

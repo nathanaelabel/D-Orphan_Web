@@ -254,48 +254,6 @@
         <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
             <div class="flex items-center justify-center min-h-screen p-4">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div
-                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
-                    <div>
-                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Ubah Data</p>
-                        <hr class="my-4">
-                        <p class="text-gray-500">Konfirmasi bahwa data yang Anda pilih akan diubah</p>
-                    </div>
-                    <div class="grid gap-4 lg:flex">
-                        <a wire:click.prevent='closeModalConfirmation' class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                <title>Close</title>
-                            </svg>
-                        </a>
-                        <a wire:click.prevent=@if ($keterangan == 'ubah') 'saveCompetition' @elseif($keterangan == 'hapus') 'deleteCompetition' @endif
-                            class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                <title>
-                                    @if ($keterangan == 'ubah')
-                                        Ubah
-                                    @elseif($keterangan == 'hapus')
-                                        Hapus
-                                    @endif
-                                </title>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-
-    @if ($showFormConfirmation)
-        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
-            aria-modal="true">
-            <div class="flex items-center justify-center min-h-screen p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
                 </div>
 
@@ -364,7 +322,8 @@
                                         <x-slot:for>name</x-slot:for>
                                         <x-slot:slot>Nama Lomba</x-slot:slot>
                                     </x-label>
-                                    <x-input wire:model="name">
+                                    <span class="text-sm text-red-700">&#42;</span>
+                                    <x-input wire:model="name" required>
                                         <x-slot:type>text</x-slot:type>
                                         <x-slot:name>name</x-slot:name>
                                         <x-slot:id>name</x-slot:id>
@@ -377,7 +336,8 @@
                                             <x-slot:for>organizer</x-slot:for>
                                             <x-slot:slot>Penyelenggara</x-slot:slot>
                                         </x-label>
-                                        <x-input wire:model="organizer">
+                                        <span class="text-sm text-red-700">&#42;</span>
+                                        <x-input wire:model="organizer" required>
                                             <x-slot:type>text</x-slot:type>
                                             <x-slot:name>organizer</x-slot:name>
                                             <x-slot:id>organizer</x-slot:id>
@@ -389,6 +349,7 @@
                                             <x-slot:for>level</x-slot:for>
                                             <x-slot:slot>Tingkat</x-slot:slot>
                                         </x-label>
+                                        <span class="text-sm text-red-700">&#42;</span>
                                         <select wire:model="level"
                                             class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
                                             <option value="Regional"
@@ -410,6 +371,7 @@
                                             <x-slot:for>registration_start_date</x-slot:for>
                                             <x-slot:slot>Tanggal Registrasi Dimulai</x-slot:slot>
                                         </x-label>
+                                        <span class="text-sm text-red-700">&#42;</span>
                                         <x-input wire:model="registration_start_date" class="cursor-text">
                                             <x-slot:type>date</x-slot:type>
                                             <x-slot:name>registration_start_date</x-slot:name>
@@ -422,6 +384,7 @@
                                             <x-slot:for>registration_start_hour</x-slot:for>
                                             <x-slot:slot>Jam Registrasi Dimulai</x-slot:slot>
                                         </x-label>
+                                        <span class="text-sm text-red-700">&#42;</span>
                                         <x-input wire:model="registration_start_hour">
                                             <x-slot:type>time</x-slot:type>
                                             <x-slot:name>registration_start_hour</x-slot:name>
@@ -435,7 +398,8 @@
                                         <x-slot:for>url</x-slot:for>
                                         <x-slot:slot>Tautan Informasi Lomba</x-slot:slot>
                                     </x-label>
-                                    <x-input wire:model="url">
+                                    <span class="text-sm text-red-700">&#42;</span>
+                                    <x-input wire:model="url" required>
                                         <x-slot:type>url</x-slot:type>
                                         <x-slot:name>url</x-slot:name>
                                         <x-slot:id>url</x-slot:id>
@@ -447,6 +411,7 @@
                                         <x-slot:for>photo_url</x-slot:for>
                                         <x-slot:slot>Poster Lomba</x-slot:slot>
                                     </x-label>
+                                    <span class="text-sm text-red-700">&#42;</span>
                                     <x-input wire:model="photo_url">
                                         <x-slot:type>url</x-slot:type>
                                         <x-slot:name>photo_url</x-slot:name>
@@ -459,11 +424,16 @@
                                         <x-slot:for>description</x-slot:for>
                                         <x-slot:slot>Deskripsi lomba</x-slot:slot>
                                     </x-label>
-                                    <x-textarea wire:model="description">
+                                    <span class="text-sm text-red-700">&#42;</span>
+                                    <x-textarea wire:model="description" required>
                                         <x-slot:maxlength>255</x-slot:maxlength>
                                         <x-slot:placeholder>Masukkan keterangan perlombaan
                                         </x-slot:placeholder>
                                     </x-textarea>
+                                </div>
+                                <div class="text-sm text-red-700">
+                                    <span>&#42;</span>
+                                    <span>Wajib diisi</span>
                                 </div>
                             </div>
                         </form>
