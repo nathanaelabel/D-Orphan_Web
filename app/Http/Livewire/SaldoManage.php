@@ -67,11 +67,11 @@ class SaldoManage extends Component
         } else {
             $this->tutorTransactions = [];
         }
-        
+
         $this->getStatus = [];
 
         foreach ($this->tutorTransactions as $status) {
-            if (array_search($status['status'], $this->getStatus) == null) {
+            if (!array_search($status['status'], $this->getStatus)) {
                 array_push($this->getStatus, $status);
             }
         }

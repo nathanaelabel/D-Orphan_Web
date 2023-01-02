@@ -52,8 +52,7 @@
         </div>
 
         {{-- Dropdown Sort --}}
-        {{$tutorTransactionDropdownSort}}
-        @if (count($getStatus)>0)
+        @if (count($getStatus) > 0)
             <select id="sort_tutor_transaction" name="sort_tutor_transaction" wire:model="tutorTransactionDropdownSort"
                 class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
                 @foreach ($getStatus as $itemStatus)
@@ -71,14 +70,15 @@
             </select>
         @endif
 
-
-        {{-- Tambah Permintaan --}}
-        <a wire:click.prevent='toggleForm' class="cursor-pointer" title="Tambah">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6 text-blue-500">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-        </a>
+        @if ($activeTab == 'Penarikan Saldo')
+            {{-- Tambah Permintaan --}}
+            <a wire:click.prevent='toggleForm' class="cursor-pointer" title="Tambah">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 text-blue-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+            </a>
+        @endif
     </div>
 
     <div class="overflow-x-auto shadow rounded">
