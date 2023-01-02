@@ -165,8 +165,7 @@
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap
-                                        px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4 w-full">
                                 <div>
                                     @if ($editedCourseTutorIndex !== $index)
                                         @if ($item['is_online'] == 1)

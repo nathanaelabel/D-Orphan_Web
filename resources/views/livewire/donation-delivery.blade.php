@@ -24,10 +24,10 @@
 
                                 <!-- Donation Form -->
                                 <div class="mt-4 space-y-4">
-                                    <div class="space-y-1">
+                                    <div class="grid">
                                         <x-label>
                                             <x-slot:for>nama_panti_asuhan</x-slot:for>
-                                            <x-slot:slot>Panti Asuhan yang dituju&#58;</x-slot:slot>
+                                            <x-slot:slot>Panti Asuhan yang dituju</x-slot:slot>
                                         </x-label>
                                         <strong>{{ $target->name }}</strong>
                                     </div>

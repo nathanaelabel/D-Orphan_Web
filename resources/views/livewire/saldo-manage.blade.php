@@ -278,7 +278,42 @@
                         <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Tambah permintaan
                             tarik saldo</p>
                         <hr class="my-4">
-                        <p class="text-gray-500">Konfirmasi bahwa permintaan tarik saldo akan dikirim</p>
+                        <form action="{{ route('/') }}" method="POST">
+                            @csrf
+
+                            <div class="grid gap-2">
+                                <div class="grid">
+                                    <x-label>
+                                        <x-slot:for>current_balance</x-slot:for>
+                                        <x-slot:slot>Jumlah saldo saat ini</x-slot:slot>
+                                    </x-label>
+                                    <strong>{{ 'Rp' . number_format(App\Models\Tutor::findOrFail(1)->user->money, 2, ',', '.') }}</strong>
+                                </div>
+                                <div class="space-y-1">
+                                    <x-label>
+                                        <x-slot:for>amount</x-slot:for>
+                                        <x-slot:slot>Nominal Tarik Saldo</x-slot:slot>
+                                    </x-label>
+                                    <span class="text-sm text-red-700">&#42;</span>
+                                    <div class="relative">
+                                        <div
+                                            class="absolute inset-y-0 left-0 pl-3 text-gray-700 flex items-center pointer-events-none">
+                                            <p>Rp</p>
+                                        </div>
+                                        <x-input wire:model="" min="10000" class="pl-10" required>
+                                            <x-slot:type>number</x-slot:type>
+                                            <x-slot:name>amount</x-slot:name>
+                                            <x-slot:id>amount</x-slot:id>
+                                            <x-slot:placeholder>xxxxxx</x-slot:placeholder>
+                                        </x-input>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-red-700">
+                                    <span>&#42;</span>
+                                    <span>Wajib diisi</span>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="grid gap-4 lg:flex">
                         <button wire:click.prevent='toggleForm'
