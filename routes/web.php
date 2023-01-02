@@ -8,6 +8,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrphanageController;
 use App\Http\Controllers\OrphanCrController;
+use App\Http\Livewire\CompetitionManageAdmin;
 use App\Http\Livewire\CompetitionRecommendation;
 use App\Http\Livewire\CourseBooking;
 use App\Http\Livewire\CourseManage;
@@ -18,7 +19,6 @@ use App\Http\Livewire\DetailCourseBooking;
 use App\Http\Livewire\DetailUser;
 use App\Http\Livewire\DonationDelivery;
 use App\Http\Livewire\KelolaPantiAsuhan;
-use App\Http\Livewire\OrphanageOrphan;
 use App\Http\Livewire\SaldoManage;
 use Illuminate\Support\Facades\Route;
 
@@ -86,4 +86,5 @@ Route::middleware([
     Route::get('/kursus/tutor/detail-tutor/{course_id}/detail-reservation', function () {
         return view('detail-reservation');
     })->name('detail-reservation');
+    Route::get('/kelola-competition-admin', CompetitionManageAdmin::class)->name('kelola-competition-admin');
 });

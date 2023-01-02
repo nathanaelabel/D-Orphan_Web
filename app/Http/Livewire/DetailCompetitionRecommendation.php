@@ -155,11 +155,16 @@ class DetailCompetitionRecommendation extends Component
         //     'date_of_birth.required' => 'Tanggal lahir harus diisi.',
         //     'gender.required' => 'Jenis kelamin harus diisi.',
         // ]);
-
-        $cr = Competition::find($this->competition_recommendation_id)->competitionRecommendations()->create([
-            'tutor_id' => auth()->user()->tutor->id,
-            'orphanage_id' => $this->orphanageDropdownSort,
-        ]);
+        if (count(CompetitionRecommendation::where('competition_id', $this->competition_recommendation_id)
+            ->where('tutor_id', auth()->user()->tutor->id)->where('orphanage_id', $this->orphanageDropdownSort)->get()) == 0) {
+            $cr = Competition::find($this->competition_recommendation_id)->competitionRecommendations()->create([
+                    'tutor_id' => auth()->user()->tutor->id,
+                    'orphanage_id' => $this->orphanageDropdownSort,
+                ]);
+        } else {
+            $cr = CompetitionRecommendation::where('competition_id', $this->competition_recommendation_id)
+                ->where('tutor_id', auth()->user()->tutor->id)->where('orphanage_id', $this->orphanageDropdownSort)->get();
+        }
 
         $cr->OrphanCrs()->create([
             'orphan_id' => $this->orphanDropdownSort,

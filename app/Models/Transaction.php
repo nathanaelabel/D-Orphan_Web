@@ -16,6 +16,11 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function userRequest()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function donation(){
         return $this->hasOne(Donation::class);
     }

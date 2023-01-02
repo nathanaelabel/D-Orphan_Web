@@ -14,6 +14,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        User::factory()->create([
+            'gender' => '-',
+            'money' => 0,
+            'user_type' => 'Admin',
+        ]);
+
         User::factory()->count(50)->create();
     }
 }

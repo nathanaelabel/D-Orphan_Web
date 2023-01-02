@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\CourseBooking as ModelsCourseBooking;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -12,23 +13,32 @@ class CourseBooking extends Component
     public $hasOrphanage;
     public $activeTab;
     public $nameTab;
+    public $adminTransactions;
 
     public function render()
     {
-        return view('livewire.course-booking')->with('courseBooking', $this->courseBooking);
+        if (auth()->user()->user_type == 'Admin') {
+            return view('livewire.saldo-manage-admin');
+        } else {
+            return view('livewire.course-booking')->with('courseBooking', $this->courseBooking);
+        }
     }
 
     public function mount()
     {
-        if (Auth::user()->orphanage) {
-            $this->hasOrphanage = true;
-        } else {
-            $this->hasOrphanage = false;
-        }
-        if (is_null($this->nameTab)) {
+        if (auth()->user()->user_type == 'Admin') {
             $this->setTab('pending');
         } else {
-            $this->setTab($this->nameTab);
+            if (Auth::user()->orphanage) {
+                $this->hasOrphanage = true;
+            } else {
+                $this->hasOrphanage = false;
+            }
+            if (is_null($this->nameTab)) {
+                $this->setTab('pending');
+            } else {
+                $this->setTab($this->nameTab);
+            }
         }
     }
 
@@ -36,26 +46,38 @@ class CourseBooking extends Component
     {
         $data = '';
         $this->activeTab = $tab;
-        if (Auth::user()->tutor) {
-            if (Auth::user()->tutor->courses) {
-                $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))
-                    ->orderBy('updated_at', 'ASC')
-                    ->get();
+        if (auth()->user()->user_type != 'Admin') {
+            if (Auth::user()->tutor) {
+                if (Auth::user()->tutor->courses) {
+                    $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->tutor->courses->pluck('id'))
+                        ->orderBy('updated_at', 'ASC')
+                        ->get();
+                }
+            } else {
+                if ($this->hasOrphanage) {
+                    $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('course_id'))
+                        ->where('orphanage_id', auth()->user()->orphanage->id)
+                        ->orderBy('updated_at', 'ASC')
+                        ->get();
+                } else {
+                    $data = collect([]);
+                }
             }
         } else {
-            if ($this->hasOrphanage) {
-                $data = ModelsCourseBooking::whereIn('course_id', Auth::user()->orphanage->courseBookings->pluck('course_id'))
-                ->where('orphanage_id', auth()->user()->orphanage->id)
-                    ->orderBy('updated_at', 'ASC')
-                    ->get();
-            } else {
-                $data = collect([]);
-            }
+            $data = Transaction::where('to_user_id', null)->orderBy('updated_at', 'ASC')->get();
         }
         if ($this->activeTab != 'canceled') {
-            $this->courseBooking = $data->where('status', $this->activeTab);
+            if (auth()->user()->user_type != 'Admin') {
+                $this->courseBooking = $data->where('status', $this->activeTab);
+            } else {
+                $this->adminTransactions = $data->where('status', $this->activeTab);
+            }
         } else {
-            $this->courseBooking = $data->where('status', 'canceled')->merge($data->where('status', 'complete'));
+            if (auth()->user()->user_type != 'Admin') {
+                $this->courseBooking = $data->where('status', 'canceled')->merge($data->where('status', 'complete'));
+            } else {
+                $this->adminTransactions = $data->where('status', 'canceled')->merge($data->where('status', 'complete'));
+            }
         }
     }
 
@@ -67,11 +89,33 @@ class CourseBooking extends Component
         $this->setTab($this->activeTab);
     }
 
+    public function acceptTransaction($id)
+    {
+        Transaction::find($id)->userRequest()->update([
+            'money' => Transaction::find($id)->userRequest->money + Transaction::find($id)->amount,
+                    ]);
+
+        Transaction::find($id)->update([
+            'status' => 'complete',
+        ]);
+
+        $this->setTab($this->activeTab);
+    }
+
     public function decline($id)
     {
         $courseBooking = ModelsCourseBooking::find($id);
         $courseBooking->status = 'canceled';
         $courseBooking->save();
+        $this->setTab($this->activeTab);
+    }
+
+    public function declineTransaction($id)
+    {
+        Transaction::find($id)->update([
+            'status' => 'canceled',
+        ]);
+
         $this->setTab($this->activeTab);
     }
 

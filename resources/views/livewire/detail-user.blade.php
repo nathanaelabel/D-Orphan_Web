@@ -42,12 +42,12 @@
         <div class="lg:w-6/12">
             <img src=@if (auth()->user()) @if (Auth::user()->user_type == 'Tutor')
             "{{ $user->photo_url }}"
-            @elseif(Auth::user()->user_type == 'Pengurus Panti')
+            @elseif(Auth::user()->user_type == 'Pengurus Panti' || Auth::user()->user_type == 'Admin')
             "{{ $user->user->profile_photo_path }}" @endif
             @else "{{ $user->photo_url }}" @endif
             alt=@if (auth()->user()) @if (Auth::user()->user_type == 'Tutor')
                         "{{ $user->name }}"
-                    @elseif(Auth::user()->user_type == 'Pengurus Panti')
+                    @elseif(Auth::user()->user_type == 'Pengurus Panti' || Auth::user()->user_type == 'Admin')
                         "{{ $user->user->name }}" @endif
         @else
             "{{ $user->name }}" @endif
@@ -60,7 +60,7 @@
                     @if (auth()->user())
                         @if (Auth::user()->user_type == 'Tutor')
                             {{ $user->name }}
-                        @elseif(Auth::user()->user_type == 'Pengurus Panti')
+                        @elseif(Auth::user()->user_type == 'Pengurus Panti' || Auth::user()->user_type == 'Admin')
                             {{ $user->user->name }}
                         @endif
                     @else
@@ -116,7 +116,7 @@
                         @endif
                     </div>
                     @auth
-                        @if (Auth::user()->user_type == 'Pengurus Panti')
+                        @if (Auth::user()->user_type == 'Pengurus Panti' || Auth::user()->user_type == 'Admin')
                             <div class="w-fit lg:flex gap-2 items-center mb-2">
                                 @foreach ($skills as $item)
                                     <span

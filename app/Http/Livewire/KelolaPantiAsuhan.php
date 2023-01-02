@@ -200,7 +200,7 @@ class KelolaPantiAsuhan extends Component
             'gender' => $this->gender,
             'note' => $this->note,
         ]);
-       
+
         // reset form fields
         $this->reset();
         $this->showForm = false;

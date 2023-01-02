@@ -18,8 +18,8 @@ return new class () extends Migration {
             $table->string('email')->unique();
             $table->integer('money')->default(0);
             $table->string('phone_number')->nullable();
-            $table->enum('gender', ['Male', 'Female']);
-            $table->enum('user_type', ['Pengurus Panti', 'Tutor']);
+            $table->enum('gender', ['Male', 'Female', '-']);
+            $table->enum('user_type', ['Pengurus Panti', 'Tutor', 'Admin']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
