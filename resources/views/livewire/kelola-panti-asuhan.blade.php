@@ -1,18 +1,21 @@
 @section('title', 'Kelola Anak Panti')
 
 <div class="space-y-8">
-    {{-- Title --}}
-    <p class="text-3xl leading-10 font-bold">Kelola Data Anak Panti Asuhan</p>
-
-    <div class="flex gap-2 items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="w-6 h-6 text-gray-700">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-            <title>Jumlah Anak Panti Asuhan</title>
-        </svg>
-
-        <p class="text-lg leading-8 text-gray-700">{{ count($orphans) }} anak Panti</p>
+    <div class="flex items-center justify-between">
+        <div>
+            <p class="text-3xl leading-10 font-bold">{{ 'Kelola Data Anak Panti Asuhan' }}</p>
+        </div>
+        <div>
+            <span class="hidden lg:flex gap-2 items-center pl-1 pr-2 py-1 rounded-lg border-2 border-black font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                    <title>Jumlah Anak Panti Asuhan</title>
+                </svg>
+                {{ count($orphans) }} anak Panti
+            </span>
+        </div>
     </div>
 
     <div class="flex justify-between gap-4 items-center">
@@ -117,7 +120,8 @@
                                     @endif
                                 @else
                                     <select name="gender" id="gender"
-                                        wire:model.defer="orphans.{{ $index }}.gender">
+                                        wire:model.defer="orphans.{{ $index }}.gender"
+                                        class="w-fit rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 pl-3 pr-10 py-2 cursor-pointer">
                                         <option value="Male" @if ($item['gender'] == 'Male') "selected" @endif>Pria
                                         </option>
                                         <option value="Female" @if ($item['gender'] == 'Female') "selected" @endif>
@@ -130,8 +134,13 @@
                                 @if ($editedOrphanIndex !== $index)
                                     {{ date_format(date_create($item['date_of_birth']), 'l, d/m/Y') }}
                                 @else
-                                    <input type="date" onfocus="this.showPicker()"
-                                        wire:model.defer="orphans.{{ $index }}.date_of_birth">
+                                    <x-input wire:model.defer="orphans.{{ $index }}.date_of_birth"
+                                        class="cursor-text">
+                                        <x-slot:type>date</x-slot:type>
+                                        <x-slot:name>date_of_birth</x-slot:name>
+                                        <x-slot:id>date_of_birth</x-slot:id>
+                                        <x-slot:placeholder>HH/BB/TTTT</x-slot:placeholder>
+                                    </x-input>
                                 @endif
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
@@ -152,7 +161,7 @@
                                         <x-slot:type>text</x-slot:type>
                                         <x-slot:name>note</x-slot:name>
                                         <x-slot:id>note</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
+                                        <x-slot:placeholder>Masukkan keterangan Anak Panti Asuhan</x-slot:placeholder>
                                     </x-input>
                                 @endif
                             </td>
@@ -264,7 +273,7 @@
 
     {{-- Create Data Modal --}}
     @if ($showForm)
-        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
+        <div class="fixed z-50 inset-0 overflow-y-scroll" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
             <div class="flex items-center justify-center min-h-screen p-4">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -276,9 +285,9 @@
                         <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Tambah Anak
                             Panti Asuhan</p>
                         <hr class="my-4">
-                        {{-- Tambah Anak Panti Form --}}
+                        {{-- Tambah Anak Panti Asuhan Form --}}
                         <form wire:submit.prevent="addData">
-                            <div class="grid gap-2 bg-white rounded-2xl shadow px-8 py-6">
+                            <div class="grid gap-2">
                                 <div class="space-y-1">
                                     <x-label>
                                         <x-slot:for>name</x-slot:for>
@@ -334,7 +343,7 @@
                                     </x-label>
                                     <x-textarea wire:model="note">
                                         <x-slot:maxlength>255</x-slot:maxlength>
-                                        <x-slot:placeholder>Masukkan keterangan dari anak Panti jika ada
+                                        <x-slot:placeholder>Masukkan keterangan Anak Panti Asuhan
                                         </x-slot:placeholder>
                                     </x-textarea>
                                 </div>
@@ -342,23 +351,16 @@
                         </form>
                     </div>
 
-                    <a wire:click.prevent='addData' class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            <title>
-                                Tambahkan</title>
-                        </svg>
-                    </a>
-
-                    <a wire:click.prevent='toggleForm' class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            <title>
-                                Batal</title>
-                        </svg>
-                    </a>
+                    <div class="grid gap-4 lg:flex">
+                        <button wire:click.prevent='toggleForm'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
+                            <p class="font-semibold text-red-700">Batal</p>
+                        </button>
+                        <button wire:click.prevent='addData'
+                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
+                            <p class="font-semibold text-white">Tambah</p>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
