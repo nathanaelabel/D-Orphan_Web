@@ -12,6 +12,11 @@ class Day extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function dayTimeRanges()
+    {
+        return $this->hasMany(DayTimeRange::class);
+    }
     public function getCreatedAtAttribute($value)
     {
         return Carbon::createFromTimestamp(strtotime($value))

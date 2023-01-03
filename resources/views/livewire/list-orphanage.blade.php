@@ -56,9 +56,19 @@
                     <x-donasi.list-user.card>
                         <x-slot:image>{{ $item->user->orphanage->photo_url }}</x-slot:image>
                         <x-slot:panti>{{ $item->name }}</x-slot:panti>
-                        <x-slot:member_sum>{{ $item->member_count }} Anak Panti</x-slot:member_sum>
+                        <x-slot:member_sum>
+                            @if (count($item->orphans) > 0)
+                                {{ count($item->orphans) }}
+                            @else
+                                0
+                            @endif Anak Panti
+                        </x-slot:member_sum>
                         <x-slot:alamat>{{ $item->user->address }}</x-slot:alamat>
-                        <x-slot:anak>{{ $item->user->orphanage->member_count . ' anak Panti' }}</x-slot:anak>
+                        <x-slot:anak>  @if (count($item->orphans) > 0)
+                                {{ count($item->orphans) }}
+                            @else
+                                0
+                            @endif Anak Panti</x-slot:anak>
                         <x-slot name="user_id">{{ $item->user->id }}</x-slot>
                         <x-slot:button>Selengkapnya</x-slot:button>
                     </x-donasi.list-user.card>

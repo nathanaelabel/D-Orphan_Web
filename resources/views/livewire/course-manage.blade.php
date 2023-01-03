@@ -36,7 +36,7 @@
         {{-- Dropdown Sort --}}
         <select id="sort_category_kelola" name="sort_category_kelola" wire:model="categoryKelolaDropdownSort"
             class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-            @empty($skills)
+            @if(count($skills)==0)
                 <option "selected">Tidak Ada Keahlian</option>
             @else
                 @foreach ($skills as $itemSkill)
@@ -45,7 +45,7 @@
                         {{ $itemSkill->name }}
                     </option>
                 @endforeach
-            @endempty
+            @endif
         </select>
 
         {{-- Tambah Kursus --}}

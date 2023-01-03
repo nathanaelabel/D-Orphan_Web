@@ -24,6 +24,12 @@ class Tutor extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function tutorDayTimeRanges()
+    {
+        return $this->hasMany(TutorDayTimeRange::class);
+    }
+    
     public function getCreatedAtAttribute($value)
     {
         return Carbon::createFromTimestamp(strtotime($value))

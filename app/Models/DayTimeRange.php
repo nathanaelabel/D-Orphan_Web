@@ -13,6 +13,16 @@ class DayTimeRange extends Model
         'id',
     ];
 
+    public function tutorDayTimeRanges()
+    {
+        return $this->hasMany(TutorDayTimeRange::class);
+    }
+
+    public function day()
+    {
+        return $this->belongsTo(Day::class);
+    }
+
     public function getCreatedAtAttribute($value)
     {
         return Carbon::createFromTimestamp(strtotime($value))

@@ -89,50 +89,63 @@ class KelolaPantiAsuhan extends Component
         // }
 
         // Menambahkan kolom total_kursus dan total_lomba pada tabel
-        // if (count($orphanOrdered_course) > 0 && count($orphanOrdered_Cr) > 0) {
-        $ids_ordered_course = implode(',', $orphanOrdered_course);
-        $ids_ordered_Cr = implode(',', $orphanOrdered_Cr);
-        $this->sumcourses = implode(',', $this->sumcourses);
-        $this->sumrecommendation = implode(',', $this->sumrecommendation);
+        if (count($orphanOrdered_course) > 0 && count($orphanOrdered_Cr) > 0) {
+            $ids_ordered_course = implode(',', $orphanOrdered_course);
+            $ids_ordered_Cr = implode(',', $orphanOrdered_Cr);
+            $this->sumcourses = implode(',', $this->sumcourses);
+            $this->sumrecommendation = implode(',', $this->sumrecommendation);
 
-        $this->orphans = Orphan::whereIn('id', $orphanOrdered_course)
+            $this->orphans = Orphan::whereIn('id', $orphanOrdered_course)
                 ->where('orphanage_id', auth()->user()->orphanage->id)
                 ->selectRaw("*, ELT(FIELD(id, $ids_ordered_course), $this->sumcourses) as total_kursus
-                                                , ELT(FIELD(id, $ids_ordered_Cr), $this->sumrecommendation) as total_lomba");
-        // }
+                                                    , ELT(FIELD(id, $ids_ordered_Cr), $this->sumrecommendation) as total_lomba");
 
-        if ($this->orphanSearch != null) {
-            if ($this->orphanDropdownSort == 'Abjad Nama') {
-                $this->orphans = $this->orphans->where('name', 'like', '%'.$this->orphanSearch.'%')
-                    ->orderBy('name', 'ASC')
-                    ->get()->toArray();
-            } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
-                $this->orphans = $this->orphans->where('name', 'like', '%'.$this->orphanSearch.'%')
-                    ->orderBy('total_kursus', 'DESC')
-                    ->get()->toArray();
+            if ($this->orphanSearch != null) {
+                if ($this->orphanDropdownSort == 'Abjad Nama') {
+                    $this->orphans = $this->orphans->where('name', 'like', '%' . $this->orphanSearch . '%')
+                        ->orderBy('name', 'ASC')
+                        ->get()->toArray();
+                } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
+                    $this->orphans = $this->orphans->where('name', 'like', '%' . $this->orphanSearch . '%')
+                        ->orderBy('total_kursus', 'DESC')
+                        ->get()->toArray();
+                } else {
+                    $this->orphans = $this->orphans->where('name', 'like', '%' . $this->orphanSearch . '%')
+                        ->orderBy('total_lomba', 'DESC')
+                        ->get()->toArray();
+                }
             } else {
-                $this->orphans = $this->orphans->where('name', 'like', '%'.$this->orphanSearch.'%')
-                    ->orderBy('total_lomba', 'DESC')
-                    ->get()->toArray();
-            }
-        } else {
-            if ($this->orphanDropdownSort == 'Abjad Nama') {
-                $this->orphans = $this->orphans->orderBy('name', 'ASC')
-                    ->get()->toArray();
-            } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
-                $this->orphans = $this->orphans->orderBy('total_kursus', 'DESC')
-                    ->get()->toArray();
-            } else {
-                $this->orphans = $this->orphans->orderBy('total_lomba', 'DESC')
-                    ->get()->toArray();
+                if ($this->orphanDropdownSort == 'Abjad Nama') {
+                    $this->orphans = $this->orphans->orderBy('name', 'ASC')
+                        ->get()->toArray();
+                } elseif ($this->orphanDropdownSort == 'Total Kursus Berhasil') {
+                    $this->orphans = $this->orphans->orderBy('total_kursus', 'DESC')
+                        ->get()->toArray();
+                } else {
+                    $this->orphans = $this->orphans->orderBy('total_lomba', 'DESC')
+                        ->get()->toArray();
+                }
             }
         }
-
         return view('livewire.kelola-panti-asuhan');
     }
 
     public function mount()
     {
+        if (auth()->user()->phone_number == null || auth()->user()->address == null) {
+            return redirect()->route('user-approve');
+        }
+
+        if (auth()->user()->user_type == 'Pengurus Panti') {
+            if (auth()->user()->orphanage->name == null || auth()->user()->orphanage->description == null) {
+                return redirect()->route('user-approve');
+            }
+        } elseif (auth()->user()->user_type == 'Tutor') {
+            if (auth()->user()->tutor->bank_account == null || auth()->user()->tutor->description == null || count(auth()->user()->tutor->tutorDayTimeRanges)==0) {
+                return redirect()->route('user-approve');
+            }
+        }
+
         $this->editedOrphanIndex = null;
         $this->showForm = false;
         $this->showFormConfirmation = false;

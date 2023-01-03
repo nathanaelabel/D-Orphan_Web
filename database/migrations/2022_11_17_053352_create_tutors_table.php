@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->string('bank_account')->references('id')->on('users');
-            $table->string('description')->references('id')->on('users');
+            $table->string('bank_account')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

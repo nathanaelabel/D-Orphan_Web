@@ -13,6 +13,11 @@ class TutorDayTimeRange extends Model
         'id',
     ];
 
+    public function dayTimeRange()
+    {
+        return $this->belongsTo(DayTimeRange::class);
+    }
+
     public function getCreatedAtAttribute($value)
     {
         return Carbon::createFromTimestamp(strtotime($value))
