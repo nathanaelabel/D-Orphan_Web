@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -23,19 +24,38 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $guarded = [
-        'id'
+        'id',
     ];
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class, 'user_id');
     }
+
     public function tutor()
     {
         return $this->hasOne(Tutor::class);
     }
+
     public function orphanage()
     {
         return $this->hasOne(Orphanage::class);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::createFromTimestamp(strtotime($value))
+            ->timezone('Asia/Jakarta')
+            ->toDateTimeString()
+        ;
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::createFromTimestamp(strtotime($value))
+            ->timezone('Asia/Jakarta')
+            ->toDateTimeString()
+        ;
     }
 
     /**

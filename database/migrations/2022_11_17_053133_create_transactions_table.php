@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -16,15 +15,15 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign("user_id")->references("id")->on("users")
+            $table->foreign('user_id')->references('id')->on('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->string('snap_token', 36)->nullable();
-            $table->integer("amount");
-            $table->enum("status",['pending','complete','canceled'])->default('pending');
-            $table->string("description")->default("Requesting");
-            $table->unsignedBigInteger("to_user_id")->nullable();
-            $table->foreign("to_user_id")->references("id")->on("users")
+            $table->integer('amount');
+            $table->enum('status', ['pending', 'complete', 'canceled'])->default('pending');
+            $table->string('description')->nullable();
+            $table->unsignedBigInteger('to_user_id')->nullable();
+            $table->foreign('to_user_id')->references('id')->on('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->timestamps();

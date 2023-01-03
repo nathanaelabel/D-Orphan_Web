@@ -50,19 +50,13 @@
         </div>
 
         {{-- Dropdown Sort --}}
-        @if (count($getStatus) > 0)
+        @if (count($status) > 0)
             <select id="sort_tutor_transaction" name="sort_tutor_transaction" wire:model="tutorTransactionDropdownSort"
                 class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-                @foreach ($getStatus as $itemStatus)
-                    <option value="{{ $itemStatus['status'] }}"
-                        {{ $tutorTransactionDropdownSort == $itemStatus['status'] ? 'selected' : null }}>
-                        @if ($itemStatus['status'] == 'pending')
-                            Diproses
-                        @elseif($itemStatus['status'] == 'complete')
-                            Sukses
-                        @else
-                            Gagal
-                        @endif
+               
+                @foreach ($status as $index => $itemStatus)
+                    <option {{ $tutorTransactionDropdownSort == $itemStatus['status'] ? 'selected' : null }}>
+                        {{ $itemStatus['status'] }}
                     </option>
                 @endforeach
             </select>
@@ -74,7 +68,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6 text-blue-500">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    <title>Tambah</title>
+                    <title>Tarik Saldo</title>
                 </svg>
             </a>
         @endif
@@ -170,8 +164,7 @@
                                             <a wire:click.prevent='openModalConfirmation({{ $index }}, "ubah")'
                                                 class="cursor-pointer text-blue-500">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6 text-blue-500">
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
                                                     <title>Simpan</title>
@@ -278,42 +271,38 @@
                         <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">Tambah permintaan
                             tarik saldo</p>
                         <hr class="my-4">
-                        <form action="{{ route('/') }}" method="POST">
-                            @csrf
-
-                            <div class="grid gap-2">
-                                <div class="grid">
-                                    <x-label>
-                                        <x-slot:for>current_balance</x-slot:for>
-                                        <x-slot:slot>Jumlah saldo saat ini</x-slot:slot>
-                                    </x-label>
-                                    <strong>{{ 'Rp' . number_format(App\Models\Tutor::findOrFail(1)->user->money, 2, ',', '.') }}</strong>
-                                </div>
-                                <div class="space-y-1">
-                                    <x-label>
-                                        <x-slot:for>amount</x-slot:for>
-                                        <x-slot:slot>Nominal Tarik Saldo</x-slot:slot>
-                                    </x-label>
-                                    <span class="text-sm text-red-700">&#42;</span>
-                                    <div class="relative">
-                                        <div
-                                            class="absolute inset-y-0 left-0 pl-3 text-gray-700 flex items-center pointer-events-none">
-                                            <p>Rp</p>
-                                        </div>
-                                        <x-input wire:model="" min="10000" class="pl-10" required>
-                                            <x-slot:type>number</x-slot:type>
-                                            <x-slot:name>amount</x-slot:name>
-                                            <x-slot:id>amount</x-slot:id>
-                                            <x-slot:placeholder>xxxxxx</x-slot:placeholder>
-                                        </x-input>
+                        <div class="grid gap-2">
+                            <div class="grid">
+                                <x-label>
+                                    <x-slot:for>current_balance</x-slot:for>
+                                    <x-slot:slot>Jumlah saldo saat ini</x-slot:slot>
+                                </x-label>
+                                <strong>{{ 'Rp' . number_format(auth()->user()->money, 2, ',', '.') }}</strong>
+                            </div>
+                            <div class="space-y-1">
+                                <x-label>
+                                    <x-slot:for>amount</x-slot:for>
+                                    <x-slot:slot>Nominal Tarik Saldo</x-slot:slot>
+                                </x-label>
+                                <span class="text-sm text-red-700">&#42;</span>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 left-0 pl-3 text-gray-700 flex items-center pointer-events-none">
+                                        <p>Rp</p>
                                     </div>
-                                </div>
-                                <div class="text-sm text-red-700">
-                                    <span>&#42;</span>
-                                    <span>Wajib diisi</span>
+                                    <x-input wire:model="amount" min="10000" class="pl-10" required>
+                                        <x-slot:type>number</x-slot:type>
+                                        <x-slot:name>amount</x-slot:name>
+                                        <x-slot:id>amount</x-slot:id>
+                                        <x-slot:placeholder>xxxxxx</x-slot:placeholder>
+                                    </x-input>
                                 </div>
                             </div>
-                        </form>
+                            <div class="text-sm text-red-700">
+                                <span>&#42;</span>
+                                <span>Wajib diisi</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="grid gap-4 lg:flex">
                         <button wire:click.prevent='toggleForm'
@@ -322,7 +311,7 @@
                         </button>
                         <button wire:click.prevent='addData'
                             class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
-                            <p class="font-semibold text-white">Tambah</p>
+                            <p class="font-semibold text-white">Tarik Saldo</p>
                         </button>
                     </div>
                 </div>

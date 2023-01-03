@@ -163,10 +163,10 @@ class DetailCompetitionRecommendation extends Component
                 ]);
         } else {
             $cr = CompetitionRecommendation::where('competition_id', $this->competition_recommendation_id)
-                ->where('tutor_id', auth()->user()->tutor->id)->where('orphanage_id', $this->orphanageDropdownSort)->get();
+                ->where('tutor_id', auth()->user()->tutor->id)->where('orphanage_id', $this->orphanageDropdownSort)->first();
         }
 
-        $cr->OrphanCrs()->create([
+        $cr->orphanCrs()->create([
             'orphan_id' => $this->orphanDropdownSort,
             'description' => $this->orphanDescription,
         ]);

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Orphanage;
 use App\Models\Transaction;
+use App\Models\User;
 use Livewire\Component;
 
 class SaldoManage extends Component
@@ -18,6 +19,9 @@ class SaldoManage extends Component
     public $activeTab;
     public $tutorTransaction;
     public $keterangan;
+    public $getStatus;
+    public $amount;
+    public $oldTab;
 
     public function render()
     {
@@ -31,6 +35,7 @@ class SaldoManage extends Component
             return $search->where('user_id', auth()->user()->id)
                         ->orwhere('to_user_id', auth()->user()->id);
         });
+
         $temp_transaction = clone $this->tutorTransactions;
         $listIdUserPanti = $temp_transaction->where('user_id', '<>', auth()->user()->id)
             ->pluck('user_id')->toArray();
@@ -38,42 +43,32 @@ class SaldoManage extends Component
         if (count($listIdUserPanti) > 0) {
             $ids_ordered = implode(',', $listIdUserPanti);
             $listNamePanti = Orphanage::whereIn('user_id', $listIdUserPanti)
-                                            ->orderByRaw("FIELD(id, $ids_ordered)")
-                                            ->pluck('name')->toArray();
+                ->orderByRaw("FIELD(id, $ids_ordered)")
+                ->pluck('name')->toArray();
             $name_ordered = "'".implode("','", $listNamePanti)."'";
 
             $this->tutorTransactions = $this->tutorTransactions->selectRaw("*, ELT(FIELD(user_id, $ids_ordered), $name_ordered) as from_panti");
+        }
+        if ($this->activeTab == 'Penarikan Saldo') {
+            $this->tutorTransactions = $this->tutorTransactions->where('user_id', auth()->user()->id);
+        } else {
+            $this->tutorTransactions = $this->tutorTransactions->where('to_user_id', auth()->user()->id);
+        }
 
-            if ($this->activeTab == 'Penarikan Saldo') {
-                $this->tutorTransactions = $this->tutorTransactions->where('user_id', auth()->user()->id);
-            } else {
-                $this->tutorTransactions = $this->tutorTransactions->where('to_user_id', auth()->user()->id);
-            }
-
-            if ($this->tutorTransactionSearch != null) {
-                $this->tutorTransactions->where(function ($search) {
-                    return $search->where('amount', 'like', '%'.$this->tutorTransactionSearch.'%')
+        if ($this->tutorTransactionSearch != null) {
+            $this->tutorTransactions->where(function ($search) {
+                return $search->where('amount', 'like', '%'.$this->tutorTransactionSearch.'%')
                         ->orwhere('description', 'like', '%'.$this->tutorTransactionSearch.'%')
                         ->orwhere('created_at', 'like', '%'.$this->tutorTransactionSearch.'%')
                             ->orwhere('updated_at', 'like', '%'.$this->tutorTransactionSearch.'%');
-                });
-
-                $this->tutorTransactions = $this->tutorTransactions->orderBy('updated_at', 'DESC')
+            });
+            // $this->getStatus = Transaction::whereIn('id', $this->tutorTransactions->pluck('id'))->select('status')->groupBy('status')->get();
+            $this->tutorTransactions = $this->tutorTransactions->orderBy('updated_at', 'ASC')
                 ->get()->toArray();
-            } else {
-                $this->tutorTransactions = $this->tutorTransactions->orderBy('updated_at', 'DESC')
-                ->get()->toArray();
-            }
         } else {
-            $this->tutorTransactions = [];
-        }
-
-        $this->getStatus = [];
-
-        foreach ($this->tutorTransactions as $status) {
-            if (!array_search($status['status'], $this->getStatus)) {
-                array_push($this->getStatus, $status);
-            }
+            // $this->getStatus = Transaction::whereIn('id', $this->tutorTransactions->pluck('id'))->select('status')->groupBy('status')->get();
+            $this->tutorTransactions = $this->tutorTransactions->orderBy('updated_at', 'ASC')
+                ->get()->toArray();
         }
 
         return view('livewire.saldo-manage');
@@ -84,8 +79,10 @@ class SaldoManage extends Component
         $this->editedTutorTransactionIndex = null;
         $this->showForm = false;
         $this->showFormConfirmation = false;
+
         if (is_null($this->activeTab)) {
             $this->setTab('Penarikan Saldo');
+            $this->oldTab = 'Penarikan Saldo';
         } else {
             $this->setTab($this->activeTab);
         }
@@ -138,14 +135,12 @@ class SaldoManage extends Component
         //     'date_of_birth.required' => 'Tanggal lahir harus diisi.',
         //     'gender.required' => 'Jenis kelamin harus diisi.',
         // ]);
+        if (auth()->user()->money >= $this->amount) {
+            User::find(auth()->user()->id)->transactions()->create([
+            'amount' => $this->amount,
+        ]);
+        }
 
-        // Orphan::create([
-        //     'orphanage_id' => auth()->user()->orphanage->id,
-        //     'name' => $this->name,
-        //     'date_of_birth' => $this->date_of_birth,
-        //     'gender' => $this->gender,
-        //     'note' => $this->note,
-        // ]);
         $this->showForm = false;
         // reset form fields
         $getActiveTab = $this->activeTab;
@@ -182,6 +177,7 @@ class SaldoManage extends Component
 
     public function setStatus()
     {
+        $this->status = [];
         if ($this->activeTab == 'Penarikan Saldo') {
             $this->status = Transaction::where('user_id', auth()->user()->id)
                 ->groupby('status')

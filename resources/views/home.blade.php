@@ -14,12 +14,30 @@
                     <br>
                 </div>
                 <div class="grid gap-4 md:grid lg:flex">
-                    <a href="{{ route('kursus') }}">
-                        <x-home.hero-primary-button>Temukan Tutor</x-home.hero-primary-button>
-                    </a>
-                    <a href="{{ route('donasi') }}">
-                        <x-home.hero-secondary-button>Salurkan Donasi</x-home.hero-secondary-button>
-                    </a>
+                    @guest
+                        <a href="{{ route('kursus') }}">
+                            <x-home.hero-primary-button>Temukan Tutor</x-home.hero-primary-button>
+                        </a>
+                    @endguest
+                    @auth
+                        @if (auth()->user()->user_type == 'Pengurus Panti')
+                            <a href="{{ route('kursus') }}">
+                                <x-home.hero-primary-button>Temukan Tutor</x-home.hero-primary-button>
+                            </a>
+                        @endif
+                    @endauth
+                    @guest
+                        <a href="{{ route('donasi') }}">
+                            <x-home.hero-secondary-button>Salurkan Donasi</x-home.hero-secondary-button>
+                        </a>
+                    @endguest
+                    @auth
+                        @if (auth()->user()->user_type == 'Tutor')
+                            <a href="{{ route('donasi') }}">
+                                <x-home.hero-secondary-button>Salurkan Donasi</x-home.hero-secondary-button>
+                            </a>
+                        @endif
+                    @endauth
                 </div>
             </div>
             <div class="hidden lg:block">
@@ -165,40 +183,58 @@
         </div>
     </div>
 
-    {{-- Tutor --}}
-    <div class="bg-home-tutor bg-cover rounded-2xl shadow p-8">
-        <div class="flex flex-col gap-4">
-            <div>
-                <svg width="64" height="64" viewBox="0 0 64 65" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M26.6666 27.4206H13.9628C9.99807 27.4206 7.41942 31.5929 9.19249 35.139L18.5258 53.8057C19.4293 55.6126 21.276 56.7539 23.2961 56.7539H34.01C34.4461 56.7539 34.8805 56.7004 35.3036 56.5947L45.3333 54.0872M26.6666 27.4206V14.0872C26.6666 11.1417 29.0544 8.7539 31.9999 8.7539H32.2545C33.5867 8.7539 34.6666 9.83382 34.6666 11.166C34.6666 13.0708 35.2304 14.933 36.287 16.5179L45.3333 30.0872V54.0872M26.6666 27.4206H31.9999M45.3333 54.0872H50.6666C53.6121 54.0872 55.9999 51.6994 55.9999 48.7539V32.7539C55.9999 29.8084 53.6121 27.4206 50.6666 27.4206H43.9999"
-                        stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+    @guest
+        {{-- Tutor --}}
+        <div class="bg-home-tutor bg-cover rounded-2xl shadow p-8">
+            <div class="flex flex-col gap-4">
+                <div>
+                    <svg width="64" height="64" viewBox="0 0 64 65" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M26.6666 27.4206H13.9628C9.99807 27.4206 7.41942 31.5929 9.19249 35.139L18.5258 53.8057C19.4293 55.6126 21.276 56.7539 23.2961 56.7539H34.01C34.4461 56.7539 34.8805 56.7004 35.3036 56.5947L45.3333 54.0872M26.6666 27.4206V14.0872C26.6666 11.1417 29.0544 8.7539 31.9999 8.7539H32.2545C33.5867 8.7539 34.6666 9.83382 34.6666 11.166C34.6666 13.0708 35.2304 14.933 36.287 16.5179L45.3333 30.0872V54.0872M26.6666 27.4206H31.9999M45.3333 54.0872H50.6666C53.6121 54.0872 55.9999 51.6994 55.9999 48.7539V32.7539C55.9999 29.8084 53.6121 27.4206 50.6666 27.4206H43.9999"
+                            stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-3xl text-white leading-10 font-bold">Bergabung sebagai Tutor handal</p>
+                    <p class="text-xl leading-8 text-gray-200">Berbagi pengalaman dan sebarkan ilmu untuk mempertajam
+                        kemampuan peserta kursus Anda</p>
+                </div>
+                <div class="w-fit">
+                    <a href="{{ route('register', 'Tutor') }}">
+                        <x-primary-button>Berikan Kursus</x-primary-button>
+                    </a>
+                </div>
             </div>
-            <div>
-                <p class="text-3xl text-white leading-10 font-bold">Bergabung sebagai Tutor handal</p>
-                <p class="text-xl leading-8 text-gray-200">Berbagi pengalaman dan sebarkan ilmu untuk mempertajam
-                    kemampuan peserta kursus Anda</p>
+        </div>
+        
+        {{-- Donasi --}}
+        <div class="bg-donasi-background flex flex-col items-center rounded-2xl shadow gap-4 p-8">
+            <img src="{{ url('img/home-donasi-illustration.svg') }}" alt="Donasi" />
+            <div class="text-center">
+                <p class="text-3xl leading-10 font-bold">Donasi praktis</p>
+                <p class="text-xl leading-8 text-gray-500">Mewadahi kemudahan proses berdonasi dari para Donatur untuk
+                    Panti Asuhan</p>
             </div>
-            <div class="w-fit">
-                <a href="{{ route('register', 'Tutor') }}">
-                    <x-primary-button>Berikan Kursus</x-primary-button>
+            <a href="{{ route('donasi') }}">
+                <x-primary-button>Donasi Sekarang</x-primary-button>
+            </a>
+        </div>
+    @endguest
+    @auth
+        @if (auth()->user()->user_type == 'Tutor')
+            {{-- Donasi --}}
+            <div class="bg-donasi-background flex flex-col items-center rounded-2xl shadow gap-4 p-8">
+                <img src="{{ url('img/home-donasi-illustration.svg') }}" alt="Donasi" />
+                <div class="text-center">
+                    <p class="text-3xl leading-10 font-bold">Donasi praktis</p>
+                    <p class="text-xl leading-8 text-gray-500">Mewadahi kemudahan proses berdonasi dari para Donatur untuk
+                        Panti Asuhan</p>
+                </div>
+                <a href="{{ route('donasi') }}">
+                    <x-primary-button>Donasi Sekarang</x-primary-button>
                 </a>
             </div>
-        </div>
-    </div>
-
-    {{-- Donasi --}}
-    <div class="bg-donasi-background flex flex-col items-center rounded-2xl shadow gap-4 p-8">
-        <img src="{{ url('img/home-donasi-illustration.svg') }}" alt="Donasi" />
-        <div class="text-center">
-            <p class="text-3xl leading-10 font-bold">Donasi praktis</p>
-            <p class="text-xl leading-8 text-gray-500">Mewadahi kemudahan proses berdonasi dari para Donatur untuk
-                Panti Asuhan</p>
-        </div>
-        <a href="{{ route('donasi') }}">
-            <x-primary-button>Donasi Sekarang</x-primary-button>
-        </a>
-    </div>
+        @endif
+    @endauth
 </x-guest-layout>
