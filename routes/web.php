@@ -13,6 +13,7 @@ use App\Http\Livewire\CompetitionRecommendation;
 use App\Http\Livewire\CourseBooking;
 use App\Http\Livewire\CourseManage;
 use App\Http\Livewire\CourseTutor;
+use App\Http\Livewire\DetailCompetitionManageAdmin;
 use App\Http\Livewire\DetailCompetitionRecommendation;
 use App\Http\Livewire\DetailCourse;
 use App\Http\Livewire\DetailCourseBooking;
@@ -87,4 +88,5 @@ Route::middleware([
         return view('detail-reservation');
     })->name('detail-reservation');
     Route::get('/kelola-competition-admin', CompetitionManageAdmin::class)->name('kelola-competition-admin');
+    Route::get('/kelola-competition-admin/{competition_id}', DetailCompetitionManageAdmin::class)->name('detail-competition-admin');
 });

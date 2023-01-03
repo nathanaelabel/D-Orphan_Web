@@ -203,43 +203,10 @@
                                 {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 flex gap-2">
-                                @if (!is_null($editedCompetitionIndex))
-                                    @if ($editedCompetitionIndex == $index)
-                                        {{-- Simpan --}}
-                                        <a wire:click.prevent='openModalConfirmation({{ $index }}, "ubah")'
-                                            class="cursor-pointer text-blue-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="w-6 h-6 text-blue-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-                                                <title>Simpan</title>
-                                            </svg>
-                                        </a>
-                                    @endif
-                                @endif
                                 @if (is_null($editedCompetitionIndex))
-                                    {{-- Ubah --}}
-                                    <a wire:click.prevent='editCompetition({{ $index }})'
-                                        class="cursor-pointer text-green-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-500">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                            <title>Ubah</title>
-                                        </svg>
-                                    </a>
-                                @endif
-                                @if (is_null($editedCompetitionIndex))
-                                    {{-- Hapus --}}
-                                    <a wire:click.prevent='openModalConfirmation({{ $index }}, "hapus")'
-                                        class="cursor-pointer text-red-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                            <title>Hapus</title>
-                                        </svg>
+                                    {{-- Selengkapnya --}}
+                                    <a href="{{ route('detail-competition-admin', $item['id']) }}">
+                                        Lihat
                                     </a>
                                 @endif
                             </td>
@@ -249,58 +216,6 @@
             @endif
         </table>
     </div>
-
-    {{-- Update & Delete Data Modal --}}
-    @if ($showFormConfirmation)
-        <div class="fixed z-50 inset-0 overflow-y-hidden" aria-labelledby="modal-title" role="dialog"
-            aria-modal="true">
-            <div class="flex items-center justify-center min-h-screen p-4">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
-                </div>
-
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div
-                    class="relative inline-block bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full sm:p-6 space-y-8">
-                    <div>
-                        <p class="text-2xl leading-8 font-semibold text-center" id="modal-title">
-                            @if ($keterangan == 'ubah')
-                                Ubah
-                            @elseif($keterangan == 'hapus')
-                                Hapus
-                            @endif data
-                        </p>
-                        <hr class="my-4">
-                        <p class="text-gray-500">Konfirmasi bahwa data @yield('title') yang Anda
-                            pilih
-                            akan
-                            @if ($keterangan == 'ubah')
-                                diubah
-                            @elseif($keterangan == 'hapus')
-                                dihapus
-                            @endif
-                        </p>
-                    </div>
-                    <div class="grid gap-4 lg:flex">
-                        <button wire:click.prevent='closeModalConfirmation'
-                            class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
-                            <p class="font-semibold text-red-700">Batal</p>
-                        </button>
-                        @if ($keterangan == 'ubah')
-                            <button wire:click.prevent='saveCompetition'
-                                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-500 focus:ring-opacity-50 active:bg-green-500 active:border-green-500">
-                                <p class="font-semibold text-white">Ubah</p>
-                            </button>
-                        @elseif($keterangan == 'hapus')
-                            <button wire:click.prevent='deleteCompetition'
-                                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-500 hover:bg-red-600 focus:ring focus:ring-red-500 focus:ring-opacity-50 active:bg-red-500 active:border-red-500">
-                                <p class="font-semibold text-white">Hapus</p>
-                            </button>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
 
     {{-- Create Data Modal --}}
     @if ($showForm)
