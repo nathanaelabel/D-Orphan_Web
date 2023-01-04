@@ -31,18 +31,22 @@ class DetailCourseBooking extends Component
     public function mount($course_booking_id)
     {
 
-        if (auth()->user()->phone_number == null || auth()->user()->address == null) {
-            return redirect()->route('user-approve');
-        }
+        // if (auth()->user()->phone_number == null || auth()->user()->address == null) {
+        //     return redirect()->route('user-approve');
+        // }
 
-        if (auth()->user()->user_type == 'Pengurus Panti') {
-            if (auth()->user()->orphanage->name == null || auth()->user()->orphanage->description == null) {
-                return redirect()->route('user-approve');
-            }
-        } elseif (auth()->user()->user_type == 'Tutor') {
-            if (auth()->user()->tutor->bank_account == null || auth()->user()->tutor->description == null || count(auth()->user()->tutor->tutorDayTimeRanges)==0) {
-                return redirect()->route('user-approve');
-            }
+        // if (auth()->user()->user_type == 'Pengurus Panti') {
+        //     if (auth()->user()->orphanage->name == null || auth()->user()->orphanage->description == null) {
+        //         return redirect()->route('user-approve');
+        //     }
+        // } elseif (auth()->user()->user_type == 'Tutor') {
+        //     if (auth()->user()->tutor->bank_account == null || auth()->user()->tutor->description == null || count(auth()->user()->tutor->tutorDayTimeRanges)==0) {
+        //         return redirect()->route('user-approve');
+        //     }
+        // }
+
+        if (auth()->user()->is_access == '0') {
+            return redirect()->route('user-approve');
         }
 
         $this->courseBooking = CourseBooking::find($this->course_booking_id);

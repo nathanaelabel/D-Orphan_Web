@@ -62,7 +62,7 @@ class UserApprove extends Component
                 'tutor_id' => auth()->user()->tutor->id,
             ]);
         }
-        
+
         $this->check();
     }
 
@@ -92,13 +92,31 @@ class UserApprove extends Component
 
     public function check()
     {
+        // if (auth()->user()->phone_number != null && auth()->user()->address != null) {
+        //     if (auth()->user()->user_type == 'Pengurus Panti') {
+        //         if (auth()->user()->orphanage->name != null && auth()->user()->orphanage->description != null) {
+        //             return redirect()->route('dasbor');
+        //         }
+        //     } elseif (auth()->user()->user_type == 'Tutor') {
+        //         if (auth()->user()->tutor->bank_account != null && auth()->user()->tutor->description != null && count(auth()->user()->tutor->tutorDayTimeRanges) > 0) {
+        //             return redirect()->route('dasbor');
+        //         }
+        //     }
+        // }
+
         if (auth()->user()->phone_number != null && auth()->user()->address != null) {
             if (auth()->user()->user_type == 'Pengurus Panti') {
                 if (auth()->user()->orphanage->name != null && auth()->user()->orphanage->description != null) {
+                    User::find(auth()->user()->id)->update([
+                        'is_access' => '1',
+                    ]);
                     return redirect()->route('dasbor');
                 }
             } elseif (auth()->user()->user_type == 'Tutor') {
                 if (auth()->user()->tutor->bank_account != null && auth()->user()->tutor->description != null && count(auth()->user()->tutor->tutorDayTimeRanges) > 0) {
+                    User::find(auth()->user()->id)->update([
+                        'is_access' => '1',
+                    ]);
                     return redirect()->route('dasbor');
                 }
             }

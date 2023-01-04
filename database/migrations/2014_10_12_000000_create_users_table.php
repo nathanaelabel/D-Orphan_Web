@@ -26,6 +26,7 @@ return new class () extends Migration {
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('address')->nullable();
+            $table->enum('is_access', ['0', '1'])->default('0');
             $table->timestamps();
         });
     }
