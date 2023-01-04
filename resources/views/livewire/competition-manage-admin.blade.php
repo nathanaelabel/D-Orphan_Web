@@ -54,7 +54,7 @@
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Tingkat</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Aksi</th>
+                    </th>
                 </tr>
             </thead>
             @if (!$competitions)
