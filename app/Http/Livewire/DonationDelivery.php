@@ -24,7 +24,7 @@ class DonationDelivery extends Component
 
     public function mount($user_id)
     {
-        if (auth()) {
+        if (auth()->user()) {
             if (auth()->user()->phone_number == null || auth()->user()->address == null) {
                 return redirect()->route('user-approve');
             }
