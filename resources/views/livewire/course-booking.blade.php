@@ -80,8 +80,6 @@
                             <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                                 @if ($activeTab == 'canceled')
                                     Status
-                                @else
-                                    Aksi
                                 @endif
                             </th>
                             <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
@@ -158,70 +156,21 @@
                                     {{ 'Rp' . number_format($item->transaction->amount, 2, ',', '.') }}
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 flex gap-2">
-                                    @if ($activeTab == 'pending')
-                                        @if (Auth::user()->user_type == 'Tutor')
-                                            {{-- Terima --}}
-                                            <a wire:click='accept({{ $item->id }})'
-                                                class="cursor-pointer text-green-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6 text-green-500">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    <title>Terima</title>
-                                                </svg>
-                                            </a>
-                                            {{-- Tolak --}}
-                                            <a wire:click='decline({{ $item->id }})'
-                                                class="cursor-pointer text-red-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6 text-red-500">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    <title>Tolak</title>
-                                                </svg>
-                                            </a>
-                                        @else
-                                            {{-- Batal --}}
-                                            <a wire:click='decline({{ $item->id }})'
-                                                class="cursor-pointer text-red-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6 text-red-500">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M6 18L18 6M6 6l12 12" />
-                                                    <title>Batal</title>
-                                                </svg>
-                                            </a>
-                                        @endif
-                                    @elseif($activeTab == 'ongoing')
-                                        @if (Auth::user()->user_type == 'Tutor')
-                                            {{-- Akhiri --}}
-                                            <a wire:click='complete({{ $item->id }})'
-                                                class="cursor-pointer text-green-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6 text-green-500">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M4.5 12.75l6 6 9-13.5" />
-                                                    <title>Akhiri</title>
-                                                </svg>
-                                            </a>
-                                        @endif
+
+                                    @if ($item->status == 'complete')
+                                        <span
+                                            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-green-100 text-green-800">
+                                            Selesai
+                                        </span>
                                     @else
-                                        @if ($item->status == 'complete')
-                                            <span
-                                                class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-green-100 text-green-800">
-                                                Selesai
-                                            </span>
-                                        @else
+                                        @if ($item->status != 'pending' && $item->status != 'ongoing')
                                             <span
                                                 class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-red-100 text-red-800">
                                                 Gagal
                                             </span>
                                         @endif
                                     @endif
+
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4">
                                     <a href="{{ route('detail-course-booking', $item->id) }}">
@@ -229,7 +178,7 @@
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                                                <title>Lihat detail reservasi {{ $item->id }}</title>
+                                            <title>Lihat detail reservasi {{ $item->id }}</title>
                                         </svg>
                                     </a>
                                 </td>

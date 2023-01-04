@@ -10,11 +10,38 @@
         </x-slot:page2>
     </x-list-user.detail-user.breadcrumb>
 
-    <p class="text-3xl leading-10 font-bold">
-        Detail Reservasi Kursus
-    </p>
+    <div class="flex items-center justify-between">
+        <div>
+            <p class="text-3xl leading-10 font-bold">
+                Detail Reservasi Kursus
+            </p>
+        </div>
+        <div>
 
-    Status: {{ $courseBooking->status }}
+            @if ($courseBooking->status == 'pending')
+                <span
+                    class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800">
+                    {{ 'Menunggu Konfirmasi' }}
+                </span>
+            @elseif ($courseBooking->status == 'ongoing')
+                <span
+                    class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-purple-100 text-purple-800">
+                    {{ 'Sedang Berlangsung' }}
+                </span>
+            @elseif ($courseBooking->status == 'complete')
+                <span
+                    class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-green-100 text-green-800">
+                    {{ 'Telah Diselesaikan' }}
+                </span>
+            @elseif ($courseBooking->status == 'canceled')
+                <span
+                    class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-red-100 text-red-800">
+                    {{ 'Telah Dibatalkan' }}
+                </span>
+            @endif
+
+        </div>
+    </div>
 
     <div class="grid rounded-2xl shadow bg-white lg:flex">
         <div class="lg:w-4/12">
@@ -312,17 +339,11 @@
         @endif
     @elseif($courseBooking->status == 'ongoing')
         @if (auth()->user()->user_type == 'Tutor')
-            <div class="flex gap-4">
-                {{-- <button wire:click='decline("ongoing")'
-                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
-                <p class="font-semibold text-red-700">Batalkan Reservasi Kursus</p>
-            </button> --}}
-                <button wire:click='complete("ongoing")'
-                    class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-500 focus:ring-opacity-50 active:bg-green-500 active:border-green-500"
-                    wire:click='decline("pending")'>
-                    <p class="font-semibold text-white">Reservasi Kursus telah selesai</p>
-                </button>
-            </div>
+            <button wire:click='complete("ongoing")'
+                class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-500 focus:ring-opacity-50 active:bg-green-500 active:border-green-500"
+                wire:click='decline("pending")'>
+                <p class="font-semibold text-white">Selesaikan Sesi Kursus</p>
+            </button>
         @endif
     @endif
 </div>
