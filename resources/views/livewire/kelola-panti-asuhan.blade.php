@@ -69,10 +69,10 @@
                         Total Rekomendasi Lomba</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
                         Catatan</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
+                    {{-- <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
                         Terakhir Diubah</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                        Tanggal Ditambahkan</th>
+                        Tanggal Ditambahkan</th> --}}
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
                         Aksi</th>
                 </tr>
@@ -165,12 +165,12 @@
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            {{-- <td class="whitespace-nowrap px-3 py-4 w-full">
                                 {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
-                            </td>
+                            </td> --}}
                             <td class="whitespace-nowrap px-3 py-4 w-full flex gap-2">
                                 @if (!is_null($editedOrphanIndex))
                                     @if ($editedOrphanIndex == $index)
