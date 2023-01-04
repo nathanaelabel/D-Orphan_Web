@@ -48,23 +48,11 @@
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Nama</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Poster</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Tanggal Mulai Registrasi</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Jam Mulai Registrasi</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Tautan Informasi</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Tingkat</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Deskripsi</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Penyelenggara</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Terakhir Diubah</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Tanggal Ditambahkan</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Aksi</th>
                 </tr>
@@ -105,19 +93,6 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCompetitionIndex !== $index)
-                                    <img src={{ $item['photo_url'] }} alt="Poster Lomba" class="rounded-lg"
-                                        onerror="this.onerror=null;this.src='/img/placeholder.svg';">
-                                @else
-                                    <x-input wire:model.defer="competitions.{{ $index }}.photo_url">
-                                        <x-slot:type>url</x-slot:type>
-                                        <x-slot:name>photo_url</x-slot:name>
-                                        <x-slot:id>photo_url</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
-                                    </x-input>
-                                @endif
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                @if ($editedCompetitionIndex !== $index)
                                     {{ date_format(date_create($item['registration_start_date']), 'l, d/m/Y') }}
                                 @else
                                     <x-input wire:model.defer="competitions.{{ $index }}.registration_start_date"
@@ -133,25 +108,12 @@
                                 @if ($editedCompetitionIndex !== $index)
                                     {{ $item['registration_start_hour'] }}
                                 @else
-                                    <x-input
-                                        wire:model.defer="competitions.{{ $index }}.registration_start_hour"
+                                    <x-input wire:model.defer="competitions.{{ $index }}.registration_start_hour"
                                         class="cursor-text">
                                         <x-slot:type>time</x-slot:type>
                                         <x-slot:name>registration_start_hour</x-slot:name>
                                         <x-slot:id>registration_start_hour</x-slot:id>
                                         <x-slot:placeholder></x-slot:placeholder>
-                                    </x-input>
-                                @endif
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                @if ($editedCompetitionIndex !== $index)
-                                    {{ $item['url'] }}
-                                @else
-                                    <x-input wire:model.defer="competitions.{{ $index }}.url">
-                                        <x-slot:type>url</x-slot:type>
-                                        <x-slot:name>url</x-slot:name>
-                                        <x-slot:id>url</x-slot:id>
-                                        <x-slot:placeholder>https://url.net/</x-slot:placeholder>
                                     </x-input>
                                 @endif
                             </td>
@@ -172,41 +134,16 @@
                                     </select>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                @if ($editedCompetitionIndex !== $index)
-                                    {{ $item['description'] }}
-                                @else
-                                    <x-input wire:model.defer="competitions.{{ $index }}.description">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>description</x-slot:name>
-                                        <x-slot:id>description</x-slot:id>
-                                        <x-slot:placeholder>Masukkan deskripsi lomba</x-slot:placeholder>
-                                    </x-input>
-                                @endif
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                @if ($editedCompetitionIndex !== $index)
-                                    {{ $item['organizer'] }}
-                                @else
-                                    <x-input wire:model.defer="competitions.{{ $index }}.organizer">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>organizer</x-slot:name>
-                                        <x-slot:id>organizer</x-slot:id>
-                                        <x-slot:placeholder>Olympic Council of Asia</x-slot:placeholder>
-                                    </x-input>
-                                @endif
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4">
-                                {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
-                            </td>
                             <td class="whitespace-nowrap px-3 py-4 flex gap-2">
                                 @if (is_null($editedCompetitionIndex))
                                     {{-- Selengkapnya --}}
                                     <a href="{{ route('detail-competition-admin', $item['id']) }}">
-                                        Lihat
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                            <title>Lihat detail</title>
+                                        </svg>
                                     </a>
                                 @endif
                             </td>
