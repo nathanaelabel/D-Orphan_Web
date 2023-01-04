@@ -26,7 +26,10 @@ class UserApprove extends Component
 
     public function render()
     {
-        $this->tutorDayTimeRanges = User::find(auth()->user()->id)->tutor->tutorDayTimeRanges;
+        if(auth()->user()->user_type=='Tutor'){
+            $this->tutorDayTimeRanges = User::find(auth()->user()->id)->tutor->tutorDayTimeRanges;
+        }
+        
 
         return view('livewire.user-approve');
     }
@@ -38,26 +41,28 @@ class UserApprove extends Component
 
     public function addData()
     {
-        if (count(Day::where('day', $this->days[$this->day - 1])->get()) > 0) {
-            $getDay = Day::where('day', $this->days[$this->day - 1])->first();
-        } else {
-            $getDay = Day::create([
-                'day' => $this->days[$this->day - 1],
+        if (auth()->user()->user_type == 'Tutor') {
+            if (count(Day::where('day', $this->days[$this->day - 1])->get()) > 0) {
+                $getDay = Day::where('day', $this->days[$this->day - 1])->first();
+            } else {
+                $getDay = Day::create([
+                    'day' => $this->days[$this->day - 1],
+                ]);
+            }
+            if (count(DayTimeRange::where('day_id', $getDay->id)->where('start_time', $this->start_time)->where('end_time', $this->end_time)->get())) {
+                $getDayTimeRange = DayTimeRange::where('day_id', $getDay->id)->where('start_time', $this->start_time)->where('end_time', $this->end_time)->first();
+            } else {
+                $getDayTimeRange = $getDay->dayTimeRanges()->create([
+                    'start_time' => $this->start_time,
+                    'end_time' => $this->end_time,
+                ]);
+            }
+
+            $getDayTimeRange->tutorDayTimeRanges()->create([
+                'tutor_id' => auth()->user()->tutor->id,
             ]);
         }
-        if (count(DayTimeRange::where('day_id', $getDay->id)->where('start_time', $this->start_time)->where('end_time', $this->end_time)->get())) {
-            $getDayTimeRange = DayTimeRange::where('day_id', $getDay->id)->where('start_time', $this->start_time)->where('end_time', $this->end_time)->first();
-        } else {
-            $getDayTimeRange = $getDay->dayTimeRanges()->create([
-                'start_time' => $this->start_time,
-                'end_time' => $this->end_time,
-            ]);
-        }
-
-        $getDayTimeRange->tutorDayTimeRanges()->create([
-            'tutor_id' => auth()->user()->tutor->id,
-        ]);
-
+        
         $this->check();
     }
 
