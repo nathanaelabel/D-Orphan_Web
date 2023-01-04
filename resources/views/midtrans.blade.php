@@ -34,7 +34,7 @@
                     </tr>
                     <tr class="odd:bg-white even:bg-gray-100">
                         <td class="px-3 py-4 max-w-full whitespace-nowrap font-semibold">Tanggal</td>
-                        <td class="px-3 py-4 w-full">{{ $order->created_at->format('d M Y H:i') }}</td>
+                        <td class="px-3 py-4 w-full"> {{ date_format(date_create($order->created_at), 'd M Y, H:i') }}</td>
                     </tr>
                 </tbody>
             </table>
