@@ -21,19 +21,20 @@ class DetailUser extends Component
 
     public function mount($user_id)
     {
-
-        if (auth()->user()) {
-            if (auth()->user()->phone_number == null || auth()->user()->address == null) {
-                return redirect()->route('user-approve');
-            }
-
-            if (auth()->user()->user_type == 'Pengurus Panti') {
-                if (auth()->user()->orphanage->name == null || auth()->user()->orphanage->description == null) {
+        if (auth()) {
+            if (auth()->user()) {
+                if (auth()->user()->phone_number == null || auth()->user()->address == null) {
                     return redirect()->route('user-approve');
                 }
-            } elseif (auth()->user()->user_type == 'Tutor') {
-                if (auth()->user()->tutor->bank_account == null || auth()->user()->tutor->description == null || count(auth()->user()->tutor->tutorDayTimeRanges)==0) {
-                    return redirect()->route('user-approve');
+
+                if (auth()->user()->user_type == 'Pengurus Panti') {
+                    if (auth()->user()->orphanage->name == null || auth()->user()->orphanage->description == null) {
+                        return redirect()->route('user-approve');
+                    }
+                } elseif (auth()->user()->user_type == 'Tutor') {
+                    if (auth()->user()->tutor->bank_account == null || auth()->user()->tutor->description == null || count(auth()->user()->tutor->tutorDayTimeRanges) == 0) {
+                        return redirect()->route('user-approve');
+                    }
                 }
             }
         }
