@@ -11,6 +11,7 @@ use App\Http\Livewire\DetailCompetitionManageAdmin;
 use App\Http\Livewire\DetailCompetitionRecommendation;
 use App\Http\Livewire\DetailCourse;
 use App\Http\Livewire\DetailCourseBooking;
+use App\Http\Livewire\DetailCourseManage;
 use App\Http\Livewire\DetailUser;
 use App\Http\Livewire\DonationDelivery;
 use App\Http\Livewire\KelolaPantiAsuhan;
@@ -51,6 +52,7 @@ Route::middleware([
     Route::get('/kursus/tutor/detail-kursus/{course_id}/{isFromCourseBooking?}', DetailCourse::class)->name('detail-kursus');
     Route::get('/course-booking/{course_booking_id}', DetailCourseBooking::class)->name('detail-course-booking');
     Route::get('/kelola-kursus', CourseManage::class)->name('kelola-kursus');
+    Route::get('/kelola-kursus/detail-kelola-kursus/{course_id}', DetailCourseManage::class)->name('detail-course-manage');
     Route::get('/kelola-saldo', SaldoManage::class)->name('kelola-saldo');
     Route::get('/lomba', CompetitionRecommendation::class)->name('lomba');
     Route::get('/lomba/detail-lomba/{competition_recommendation_id}', DetailCompetitionRecommendation::class)->name('detail-competition-recommendation');

@@ -36,7 +36,7 @@
         {{-- Dropdown Sort --}}
         <select id="sort_category_kelola" name="sort_category_kelola" wire:model="categoryKelolaDropdownSort"
             class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-            @if(count($skills)==0)
+            @if (count($skills) == 0)
                 <option "selected">Tidak Ada Keahlian</option>
             @else
                 @foreach ($skills as $itemSkill)
@@ -256,10 +256,23 @@
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full flex gap-2">
+                            <td class="whitespace-nowrap px-3 py-4 flex gap-2">
+                                @if (is_null($editedCourseTutorIndex))
+                                    {{-- Selengkapnya --}}
+                                    <a href="{{ route('detail-course-manage', $item['id']) }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                            <title>Lihat detail</title>
+                                        </svg>
+                                    </a>
+                                @endif
+                            </td>
+                            {{-- <td class="whitespace-nowrap px-3 py-4 w-full flex gap-2">
                                 @if (!is_null($editedCourseTutorIndex))
                                     @if ($editedCourseTutorIndex == $index)
-                                        {{-- Simpan --}}
+                                        Simpan
                                         <a wire:click.prevent='openModalConfirmation({{ $index }}, "ubah")'
                                             class="cursor-pointer text-blue-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -272,7 +285,7 @@
                                     @endif
                                 @endif
                                 @if (is_null($editedCourseTutorIndex))
-                                    {{-- Ubah --}}
+                                    Ubah
                                     <a wire:click.prevent='editCourseTutor({{ $index }})'
                                         class="cursor-pointer text-green-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -284,7 +297,7 @@
                                     </a>
                                 @endif
                                 @if (is_null($editedCourseTutorIndex))
-                                    {{-- Hapus --}}
+                                    Hapus
                                     <a wire:click.prevent='openModalConfirmation({{ $index }}, "hapus")'
                                         class="cursor-pointer text-red-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -295,7 +308,7 @@
                                         </svg>
                                     </a>
                                 @endif
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>

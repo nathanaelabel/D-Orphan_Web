@@ -45,29 +45,29 @@ class CourseManage extends Component
             $this->getSkill = null;
         }
 
-        if(count($this->skills)>0){
+        if (count($this->skills) > 0) {
             if (!$this->categoryKelolaDropdownSort) {
                 $this->setCategoryKelolaDropdownSort($this->skills->first()->name);
             }
-    
+
             $getCategoryKelolaSearch = Skill::where('name', $this->categoryKelolaDropdownSort)->first();
-    
+
             if ($this->categoryKelolaSearch != null) {
                 $this->coursesTutors = Course::where('tutor_id', auth()->user()->tutor->id)
                     ->where('skill_id', $getCategoryKelolaSearch->id);
-    
+
                 $this->coursesTutors->where(function ($search) {
-                    return $search->where('hourly_price', 'like', '%'.$this->categoryKelolaSearch.'%')
-                        ->orwhere('is_online', 'like', '%'.$this->categoryKelolaSearch.'%')
-                        ->orwhere('is_visit', 'like', '%'.$this->categoryKelolaSearch.'%')
-                        ->orwhere('description', 'like', '%'.$this->categoryKelolaSearch.'%')
-                        ->orwhere('maximum_member', 'like', '%'.$this->categoryKelolaSearch.'%')
-                        ->orwhere('tool_price', 'like', '%'.$this->categoryKelolaSearch.'%')
-                        ->orwhere('tool_description', 'like', '%'.$this->categoryKelolaSearch.'%')
-                        ->orwhere('location', 'like', '%'.$this->categoryKelolaSearch.'%')
-                        ->orwhere('name', 'like', '%'.$this->categoryKelolaSearch.'%');
+                    return $search->where('hourly_price', 'like', '%' . $this->categoryKelolaSearch . '%')
+                        ->orwhere('is_online', 'like', '%' . $this->categoryKelolaSearch . '%')
+                        ->orwhere('is_visit', 'like', '%' . $this->categoryKelolaSearch . '%')
+                        ->orwhere('description', 'like', '%' . $this->categoryKelolaSearch . '%')
+                        ->orwhere('maximum_member', 'like', '%' . $this->categoryKelolaSearch . '%')
+                        ->orwhere('tool_price', 'like', '%' . $this->categoryKelolaSearch . '%')
+                        ->orwhere('tool_description', 'like', '%' . $this->categoryKelolaSearch . '%')
+                        ->orwhere('location', 'like', '%' . $this->categoryKelolaSearch . '%')
+                        ->orwhere('name', 'like', '%' . $this->categoryKelolaSearch . '%');
                 });
-    
+
                 $this->coursesTutors = $this->coursesTutors->get()->toArray();
             } else {
                 $this->coursesTutors = Course::where('tutor_id', auth()->user()->tutor->id)
@@ -78,8 +78,6 @@ class CourseManage extends Component
                 array_push($this->tutorSkills, Skill::where('id', $this->coursesTutors[$i]['skill_id'])->first());
             }
         }
-
-       
 
         return view('livewire.course-manage');
     }
@@ -96,7 +94,7 @@ class CourseManage extends Component
                 return redirect()->route('user-approve');
             }
         } elseif (auth()->user()->user_type == 'Tutor') {
-            if (auth()->user()->tutor->bank_account == null || auth()->user()->tutor->description == null || count(auth()->user()->tutor->tutorDayTimeRanges)==0) {
+            if (auth()->user()->tutor->bank_account == null || auth()->user()->tutor->description == null || count(auth()->user()->tutor->tutorDayTimeRanges) == 0) {
                 return redirect()->route('user-approve');
             }
         }
