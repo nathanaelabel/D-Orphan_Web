@@ -16,8 +16,7 @@
                 Detail Reservasi Kursus
             </p>
         </div>
-        <div>
-
+        <div class="hidden lg:flex">
             @if ($courseBooking->status == 'pending')
                 <span
                     class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800">
@@ -39,12 +38,11 @@
                     {{ 'Telah Dibatalkan' }}
                 </span>
             @endif
-
         </div>
     </div>
 
     <div class="grid rounded-2xl shadow bg-white lg:flex">
-        <div class="lg:w-4/12">
+        <div class="lg:w-6/12">
             @if (auth()->user()->user_type == 'Tutor')
                 <img src="{{ $courseBooking->orphanage->photo_url }}" alt="Panti Asuhan"
                     class="w-full h-full object-cover rounded-t-2xl rounded-b-none lg:rounded-l-2xl lg:rounded-r-none">
@@ -54,7 +52,7 @@
             @endif
         </div>
 
-        <div class="w-fit self-center">
+        <div class="w-full self-center">
             <div class="grid gap-4 p-4 lg:p-8">
                 <a href="{{ route('detail-kursus', [$courseBooking->course->id, true]) }}"
                     class="text-2xl leading-8 font-semibold text-blue-500 hover:text-blue-600">
@@ -118,38 +116,8 @@
                         </p>
                     </div>
                     <div class="flex gap-2 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6 text-gray-700">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            <title>Tarif per jam</title>
-                        </svg>
-                        <p class="text-lg leading-8 text-gray-700">
-                            {{ 'Rp' . number_format($courseBooking->course->hourly_price, 2, ',', '.') . '/jam' }}
-                            @if ($courseBooking->course->tool_price == 0)
-                            @else
-                                &#40;tarif sudah termasuk biaya sewa peralatan senilai
-                                {{ 'Rp' . number_format($courseBooking->course->tool_price, 2, ',', '.') }}&#41;
-                            @endif
-                        </p>
-                    </div>
-
-                    @if ($courseBooking->course->tool_price == 0)
-                    @else
-                        <div class="flex gap-2 items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-                                <title>Deskripsi sewa peralatan</title>
-                            </svg>
-                            <p class="text-lg leading-8 text-gray-700">{{ $courseBooking->course->tool_description }}
-                            </p>
-                        </div>
-                    @endif
-                    <div class="flex gap-2 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6 text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             <title>Durasi</title>
@@ -193,32 +161,53 @@
                         </p>
                     </div>
                     <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-gray-700">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <title>Tarif per jam</title>
+                        </svg>
+                        <p class="text-lg leading-8 text-gray-700">
+                            {{ 'Rp' . number_format($courseBooking->course->hourly_price, 2, ',', '.') . '/jam' }}
+                            @if ($courseBooking->course->tool_price == 0)
+                            @else
+                                &#40;termasuk biaya sewa peralatan
+                                {{ 'Rp' . number_format($courseBooking->course->tool_price, 2, ',', '.') }}&#41;
+                            @endif
+                        </p>
+                    </div>
+
+                    @if ($courseBooking->course->tool_price == 0)
+                    @else
+                        <div class="flex gap-2 items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                <title>Deskripsi sewa peralatan</title>
+                            </svg>
+                            <p class="text-lg leading-8 text-gray-700">{{ $courseBooking->course->tool_description }}
+                            </p>
+                        </div>
+                    @endif
+                    <div class="flex gap-2 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                             </svg>
                             <title>Tanggal dipesan</title>
                         </svg>
                         <p class="text-lg leading-8 text-gray-700">{{ $courseBooking->created_at }}</p>
                     </div>
-                    @if ($courseBooking->status != 'pending')
-                        <div class="flex gap-2 items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
-                                </svg>
-                                <title>Tanggal diperbarui</title>
-                            </svg>
-                            <p class="text-lg leading-8 text-gray-700">{{ $courseBooking->updated_at }}</p>
-                        </div>
-                    @endif
                 </div>
+                <hr>
+                @if ($courseBooking->status != 'pending')
+                    <p class="text-sm text-gray-500">{{ 'Diperbarui pada ' . $courseBooking->updated_at }}
+                    </p>
+                @endif
             </div>
         </div>
     </div>
@@ -325,7 +314,7 @@
                 <p class="font-semibold text-red-700">Batalkan Reservasi Kursus</p>
             </button>
         @else
-            <div class="flex gap-4">
+            <div class="grid gap-4 lg:flex">
                 <button wire:click='decline("pending")'
                     class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-red-100 hover:bg-red-200 focus:ring focus:ring-red-100 focus:ring-opacity-50 active:bg-red-100 active:border-red-100">
                     <p class="font-semibold text-red-700">Tolak Reservasi Kursus</p>

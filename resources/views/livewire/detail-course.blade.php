@@ -175,7 +175,7 @@
                             {{ 'Rp' . number_format($course->hourly_price, 2, ',', '.') . '/jam' }}
                             @if ($course->tool_price == 0)
                             @else
-                                &#40;tarif sudah termasuk biaya sewa peralatan senilai
+                                &#40;termasuk biaya sewa peralatan 
                                 {{ 'Rp' . number_format($course->tool_price, 2, ',', '.') }}&#41;
                             @endif
                         </p>

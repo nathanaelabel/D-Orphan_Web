@@ -86,7 +86,6 @@
                                 {{ $item->description }}
                             </td>
 
-
                             <td class="whitespace-nowrap px-3 py-4">
                                 {{ date_format(date_create($item->created_at), 'd/m/Y') }}
                             </td>

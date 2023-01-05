@@ -53,10 +53,15 @@
         @if (count($status) > 0)
             <select id="sort_tutor_transaction" name="sort_tutor_transaction" wire:model="tutorTransactionDropdownSort"
                 class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
-               
                 @foreach ($status as $index => $itemStatus)
                     <option {{ $tutorTransactionDropdownSort == $itemStatus['status'] ? 'selected' : null }}>
-                        {{ $itemStatus['status'] }}
+                        @if ($itemStatus['status'] == 'pending')
+                            {{ 'Diproses' }}
+                        @elseif($itemStatus['status'] == 'complete')
+                            {{ 'Sukses' }}
+                        @else
+                            {{ 'Gagal' }}
+                        @endif
                     </option>
                 @endforeach
             </select>
