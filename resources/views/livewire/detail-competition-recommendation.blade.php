@@ -197,7 +197,7 @@
             </div>
 
             <div class="bg-white rounded-2xl shadow p-4 lg:p-8 grid gap-4">
-                <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">Tambah Peserta Lomba</p>
+                <p class="text-2xl leading-8 font-semibold text-center">Tambah Peserta Lomba</p>
                 <hr>
                 <div class="grid gap-1">
                     <x-label>

@@ -26,10 +26,10 @@ class UserApprove extends Component
 
     public function render()
     {
-        if(auth()->user()->user_type=='Tutor'){
+        if (auth()->user()->user_type == 'Tutor') {
             $this->tutorDayTimeRanges = User::find(auth()->user()->id)->tutor->tutorDayTimeRanges;
         }
-        
+
 
         return view('livewire.user-approve');
     }

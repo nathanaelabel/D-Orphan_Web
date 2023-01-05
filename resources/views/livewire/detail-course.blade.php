@@ -106,7 +106,7 @@
         {{-- Kursus --}}
         <div class="rounded-2xl shadow bg-white lg:flex">
             <div class="grid gap-4 p-4 lg:p-8">
-                <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">{{ $course->name }}</p>
+                <p class="text-2xl leading-8 font-semibold text-center">{{ $course->name }}</p>
                 <hr class="my-4">
                 <div class="grid gap-1">
                     <div class="mb-2">

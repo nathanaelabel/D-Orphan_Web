@@ -15,7 +15,7 @@
 
                 <div class="space-y-8">
                     <div>
-                        <p class="text-2xl leading-8 font-semibold text-gray-900 text-center">Rincian Reservasi Kursus
+                        <p class="text-2xl leading-8 font-semibold text-center">Rincian Reservasi Kursus
                         </p>
                         <hr class="my-4">
                         <div class="space-y-4">

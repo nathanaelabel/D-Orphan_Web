@@ -80,12 +80,20 @@
                             <p class="px-4 py-2">
                                 <span>Halo,</span>
                                 <span>{{ Auth::user()->name }}</span>
-                                <span>&#128075;</span>
                             </p>
                             <hr class="my-1">
                             <a href="{{ route('profile.show') }}"
-                                class="block px-4 py-2 text-gray-500 hover:text-blue-500 active:text-blue-500 active:scale-100 {{ request()->routeIs('profile.show') ? 'text-blue-500 font-semibold' : '' }}"
-                                role="menuitem" tabindex="-1" id="user-menu-item-0">Profil</a>
+                                class="block px-4 py-2 font-medium text-gray-500 hover:text-blue-500 active:text-blue-500 active:scale-100 {{ request()->routeIs('profile.show') ? 'text-blue-500' : '' }}"
+                                role="menuitem" tabindex="-1" id="user-menu-item-0">Pengaturan Akun</a>
+                            @if (Auth::user()->user_type == 'Pengurus Panti')
+                                <a href="{{ route('user-approve') }}"
+                                    class="block px-4 py-2 font-medium text-gray-500 hover:text-blue-500 active:text-blue-500 active:scale-100 {{ request()->routeIs('user-approve') ? 'text-blue-500' : '' }}"
+                                    role="menuitem" tabindex="-1" id="user-menu-item-0">Ubah Data Panti</a>
+                            @elseif (Auth::user()->user_type == 'Tutor')
+                                <a href="{{ route('user-approve') }}"
+                                    class="block px-4 py-2 font-medium text-gray-500 hover:text-blue-500 active:text-blue-500 active:scale-100 {{ request()->routeIs('user-approve') ? 'text-blue-500' : '' }}"
+                                    role="menuitem" tabindex="-1" id="user-menu-item-0">Ubah Data Tutor</a>
+                            @endif
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
@@ -124,8 +132,8 @@
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                     <!-- Icon when menu is open. Menu open: "block", Menu closed: "hidden" -->
-                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" aria-hidden="true">
+                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -215,7 +223,7 @@
                         </span>
                     @endif
                     <a href="{{ route('profile.show') }}"
-                        class="block px-4 py-2 text-gray-500 hover:text-blue-500 active:text-blue-500  {{ request()->routeIs('profile.show') ? 'text-blue-500 font-semibold' : '' }}"
+                        class="block px-4 py-2 font-medium text-gray-500 hover:text-blue-500 active:text-blue-500  {{ request()->routeIs('profile.show') ? 'text-blue-500' : '' }}"
                         role="menuitem" tabindex="-1" id="user-menu-item-0">Profil</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

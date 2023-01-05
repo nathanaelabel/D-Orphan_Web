@@ -33,7 +33,7 @@ class SaldoManage extends Component
 
         $this->tutorTransactions->where(function ($search) {
             return $search->where('user_id', auth()->user()->id)
-                        ->orwhere('to_user_id', auth()->user()->id);
+                ->orwhere('to_user_id', auth()->user()->id);
         });
 
         $temp_transaction = clone $this->tutorTransactions;
@@ -45,7 +45,7 @@ class SaldoManage extends Component
             $listNamePanti = Orphanage::whereIn('user_id', $listIdUserPanti)
                 ->orderByRaw("FIELD(id, $ids_ordered)")
                 ->pluck('name')->toArray();
-            $name_ordered = "'".implode("','", $listNamePanti)."'";
+            $name_ordered = "'" . implode("','", $listNamePanti) . "'";
 
             $this->tutorTransactions = $this->tutorTransactions->selectRaw("*, ELT(FIELD(user_id, $ids_ordered), $name_ordered) as from_panti");
         }
@@ -57,10 +57,10 @@ class SaldoManage extends Component
 
         if ($this->tutorTransactionSearch != null) {
             $this->tutorTransactions->where(function ($search) {
-                return $search->where('amount', 'like', '%'.$this->tutorTransactionSearch.'%')
-                        ->orwhere('description', 'like', '%'.$this->tutorTransactionSearch.'%')
-                        ->orwhere('created_at', 'like', '%'.$this->tutorTransactionSearch.'%')
-                            ->orwhere('updated_at', 'like', '%'.$this->tutorTransactionSearch.'%');
+                return $search->where('amount', 'like', '%' . $this->tutorTransactionSearch . '%')
+                    ->orwhere('description', 'like', '%' . $this->tutorTransactionSearch . '%')
+                    ->orwhere('created_at', 'like', '%' . $this->tutorTransactionSearch . '%')
+                    ->orwhere('updated_at', 'like', '%' . $this->tutorTransactionSearch . '%');
             });
             // $this->getStatus = Transaction::whereIn('id', $this->tutorTransactions->pluck('id'))->select('status')->groupBy('status')->get();
             $this->tutorTransactions = $this->tutorTransactions->orderBy('updated_at', 'ASC')
@@ -76,7 +76,6 @@ class SaldoManage extends Component
 
     public function mount()
     {
-
         // if (auth()->user()->phone_number == null || auth()->user()->address == null) {
         //     return redirect()->route('user-approve');
         // }
@@ -91,7 +90,7 @@ class SaldoManage extends Component
         //     }
         // }
 
-        if(auth()->user()->is_access=='0'){
+        if (auth()->user()->is_access == '0') {
             return redirect()->route('user-approve');
         }
 
@@ -156,8 +155,8 @@ class SaldoManage extends Component
         // ]);
         if (auth()->user()->money >= $this->amount) {
             User::find(auth()->user()->id)->transactions()->create([
-            'amount' => $this->amount,
-        ]);
+                'amount' => $this->amount,
+            ]);
         }
 
         $this->showForm = false;
@@ -204,9 +203,9 @@ class SaldoManage extends Component
                 ->get()->toArray();
         } else {
             $this->status = Transaction::where('to_user_id', auth()->user()->id)
-            ->groupby('status')
-            ->selectRaw('status')
-            ->get()->toArray();
+                ->groupby('status')
+                ->selectRaw('status')
+                ->get()->toArray();
         }
         if (count($this->status) > 0) {
             $this->setTutorTransactionDropdownSort($this->status[0]['status']);
