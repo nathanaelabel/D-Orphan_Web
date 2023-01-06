@@ -76,7 +76,6 @@ class DetailCompetitionRecommendation extends Component
 
     public function mount($competition_recommendation_id)
     {
-
         // if (auth()->user()->phone_number == null || auth()->user()->address == null) {
         //     return redirect()->route('user-approve');
         // }
@@ -185,10 +184,12 @@ class DetailCompetitionRecommendation extends Component
                 ->where('tutor_id', auth()->user()->tutor->id)->where('orphanage_id', $this->orphanageDropdownSort)->first();
         }
 
-        $cr->orphanCrs()->create([
-            'orphan_id' => $this->orphanDropdownSort,
-            'description' => $this->orphanDescription,
-        ]);
+        if (count(OrphanCr::where('competition_recommendation_id', $cr->id)->where('orphan_id', $this->orphanDropdownSort)->where('description', $this->orphanDescription)->get()) == 0) {
+            $cr->orphanCrs()->create([
+                'orphan_id' => $this->orphanDropdownSort,
+                'description' => $this->orphanDescription,
+            ]);
+        }
 
         //$this->showForm = false;
         // reset form fields

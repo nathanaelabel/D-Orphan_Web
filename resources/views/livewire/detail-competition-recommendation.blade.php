@@ -295,7 +295,10 @@
                                         {{ App\Models\Orphan::find($item['orphan_id'])->name }}
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4">
-                                        {{ App\Models\Orphanage::find(App\Models\Orphan::find($item['orphan_id'])->orphanage_id)->name }}
+                                        <a
+                                            href="{{ route('detail-user', App\Models\Orphanage::find(App\Models\Orphan::find($item['orphan_id'])->orphanage_id)->user->id) }}">
+                                            {{ App\Models\Orphanage::find(App\Models\Orphan::find($item['orphan_id'])->orphanage_id)->name }}
+                                        </a>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4">
                                         @if ($editedOrphanCrIndex !== $index)
@@ -420,7 +423,7 @@
             @endif
         @else
             <p>Maaf, Anda belum bisa memberikan rekomendasi perlombaan kepada Anak Panti. Rekomendasi hanya dapat
-                diberikan untuk kursus yang sedang berlangsung ataupun yang telah diselesaikan.</p>
+                diberikan jika Anda memiliki kursus yang sedang berlangsung atau yang telah diselesaikan.</p>
     @endif
 @endif
 </div>
