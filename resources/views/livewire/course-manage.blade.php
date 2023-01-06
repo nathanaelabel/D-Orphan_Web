@@ -62,36 +62,35 @@
         <table class="min-w-full">
             <thead class="bg-gray-500 text-white">
                 <tr>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Kategori Kursus</th>
+                    {{-- <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                        Kategori Kursus</th> --}}
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Nama Kursus</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Tarif Per Jam</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Batas Jumlah Peserta</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Akses</th>
+                        Tipe Kehadiran</th>
+                    {{-- <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                        Lokasi</th> --}}
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Lokasi</th>
+                        Tarif Per Jam</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Harga Sewa Alat</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                    {{-- <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Deskripsi Sewa Alat</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Deskripsi Kursus</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
                         Terakhir Diubah</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                        Tanggal Ditambahkan</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Aksi</th>
+                        Tanggal Ditambahkan</th> --}}
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold"></th>
                 </tr>
             </thead>
             @empty($coursesTutors)
                 <tbody class="bg-white">
                     <tr>
-                        <td colspan="5" class="px-3 py-4">
+                        <td colspan="6" class="px-3 py-4">
                             <div class="grid gap-2 p-2 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
@@ -107,7 +106,7 @@
                 <tbody>
                     @foreach ($coursesTutors as $index => $item)
                         <tr class="odd:bg-white even:bg-gray-100">
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            {{-- <td class="whitespace-nowrap px-3 py-4 w-full">
                                 @if ($editedCourseTutorIndex !== $index)
                                     {{ $tutorSkills[$index]['name'] }}
                                 @elseif($editedCourseTutorIndex === $index)
@@ -128,8 +127,8 @@
                                         </select>
                                     </div>
                                 @endif
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            </td> --}}
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCourseTutorIndex !== $index)
                                     {{ $item['name'] }}
                                 @else
@@ -141,21 +140,9 @@
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCourseTutorIndex !== $index)
-                                    {{ 'Rp' . number_format($item['hourly_price'], 2, ',', '.') }}
-                                @else
-                                    <x-input wire:model.defer="coursesTutors.{{ $index }}.hourly_price">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>hourly_price</x-slot:name>
-                                        <x-slot:id>hourly_price</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
-                                    </x-input>
-                                @endif
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
-                                @if ($editedCourseTutorIndex !== $index)
-                                    {{ $item['maximum_member'] }}
+                                    {{ $item['maximum_member'] . ' Anak' }}
                                 @else
                                     <x-input wire:model.defer="coursesTutors.{{ $index }}.maximum_member">
                                         <x-slot:type>text</x-slot:type>
@@ -165,7 +152,7 @@
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 <div>
                                     @if ($editedCourseTutorIndex !== $index)
                                         @if ($item['is_online'] == 1)
@@ -198,7 +185,7 @@
                                     @endif
                                 </div>
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            {{-- <td class="whitespace-nowrap px-3 py-4 w-full">
                                 @if ($editedCourseTutorIndex !== $index)
                                     @if ($item['location'] == null)
                                         {{ '-' }}
@@ -213,8 +200,20 @@
                                         <x-slot:placeholder></x-slot:placeholder>
                                     </x-input>
                                 @endif
+                            </td> --}}
+                            <td class="whitespace-nowrap px-3 py-4">
+                                @if ($editedCourseTutorIndex !== $index)
+                                    {{ 'Rp' . number_format($item['hourly_price'], 2, ',', '.') }}
+                                @else
+                                    <x-input wire:model.defer="coursesTutors.{{ $index }}.hourly_price">
+                                        <x-slot:type>text</x-slot:type>
+                                        <x-slot:name>hourly_price</x-slot:name>
+                                        <x-slot:id>hourly_price</x-slot:id>
+                                        <x-slot:placeholder></x-slot:placeholder>
+                                    </x-input>
+                                @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCourseTutorIndex !== $index)
                                     {{ 'Rp' . number_format($item['tool_price'], 2, ',', '.') }}
                                 @else
@@ -226,7 +225,7 @@
                                     </x-input>
                                 @endif
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
+                            {{-- <td class="whitespace-nowrap px-3 py-4 w-full">
                                 @if ($editedCourseTutorIndex !== $index)
                                     {{ $item['tool_description'] }}
                                 @else
@@ -255,7 +254,7 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 w-full">
                                 {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
-                            </td>
+                            </td> --}}
                             <td class="whitespace-nowrap px-3 py-4 flex gap-2">
                                 @if (is_null($editedCourseTutorIndex))
                                     {{-- Selengkapnya --}}
