@@ -59,25 +59,9 @@ class DetailCourseManage extends Component
 
     public function saveCourse()
     {
-        // $skill = Skill::find($this->skill_id);
-        // dd($skill);
-
-        // $skill->courses()->update([
-        //     'tutor_id' => auth()->user()->tutor->id,
-        //     'name' => $this->name,
-        //     'description' => $this->description,
-        //     'hourly_price' => $this->hourly_price,
-        //     'is_online' => $this->is_online,
-        //     'is_visit' => $this->is_visit,
-        //     'maximum_member' => $this->maximum_member,
-        //     'location' => $this->location,
-        //     'tool_price' => $this->tool_price,
-        //     'tool_description' => $this->tool_description,
-        // ]);
-        // $this->editedCourse = false;
-        // $this->showFormConfirmation = false;
-
         $this->course->update([
+            'tutor_id' => auth()->user()->tutor->id,
+            'skill_id' => $this->skill_id,
             'name' => $this->name,
             'description' => $this->description,
             'hourly_price' => $this->hourly_price,
@@ -90,6 +74,22 @@ class DetailCourseManage extends Component
         ]);
         $this->editedCourse = false;
         $this->showFormConfirmation = false;
+
+        return redirect()->route('kelola-kursus');
+
+        // $this->course->update([
+        //     'name' => $this->name,
+        //     'description' => $this->description,
+        //     'hourly_price' => $this->hourly_price,
+        //     'is_online' => $this->is_online,
+        //     'is_visit' => $this->is_visit,
+        //     'maximum_member' => $this->maximum_member,
+        //     'location' => $this->location,
+        //     'tool_price' => $this->tool_price,
+        //     'tool_description' => $this->tool_description,
+        // ]);
+        // $this->editedCourse = false;
+        // $this->showFormConfirmation = false;
     }
 
     public function resetForm()
@@ -107,13 +107,15 @@ class DetailCourseManage extends Component
 
     public function editCourse()
     {
+        $this->skill_id = $this->course->skill_id;
         $this->editedCourse = true;
     }
 
     public function deleteCourse()
     {
-        $this->course->delete();
+        $this->getSkill = $this->course->skill_id;
 
+        $this->course->delete();
         return redirect()->route('kelola-kursus');
     }
 
