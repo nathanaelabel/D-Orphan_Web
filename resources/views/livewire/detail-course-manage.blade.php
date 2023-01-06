@@ -12,7 +12,7 @@
         @if ($editedCourse)
             <div class="w-full self-center">
                 <div class="grid gap-4 p-4 lg:p-8">
-                    {{-- <div class="space-y-1">
+                    <div class="space-y-1">
                         <x-label>
                             <x-slot:for>skill</x-slot:for>
                             <x-slot:slot>Kategori Kursus</x-slot:slot>
@@ -26,7 +26,7 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div> --}}
+                    </div>
                     <div class="space-y-1 w-full">
                         <x-label>
                             <x-slot:for>name</x-slot:for>
@@ -171,9 +171,9 @@
 
                     <button wire:click.prevent='saveCourse'
                         class="w-full inline-flex justify-center items-center space-x-2 rounded focus:outline-none px-3 py-2 leading-6 bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:border-blue-500">
-                        <a href="{{ route('detail-course-manage', $course['id']) }}">
-                            <p class="font-semibold text-white">Simpan</p>
+                        <p class="font-semibold text-white">Simpan</p>
                     </button>
+
                 </div>
 
             </div>
@@ -183,6 +183,16 @@
                     <p class="text-2xl leading-8 font-semibold text-gray-900">
                         {{ $course->name }}
                     </p>
+
+                    <div class="flex">
+                        <span
+                            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">
+                            <svg class="-ml-1 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor" viewBox="0 0 8 8">
+                                <circle cx="4" cy="4" r="3" />
+                            </svg>
+                            {{ $course->skill->name }}
+                        </span>
+                    </div>
 
                     <div class="grid gap-1">
                         <div class="flex gap-2 items-center">
@@ -256,30 +266,30 @@
                                 {{ $course['location'] }}
                             </p>
                         </div>
-                    </div>
 
-                    <div class="flex gap-2 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            <title>Harga Sewa Alat</title>
-                        </svg>
-                        <p class="text-lg leading-8 text-gray-700">
-                            {{ 'Rp' . number_format($course['tool_price'], 2, ',', '.') }}
-                        </p>
-                    </div>
+                        <div class="flex gap-2 items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <title>Harga Sewa Alat</title>
+                            </svg>
+                            <p class="text-lg leading-8 text-gray-700">
+                                {{ 'Rp' . number_format($course['tool_price'], 2, ',', '.') }}
+                            </p>
+                        </div>
 
-                    <div class="flex gap-2 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            <title>Deskripsi Sewa Alat</title>
-                        </svg>
-                        <p class="text-lg leading-8 text-gray-700">
-                            {{ $course['tool_description'] }}
-                        </p>
+                        <div class="flex gap-2 items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <title>Deskripsi Sewa Alat</title>
+                            </svg>
+                            <p class="text-lg leading-8 text-gray-700">
+                                {{ $course['tool_description'] }}
+                            </p>
+                        </div>
                     </div>
 
                     <p class="text-gray-500">{{ $course['description'] }}</p>

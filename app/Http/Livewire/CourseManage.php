@@ -4,7 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Course;
 use App\Models\Skill;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class CourseManage extends Component
 {
@@ -12,6 +14,7 @@ class CourseManage extends Component
     public $categoryKelolaSearch;
     public $categoryKelolaDropdownSort;
     public $editedCourseTutorIndex;
+    public $course_id;
     public $showForm;
     public $showFormConfirmation;
     public $name;
@@ -44,6 +47,14 @@ class CourseManage extends Component
             $this->setCategoryKelolaDropdownSort($this->skills->first()->name);
             $this->getSkill = null;
         }
+        // else if ($this->getSkill == null && count(Course::where('skill_id', $this->getSkill)->where('tutor_id', auth()->user()->tutor->id)->get()) == 0) {
+        //     $this->setCategoryKelolaDropdownSort($this->skills->first()->name);
+        //     $this->getSkill = null;
+        // }
+
+        // $this->categoryKelolaDropdownSort = Skill::whereIn('id', auth()->user()->tutor->courses->pluck('skill_id'))->first()->name;
+
+        // dump($this->categoryKelolaDropdownSort);
 
         if (count($this->skills) > 0) {
             if (!$this->categoryKelolaDropdownSort) {
@@ -99,6 +110,8 @@ class CourseManage extends Component
             }
         }
 
+        $this->categoryKelolaDropdownSort = null;
+        $this->skill_id = Skill::all()->sortBy('name')->first()->id;
         $this->editedCourseTutorIndex = null;
         $this->showForm = false;
         $this->showFormConfirmation = false;
@@ -186,7 +199,8 @@ class CourseManage extends Component
         $this->showForm = false;
         // reset form fields
         $this->reset();
-
+        // sort by name
+        $this->categoryKelolaDropdownSort = $skill->name;
         // show success message
         session()->flash('message', 'Kursus berhasil ditambahkan.');
     }
@@ -194,5 +208,11 @@ class CourseManage extends Component
     public function editCourseTutor($courseTutorIndex)
     {
         $this->editedCourseTutorIndex = $courseTutorIndex;
+    }
+
+    public function redirectDetail($courseId)
+    {
+        $this->getSkill = Course::find($courseId)->skill_id;
+        return redirect()->route('detail-course-manage', $courseId);
     }
 }
