@@ -33,10 +33,17 @@
                     {{ 'Telah Diselesaikan' }}
                 </span>
             @elseif ($courseBooking->status == 'canceled')
-                <span
-                    class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-red-100 text-red-800">
-                    {{ 'Telah Dibatalkan' }}
-                </span>
+                @if (Auth::user()->user_type == 'Pengurus Panti')
+                    <span
+                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-red-100 text-red-800">
+                        {{ 'Telah Dibatalkan' }}
+                    </span>
+                @elseif(Auth::user()->user_type == 'Tutor')
+                    <span
+                        class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-semibold bg-red-100 text-red-800">
+                        {{ 'Telah Ditolak' }}
+                    </span>
+                @endif
             @endif
         </div>
     </div>
@@ -121,8 +128,8 @@
                         </p>
                     </div>
                     <div class="flex gap-2 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-gray-700">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -147,8 +154,8 @@
                         </div>
                     @endif
                     <div class="flex gap-2 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -156,12 +163,14 @@
                             </svg>
                             <title>Tanggal dipesan</title>
                         </svg>
-                        <p class="text-lg leading-8 text-gray-700"> {{ date_format(date_create($courseBooking->created_at), 'l, d F Y, H:i A') }}</p>
+                        <p class="text-lg leading-8 text-gray-700">
+                            {{ date_format(date_create($courseBooking->created_at), 'l, d F Y, H:i A') }}</p>
                     </div>
                 </div>
                 <hr>
                 @if ($courseBooking->status != 'pending')
-                    <p class="text-sm text-gray-500">{{ 'Diperbarui pada ' . date_format(date_create($courseBooking->updated_at), 'l, d F Y, H:i A') }}
+                    <p class="text-sm text-gray-500">
+                        {{ 'Diperbarui pada ' . date_format(date_create($courseBooking->updated_at), 'l, d F Y, H:i A') }}
                     </p>
                 @endif
             </div>
