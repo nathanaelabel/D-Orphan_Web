@@ -71,11 +71,7 @@
                         <x-slot:tarif>{{ 'Rp' . number_format($item['hourly_price'], 2, ',', '.') . '/jam' }}
                         </x-slot:tarif>
                         <x-slot:lokasi>
-                            @if ($item['location'] == null)
-                                {{ '-' }}
-                            @else
-                                {{ $item['location'] }}
-                            @endif
+                            {{ $item['location'] }}
                         </x-slot:lokasi>
                         <x-slot:hadirIcon>
                             @if ($item['is_online'] == 1)
@@ -94,14 +90,14 @@
                             @endif
                         </x-slot:hadirIcon>
                         <x-slot:hadirTipe>
-                            @if ($item['is_online'] == 0)
-                                {{ 'Luring' }}
-                            @elseif ($item['is_online'] == 1)
+                            @if ($item['is_online'] == 1)
                                 {{ 'Daring' }}
-                            @elseif ($item['is_visit'] == 0)
-                                {{ 'Luring' }}
                             @else
-                                {{ '-' }}
+                                @if ($item['is_visit'] == 0)
+                                    {{ 'Luring, Tidak dilaksanakan di Panti' }}
+                                @else
+                                    {{ 'Luring, Bisa dilaksanakan di Panti' }}
+                                @endif
                             @endif
                         </x-slot:hadirTipe>
                         <x-slot:anak>{{ $item['maximum_member'] }} anak/Panti</x-slot:anak>

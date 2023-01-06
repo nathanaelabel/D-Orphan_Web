@@ -21,14 +21,14 @@ class CourseBookingFactory extends Factory
         $faker = Faker::create('en_EN');
         $status = $faker->randomElement(['pending', 'ongoing', 'complete', 'canceled']);
         $getCourse = $faker->randomElement(Course::all()->pluck('id'));
-        $is_visit = Course::findOrFail($getCourse)->is_visit == 1 ? rand(0, 1) : null;
+        $is_visit = Course::findOrFail($getCourse)->is_visit == 1 ? rand(0, 1) : 0;
 
         if (Course::find($getCourse)->is_online == 1) {
             $is_visit = 0;
             $location = Course::find($getCourse)->location;
         } else {
             if (Course::find($getCourse)->is_visit == 1) {
-                $location = '';
+                $location = $faker->address();
             } else {
                 $location = Course::find($getCourse)->location;
             }

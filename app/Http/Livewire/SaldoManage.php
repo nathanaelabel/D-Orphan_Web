@@ -22,15 +22,23 @@ class SaldoManage extends Component
     public $getStatus;
     public $amount;
     public $oldTab;
+    public $obj;
 
     public function render()
     {
         $this->tutorTransactions = [];
 
         $this->setStatus();
-
-        $this->tutorTransactions = Transaction::where('status', $this->tutorTransactionDropdownSort);
-
+        if ($this->tutorTransactionDropdownSort != null) {
+            if ($this->tutorTransactionDropdownSort == 'pending' || $this->tutorTransactionDropdownSort == 'Diproses') {
+                $this->obj = 'pending';
+            } elseif ($this->tutorTransactionDropdownSort == 'complete' || $this->tutorTransactionDropdownSort == 'Sukses') {
+                $this->obj = 'complete';
+            } elseif ($this->tutorTransactionDropdownSort == 'canceled' || $this->tutorTransactionDropdownSort == 'Gagal') {
+                $this->obj = 'canceled';
+            }
+        }
+        $this->tutorTransactions = Transaction::where('status', $this->obj);
         $this->tutorTransactions->where(function ($search) {
             return $search->where('user_id', auth()->user()->id)
                 ->orwhere('to_user_id', auth()->user()->id);
@@ -42,10 +50,12 @@ class SaldoManage extends Component
 
         if (count($listIdUserPanti) > 0) {
             $ids_ordered = implode(',', $listIdUserPanti);
+
+            //to get name orphanage
             $listNamePanti = Orphanage::whereIn('user_id', $listIdUserPanti)
                 ->orderByRaw("FIELD(id, $ids_ordered)")
                 ->pluck('name')->toArray();
-            $name_ordered = "'" . implode("','", $listNamePanti) . "'";
+            $name_ordered = "'".implode("','", $listNamePanti)."'";
 
             $this->tutorTransactions = $this->tutorTransactions->selectRaw("*, ELT(FIELD(user_id, $ids_ordered), $name_ordered) as from_panti");
         }
@@ -57,10 +67,10 @@ class SaldoManage extends Component
 
         if ($this->tutorTransactionSearch != null) {
             $this->tutorTransactions->where(function ($search) {
-                return $search->where('amount', 'like', '%' . $this->tutorTransactionSearch . '%')
-                    ->orwhere('description', 'like', '%' . $this->tutorTransactionSearch . '%')
-                    ->orwhere('created_at', 'like', '%' . $this->tutorTransactionSearch . '%')
-                    ->orwhere('updated_at', 'like', '%' . $this->tutorTransactionSearch . '%');
+                return $search->where('amount', 'like', '%'.$this->tutorTransactionSearch.'%')
+                    ->orwhere('description', 'like', '%'.$this->tutorTransactionSearch.'%')
+                    ->orwhere('created_at', 'like', '%'.$this->tutorTransactionSearch.'%')
+                    ->orwhere('updated_at', 'like', '%'.$this->tutorTransactionSearch.'%');
             });
             // $this->getStatus = Transaction::whereIn('id', $this->tutorTransactions->pluck('id'))->select('status')->groupBy('status')->get();
             $this->tutorTransactions = $this->tutorTransactions->orderBy('updated_at', 'ASC')
@@ -207,8 +217,10 @@ class SaldoManage extends Component
                 ->selectRaw('status')
                 ->get()->toArray();
         }
-        if (count($this->status) > 0) {
-            $this->setTutorTransactionDropdownSort($this->status[0]['status']);
+        if ($this->tutorTransactionDropdownSort == null) {
+            if (count($this->status) > 0) {
+                $this->setTutorTransactionDropdownSort($this->status[0]['status']);
+            }
         }
     }
 }

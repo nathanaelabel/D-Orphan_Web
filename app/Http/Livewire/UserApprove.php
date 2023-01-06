@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Livewire\WithFileUploads;
 use App\Models\Day;
 use App\Models\DayTimeRange;
 use App\Models\TutorDayTimeRange;
@@ -10,6 +11,7 @@ use Livewire\Component;
 
 class UserApprove extends Component
 {
+    use WithFileUploads;
     public $name;
     public $description;
     public $bank_account;
@@ -23,6 +25,9 @@ class UserApprove extends Component
     public $start_time;
     public $end_time;
     public $tutorDayTimeRanges;
+    public $gender;
+    public $image;
+    public $photo_url;
 
     public function render()
     {
@@ -30,13 +35,14 @@ class UserApprove extends Component
             $this->tutorDayTimeRanges = User::find(auth()->user()->id)->tutor->tutorDayTimeRanges;
         }
 
-
         return view('livewire.user-approve');
     }
 
     public function deleteTutorDayTimeRange($index)
     {
-        TutorDayTimeRange::find($index)->delete();
+        if (count(TutorDayTimeRange::where('tutor_id', auth()->user()->tutor->id)->get()) > 1) {
+            TutorDayTimeRange::find($index)->delete();
+        }
     }
 
     public function addData()
@@ -49,7 +55,7 @@ class UserApprove extends Component
                     'day' => $this->days[$this->day - 1],
                 ]);
             }
-            if (count(DayTimeRange::where('day_id', $getDay->id)->where('start_time', $this->start_time)->where('end_time', $this->end_time)->get())) {
+            if (count(DayTimeRange::where('day_id', $getDay->id)->where('start_time', $this->start_time)->where('end_time', $this->end_time)->get()) > 0) {
                 $getDayTimeRange = DayTimeRange::where('day_id', $getDay->id)->where('start_time', $this->start_time)->where('end_time', $this->end_time)->first();
             } else {
                 $getDayTimeRange = $getDay->dayTimeRanges()->create([
@@ -58,24 +64,31 @@ class UserApprove extends Component
                 ]);
             }
 
-            $getDayTimeRange->tutorDayTimeRanges()->create([
-                'tutor_id' => auth()->user()->tutor->id,
-            ]);
+            if (count(TutorDayTimeRange::where('day_time_range_id', $getDayTimeRange->id)->where('tutor_id', auth()->user()->tutor->id)->get()) == 0) {
+                $getDayTimeRange->tutorDayTimeRanges()->create([
+                    'tutor_id' => auth()->user()->tutor->id,
+                ]);
+            }
         }
 
-        $this->check();
+        if (auth()->user()->is_access == '0') {
+            $this->check();
+        }
     }
 
     public function saveUser()
     {
         User::find(auth()->user()->id)->update([
             'phone_number' => $this->phone_number,
+            'gender' => $this->gender,
             'address' => $this->address,
         ]);
 
         if (auth()->user()->user_type == 'Pengurus Panti') {
+            $path = $this->image->store('images');
             User::find(auth()->user()->id)->orphanage()->update([
                 'name' => $this->name,
+                'photo_url' => $path,
                 'description' => $this->description,
             ]);
         } elseif (auth()->user()->user_type == 'Tutor') {
@@ -87,7 +100,9 @@ class UserApprove extends Component
 
         $this->showFormConfirmation = false;
 
-        $this->check();
+        if (auth()->user()->is_access == '0') {
+            $this->check();
+        }
     }
 
     public function check()
@@ -104,12 +119,13 @@ class UserApprove extends Component
         //     }
         // }
 
-        if (auth()->user()->phone_number != null && auth()->user()->address != null) {
+        if (auth()->user()->phone_number != null && auth()->user()->address != null && auth()->user()->gender != null) {
             if (auth()->user()->user_type == 'Pengurus Panti') {
                 if (auth()->user()->orphanage->name != null && auth()->user()->orphanage->description != null) {
                     User::find(auth()->user()->id)->update([
                         'is_access' => '1',
                     ]);
+
                     return redirect()->route('dasbor');
                 }
             } elseif (auth()->user()->user_type == 'Tutor') {
@@ -117,6 +133,7 @@ class UserApprove extends Component
                     User::find(auth()->user()->id)->update([
                         'is_access' => '1',
                     ]);
+
                     return redirect()->route('dasbor');
                 }
             }
@@ -136,12 +153,14 @@ class UserApprove extends Component
     {
         if (auth()->user()->user_type == 'Pengurus Panti') {
             $this->name = $this->user->orphanage->name;
+            $this->image = $this->user->orphanage->photo_url;
             $this->description = $this->user->orphanage->description;
         } else {
             $this->bank_account = $this->user->tutor->bank_account;
             $this->description = $this->user->tutor->description;
         }
 
+        $this->gender = $this->user->gender;
         $this->phone_number = $this->user->phone_number;
         $this->address = $this->user->address;
     }

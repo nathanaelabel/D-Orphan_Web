@@ -50,22 +50,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
-                                <title>Bergabung sejak</title>
-                            </svg>
-                            <p class="text-lg leading-8 text-gray-700">
-                                {{ date_format(date_create($course->tutor->user->created_at), 'd/m/Y') }}
-                            </p>
-                        </div>
-                        <div class="flex gap-2 items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
-                                <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                                 <title>Jumlah kelas tersedia</title>
                             </svg>
                             <p class="text-lg leading-8 text-gray-700">
-                                {{ count($course->tutor->courses) . ' kelas tersedia' }}</p>
+                                {{ count($course->tutor->courses) . ' kursus tersedia' }}</p>
                         </div>
                         <div class="flex gap-2 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -74,7 +63,18 @@
                                 <title>Jumlah kelas berhasil</title>
                             </svg>
                             <p class="text-lg leading-8 text-gray-700">
-                                {{ count($courseBookingDone) . ' kelas berhasil' }}
+                                {{ count($courseBookingDone) . ' kursus berhasil' }}
+                            </p>
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                                <title>Bergabung sejak</title>
+                            </svg>
+                            <p class="text-lg leading-8 text-gray-700">
+                                {{ date_format(date_create($course->tutor->user->created_at), 'd/m/Y') }}
                             </p>
                         </div>
                     </div>
@@ -127,7 +127,22 @@
                         </svg>
                         <p class="text-lg leading-8 text-gray-700">{{ $course->maximum_member }} anak/Panti</p>
                     </div>
-
+                    <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-gray-700">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <title>Tarif per jam</title>
+                        </svg>
+                        <p class="text-lg leading-8 text-gray-700">
+                            {{ 'Rp' . number_format($course->hourly_price, 2, ',', '.') . '/jam' }}
+                            @if ($course->tool_price == 0)
+                            @else
+                                &#40;termasuk biaya sewa peralatan
+                                {{ 'Rp' . number_format($course->tool_price, 2, ',', '.') }}&#41;
+                            @endif
+                        </p>
+                    </div>
                     <div class="flex gap-2 items-center">
                         @if ($course->is_online == 1)
                             <div class="flex gap-2 items-center">
@@ -137,7 +152,8 @@
                                         d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79M12 12h.008v.007H12V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                     <title>Tipe kehadiran</title>
                                 </svg>
-                                <p class="text-lg leading-8 text-gray-700">Daring &#40;via {{ $course->location }}&#41;
+                                <p class="text-lg leading-8 text-gray-700">Daring &#40;via
+                                    {{ $course->location }}&#41;
                                 </p>
                             </div>
                         @else
@@ -154,30 +170,25 @@
                                 </svg>
                                 <p class="text-lg leading-8 text-gray-700">
                                     @if ($course->is_visit == 1)
-                                        Luring &#40;Kursus tidak dilaksanakan di lokasi Panti Asuhan&#41;
+                                        Luring &#40;Kursus bisa dilaksanakan di lokasi Panti Asuhan&#41;
                                     @else
-                                        Luring &#40;Kursus dilaksanakan di lokasi Panti Asuhan&#41;
+                                        Luring &#40;Kursus tidak dilaksanakan di lokasi Panti Asuhan&#41;
                                     @endif
                                 </p>
                             </div>
                         @endif
                         </p>
                     </div>
-
                     <div class="flex gap-2 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            <title>Tarif per jam</title>
+                                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                         </svg>
                         <p class="text-lg leading-8 text-gray-700">
-                            {{ 'Rp' . number_format($course->hourly_price, 2, ',', '.') . '/jam' }}
-                            @if ($course->tool_price == 0)
-                            @else
-                                &#40;termasuk biaya sewa peralatan 
-                                {{ 'Rp' . number_format($course->tool_price, 2, ',', '.') }}&#41;
-                            @endif
+                            {{ $course->location }}
                         </p>
                     </div>
 

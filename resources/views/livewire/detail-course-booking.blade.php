@@ -104,76 +104,32 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6 text-gray-700">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
-                            <title>Jenis kelamin</title>
-                        </svg>
-                        <p class="text-lg leading-8 text-gray-700">
-                            @if ($courseBooking->course->tutor->user->gender == 'Male')
-                                {{ 'Pria' }}
-                            @else
-                                {{ 'Wanita' }}
-                            @endif
-                        </p>
-                    </div>
-                    <div class="flex gap-2 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
-                            <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             <title>Durasi</title>
                         </svg>
                         <p class="text-lg leading-8 text-gray-700">{{ $courseBooking->hour_count }} jam</p>
                     </div>
                     <div class="flex gap-2 items-center">
-                        @if ($courseBooking->course->is_online == 1)
-                            <div class="flex gap-2 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79M12 12h.008v.007H12V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                    <title>Tipe kehadiran</title>
-                                </svg>
-                                <p class="text-lg leading-8 text-gray-700">Daring &#40;via
-                                    {{ $courseBooking->course->location }}&#41;
-                                </p>
-                            </div>
-                        @else
-                            <div class="flex gap-2 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 3l8.735 8.735m0 0a.374.374 0 11.53.53m-.53-.53l.53.53m0 0L21 21M14.652 9.348a3.75
-                                    3.75 0 010 5.304m2.121-7.425a6.75 6.75 0 010 9.546m2.121-11.667c3.808 3.807 3.808
-                                    9.98 0
-                                    13.788m-9.546-4.242a3.733 3.733 0 01-1.06-2.122m-1.061 4.243a6.75 6.75 0
-                                    01-1.625-6.929m-.496 9.05c-3.068-3.067-3.664-7.67-1.79-11.334M12 12h.008v.008H12V12z" />
-                                    <title>Tipe kehadiran</title>
-                                </svg>
-                                <p class="text-lg leading-8 text-gray-700">
-                                    @if ($courseBooking->course->is_visit == 1)
-                                        Luring &#40;Kursus tidak dilaksanakan di lokasi Panti Asuhan&#41;
-                                    @else
-                                        Luring &#40;Kursus dilaksanakan di lokasi Panti Asuhan&#41;
-                                    @endif
-                                </p>
-                            </div>
-                        @endif
-                        </p>
-                    </div>
-                    <div class="flex gap-2 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6 text-gray-700">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            <title>Tarif per jam</title>
+                            <title>Total Harga</title>
                         </svg>
                         <p class="text-lg leading-8 text-gray-700">
-                            {{ 'Rp' . number_format($courseBooking->course->hourly_price, 2, ',', '.') . '/jam' }}
-                            @if ($courseBooking->course->tool_price == 0)
-                            @else
-                                &#40;termasuk biaya sewa peralatan
-                                {{ 'Rp' . number_format($courseBooking->course->tool_price, 2, ',', '.') }}&#41;
-                            @endif
+                            {{ 'Rp' . number_format($courseBooking->course->hourly_price * $courseBooking->hour_count, 2, ',', '.') }}
+                        </p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        <p class="text-lg leading-8 text-gray-700">
+                            {{ $courseBooking->location }}
                         </p>
                     </div>
 
@@ -200,12 +156,12 @@
                             </svg>
                             <title>Tanggal dipesan</title>
                         </svg>
-                        <p class="text-lg leading-8 text-gray-700">{{ $courseBooking->created_at }}</p>
+                        <p class="text-lg leading-8 text-gray-700"> {{ date_format(date_create($courseBooking->created_at), 'l, d F Y, H:i A') }}</p>
                     </div>
                 </div>
                 <hr>
                 @if ($courseBooking->status != 'pending')
-                    <p class="text-sm text-gray-500">{{ 'Diperbarui pada ' . $courseBooking->updated_at }}
+                    <p class="text-sm text-gray-500">{{ 'Diperbarui pada ' . date_format(date_create($courseBooking->updated_at), 'l, d F Y, H:i A') }}
                     </p>
                 @endif
             </div>

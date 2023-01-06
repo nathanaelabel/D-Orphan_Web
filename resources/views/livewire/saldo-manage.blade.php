@@ -155,7 +155,9 @@
                             </td>
                             @if ($activeTab == 'Pembayaran Kursus')
                                 <td class="whitespace-nowrap px-3 py-4">
+                                <a href="{{ route('detail-user', $item['user_id']) }}">
                                     {{ $item['from_panti'] }}
+                                    </a>
                                 </td>
                             @endif
                             <td class="whitespace-nowrap px-3 py-4">

@@ -28,11 +28,11 @@ class CourseFactory extends Factory
             $location = $faker->randomElement(['Zoom Meeting', 'Google Meet', 'Microsoft Teams', 'Cisco Webex', 'Adobe Connect Meetings', 'Discord', 'Lifesize', 'BlueJeans', 'GoToMeeting', 'Any Meeting', 'RingCentral Meetings', 'Zoho Meeting']);
         } else {
             $is_visit = random_int(0, 1);
-            if ($is_visit == 1) {
-                $location = null;
-            } else {
+            // if ($is_visit == 1) {
+                // $location = null;
+            // } else {
                 $location = $faker2->address();
-            }
+            // }
         }
 
         return [

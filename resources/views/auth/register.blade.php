@@ -58,7 +58,8 @@
                                     <div class="mt-4">
                                         <x-jet-label for="name" value="{{ __('Nama') }}" />
                                         <x-jet-input id="name" class="block mt-1 w-full" type="text"
-                                            name="name" :value="old('name')" placeholder="John Doe" required autofocus
+                                            name="name" :value="old('name')"
+                                            placeholder="Isi dengan nama Tutor atau Pengurus Panti" required autofocus
                                             autocomplete="name" />
                                     </div>
 
