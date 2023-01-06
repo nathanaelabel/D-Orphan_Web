@@ -70,7 +70,7 @@ class DetailCompetitionRecommendation extends Component
                     ->where('tutor_id', auth()->user()->tutor->id)->pluck('id')->toArray();
                 $getListOrphanID = OrphanCr::whereIn('competition_recommendation_id', $this->competitionRecommendations)->pluck('orphan_id')->toArray();
                 $getListOrphanageID = Orphan::whereIn('id', $getListOrphanID)->groupBy('orphanage_id')->pluck('orphanage_id')->toArray();
-                $getListOrphanageCr = Orphanage::whereIn('id', $getListOrphanageID)->get();
+                $getListOrphanageCr = Orphanage::whereIn('id', $getListOrphanageID)->orderBy('name', 'ASC')->get();
 
                 if (!$this->orphanageCrDropdownSort && count($getListOrphanageCr) > 0) {
                     $this->setOrphanageCrDropwdownSort($getListOrphanageCr->first()->id);
@@ -203,6 +203,8 @@ class DetailCompetitionRecommendation extends Component
                 'orphan_id' => $this->orphanDropdownSort,
                 'description' => $this->orphanDescription,
             ]);
+
+            $this->setOrphanageCrDropwdownSort($cr->orphanage->id);
         }
     }
 

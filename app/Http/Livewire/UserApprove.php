@@ -28,14 +28,28 @@ class UserApprove extends Component
     public $gender;
     public $image;
     public $photo_url;
+    public $dailyScheduleDropdownSort;
+    public $tutorDays;
 
     public function render()
     {
         if (auth()->user()->user_type == 'Tutor') {
             $this->tutorDayTimeRanges = User::find(auth()->user()->id)->tutor->tutorDayTimeRanges;
+
+            $getIdTutorDayTimeRanges = TutorDayTimeRange::where('tutor_id', auth()->user()->tutor->id)->pluck('day_time_range_id')->toArray();
+            $getIdDayTimeRanges = DayTimeRange::whereIn('id', $getIdTutorDayTimeRanges)->pluck('day_id');
+            $this->tutorDays = Day::whereIn('id', $getIdDayTimeRanges)->get();
+            if (!$this->dailyScheduleDropdownSort) {
+                $this->setDailyScheduleDropwdownSort($this->tutorDays->first()->day);
+            }
         }
 
         return view('livewire.user-approve');
+    }
+
+    public function setDailyScheduleDropwdownSort($dailyScheduleDropdownSortNew)
+    {
+        $this->dailyScheduleDropdownSort = $dailyScheduleDropdownSortNew;
     }
 
     public function deleteTutorDayTimeRange($index)
@@ -68,6 +82,8 @@ class UserApprove extends Component
                 $getDayTimeRange->tutorDayTimeRanges()->create([
                     'tutor_id' => auth()->user()->tutor->id,
                 ]);
+
+                $this->setDailyScheduleDropwdownSort($getDay->day);
             }
         }
 
@@ -147,6 +163,7 @@ class UserApprove extends Component
         $this->days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
         $this->showFormConfirmation = false;
         $this->day = 1;
+        $this->tutorDays = [];
     }
 
     public function resetForm()
