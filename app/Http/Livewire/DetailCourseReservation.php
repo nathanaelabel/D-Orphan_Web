@@ -35,7 +35,7 @@ class DetailCourseReservation extends Component
 
     public function render()
     {
-        $this->totalPrice = $this->course->hourly_price * $this->meetingCount * $this->studentList->count();
+        $this->totalPrice = $this->course->hourly_price * (int)$this->meetingCount  * (int)$this->studentList->count();
         return view('livewire.detail-course-reservation');
     }
 
