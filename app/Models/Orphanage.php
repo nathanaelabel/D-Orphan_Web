@@ -27,7 +27,10 @@ class Orphanage extends Model
     {
         return $this->hasMany(CourseBooking::class);
     }
-
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
     public function getCreatedAtAttribute($value)
     {
         return Carbon::createFromTimestamp(strtotime($value))

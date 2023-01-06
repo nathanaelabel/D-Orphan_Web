@@ -14,9 +14,21 @@
                     <title>Akun {{ Auth::user()->user_type }}</title>
                 </svg>
                 {{ Auth::user()->user_type }}
+
             </span>
         </div>
     </div>
+    @if (Auth::user()->user_type == 'Pengurus Panti')
+        Total Pengeluaran Bulan Ini = Rp.
+        {{ number_format(Auth::user()->transactions->where('created_at', '>', \Carbon\Carbon::now()->month)->where('created_at', '<', \Carbon\Carbon::now()->addMonth(2)->month)->where('updated_at')->sum('amount'),0,',','.') }}
+        Total Murid terdaftar = {{ Auth::user()->orphanage->orphans->count() }}
+        Total Kursus Sedang Berjalan =
+        {{ Auth::user()->orphanage->courseBookings->where('status', 'ongoing')->count() }}
+        @if (Auth::user()->orphanage->donations != null)
+            Total Donasi Digalang = {{ Auth::user()->orphanage->donations->sum('amount') }}
+        @endif
+    @else
+    @endif
 
     {{-- Tabs --}}
     @if (Auth::user()->user_type == 'Pengurus Panti' && $hasOrphanage == false)
