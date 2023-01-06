@@ -209,14 +209,39 @@
 
                 <details open class="space-y-2">
                     <summary class="text-xl leading-8 font-semibold">Jadwal Kursus</summary>
-
+                    @if (count($tutorDayTimeRanges) > 0)
+                        <div>
+                            <span class="hidden lg:flex gap-2 pl-1 pr-2 py-1 font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                                    <title>Jumlah Jadwal Tutor</title>
+                                </svg>
+                                {{ count($tutorDayTimeRanges) }} Jadwal
+                            </span>
+                        </div>
+                    @endif
+                    @if (count($tutorDays) > 0)
+                        <div class="flex items-center justify-between">
+                            {{-- Schedule --}}
+                            <p class="text-xl leading-8 font-semibold">Pilih Hari</p>
+                            {{-- Dropdown Sort --}}
+                            <select id="sort_dailySchedule" name="sort_dailySchedule"
+                                wire:model="dailyScheduleDropdownSort"
+                                class="dropdown w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                                @foreach ($tutorDays as $item)
+                                    <option {{ $dailyScheduleDropdownSort == $item->day ? 'selected' : null }}>
+                                        {{ $item->day }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
                     <div class="overflow-x-auto shadow rounded">
                         <table class="min-w-full">
                             <thead class="bg-gray-500 text-white">
                                 <tr>
-                                    <th scope="col"
-                                        class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
-                                        No.</th>
                                     <th scope="col"
                                         class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-fit">
                                         Hari</th>
@@ -234,33 +259,32 @@
 
                             <tbody>
                                 @foreach ($tutorDayTimeRanges as $item)
-                                    <tr class="odd:bg-white even:bg-gray-100">
-                                        <td class="whitespace-nowrap px-3 py-4 w-fit">
-                                            {{ $loop->iteration }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4">
-                                            {{ $item->dayTimeRange->day->day }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4">
-                                            {{ $item->dayTimeRange->start_time }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4">
-                                            {{ $item->dayTimeRange->end_time }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 flex gap-2">
-                                            {{-- Hapus --}}
-                                            <a wire:click.prevent='deleteTutorDayTimeRange({{ $item->id }})'
-                                                class="cursor-pointer text-red-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6 text-red-500">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                                    <title>Hapus</title>
-                                                </svg>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @if ($item->dayTimeRange->day->day == $dailyScheduleDropdownSort)
+                                        <tr class="odd:bg-white even:bg-gray-100">
+                                            <td class="whitespace-nowrap px-3 py-4">
+                                                {{ $item->dayTimeRange->day->day }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4">
+                                                {{ $item->dayTimeRange->start_time }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4">
+                                                {{ $item->dayTimeRange->end_time }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 flex gap-2">
+                                                {{-- Hapus --}}
+                                                <a wire:click.prevent='deleteTutorDayTimeRange({{ $item->id }})'
+                                                    class="cursor-pointer text-red-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-6 h-6 text-red-500">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                        <title>Hapus</title>
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

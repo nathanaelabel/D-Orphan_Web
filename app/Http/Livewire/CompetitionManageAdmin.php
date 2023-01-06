@@ -108,21 +108,24 @@ class CompetitionManageAdmin extends Component
             'organizer.required' => 'Nama penyelenggara harus diisi',
         ]);
 
-        Competition::create([
-            'name' => $this->name,
-            'photo_url' => $this->photo_url,
-            'registration_start_date' => $this->registration_start_date,
-            'registration_start_hour' => $this->registration_start_hour,
-            'url' => $this->url,
-            'level' => $this->level,
-            'description' => $this->description,
-            'organizer' => $this->organizer,
-        ]);
+        if (count(Competition::where('name', $this->name)->where('photo_url', $this->photo_url)->where('registration_start_date', $this->registration_start_date)
+        ->where('registration_start_hour', $this->registration_start_hour)->where('url', $this->url)->where('level', $this->level)
+        ->where('description', $this->description)->where('organizer', $this->organizer)->get()) == 0) {
+            Competition::create([
+                'name' => $this->name,
+                'photo_url' => $this->photo_url,
+                'registration_start_date' => $this->registration_start_date,
+                'registration_start_hour' => $this->registration_start_hour,
+                'url' => $this->url,
+                'level' => $this->level,
+                'description' => $this->description,
+                'organizer' => $this->organizer,
+            ]);
 
-        // reset form fields
-        $this->reset();
-        $this->showForm = false;
-        // show success message
-        session()->flash('message', 'Data perlombaan berhasil ditambahkan.');
+            $this->reset();
+            $this->showForm = false;
+
+            session()->flash('message', 'Data perlombaan berhasil ditambahkan.');
+        }
     }
 }

@@ -43,7 +43,7 @@
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Deskripsi</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Tanggal Ditambahkan</th>
+                        Tanggal Permintaan</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Terakhir Diubah</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
@@ -80,7 +80,7 @@
                             </td>
 
                             <td class="whitespace-nowrap px-3 py-4">
-                                {{ $item->amount }}
+                              {{ 'Rp' . number_format($item->amount, 2, ',', '.') }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4">
                                 {{ $item->description }}
