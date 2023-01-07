@@ -111,7 +111,7 @@ class CourseBooking extends Component
     {
         Transaction::find($id)->userRequest()->update([
             'money' => Transaction::find($id)->userRequest->money + Transaction::find($id)->amount,
-                    ]);
+        ]);
 
         Transaction::find($id)->update([
             'status' => 'complete',

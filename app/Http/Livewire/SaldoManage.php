@@ -21,6 +21,7 @@ class SaldoManage extends Component
     public $keterangan;
     public $getStatus;
     public $amount;
+    public $description;
     public $oldTab;
     public $obj;
 
@@ -166,6 +167,7 @@ class SaldoManage extends Component
         if (auth()->user()->money >= $this->amount) {
             User::find(auth()->user()->id)->transactions()->create([
                 'amount' => $this->amount,
+                'description' => $this->description,
             ]);
         }
 

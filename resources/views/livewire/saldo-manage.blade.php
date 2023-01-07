@@ -85,14 +85,14 @@
                 <tr>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Status</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Nominal</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Deskripsi</th>
                     @if ($activeTab == 'Pembayaran Kursus')
                         <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                             Dari Panti</th>
                     @endif
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                        Nominal</th>
+                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
+                        Deskripsi</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Waktu Transaksi</th>
                     @if ($activeTab == 'Penarikan Saldo' && $tutorTransactionDropdownSort != 'canceled')
@@ -138,12 +138,20 @@
                                     </span>
                                 @endif
                             </td>
+                            @if ($activeTab == 'Pembayaran Kursus')
+                                <td class="whitespace-nowrap px-3 py-4">
+                                    <a href="{{ route('detail-user', $item['user_id']) }}"
+                                        class="text-blue-500 hover:text-blue-600">
+                                        {{ $item['from_panti'] }}
+                                    </a>
+                                </td>
+                            @endif
                             <td class="whitespace-nowrap px-3 py-4">
                                 {{ 'Rp' . number_format($item['amount'], 2, ',', '.') }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedTutorTransactionIndex !== $index)
-                                    {{ $item['description'] }}
+                                    <p class="truncate w-40">{{ $item['description'] }}</p>
                                 @else
                                     <x-input wire:model.defer="tutorTransactions.{{ $index }}.description">
                                         <x-slot:type>text</x-slot:type>
@@ -153,13 +161,6 @@
                                     </x-input>
                                 @endif
                             </td>
-                            @if ($activeTab == 'Pembayaran Kursus')
-                                <td class="whitespace-nowrap px-3 py-4">
-                                <a href="{{ route('detail-user', $item['user_id']) }}">
-                                    {{ $item['from_panti'] }}
-                                    </a>
-                                </td>
-                            @endif
                             <td class="whitespace-nowrap px-3 py-4">
                                 {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
                             </td>
@@ -171,7 +172,8 @@
                                             <a wire:click.prevent='openModalConfirmation({{ $index }}, "ubah")'
                                                 class="cursor-pointer text-blue-500">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                                                    stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6 text-blue-500">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
                                                     <title>Simpan</title>
@@ -182,9 +184,9 @@
                                     @if (is_null($editedTutorTransactionIndex))
                                         {{-- Ubah --}}
                                         <a wire:click.prevent='editTutorTransaction({{ $index }})'
-                                            class="cursor-pointer text-blue-500">
+                                            class="cursor-pointer text-green-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-500">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                                 <title>Ubah</title>
@@ -193,7 +195,7 @@
                                     @endif
                                     @if (is_null($editedTutorTransactionIndex))
                                         {{-- Cancel --}}
-                                        <a wire:click.prevent='openModalConfirmation({{ $index }}, "canceled")'
+                                        <a wire:click.prevent='openModalConfirmation({{ $index }}, "hapus")'
                                             class="cursor-pointer text-red-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
@@ -304,6 +306,17 @@
                                         <x-slot:placeholder>xxxxxx</x-slot:placeholder>
                                     </x-input>
                                 </div>
+                            </div>
+                            <div class="space-y-1">
+                                <x-label>
+                                    <x-slot:for>description</x-slot:for>
+                                    <x-slot:slot>Deskripsi Sewa Alat</x-slot:slot>
+                                </x-label>
+                                <span class="text-sm text-red-700">&#42;</span>
+                                <x-textarea wire:model="description">
+                                    <x-slot:maxlength>255</x-slot:maxlength>
+                                    <x-slot:placeholder>Masukkan deskripsi tarik saldo</x-slot:placeholder>
+                                </x-textarea>
                             </div>
                             <div class="text-sm text-red-700">
                                 <span>&#42;</span>

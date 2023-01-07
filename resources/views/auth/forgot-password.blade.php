@@ -44,7 +44,7 @@
 
                                         <div class="space-y-6">
                                             <div>
-                                                <x-jet-label for="email" value="{{ __('Email') }}" />
+                                                <x-jet-label for="email" value="{{ __('Surel') }}" />
                                                 <x-jet-input id="email" class="block mt-1 w-full" type="email"
                                                     name="email" :value="old('email')" required autofocus />
                                             </div>

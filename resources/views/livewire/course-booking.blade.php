@@ -19,14 +19,95 @@
         </div>
     </div>
     @if (Auth::user()->user_type == 'Pengurus Panti')
-        Total Pengeluaran Bulan Ini = Rp.
-        {{ number_format(Auth::user()->transactions->where('created_at', '>', \Carbon\Carbon::now()->month)->where('created_at', '<', \Carbon\Carbon::now()->addMonth(2)->month)->where('updated_at')->sum('amount'),0,',','.') }}
-        Total Murid terdaftar = {{ Auth::user()->orphanage->orphans->count() }}
-        Total Kursus Sedang Berjalan =
-        {{ Auth::user()->orphanage->courseBookings->where('status', 'ongoing')->count() }}
-        @if (Auth::user()->orphanage->donations != null)
-            Total Donasi Digalang = {{ Auth::user()->orphanage->donations->sum('amount') }}
-        @endif
+        <div class="flex flex-col space-y-4">
+            <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+                <x-dasbor.card>
+                    <x-slot:title>Donasi terkumpul</x-slot:title>
+                    <x-slot:icon>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                    </x-slot:icon>
+                    <x-slot:number>
+                        @if (Auth::user()->orphanage->donations != null)
+                            {{ 'Rp' . number_format(Auth::user()->orphanage->donations->sum('amount'), 2, ',', '.') }}
+                        @else
+                            {{ 'Rp0,00' }}
+                        @endif
+                    </x-slot:number>
+                </x-dasbor.card>
+                <x-dasbor.card>
+                    <x-slot:title>
+                        Pengeluaran @if (now()->format('F') == 'January')
+                            {{ 'Januari' }}
+                        @elseif(now()->format('F') == 'February')
+                            {{ 'Februari' }}
+                        @elseif(now()->format('F') == 'March')
+                            {{ 'Maret' }}
+                        @elseif(now()->format('F') == 'April')
+                            {{ 'April' }}
+                        @elseif(now()->format('F') == 'May')
+                            {{ 'Mei' }}
+                        @elseif(now()->format('F') == 'June')
+                            {{ 'Juni' }}
+                        @elseif(now()->format('F') == 'July')
+                            {{ 'Juli' }}
+                        @elseif(now()->format('F') == 'August')
+                            {{ 'Agustus' }}
+                        @elseif(now()->format('F') == 'September')
+                            {{ 'September' }}
+                        @elseif(now()->format('F') == 'October')
+                            {{ 'Oktober' }}
+                        @elseif(now()->format('F') == 'November')
+                            {{ 'November' }}
+                        @elseif(now()->format('F') == 'December')
+                            {{ 'Desember' }}
+                        @endif {{ now()->format('Y') }}
+                    </x-slot:title>
+                    <x-slot:icon>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 4.5l-15 15m0 0h11.25m-11.25 0V8.25" />
+                    </x-slot:icon>
+                    <x-slot:number>
+                        {{ 'Rp' .number_format(Auth::user()->transactions->where('created_at', '>', \Carbon\Carbon::now()->month)->where('created_at', '<', \Carbon\Carbon::now()->addMonth(2)->month)->where('updated_at')->sum('amount'),2,',','.') }}
+                    </x-slot:number>
+                </x-dasbor.card>
+                <x-dasbor.card>
+                    <x-slot:title>Peserta kursus terdaftar</x-slot:title>
+                    <x-slot:icon>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                    </x-slot:icon>
+                    <x-slot:number>{{ Auth::user()->orphanage->orphans->count() }}</x-slot:number>
+                </x-dasbor.card>
+                <x-dasbor.card>
+                    <x-slot:title>Kursus menunggu persetujuan</x-slot:title>
+                    <x-slot:icon>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </x-slot:icon>
+                    <x-slot:number>{{ Auth::user()->orphanage->courseBookings->where('status', 'pending')->count() }}
+                    </x-slot:number>
+                </x-dasbor.card>
+                <x-dasbor.card>
+                    <x-slot:title>Kursus sedang berlangsung</x-slot:title>
+                    <x-slot:icon>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </x-slot:icon>
+                    <x-slot:number>{{ Auth::user()->orphanage->courseBookings->where('status', 'ongoing')->count() }}
+                    </x-slot:number>
+                </x-dasbor.card>
+                <x-dasbor.card>
+                    <x-slot:title>Kursus telah diselesaikan</x-slot:title>
+                    <x-slot:icon>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </x-slot:icon>
+                    <x-slot:number>{{ Auth::user()->orphanage->courseBookings->where('status', 'complete')->count() }}
+                    </x-slot:number>
+                </x-dasbor.card>
+            </div>
+        </div>
     @else
     @endif
 
@@ -125,7 +206,6 @@
                     <tbody>
                         @foreach ($courseBooking as $item)
                             <tr class="odd:bg-white even:bg-gray-100">
-
                                 <td class="whitespace-nowrap px-3 py-4">
                                     @if ($activeTab == 'pending')
                                         {{ date_format(date_create($item->created_at), 'd/m/Y') }}
@@ -133,7 +213,6 @@
                                         {{ date_format(date_create($item->updated_at), 'd/m/Y') }}
                                     @endif
                                 </td>
-
                                 <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
                                     @if (Auth::user()->user_type == 'Tutor')
                                         <a
@@ -143,7 +222,6 @@
                                             href="{{ route('detail-user', $item->course->tutor->user->id) }}">{{ $item->course->tutor->user->name }}</a>
                                     @endif
                                 </td>
-
                                 <td class="whitespace-nowrap px-3 py-4">
                                     <div class="flex items-center gap-2">
                                         <span

@@ -1,6 +1,5 @@
 @section('title', 'Kelola Kursus')
 
-
 <div class="space-y-8">
     <div class="flex items-center justify-between">
         <div>
@@ -62,28 +61,16 @@
         <table class="min-w-full">
             <thead class="bg-gray-500 text-white">
                 <tr>
-                    {{-- <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Kategori Kursus</th> --}}
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Nama Kursus</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Batas Jumlah Peserta</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Tipe Kehadiran</th>
-                    {{-- <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Lokasi</th> --}}
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Tarif Per Jam</th>
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
                         Harga Sewa Alat</th>
-                    {{-- <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Deskripsi Sewa Alat</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold">
-                        Deskripsi Kursus</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                        Terakhir Diubah</th>
-                    <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold w-full">
-                        Tanggal Ditambahkan</th> --}}
                     <th scope="col" class="sticky top-0 z-10 px-3 py-3.5 text-left font-semibold"></th>
                 </tr>
             </thead>
@@ -106,28 +93,6 @@
                 <tbody>
                     @foreach ($coursesTutors as $index => $item)
                         <tr class="odd:bg-white even:bg-gray-100">
-                            {{-- <td class="whitespace-nowrap px-3 py-4 w-full">
-                                @if ($editedCourseTutorIndex !== $index)
-                                    {{ $tutorSkills[$index]['name'] }}
-                                @elseif($editedCourseTutorIndex === $index)
-                                    <div>
-                                        <select id="sort_category_kelola" name="sort_category_kelola"
-                                            wire:model="skillIdModel"
-                                            class="dropdown
-                                        w-fit rounded-md shadow-sm pl-3 pr-10 font-medium border-transparent
-                                        focus:border-transparent bg-blue-500 text-white focus:ring focus:ring-blue-500
-                                        focus:ring-opacity-50 cursor-pointer">
-
-                                            @foreach ($allSkills as $itemAllSkill)
-                                                <option value="{{ $itemAllSkill->id }}"
-                                                    {{ $tutorSkills[$index]['id'] == $itemAllSkill->id ? 'selected' : null }}>
-                                                    {{ $itemAllSkill->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
-                            </td> --}}
                             <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCourseTutorIndex !== $index)
                                     {{ $item['name'] }}
@@ -185,22 +150,6 @@
                                     @endif
                                 </div>
                             </td>
-                            {{-- <td class="whitespace-nowrap px-3 py-4 w-full">
-                                @if ($editedCourseTutorIndex !== $index)
-                                    @if ($item['location'] == null)
-                                        {{ '-' }}
-                                    @else
-                                        {{ $item['location'] }}
-                                    @endif
-                                @else
-                                    <x-input wire:model.defer="coursesTutors.{{ $index }}.location">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>location</x-slot:name>
-                                        <x-slot:id>location</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
-                                    </x-input>
-                                @endif
-                            </td> --}}
                             <td class="whitespace-nowrap px-3 py-4">
                                 @if ($editedCourseTutorIndex !== $index)
                                     {{ 'Rp' . number_format($item['hourly_price'], 2, ',', '.') }}
@@ -225,36 +174,6 @@
                                     </x-input>
                                 @endif
                             </td>
-                            {{-- <td class="whitespace-nowrap px-3 py-4 w-full">
-                                @if ($editedCourseTutorIndex !== $index)
-                                    {{ $item['tool_description'] }}
-                                @else
-                                    <x-input wire:model.defer="coursesTutors.{{ $index }}.tool_description">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>tool_description</x-slot:name>
-                                        <x-slot:id>tool_description</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
-                                    </x-input>
-                                @endif
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
-                                @if ($editedCourseTutorIndex !== $index)
-                                    {{ $item['description'] }}
-                                @else
-                                    <x-input wire:model.defer="coursesTutors.{{ $index }}.description">
-                                        <x-slot:type>text</x-slot:type>
-                                        <x-slot:name>description</x-slot:name>
-                                        <x-slot:id>description</x-slot:id>
-                                        <x-slot:placeholder></x-slot:placeholder>
-                                    </x-input>
-                                @endif
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
-                                {{ date_format(date_create($item['updated_at']), 'l, d F Y, H:i A') }}
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 w-full">
-                                {{ date_format(date_create($item['created_at']), 'l, d F Y, H:i A') }}
-                            </td> --}}
                             <td class="whitespace-nowrap px-3 py-4 flex gap-2">
                                 @if (is_null($editedCourseTutorIndex))
                                     {{-- Selengkapnya --}}
@@ -268,46 +187,6 @@
                                     </button>
                                 @endif
                             </td>
-                            {{-- <td class="whitespace-nowrap px-3 py-4 w-full flex gap-2">
-                                @if (!is_null($editedCourseTutorIndex))
-                                    @if ($editedCourseTutorIndex == $index)
-                                        Simpan
-                                        <a wire:click.prevent='openModalConfirmation({{ $index }}, "ubah")'
-                                            class="cursor-pointer text-blue-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-                                                <title>Simpan</title>
-                                            </svg>
-                                        </a>
-                                    @endif
-                                @endif
-                                @if (is_null($editedCourseTutorIndex))
-                                    Ubah
-                                    <a wire:click.prevent='editCourseTutor({{ $index }})'
-                                        class="cursor-pointer text-green-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-500">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                            <title>Ubah</title>
-                                        </svg>
-                                    </a>
-                                @endif
-                                @if (is_null($editedCourseTutorIndex))
-                                    Hapus
-                                    <a wire:click.prevent='openModalConfirmation({{ $index }}, "hapus")'
-                                        class="cursor-pointer text-red-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                            <title>Hapus</title>
-                                        </svg>
-                                    </a>
-                                @endif
-                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>

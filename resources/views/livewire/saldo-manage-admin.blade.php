@@ -76,14 +76,15 @@
                         <tr class="odd:bg-white even:bg-gray-100">
 
                             <td class="whitespace-nowrap px-3 py-4 text-blue-500 hover:text-blue-600">
-                                <a href="{{ route('detail-user', $item->userRequest->id) }}">{{ $item->userRequest->name }}</a>
+                                <a
+                                    href="{{ route('detail-user', $item->userRequest->id) }}">{{ $item->userRequest->name }}</a>
                             </td>
 
                             <td class="whitespace-nowrap px-3 py-4">
-                              {{ 'Rp' . number_format($item->amount, 2, ',', '.') }}
+                                {{ 'Rp' . number_format($item->amount, 2, ',', '.') }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4">
-                                {{ $item->description }}
+                                <p class="truncate w-40">{{ $item->description }}</p>
                             </td>
 
                             <td class="whitespace-nowrap px-3 py-4">
