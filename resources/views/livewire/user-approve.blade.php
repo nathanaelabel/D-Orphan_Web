@@ -27,7 +27,7 @@
                             @if (auth()->user()->user_type == 'Pengurus Panti')
                                 Nama Panti
                             @else
-                                Rekening
+                                Rekening Tutor
                             @endif
                         </x-slot:slot>
                     </x-label>
@@ -56,7 +56,7 @@
                             @if (auth()->user()->user_type == 'Pengurus Panti')
                                 Jenis Kelamin Pengurus Panti
                             @else
-                                Jenis Kelamin
+                                Jenis Kelamin Tutor
                             @endif
                         </x-slot:slot>
                     </x-label>
@@ -82,7 +82,13 @@
                 <div class="space-y-1">
                     <x-label>
                         <x-slot:for>phone_number</x-slot:for>
-                        <x-slot:slot>Nomor Telepon Panti</x-slot:slot>
+                        <x-slot:slot>
+                        @if (auth()->user()->user_type == 'Pengurus Panti')
+                                Nomor Telepon Panti
+                            @else
+                                Nomor Telepon Tutor
+                            @endif
+                        </x-slot:slot>
                     </x-label>
 
                     <x-input wire:model="phone_number">
@@ -100,7 +106,7 @@
                             @if (auth()->user()->user_type == 'Pengurus Panti')
                                 Alamat Panti
                             @else
-                                Alamat
+                                Alamat Tutor
                             @endif
                         </x-slot:slot>
                     </x-label>
@@ -120,7 +126,7 @@
                             @if (auth()->user()->user_type == 'Pengurus Panti')
                                 Deskripsi Panti
                             @else
-                                Deskripsi
+                                Deskripsi Tutor
                             @endif
                         </x-slot:slot>
                     </x-label>
