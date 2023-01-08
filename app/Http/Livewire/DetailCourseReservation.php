@@ -22,7 +22,7 @@ class DetailCourseReservation extends Component
     public $jam_mulai;
     public $jam_berakhir;
     public $hari_mulai;
-
+    public $error;
     public $studentList;
     public $course;
     public $studentNotRegistered;
@@ -36,6 +36,15 @@ class DetailCourseReservation extends Component
     public function render()
     {
         $this->totalPrice = $this->course->hourly_price * (int)$this->meetingCount  * (int)$this->studentList->count();
+        if($this->totalPrice > Auth::user()->money){
+            $this->error = 'Saldo anda tidak cukup';
+        }else if($this->meetingCount < 1){
+            $this->error = 'Jumlah pertemuan tidak boleh kurang dari 1';
+        }else if($this->dayCount<1){
+            $this->error = 'Jumlah jadwal tidak boleh kurang dari 1';
+        }else{
+            $this->error = '';
+        }
         return view('livewire.detail-course-reservation');
     }
 
@@ -85,6 +94,10 @@ class DetailCourseReservation extends Component
     }
     public function save()
     {
+        if($this->totalPrice > Auth::user()->money){
+            $this->error = 'Saldo anda tidak cukup';
+            return;
+        }
         $this->validate([
             'meetingCount' => 'required|numeric|min:1',
             'dayCount' => 'required|numeric|min:1',

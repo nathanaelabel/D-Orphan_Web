@@ -202,6 +202,7 @@
                             </div>
                         </div>
                         Harga Total = {{ $totalPrice }}
+                        <div class="text-red-500">{{$error}}</div>
                         <div>
                             <x-primary-button wire:click="save">{{ __('Kirim Reservasi') }}</x-primary-button>
                         </div>
@@ -211,3 +212,4 @@
         </div>
     </div>
 </div>
+
