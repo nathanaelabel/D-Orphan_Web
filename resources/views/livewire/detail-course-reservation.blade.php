@@ -214,7 +214,7 @@
                             </div>
                         </div>
                     </div>
-                    Harga Total = {{ 'Rp' . number_format($totalPrice), 2, ',', '.' }}
+                    Harga Total = {{ 'Rp' . number_format($totalPrice, 2, ',', '.') }}
                     <div class="text-red-500">{{ $error }}</div>
                     <div>
                         <x-primary-button wire:click="save">{{ __('Kirim Reservasi') }}</x-primary-button>
