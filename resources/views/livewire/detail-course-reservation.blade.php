@@ -139,16 +139,17 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6 text-red-500 cursor-pointer">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M6 18L18 6M6 6l12 12" />
-                                                    <title>Hapus</title>
-                                                </svg>
+                                                <a wire:click="deleteDay" class="cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-6 h-6 text-red-500 cursor-pointer">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6 18L18 6M6 6l12 12" />
+                                                        <title>Hapus</title>
+                                                    </svg>
+                                                </a>
                                             </div>
                                         </div>
-
                                     @endfor
                                 </div>
                             </div>
@@ -190,26 +191,39 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div>
-
-                                    <ol class="list-decimal list-inside">
-                                        @foreach ($studentList as $item)
-                                            <li>{{ $item->name }}</li>
-                                        @endforeach
-
-                                    </ol>
+                                <div class="flex justify-between">
+                                    <div>
+                                        <ol class="list-decimal list-inside">
+                                            @foreach ($studentList as $item)
+                                                <div>
+                                                    <li>{{ $item->name }}</li>
+                                                </div>
+                                                <div>
+                                                    <a wire:click="deleteStudent" class="cursor-pointer">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                            stroke-width="1.5" stroke="currentColor"
+                                                            class="w-6 h-6 text-red-500 cursor-pointer">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M6 18L18 6M6 6l12 12" />
+                                                            <title>Hapus</title>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        </ol>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        Harga Total = {{ $totalPrice }}
-                        <div class="text-red-500">{{$error}}</div>
-                        <div>
-                            <x-primary-button wire:click="save">{{ __('Kirim Reservasi') }}</x-primary-button>
-                        </div>
                     </div>
-                </form>
+                    {{ 'Rp' . number_format($totalPrice), 2, ',', '.' }}
+                    <div class="text-red-500">{{ $error }}</div>
+                    <div>
+                        <x-primary-button wire:click="save">{{ __('Kirim Reservasi') }}</x-primary-button>
+                    </div>
             </div>
+            </form>
         </div>
     </div>
 </div>
-
+</div>
