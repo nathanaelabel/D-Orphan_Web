@@ -84,7 +84,16 @@ class DetailCourseReservation extends Component
     {
         ++$this->dayCount;
     }
+    public function deleteDay()
+    {
+        --$this->dayCount;
+    }
 
+    public function deleteStudent($index){
+        $this->studentList->forget($index);
+        $this->studentNotRegistered = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList->pluck('id'));
+        $this->currentStudent = $this->studentNotRegistered->first()->id;
+    }
     public function addStudent($id)
     {
         $this->studentList->push(Orphan::find($id));
