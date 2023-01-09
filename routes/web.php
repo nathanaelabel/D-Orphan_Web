@@ -31,11 +31,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\PaymentCallbackController; // => letakkan dibagian atas
- 
+use Illuminate\Support\Facades\Artisan;
+
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
 Route::get('/', function () {
     return view('home');
 })->name('/');
+
+Route::get('foo', function(){
+    Artisan::call('storage:link', []);
+    return 'success';
+});
 
 Route::get('/donasi', ListOrphanage::class)->name('donasi');
 Route::get('/detail-user/{user_id}', DetailUser::class)->name('detail-user');
