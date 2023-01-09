@@ -76,7 +76,7 @@ class DetailCourseReservation extends Component
         if (Auth::user()->orphanage->orphans->count() != 0) {
             $this->currentStudent = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList)->first()->id;
             $this->studentNotRegistered = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList);
-        }else{
+        } else {
             $this->currentStudent = null;
             $this->studentNotRegistered = [];
         }
@@ -101,13 +101,19 @@ class DetailCourseReservation extends Component
         $this->studentNotRegistered = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList->pluck('id'));
         $this->currentStudent = $this->studentNotRegistered->first()->id;
     }
+
     public function addStudent($id)
     {
         $this->studentList->push(Orphan::find($id));
         $this->studentNotRegistered = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList->pluck('id'));
-
-        $this->currentStudent = $this->studentNotRegistered->first()->id;
+        if ($this->studentNotRegistered->count() != 0) {
+            $this->currentStudent = $this->studentNotRegistered->first()->id;
+        } else {
+            $this->currentStudent = null;
+            $this->studentList = new Collection();
+        }
     }
+
     public function save()
     {
         if ($this->totalPrice > Auth::user()->money) {
@@ -126,7 +132,6 @@ class DetailCourseReservation extends Component
                 'status' => 'pending',
                 'description' => 'Pemesanan kursus ' . $this->course->name,
                 'to_user_id' => $this->course->tutor->user->id,
-
             ]
         );
         User::find(Auth::user()->id)->decrement('money', $t->amount);
