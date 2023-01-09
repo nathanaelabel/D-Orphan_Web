@@ -37,13 +37,13 @@ class DetailCourseReservation extends Component
     public function render()
     {
         $this->totalPrice = $this->course->hourly_price * (int)$this->meetingCount  * (int)$this->studentList->count();
-        if($this->totalPrice > Auth::user()->money){
+        if ($this->totalPrice > Auth::user()->money) {
             $this->error = 'Saldo anda tidak cukup';
-        }else if($this->meetingCount < 1){
+        } else if ($this->meetingCount < 1) {
             $this->error = 'Jumlah pertemuan tidak boleh kurang dari 1';
-        }else if($this->dayCount<1){
+        } else if ($this->dayCount < 1) {
             $this->error = 'Jumlah jadwal tidak boleh kurang dari 1';
-        }else{
+        } else {
             $this->error = '';
         }
         return view('livewire.detail-course-reservation');
@@ -73,9 +73,14 @@ class DetailCourseReservation extends Component
         }
 
         $this->studentList = new EloquentCollection();
-        $this->currentStudent = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList)->first()->id;
+        if (Auth::user()->orphanage->orphans->count() != 0) {
+            $this->currentStudent = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList)->first()->id;
+            $this->studentNotRegistered = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList);
+        }else{
+            $this->currentStudent = null;
+            $this->studentNotRegistered = [];
+        }
         $this->course = Course::find($course_id);
-        $this->studentNotRegistered = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList);
         $this->days = Day::all();
         $this->hari_mulai = [];
         $this->dayCount = 0;
@@ -90,7 +95,8 @@ class DetailCourseReservation extends Component
         --$this->dayCount;
     }
 
-    public function deleteStudent($index){
+    public function deleteStudent($index)
+    {
         $this->studentList->forget($index);
         $this->studentNotRegistered = Auth::user()->orphanage->orphans->whereNotIn('id', $this->studentList->pluck('id'));
         $this->currentStudent = $this->studentNotRegistered->first()->id;
@@ -104,10 +110,10 @@ class DetailCourseReservation extends Component
     }
     public function save()
     {
-        if($this->totalPrice > Auth::user()->money){
+        if ($this->totalPrice > Auth::user()->money) {
             $this->error = 'Saldo anda tidak cukup';
             return;
-        }else{
+        } else {
         }
         $this->validate([
             'meetingCount' => 'required|numeric|min:1',
@@ -123,7 +129,7 @@ class DetailCourseReservation extends Component
 
             ]
         );
-        User::find(Auth::user()->id)->decrement('money',$t->amount);
+        User::find(Auth::user()->id)->decrement('money', $t->amount);
         $cb = CourseBooking::create([
             'course_id' => $this->course->id,
             'orphanage_id' => Auth::user()->orphanage->id,
@@ -151,6 +157,6 @@ class DetailCourseReservation extends Component
                 'day_time_range_id' => $dtr->id,
             ]);
         }
-        return redirect()->route('detail-course-booking',$cb->id);
+        return redirect()->route('detail-course-booking', $cb->id);
     }
 }
