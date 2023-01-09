@@ -12,10 +12,11 @@
                     @auth
                         <a href="{{ route('dasbor') }}"
                             class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('dasbor') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Dasbor</a>
-
                         @if (Auth::user()->user_type == 'Admin')
                             <a href="{{ route('kelola-competition-admin') }}"
                                 class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-competition-admin') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Lomba</a>
+                            <a href="{{ route('kelola-category-admin') }}"
+                                class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-category-admin') ? 'border-blue-500 text-blue-500 font-medium border-b-2' : '' }}">Kategori</a>
                         @else
                             @if (Auth::user()->user_type == 'Pengurus Panti')
                                 <a href="{{ route('kelola-panti') }}"
@@ -65,8 +66,9 @@
                                 @if (Auth::user()->profile_photo_path != null)
                                     {{-- <img src="/storage/{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
                                         class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}"> --}}
-                                    <img src="{{ asset('storage/'.Auth::user()->profile_photo_path)}}" alt="{{ Auth::user()->name }}"
-                                        class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
+                                    <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
+                                        alt="{{ Auth::user()->name }}" class="h-8 w-8 rounded-full"
+                                        title="{{ Auth::user()->user_type }}">
                                 @else
                                     <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"
                                         class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
@@ -151,6 +153,8 @@
                 @if (Auth::user()->user_type == 'Admin')
                     <a href="{{ route('kelola-competition-admin') }}"
                         class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-competition-admin') ? 'text-blue-500 font-semibold' : '' }}">Lomba</a>
+                    <a href="{{ route('kelola-category-admin') }}"
+                        class="text-gray-500 border-transparent hover:text-blue-500 active:text-blue-500 inline-flex items-center px-1 pt-1 border-b-2 font-medium {{ request()->routeIs('kelola-category-admin') ? 'text-blue-500 font-semibold' : '' }}">Kategori</a>
                 @else
                     @if (Auth::user()->user_type == 'Pengurus Panti')
                         <a href="{{ route('kelola-panti') }}"

@@ -116,7 +116,4 @@
             </div>
         @endif
     </div>
-
-    {{-- Pagination --}}
-    {{-- <x-pagination></x-pagination> --}}
 </div>
