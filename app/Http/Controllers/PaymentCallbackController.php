@@ -9,44 +9,18 @@ use App\Services\Midtrans\CallbackService;
 
 class PaymentCallbackController extends Controller
 {
-    public function receive()
+    public function receive(Request $request)
     {
-        $callback = new CallbackService;
-
-        if ($callback->isSignatureKeyVerified()) {
-            $notification = $callback->getNotification();
-            $order = $callback->getOrder();
-
-            if ($callback->isSuccess()) {
-                Transaction::where('id', $order->id)->update([
-                    'status' => 'complete',
+        $serverKey = config('midtrans.server_key');
+        $hashed = hash("sha512",$request->order_id.$request->status_code.$request->gross_amount.$serverKey);
+        if($hashed == $request->signature_key){
+            if($request->transaction_status=='capture'){
+                $order = Transaction::find($request->order_id);
+                $order->update([
+                    'status' => 'complete'
                 ]);
-                Transaction::find($order->transaction_id)->user->increment('money',Transaction::find($order->transaction_id)->amount);
+                $order->user->increment('money', $order->amount);
             }
-
-            if ($callback->isExpire()) {
-                Transaction::where('id', $order->id)->update([
-                    'status' => 'canceled',
-                ]);
-            }
-
-            if ($callback->isCancelled()) {
-                Transaction::where('id', $order->id)->update([
-                    'status' => 'canceled',
-                ]);
-            }
-
-            return response()
-                ->json([
-                    'success' => true,
-                    'message' => 'Notifikasi berhasil diproses',
-                ]);
-        } else {
-            return response()
-                ->json([
-                    'error' => true,
-                    'message' => 'Signature key tidak terverifikasi',
-                ], 403);
         }
     }
 }
