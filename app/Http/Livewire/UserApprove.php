@@ -58,6 +58,18 @@ class UserApprove extends Component
     {
         if (count(TutorDayTimeRange::where('tutor_id', auth()->user()->tutor->id)->get()) > 1) {
             TutorDayTimeRange::find($index)->delete();
+
+            if (auth()->user()->user_type == 'Tutor') {
+                $this->tutorDayTimeRanges = User::find(auth()->user()->id)->tutor->tutorDayTimeRanges;
+
+                $getIdTutorDayTimeRanges = TutorDayTimeRange::where('tutor_id', auth()->user()->tutor->id)->pluck('day_time_range_id')->toArray();
+                $getIdDayTimeRanges = DayTimeRange::whereIn('id', $getIdTutorDayTimeRanges)->pluck('day_id');
+                $this->tutorDays = Day::whereIn('id', $getIdDayTimeRanges)->get();
+
+                if (count($this->tutorDays) > 0) {
+                    $this->setDailyScheduleDropwdownSort($this->tutorDays->first()->day);
+                }
+            }
         }
     }
 
