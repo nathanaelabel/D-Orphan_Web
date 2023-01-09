@@ -111,7 +111,7 @@
                             d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                     </x-slot:icon>
                     <x-slot:number>
-                        {{ 'Rp' .number_format(App\Models\Transaction::whereIn('id',App\Models\CourseBooking::whereIn('course_id', App\Models\Course::where('tutor_id', Auth::user()->tutor->id)->pluck('id'))->where('status', 'complete')->pluck('transaction_id'))->whereMonth('updated_at', \Carbon\Carbon::now()->month)->sum('amount')) }}
+                        {{ 'Rp' .number_format(App\Models\Transaction::whereIn('id',App\Models\CourseBooking::whereIn('course_id', App\Models\Course::where('tutor_id', Auth::user()->tutor->id)->pluck('id'))->where('status', 'complete')->pluck('transaction_id'))->whereMonth('updated_at', \Carbon\Carbon::now()->month)->sum('amount'),2,',','.') }}
                     </x-slot:number>
                 </x-dasbor.card>
                 <x-dasbor.card>
