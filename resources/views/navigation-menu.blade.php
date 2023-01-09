@@ -65,8 +65,14 @@
                                 @if (Auth::user()->profile_photo_path != null)
                                     {{-- <img src="/storage/{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}"
                                         class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}"> --}}
+                                        @if (str_contains(Auth::user()->profile_photo_path, 'https://'))
+                                        <img src="{{Auth::user()->profile_photo_path}}" alt="{{ Auth::user()->name }}"
+                                        class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
+                                        @else
                                     <img src="{{ asset('storage/'.Auth::user()->profile_photo_path)}}" alt="{{ Auth::user()->name }}"
                                         class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
+                                        @endif
+                                        
                                 @else
                                     <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"
                                         class="h-8 w-8 rounded-full" title="{{ Auth::user()->user_type }}">
