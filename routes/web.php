@@ -1,24 +1,24 @@
 <?php
 
-use App\Http\Controllers\TransactionController;
-use App\Http\Livewire\CompetitionManageAdmin;
-use App\Http\Livewire\CompetitionRecommendation;
-use App\Http\Livewire\CourseCategory;
-use App\Http\Livewire\CourseBooking;
-use App\Http\Livewire\CourseManage;
-use App\Http\Livewire\CourseTutor;
-use App\Http\Livewire\DetailCompetitionManageAdmin;
-use App\Http\Livewire\DetailCompetitionRecommendation;
-use App\Http\Livewire\DetailCourse;
-use App\Http\Livewire\DetailCourseBooking;
-use App\Http\Livewire\DetailCourseManage;
 use App\Http\Livewire\DetailUser;
-use App\Http\Livewire\DonationDelivery;
-use App\Http\Livewire\KelolaPantiAsuhan;
-use App\Http\Livewire\ListOrphanage;
+use App\Http\Livewire\CourseTutor;
 use App\Http\Livewire\SaldoManage;
 use App\Http\Livewire\UserApprove;
+use App\Http\Livewire\CourseManage;
+use App\Http\Livewire\DetailCourse;
+use App\Http\Livewire\CourseBooking;
+use App\Http\Livewire\ListOrphanage;
+use App\Http\Livewire\CourseCategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\DonationDelivery;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Livewire\KelolaPantiAsuhan;
+use App\Http\Livewire\DetailCourseManage;
+use App\Http\Livewire\CategoryManageAdmin;
+use App\Http\Livewire\DetailCourseBooking;
+use App\Http\Livewire\CompetitionManageAdmin;
+use App\Http\Controllers\TransactionController;
+use App\Http\Livewire\CompetitionRecommendation;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,17 +30,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Livewire\DetailCompetitionManageAdmin;
+use App\Http\Livewire\DetailCompetitionRecommendation;
 use App\Http\Controllers\PaymentCallbackController; // => letakkan dibagian atas
-use Illuminate\Support\Facades\Artisan;
 
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
 Route::get('/', function () {
     return view('home');
 })->name('/');
 
-
-
-Route::get('foo', function(){
+Route::get('foo', function () {
     Artisan::call('storage:link', []);
     return 'success';
 });
@@ -73,5 +72,6 @@ Route::middleware([
     })->name('detail-reservation');
     Route::get('/kelola-competition-admin', CompetitionManageAdmin::class)->name('kelola-competition-admin');
     Route::get('/kelola-competition-admin/{competition_id}', DetailCompetitionManageAdmin::class)->name('detail-competition-admin');
+    Route::get('/kelola-category-admin', CategoryManageAdmin::class)->name('kelola-category-admin');
     Route::get('/kelengkapan-data', UserApprove::class)->name('user-approve');
 });
