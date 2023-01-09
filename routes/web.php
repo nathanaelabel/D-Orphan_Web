@@ -30,7 +30,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use App\Http\Controllers\PaymentCallbackController; // => letakkan dibagian atas
+ 
+Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
 Route::get('/', function () {
     return view('home');
 })->name('/');

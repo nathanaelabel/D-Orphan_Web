@@ -87,8 +87,8 @@ class DetailCourseBooking extends Component
     public function complete($nameTab)
     {
         $this->courseBooking->status = 'complete';
-        Auth::user()->money = Auth::user()->money + $this->courseBooking->transaction->amount;
-        Auth::user()->save();
+        auth()->user->money = Auth::user()->money + $this->courseBooking->transaction->amount;
+        auth()->user->save();
         $this->courseBooking->save();
 
         return redirect()->route('dasbor', ['nameTab' => $nameTab]);
