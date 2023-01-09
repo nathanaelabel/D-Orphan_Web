@@ -40,7 +40,9 @@ class UserApprove extends Component
             $getIdDayTimeRanges = DayTimeRange::whereIn('id', $getIdTutorDayTimeRanges)->pluck('day_id');
             $this->tutorDays = Day::whereIn('id', $getIdDayTimeRanges)->get();
             if (!$this->dailyScheduleDropdownSort) {
-                $this->setDailyScheduleDropwdownSort($this->tutorDays->first()->day);
+                if (count($this->tutorDays) > 0) {
+                    $this->setDailyScheduleDropwdownSort($this->tutorDays->first()->day);
+                }
             }
         }
 
