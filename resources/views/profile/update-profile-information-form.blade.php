@@ -27,13 +27,16 @@
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
                     @if (Auth::user()->profile_photo_path != null)
-                        {{-- <img src="/storage/{{ $this->user->profile_photo_path }}" alt="{{ $this->user->name }}"
-                            class="rounded-full h-20 w-20 object-cover"> --}}
-                        <img src="{{ $this->user->profile_photo_path }}" alt="{{ $this->user->name }}"
-                            class="rounded-full h-20 w-20 object-cover">
+                        @if (str_contains(Auth::user()->profile_photo_path, 'https://'))
+                            <img src="{{ Auth::user()->profile_photo_path }}" alt="{{ $this->user->name }}"
+                                class="rounded-full h-20 w-20 object-cover">
+                        @else
+                            <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
+                                alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
+                        @endif
                     @else
-                        <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}"
-                            class="rounded-full h-20 w-20 object-cover">
+                    <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ $this->user->name }}"
+                                class="rounded-full h-20 w-20 object-cover">
                     @endif
                 </div>
 

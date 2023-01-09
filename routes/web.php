@@ -38,6 +38,8 @@ Route::get('/', function () {
     return view('home');
 })->name('/');
 
+
+
 Route::get('foo', function(){
     Artisan::call('storage:link', []);
     return 'success';
