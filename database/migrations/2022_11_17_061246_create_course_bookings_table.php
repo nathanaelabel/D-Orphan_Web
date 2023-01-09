@@ -28,7 +28,13 @@ return new class () extends Migration {
             $table->foreign('orphanage_id')->references('id')->on('orphanages')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->enum('status', ['pending', 'ongoing', 'complete', 'canceled']);
+            $table->enum('status', ['pending', 'ongoing', 'complete', 'canceled', 'confirmed']);
+            //Pending --> Uang panti sudah dipotong, tapi masih bisa kembali kalau cancel
+            //Canceled --> telah di cancel, uang kembali jika status masih pending. 
+            //Ongoing --> Uang panti sudah dipotong, tidak bisa kembali
+            //complete--> Tutor sudah selesai mengajar, uang belum diserahkan, panti bisa lapor jika tutor curang
+            //confirmed --> Tutor sudah selesai mengajar, uang sudah diserahkan, panti tidak bisa protes. 
+            
             $table->string('location')->nullable();
             $table->timestamps();
         });

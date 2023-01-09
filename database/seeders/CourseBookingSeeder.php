@@ -32,6 +32,8 @@ class CourseBookingSeeder extends Seeder
                 $status = 'complete'; // saldo PA berkurang
             } elseif ($courseBooking->status == 'canceled') {
                 $status = 'canceled'; // saldo PA dikembalikan
+            } elseif($courseBooking->status == 'complete'){
+                $status = 'complete'; // saldo PA berkurang
             } else {
                 $status = 'pending'; // saldo PA belum berkurang
             }

@@ -10,6 +10,7 @@ use App\Models\DayTimeRange;
 use App\Models\Orphan;
 use App\Models\OrphanCourseBooking;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -106,6 +107,7 @@ class DetailCourseReservation extends Component
         if($this->totalPrice > Auth::user()->money){
             $this->error = 'Saldo anda tidak cukup';
             return;
+        }else{
         }
         $this->validate([
             'meetingCount' => 'required|numeric|min:1',
@@ -121,6 +123,7 @@ class DetailCourseReservation extends Component
 
             ]
         );
+        User::find(Auth::user()->id)->decrement('money',$t->amount);
         $cb = CourseBooking::create([
             'course_id' => $this->course->id,
             'orphanage_id' => Auth::user()->orphanage->id,
@@ -148,5 +151,6 @@ class DetailCourseReservation extends Component
                 'day_time_range_id' => $dtr->id,
             ]);
         }
+        return redirect()->route('detail-course-booking',$cb->id);
     }
 }

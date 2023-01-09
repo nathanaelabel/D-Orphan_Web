@@ -54,7 +54,7 @@
                                     <div class="space-y-1">
                                         <x-label>
                                             <x-slot:for>lokasi_kursus_luring</x-slot:for>
-                                            <x-slot:slot>Lokasi Kursus Luring</x-slot:slot>
+                                            <x-slot:slot>Lokasi Kursus Luring (Bisa isi online, jika kosong maka akan dilakukan di alamat kursus tutor)</x-slot:slot>
                                         </x-label>
                                         <x-input wire:model="location">
                                             <x-slot:type>text</x-slot:type>
@@ -197,7 +197,7 @@
                                             @foreach ($studentList as $item)
                                                 <div class="flex justify-between">
                                                     <li>{{ $item->name }}</li>
-                                                    <a wire:click="deleteStudent" class="cursor-pointer">
+                                                    <a wire:click="deleteStudent({{$loop->iteration -1}})" class="cursor-pointer">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                             class="w-6 h-6 text-red-500 cursor-pointer">

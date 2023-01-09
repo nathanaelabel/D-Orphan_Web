@@ -6,6 +6,7 @@ use App\Models\CourseBooking;
 use App\Models\CourseBookingDayTimeRange;
 use App\Models\Day;
 use App\Models\DayTimeRange;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class DetailCourseBooking extends Component
@@ -23,7 +24,7 @@ class DetailCourseBooking extends Component
         $this->days = Day::whereIn('id', $getIdDayTimeRanges)->get();
 
         $this->dayTimeRanges = DayTimeRange::whereIn('id', $getIdCourseBookingDayTimeRanges)
-        ->where('day_id', Day::where('day', $this->courseBookingScheduleDropdownSort)->first()->id)->get();
+            ->where('day_id', Day::where('day', $this->courseBookingScheduleDropdownSort)->first()->id)->get();
 
         return view('livewire.detail-course-booking');
     }
@@ -64,7 +65,12 @@ class DetailCourseBooking extends Component
 
     public function decline($nameTab)
     {
+        if ($this->courseBooking->status == 'pending') {
+            $this->courseBooking->orphanage->user->increment('money', $this->courseBooking->transaction->amount);
+        }
         $this->courseBooking->status = 'canceled';
+        $this->courseBooking->transaction->status = 'canceled';
+
         $this->courseBooking->save();
 
         return redirect()->route('dasbor', ['nameTab' => $nameTab]);
@@ -81,6 +87,8 @@ class DetailCourseBooking extends Component
     public function complete($nameTab)
     {
         $this->courseBooking->status = 'complete';
+        Auth::user()->money = Auth::user()->money + $this->courseBooking->transaction->amount;
+        Auth::user()->save();
         $this->courseBooking->save();
 
         return redirect()->route('dasbor', ['nameTab' => $nameTab]);
